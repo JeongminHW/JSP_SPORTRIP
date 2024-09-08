@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+.area01 {
+	padding: 300px 0;
+}
+
+#wrap {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	min-width: 320px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#campaign .c_hero {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	padding-bottom: 350px;
+}
+
+#campaign {
+	display: inline-block;
+	vertical-align: middle;
+	background-color: #fff;
+	width: 100%;
+}
+
+#campaign>section {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+	width: 100%;
+}
+
+#campaign .c_marquee {
+	position: relative;
+}
+
+#campaign .c_marquee .cm_wrap {
+	width: 100%;
+	height: 180px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#campaign .c_marquee .cm_wrap.t2 {
+	position: relative;
+}
+
+#campaign .c_marquee .marquee, #campaign .c_marquee .marqueereverse {
+	position: absolute;
+	display: inline-block;
+	white-space: nowrap;
+	background: none;
+	font-family: 'Black Han Sans', sans-serif;
+	font-size: 200px;
+	font-weight: 900;
+	line-height: 180px;
+	color: transparent;
+	-webkit-text-stroke: #236FB5 1px;
+}
+
+#campaign .c_marquee .marquee {
+	animation: slidemarquee 120s linear infinite;
+}
+
+#campaign .c_marquee .marquee.t1 {
+	animation-delay: -60s;
+}
+
+#campaign .c_marquee .marqueereverse {
+	color: #236FB5;
+	animation: slidereversemarquee 120s linear infinite;
+}
+
+#campaign .c_marquee .marquee, #campaign .c_marquee .marqueereverse {
+	font-size: 90px;
+	line-height: 80px;
+}
+
+#campaign .c_marquee .marqueereverse.t1 {
+	animation-delay: -60s;
+}
+
+@keyframes slidemarquee { 
+	0% {transform: translateX(100%);}
+	100%{transform: translateX(-100%);}
+}
+
+@keyframes slidereversemarquee { 
+	0% {transform: translateX(-100%);}
+	100%{transform: translateX(100%);}
+}
+
+#campaign .c_hero .c_marquee {
+	transform: rotate(-10deg);
+}
+
+#campaign .c_marquee .cm_wrap {
+	height: 140px;
+}
+
+#campaign .c_marquee .marquee, #campaign .c_marquee .marqueereverse {
+	font-size: 160px;
+	line-height: 140px;
+}
+
+#campaign .c_slide {
+	margin-top: 30px;
+}
+
+#campaign .c_slide .item {
+	padding: 0 15px;
+}
+
+#campaign .c_hero {
+	padding-top: 200px;
+	padding-bottom: 300px;
+}
+
+#campaign .c_hero .ch_title {
+	top: -101px;
+}
+
+#campaign .c_hero .ch_title span {
+	height: 80px;
+	font-size: 60px;
+	line-height: 90px;
+}
+
+#campaign .c_slide {
+	margin-top: 30px;
+}
+
+#campaign .c_slide {
+	display: inline-block;
+	vertical-align: middle;
+	width: 83.333%;
+	min-height: 400px;
+	margin-top: 60px;
+	transform: rotate(-10deg)
+}
+
+#campaign .c_slide .owl-stage-outer {
+	overflow: visible;
+}
+
+#campaign .c_slide .owl-nav {
+	display: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); /* css reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, button, cite, code,del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    background: none;
+}
