@@ -105,3 +105,17 @@ input{
 .input_label{
     font-size: 24px;
 }
+
+.team_logo_img{
+    width: 50px;
+    margin-right: 30px;
+}
+
+#logo_img, .league_info{
+    display: inline-block;
+}
+
+ul, li{
+    list-style: none;
+    display: inline-block;
+}
