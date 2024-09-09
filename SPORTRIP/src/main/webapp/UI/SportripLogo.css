@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.letter {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 96px;
+    font-weight: bold;
+    color: #236FB5;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    margin: 0 2px;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.show {
+    opacity: 1;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    z-index: 5;  /* 2번 화면보다 위에 표시되도록 z-index를 5로 설정 */ 
+}
+
+#logo_DottedLine {
+    position: absolute;
+    top: -122px;
+    width: 340px;
+    height: auto;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    left: calc(76% - 290px);
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+#logo_DottedLine.show {
+    opacity: 1;
+}
+
+#logo_YaChookBae {
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    position: relative;
+    top: -10px;
+    margin: 0 0px;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+    transform: translateX(-100%) rotate(-360deg); /* 왼쪽에서 굴러오는 애니메이션 */
+    animation: rollIn 1s ease-out forwards;
+}
+
+@keyframes rollIn {
+    0% {
+        transform: translateX(-100vw) rotate(-360deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) rotate(0);
+        opacity: 1;
+    }
+}
+
+#logo_YaChookBae.show {
+    opacity: 1;
+}
+
+#logo_Airplane {
+    position: absolute;
+    top: -122px;
+    width: 120px;
+    height: auto;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    left: calc(100% - 100px);
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+#logo_Airplane.show {
+    opacity: 1;
+}
+
+#textContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.move-to-top-left {
+    transform: translate(-96%, -225%) scale(0.4);
+    transition: transform 0.7s ease-in-out;
+    cursor: pointer;
+}

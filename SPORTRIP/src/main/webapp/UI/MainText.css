@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+#secondScreen {
+    position: fixed;
+    bottom: -200vh; /* 처음엔 화면 밖에 위치 */
+    width: 100%;
+    background-color: transparent;
+    z-index: 1; /* 1번 화면 아래에 위치하도록 설정 */
+    transition: transform 1s ease-out;
+}
+
+#secondScreen.show {
+    transform: translateY(-180vh); /* 위로 슬라이드해서 올라오는 애니메이션 */
+}
+
 .area01 {
 	padding: 300px 0;
 }
