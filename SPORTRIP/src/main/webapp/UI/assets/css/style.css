@@ -26,15 +26,7 @@ a{
     text-decoration: none;
 }
 
-#login{
-    display: grid;
-    place-items: center; /*글씨 중간 정렬*/
-    font-size: 24px;
-    width: 100%;
-    height: 100%;
-}
-
-#signup{
+.item{
     display: grid;
     place-items: center; /*글씨 중간 정렬*/
     font-size: 24px;
@@ -118,4 +110,13 @@ input{
 ul, li{
     list-style: none;
     display: inline-block;
+}
+
+.top{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center; /*글씨 중간 정렬*/
+    height: 50px;
+    gap: 1px;
+    margin-top: 20px;
 }
