@@ -237,3 +237,25 @@ tbody{
         margin-right: 4px;
     }
 }
+
+.highlight-container{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    bottom: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.highlight-box{
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+                0 2px 2px rgba(0,0,0,0.15), 
+                0 4px 4px rgba(0,0,0,0.15), 
+                0 8px 8px rgba(0,0,0,0.15);
+    margin-bottom: 50px;
+    font-size: 18px;
+    span{
+        font-weight: 500;
+    }
+}
