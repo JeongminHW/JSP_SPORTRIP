@@ -118,6 +118,15 @@ ul, li{
     margin-top: 20px;
 }
 
+.t_top{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    place-items: center; /*글씨 중간 정렬*/
+    height: 50px;
+    gap: 1px;
+    margin-top: 20px;
+}
+
 .outer {
     width: 100%;
     height: 33vw; /* 화면 너비의 30%로 높이 설정 */
