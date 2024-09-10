@@ -1,17 +1,87 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#header {
+    display: none; /* 처음에 헤더는 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: transparent;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    text-align: center;
+    transition: 0.5s ease;
+}
+
+#header.show {
+    display: block; /* 2번 화면이 올라올 때 보여짐 */
+}
+
+/* 헤더 안의 네비게이션 리스트 */
+#header .h_wrap {
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+}
+
+#header .h_gnb {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#header .h_gnb .hg_list {
+	display: inline-flex;
+	vertical-align: middle;
+	font-size: 0; /* Flexbox 아이템 간의 간격을 줄이기 위해 0으로 설정 */
+	line-height: 0;
+}
+
+#header .h_gnb .hg_list li {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 30px;
+	font-size: 20px;
+	line-height: 1.5;
+	color: white;
+	cursor: pointer;
+}
+
+#header .h_gnb .hg_list li span {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 36px;
+    color: #000; /* 검정색 */
+}
+
+#header .h_gnb .hg_list li a {
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+#campaign .c_marquee {
+	position: relative;
+}
+
 #secondScreen {
     position: fixed;
-    bottom: -200vh; /* 처음엔 화면 밖에 위치 */
+    bottom: -200vh; /* 처음엔 화면 아래에 위치 */
     width: 100%;
+    height: 100vh; /* 화면 높이에 맞춰서 조정 */
     background-color: transparent;
-    z-index: 1; /* 1번 화면 아래에 위치하도록 설정 */
+    z-index: 1; 
     transition: transform 1s ease-out;
 }
 
 #secondScreen.show {
-    transform: translateY(-180vh); /* 위로 슬라이드해서 올라오는 애니메이션 */
+    transform: translateY(-200vh); /* 위로 슬라이드해서 올라오는 애니메이션 */
 }
+
 
 .area01 {
 	padding: 300px 0;
@@ -45,10 +115,6 @@
 	vertical-align: middle;
 	overflow: hidden;
 	width: 100%;
-}
-
-#campaign .c_marquee {
-	position: relative;
 }
 
 #campaign .c_marquee .cm_wrap {
@@ -109,7 +175,7 @@
 }
 
 #campaign .c_hero .c_marquee {
-	transform: rotate(-10deg);
+	transform: rotate(-8deg);
 }
 
 #campaign .c_marquee .cm_wrap {
@@ -121,17 +187,11 @@
 	line-height: 140px;
 }
 
-#campaign .c_slide {
-	margin-top: 30px;
-}
-
-#campaign .c_slide .item {
-	padding: 0 15px;
-}
-
 #campaign .c_hero {
-	padding-top: 200px;
-	padding-bottom: 300px;
+    padding-top: 300px;
+    padding-bottom: 350px;
+    position: relative;
+    top: 35px; /* 위치 보정용 */
 }
 
 #campaign .c_hero .ch_title {
@@ -144,33 +204,12 @@
 	line-height: 90px;
 }
 
-#campaign .c_slide {
-	margin-top: 30px;
+@keyframes slidemarquee { 
+	0% { transform: translateX(100%); }
+	100% { transform: translateX(-100%); }
 }
 
-#campaign .c_slide {
-	display: inline-block;
-	vertical-align: middle;
-	width: 83.333%;
-	min-height: 400px;
-	margin-top: 60px;
-	transform: rotate(-10deg)
-}
-
-#campaign .c_slide .owl-stage-outer {
-	overflow: visible;
-}
-
-#campaign .c_slide .owl-nav {
-	display: none;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); /* css reset */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, button, cite, code,del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    background: none;
+@keyframes slidereversemarquee { 
+	0% { transform: translateX(-100%); }
+	100% { transform: translateX(100%); }
 }

@@ -28,11 +28,14 @@ body {
 }
 
 .container {
+ 	position: absolute;
+    top: 50%; /* 화면 중앙 상단에서 시작 */
+    left: 50%; /* 화면 중앙 좌측에서 시작 */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    position: relative;
+    transform: translate(-50%, -50%) scale(1); /* 중앙으로 위치 조정 및 크기 조정 */
     transition: transform 0.5s ease-in-out;
     z-index: 5;  /* 2번 화면보다 위에 표시되도록 z-index를 5로 설정 */ 
 }
@@ -105,8 +108,29 @@ body {
     z-index: 2;
 }
 
+/* 컨테이너 이동 후 상태 */
 .move-to-top-left {
-    transform: translate(-96%, -225%) scale(0.4);
-    transition: transform 0.7s ease-in-out;
-    cursor: pointer;
+    position: absolute;
+    top: 4vh; /* 1189px x 731px 해상도 기준의 비율로 위치 지정 */
+    left: -10vw; /* 화면 비율에 맞게 가로 위치 설정 */
+    transform: translate(0, 0) scale(0.4); /* 크기 유지 */
+    transition: transform 2s ease;
 }
+
+/* 추가 미디어 쿼리 - 화면 비율 조정 */
+@media (max-width: 768px) {
+    .move-to-top-left {
+        top: 20vh;
+        left: 8vw;
+        transform: translate(0, 0) scale(0.6);
+    }
+}
+
+@media (max-width: 480px) {
+    .move-to-top-left {
+        top: 22vh;
+        left: 6vw;
+        transform: translate(0, 0) scale(0.8);
+    }
+}
+
