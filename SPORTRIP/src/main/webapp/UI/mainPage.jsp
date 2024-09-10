@@ -62,32 +62,39 @@
 				<div class="c_marquee value02">
 					<div class="cm_wrap t1">
 						<div class="marquee">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
+							<span>LET’S KFA</span> 
+							<span>LET’S KBO</span> 
+							<span>LET’S
 								KOVO</span>
 						</div>
 						<div class="marquee t1">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
-								KOVO</span>
+							<span>LET’S KFA</span> 
+							<span>LET’S KBO</span> 
+							<span>LET’S	KOVO</span>
 						</div>
 					</div>
 					<div class="cm_wrap t2">
 						<div class="marqueereverse">
-							<span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span> <span>LET’S
-								SPORTRIP</span>
+							<span>LET’S SPORTRIP</span> 
+							<span>LET’S SPORTRIP</span> 
+							<span>LET’S	SPORTRIP</span>
 						</div>
 						<div class="marqueereverse t1">
-							<span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span> <span>LET’S
-								SPORTRIP</span>
+							<span>LET’S SPORTRIP</span> 
+							<span>LET’S SPORTRIP</span> 
+							<span>LET’S	SPORTRIP</span>
 						</div>
 					</div>
 					<div class="cm_wrap t3">
 						<div class="marquee">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
-								KOVO</span>
+							<span>LET’S KFA</span> 
+							<span>LET’S KBO</span> 
+							<span>LET’S	KOVO</span>
 						</div>
 						<div class="marquee t1">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
-								KOVO</span>
+							<span>LET’S KFA</span> 
+							<span>LET’S KBO</span> 
+							<span>LET’S	KOVO</span>
 						</div>
 					</div>
 				</div>
