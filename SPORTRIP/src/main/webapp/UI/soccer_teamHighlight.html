@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K-league</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <script>
+    	function goMain(){
+    		document.location.href="mainPage.jsp";
+    	}
+    </script>
 </head>
 <body>
-    <header class="header header_logo">
-        <a href="soccer_main.html"><img src="./assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
+	<header class="header header_logo">
+		<a style="cursor: pointer" onclick="goMain()"><img src="./assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
+
         <div class="league_info">
+        <a href="soccer_main.html" style="margin-left: 50px;"><img src="./assets/images/k-league_logo.svg" alt="리그" id="league_logo_img"></a>
             <ul>
                 <li>
                     <a href=""><img src="./assets/images/logo_img/1_강원.png" alt="강원" class="team_logo_img" title="강원"></a>

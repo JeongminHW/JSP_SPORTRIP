@@ -13,6 +13,10 @@ body, input, button{
     width:200px;
 }
 
+#league_logo_img{
+    width: 150px;
+}
+
 .container{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -100,9 +104,10 @@ input{
     margin-right: 30px;
 }
 
-#logo_img, .league_info{
-    display: inline-block;
+.league_info{
+    display: inline;
 }
+
 
 ul, li{
     list-style: none;
