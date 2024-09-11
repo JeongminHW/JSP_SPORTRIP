@@ -302,3 +302,15 @@ tbody{
     cursor: pointer;
     box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
+
+.login-signup-box{
+    display: inline-block;
+    float: right;
+    font-size: 20px;
+    ul>li::after{
+        content: " | ";
+    }
+    ul>li:last-child::after{
+        content: "";
+    }
+}
