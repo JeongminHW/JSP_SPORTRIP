@@ -13,6 +13,10 @@ body, input, button{
     width:200px;
 }
 
+#league_logo_img{
+    width: 150px;
+}
+
 .container{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -100,9 +104,10 @@ input{
     margin-right: 30px;
 }
 
-#logo_img, .league_info{
-    display: inline-block;
+.league_info{
+    display: inline;
 }
+
 
 ul, li{
     list-style: none;
@@ -117,6 +122,26 @@ ul, li{
     gap: 1px;
     margin-top: 20px;
 }
+
+.t_top{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    place-items: center; /*글씨 중간 정렬*/
+    height: 50px;
+    gap: 1px;
+    margin-top: 20px;
+}
+
+.u_top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center; /* 글씨 중간 정렬 */
+    width: 80%;
+    height: 50px;
+    gap: 1px;
+    margin: 40px auto 0 auto; /* 상단 마진 20px, 좌우 중앙 정렬 */
+}
+
 
 .outer {
     width: 100%;
