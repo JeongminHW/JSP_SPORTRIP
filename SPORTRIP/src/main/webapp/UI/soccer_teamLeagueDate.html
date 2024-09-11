@@ -57,43 +57,58 @@
         </div>
     </header>
     <div class="top">
-        <div class="item" style="background-color: #083660;">
+        <div class="item" style="background-color: #236FB5;">
 			<a href="soccer_teamRank.html">팀 순위</a>
 		</div>
 		<div class="item" style="background-color: #236FB5;">
 			<a href="soccer_teamHighlight.html">하이라이트 경기</a>
 		</div>
-        <div class="item" style="background-color: #236FB5;">
+        <div class="item" style="background-color: #083660;">
             <a href="soccer_teamLeagueDate.html">경기 일정</a>
         </div>
     </div>
 
-    <div class="rank-table">
+    <div class="select-box">
+        <select name="year" class="select year">
+            <option value="0">년</option>
+            <script>
+                let year = new Date().getFullYear();
+                for (let i = year; i > year - 12; i--) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+        <select name="month" class="select month">
+            <option value="0">월</option>
+            <script>
+                let month = new Date().getMonth() + 1;
+                for (let i = 1; i <= 12; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+
+    <div class="league-date-table">
         <table>
             <thead>
                 <tr>
-                    <th>순위</th>
-                    <th>팀</th>
-                    <th>경기</th>
-                    <th>승점</th>
-                    <th>승</th>
-                    <th>무</th>
-                    <th>패</th>
-                    <th>득점</th>
-                    <th>실점</th>
+                    <th>날짜</th>
+                    <th>시간</th>
+                    <th colspan="5">경기</th>
+                    <th colspan="2">장소</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td><img src="assets/images/logo_img/2_울산HD.png" alt=""> 울산</td>
-                    <td>38</td>
-                    <td>76</td>
-                    <td>23</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>63</td>
-                    <td>42</td>
+                    <td>9월 13일</td>
+                    <td>18:00</td>
+                    <td colspan="5">
+                        <div><img src="assets/images/logo_img/2_울산HD.png" alt=""> 울산</div>
+                        <div>1 : 0</div>
+                        <div><img src="assets/images/logo_img/3_수원FC.png" alt=""> 수원</div>
+                    </td>
+                    <td>문수경기장</td>
                 </tr>
             </tbody>
         </table>

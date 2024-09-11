@@ -256,7 +256,10 @@ tbody{
     font-weight: bold;
     vertical-align: middle;
     height: 60px;
-    td>img{
+    td>div{
+        display: inline;
+    }
+    td>div>img{
         width: 30px;
         vertical-align: middle;
         margin-right: 4px;
@@ -273,7 +276,6 @@ tbody{
 }
 
 .highlight-box{
-    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
     box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
                 0 2px 2px rgba(0,0,0,0.15), 
                 0 4px 4px rgba(0,0,0,0.15), 
@@ -283,4 +285,20 @@ tbody{
     span{
         font-weight: 500;
     }
+}
+
+.select-box{
+    float: right;
+    margin: 10px;
+}
+
+.select{
+    font-size: 18px;
+    width: 100px;
+    height: 30px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
