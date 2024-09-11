@@ -108,29 +108,11 @@ body {
     z-index: 2;
 }
 
-/* 컨테이너 이동 후 상태 */
+/* 수정된 컨테이너 move-to-top-left 상태 */
 .move-to-top-left {
     position: absolute;
-    top: 4vh; /* 1189px x 731px 해상도 기준의 비율로 위치 지정 */
-    left: -10vw; /* 화면 비율에 맞게 가로 위치 설정 */
-    transform: translate(0, 0) scale(0.4); /* 크기 유지 */
-    transition: transform 2s ease;
+    top: 0%; /* 화면의 위쪽에서 8% */
+    left: 0; /* 화면의 왼쪽에서 0% */
+    transform: translate(-20%, 40%) scale(0.5); /* X 축으로 -50% 이동하여 완전히 왼쪽에 붙임 */
+    transition: transform 1s ease;
 }
-
-/* 추가 미디어 쿼리 - 화면 비율 조정 */
-@media (max-width: 768px) {
-    .move-to-top-left {
-        top: 20vh;
-        left: 8vw;
-        transform: translate(0, 0) scale(0.6);
-    }
-}
-
-@media (max-width: 480px) {
-    .move-to-top-left {
-        top: 22vh;
-        left: 6vw;
-        transform: translate(0, 0) scale(0.8);
-    }
-}
-
