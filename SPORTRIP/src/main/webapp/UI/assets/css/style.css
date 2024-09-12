@@ -383,7 +383,6 @@ tbody{
   }
 }
 
-
 .team-info-box{
   display: flex;
   flex-wrap: nowrap;
@@ -402,6 +401,7 @@ tbody{
       margin-top: 20px;
       border: 2px solid #ffc029;
     }
+    
     .ulsan-E{
       border: none;
     }
