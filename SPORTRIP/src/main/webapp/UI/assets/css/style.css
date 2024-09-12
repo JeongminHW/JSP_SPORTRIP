@@ -278,43 +278,44 @@ tbody{
 }
 
 .highlight-box{
-    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
-                0 2px 2px rgba(0,0,0,0.15), 
-                0 4px 4px rgba(0,0,0,0.15), 
-                0 8px 8px rgba(0,0,0,0.15);
-    margin-bottom: 50px;
-    font-size: 18px;
-    span{
-        font-weight: 500;
-    }
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+              0 2px 2px rgba(0,0,0,0.15), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.15);
+  margin-bottom: 50px;
+  font-size: 18px;
+  span{
+    font-weight: 500;
+  }
 }
 
 .select-box{
-    float: right;
-    margin: 10px;
+  float: right;
+  margin: 10px;
 }
 
 .select{
-    font-size: 18px;
-    width: 100px;
-    height: 30px;
-    background-color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  font-size: 18px;
+  width: 100px;
+  height: 30px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }
 
 .login-signup-box{
-    display: inline-block;
-    float: right;
-    font-size: 20px;
-    ul>li::after{
-        content: " | ";
-    }
-    ul>li:last-child::after{
-        content: "";
-    }
+  float: right;
+  margin-top: 40px;
+  margin-right: 10px;
+  font-size: 20px;
+  ul>li::after{
+    content: " | ";
+  }
+  ul>li:last-child::after{
+    content: "";
+  }
 }
 
 #sub_wrap {
@@ -369,6 +370,44 @@ tbody{
 }
 
 .player-name span {
-    color: #ffc029;
-    margin-right: 8px;
+  color: #ffc029;
+  margin-right: 8px;
+}
+
+.img-box{
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  img{
+    width:100px;
+  }
+}
+
+.team-info-box{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div{
+    margin-top: 50px;
+    width: 800px;
+    text-align: center;
+    span{
+      font-size: 30px;
+    }
+    img{
+      width: 800px;
+      margin-top: 20px;
+      border: 2px solid #ffc029;
+    }
+    
+    .ulsan-E{
+      border: none;
+    }
+
+    .ulsan-U{
+      border: none;
+    }
+  }
 }
