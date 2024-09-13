@@ -441,13 +441,13 @@ tbody{
   align-items: center;
   div{
     margin-top: 50px;
-    width: 800px;
+    width: 1024px;
     text-align: center;
     span{
       font-size: 30px;
     }
     img{
-      width: 800px;
+      width: 1024px;
       margin-top: 20px;
       border: 2px solid #ffc029;
     }
