@@ -1,4 +1,4 @@
-package Mgr;
+package DAO;
 
 public class MDMgr {
 
