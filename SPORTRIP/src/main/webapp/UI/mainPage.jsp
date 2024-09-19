@@ -48,7 +48,7 @@
 								</a>
 							</li>							
 							<li class="trip">
-								<a href="">
+								<a href="hotel_main.html">
 									<span>여행</span>
 								</a>
 							</li>							
