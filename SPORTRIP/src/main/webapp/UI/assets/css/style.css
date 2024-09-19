@@ -179,6 +179,53 @@ img {
 	pointer-events: none; /* 부모 영역 클릭 이벤트 차단 */
 }
 
+tbody{
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    height: 60px;
+    td>img{
+        width: 50px;
+        vertical-align: middle;
+        margin-right: 4px;
+    }
+    td>div{
+      display: inline-block;
+      margin-right: 10px;
+      img{
+        width: 50px;
+        vertical-align: middle;
+        margin-right: 4px;
+      }
+  }
+}
+
+.highlight-container{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    bottom: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.highlight-box{
+  width: 560px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+              0 2px 2px rgba(0,0,0,0.15), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.15);
+  margin-bottom: 50px;
+  font-size: 18px;
+  .info-box{
+    height: 82px;
+  }
+  span{
+    padding: 10px;
+    font-weight: 500;
+  }
+}
+
 .button-list button {
 	font-family: 'BMJUA';
 	font-size: 24px; /* 버튼 텍스트 크기 조정 */
@@ -194,8 +241,6 @@ img {
 	border-radius: 50%;
 	pointer-events: auto; /* 버튼 클릭 가능하도록 설정 */
 	transition: background-color 0.3s ease;
-}
-
 .button-list button:hover {
 	background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버 시 버튼 배경색 변경 */
 }
@@ -435,38 +480,80 @@ td>div>img {
 	}
 }
 
-.team-info-box {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center; div { margin-top : 50px;
-	width: 800px;
-	text-align: center;
-	span
-	{
-	font-size
-	:
-	30px;
+.team-info-box{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div{
+    margin-top: 50px;
+    width: 1024px;
+    text-align: center;
+    span{
+      font-size: 30px;
+    }
+    img{
+      width: 1024px;
+      margin-top: 20px;
+      border: 2px solid #ffc029;
+    }
+    
+    .ulsan-E{
+      border: none;
+    }
+
+    .ulsan-U{
+      border: none;
+    }
+  }
 }
 
-img {
-	width: 800px;
-	margin-top: 20px;
-	border: 2px solid #ffc029;
+.h_top{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  height: 50px;
+  gap: 1px;
+  margin-top: 20px;
 }
 
-.ulsan-E {
-	border: none;
+.search-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  input{
+    width: 500px;
+    height: 30px;
+    font-size: 18px;
+    padding: 5px;
+    border: 1px solid #9e9e9e;
+    border-radius: 10px;
+  }
+  button{
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    img{
+      width: 30px;
+    }
+  }
 }
 
-.ulsan-U {
-	border: none;
+.search-menu-box{
+  border: 2px solid #9e9e9e;
+  .hotel-info-box{
+    width: 100%;
+    height: 300px;
+    .hotel-img{
+      width: 200px;
+      height: 200px;
+    }
+  }
 }
 
-}
-}
-.goods-section {
+  .goods-section {
   width: 1260px;
   height: 100%;
   margin: 40px auto; /* 좌우 가운데 정렬 */

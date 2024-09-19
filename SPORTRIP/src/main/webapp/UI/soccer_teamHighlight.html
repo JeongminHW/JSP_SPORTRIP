@@ -10,6 +10,7 @@
     		document.location.href="mainPage.jsp";
     	}
     </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 </head>
 <body>
 	<header class="header header_logo">
@@ -69,60 +70,50 @@
     </div>
 
     <div class="highlight-container">
-        <div class="highlight-box highlight1">
-            <div class="highlight-video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8f2FbTwP300?si=9xTio_IBTGNuDEso" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="info-box">
-                <span style="color: red; font-weight: bold;">[하이라이트]</span><br>
-                <span>하나은행 K리그2 2024 R29 충남아산 vs 경남 (2024-09-01)</span>
-            </div>
-        </div>
-        <div class="highlight-box highlight2">
-            <div class="highlight-video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8f2FbTwP300?si=9xTio_IBTGNuDEso" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="info-box">
-                <span style="color: red; font-weight: bold;">[하이라이트]</span><br>
-                <span>하나은행 K리그2 2024 R29 충남아산 vs 경남 (2024-09-01)</span>
-            </div>
-        </div>
-        <div class="highlight-box highlight3">
-            <div class="highlight-video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8f2FbTwP300?si=9xTio_IBTGNuDEso" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="info-box">
-                <span style="color: red; font-weight: bold;">[하이라이트]</span><br>
-                <span>하나은행 K리그2 2024 R29 충남아산 vs 경남 (2024-09-01)</span>
-            </div>
-        </div>
-        <div class="highlight-box highlight4">
-            <div class="highlight-video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8f2FbTwP300?si=9xTio_IBTGNuDEso" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="info-box">
-                <span style="color: red; font-weight: bold;">[하이라이트]</span><br>
-                <span>하나은행 K리그2 2024 R29 충남아산 vs 경남 (2024-09-01)</span>
-            </div>
-        </div>
-        <div class="highlight-box highlight5">
-            <div class="highlight-video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8f2FbTwP300?si=9xTio_IBTGNuDEso" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="info-box">
-                <span style="color: red; font-weight: bold;">[하이라이트]</span><br>
-                <span>하나은행 K리그2 2024 R29 충남아산 vs 경남 (2024-09-01)</span>
-            </div>
-        </div>
-        <div class="highlight-box highlight6">
-            <div class="highlight-video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8f2FbTwP300?si=9xTio_IBTGNuDEso" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="info-box">
-                <span style="color: red; font-weight: bold;">[하이라이트]</span><br>
-                <span>하나은행 K리그2 2024 R29 충남아산 vs 경남 (2024-09-01)</span>
-            </div>
-        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                const apiurl = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=12&order=date&q=%EC%BF%A0%ED%8C%A1%ED%94%8C%EB%A0%88%EC%9D%B4%20k%EB%A6%AC%EA%B7%B81%20%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8&type=video&videoDuration=medium&key=AIzaSyADuItf8mzFqwyrWiWKYs89YaWA7TuwdWs";
+        
+                function convertUTCToKST(utcStr) {
+                    const date = new Date(utcStr);
+                        const offset = 9 * 60; // Korea Standard Time (UTC+9) in minutes
+                        const localDate = new Date(date.getTime() + offset * 60000);
+                        localDate.setDate(localDate.getDate() - 1); // 하루를 빼기
+        
+                        const yyyy = localDate.getFullYear();
+                        const mm = String(localDate.getMonth() + 1).padStart(2, '0');
+                        const dd = String(localDate.getDate()).padStart(2, '0');
+                        return `${yyyy}-${mm}-${dd}`;
+                }
+        
+                function truncateTitle(title) {
+                        const separatorIndex = title.indexOf('|');
+                        if (separatorIndex !== -1) {
+                            return title.substring(0, separatorIndex).trim();
+                        }
+                        return title;
+                }
+                
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: apiurl,
+                    contentType : "application/json",
+                    success : function(data) {
+                        data.items.forEach(function(element, index) {
+                            const publishedDate = convertUTCToKST(element.snippet.publishedAt);
+                            const truncatedTitle = truncateTitle(element.snippet.title);
+                            $('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');
+                        });
+                    },
+                    complete : function(data) {
+                    },
+                    error : function(xhr, status, error) {
+                        console.log("유튜브 요청 에러: "+error);
+                    }
+                });
+            });
+            </script>
     </div>
 </body>
 </html>
