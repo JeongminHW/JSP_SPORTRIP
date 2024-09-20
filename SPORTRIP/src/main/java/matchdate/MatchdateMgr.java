@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
-import DAO.DBConnectionMgr;
+import DB.DBConnectionMgr;
 
 public class MatchdateMgr {
 	

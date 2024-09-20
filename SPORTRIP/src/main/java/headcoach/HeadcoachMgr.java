@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import DAO.DBConnectionMgr;
+import DB.DBConnectionMgr;
+
 
 public class HeadcoachMgr {
 	private DBConnectionMgr pool;
