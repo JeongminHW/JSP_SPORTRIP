@@ -1,4 +1,4 @@
-package Bean;
+package basket;
 
 public class BasketBean {
     private int basketNum;

@@ -1,4 +1,4 @@
-package Bean;
+package charge;
 
 public class ChargeBean {
     private int chargeNum;
