@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JSP 애니메이션</title>
+<title>SPORTRIP</title>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <link href="./assets/css/MainText.css" rel="stylesheet" type="text/css">
 <link href="./assets/css/SportripLogo.css" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
 								</a>
 							</li>							
 							<li class="trip">
-								<a href="">
+								<a href="hotel_main.html">
 									<span>여행</span>
 								</a>
 							</li>							
