@@ -1,4 +1,4 @@
-package Bean;
+package md;
 
 public class MDBean {
     private int mdNum;

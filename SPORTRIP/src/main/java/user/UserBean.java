@@ -1,4 +1,4 @@
-package Bean;
+package user;
 
 public class UserBean {
     private String id;

@@ -1,5 +1,3 @@
-package Mgr;
-
 /**
  * Copyright(c) 2001 iSavvix Corporation (http://www.isavvix.com/)
  *
@@ -24,6 +22,9 @@ package Mgr;
  * TO THE SOFTWARE.
  *
  */
+package DB;
+
+
 
 import java.sql.*;
 import java.util.Properties;
@@ -37,7 +38,7 @@ import java.util.Vector;
 public class DBConnectionMgr {
     private Vector connections = new Vector(10);
     private String _driver = "com.mysql.cj.jdbc.Driver",
-    _url = "jdbc:mysql://localhost:3306/sportrip?characterEncoding=UTF-8&serverTimezone=UTC",
+    _url = "jdbc:mysql://113.198.238.97:3306/sportrip?characterEncoding=UTF-8&serverTimezone=UTC",
     _user = "root",
     _password = "1234";
     
