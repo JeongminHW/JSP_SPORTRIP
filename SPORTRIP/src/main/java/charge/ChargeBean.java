@@ -1,51 +1,42 @@
 package charge;
 
 public class ChargeBean {
-    private int chargeNum;
-    private String id;
-    private int mdNum;
-    private int repairC;
-    private int price;
+    private int CHARGE_NUM;
+    private String ID;
+    private int MD_NUM;
+    private int REPAIR_C;
+    private int PRICE;
+    
+	public int getCHARGE_NUM() {
+		return CHARGE_NUM;
+	}
+	public void setCHARGE_NUM(int cHARGE_NUM) {
+		CHARGE_NUM = cHARGE_NUM;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public int getMD_NUM() {
+		return MD_NUM;
+	}
+	public void setMD_NUM(int mD_NUM) {
+		MD_NUM = mD_NUM;
+	}
+	public int getREPAIR_C() {
+		return REPAIR_C;
+	}
+	public void setREPAIR_C(int rEPAIR_C) {
+		REPAIR_C = rEPAIR_C;
+	}
+	public int getPRICE() {
+		return PRICE;
+	}
+	public void setPRICE(int pRICE) {
+		PRICE = pRICE;
+	}
 
-    public ChargeBean() {}
-
-    public int getChargeNum() {
-        return chargeNum;
-    }
-
-    public void setChargeNum(int chargeNum) {
-        this.chargeNum = chargeNum;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getMdNum() {
-        return mdNum;
-    }
-
-    public void setMdNum(int mdNum) {
-        this.mdNum = mdNum;
-    }
-
-    public int getRepairC() {
-        return repairC;
-    }
-
-    public void setRepairC(int repairC) {
-        this.repairC = repairC;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    
 }
