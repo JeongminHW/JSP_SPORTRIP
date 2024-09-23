@@ -43,4 +43,55 @@ public class PlayerMgr {
         }
         return playerList;
     }
+    
+    // 선수 등록(관리자)
+    public boolean insertPlayer(PlayerBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "insert into player values(null, ?, ?, ?, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bean.getTeamNum());
+			pstmt.setString(2, bean.getPlayerName());
+			pstmt.setDate(3, bean.getBirth());
+			pstmt.setString(4, bean.getPlayerImg());
+			pstmt.setString(5, bean.getPosition());
+			pstmt.setString(6, bean.getUniformNum());
+			if(pstmt.executeUpdate() == 1) {
+				flag = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+    
+    // 선수 삭제(관리자)
+    public boolean updatePlayer(int player_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "delete player where player_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, player_num);
+			if(pstmt.executeUpdate() == 1) {
+				flag = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
 }
