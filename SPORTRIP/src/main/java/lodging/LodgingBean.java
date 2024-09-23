@@ -38,4 +38,31 @@ public class LodgingBean {
 	public String getSTARDIUM() {
 		return STARDIUM;
 	}
+	public void setLODGING_NUM(int num) {
+		LODGING_NUM = num;
+	}
+	public void setLODGING_NAME(String name) {
+		LODGING_NAME = name;
+	}
+	public void setCATEGORY(String cg) {
+		CATEGORY = cg;
+	}
+	public void setGRADE(String grade) {
+		GRADE = grade;
+	}
+	public void setADDRESS(String add) {
+		ADDRESS = add;
+	}
+	public void setLODGING_IMG(String img) {
+		LODGING_IMG = img;
+	}
+	public void setLON(String lon) {
+		LON = lon;
+	}
+	public void setLAT(String lat) {
+		LAT = lat;
+	}
+	public void setSTARDIUM(String star) {
+		STARDIUM = star;
+	}
 }
