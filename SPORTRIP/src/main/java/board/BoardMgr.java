@@ -209,29 +209,7 @@ public class BoardMgr {
 			pool.freeConnection(con, pstmt);
 		}
 	}
-	
-	// 관리자 여부 확인
-	public boolean checkAdmin(String id) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		boolean flag = false;
-		try {
-			con = pool.getConnection();
-			sql = "select count(*) from user where id = ? admin = 1";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				flag = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt, rs);
-		}
-		return flag;
-	}
+
 	
 	
 }
