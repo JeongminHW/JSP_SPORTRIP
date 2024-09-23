@@ -15,6 +15,9 @@ public class ReserveBean {
 	public int getRESERVE_NUM() {
 		return RESERVE_NUM;
 	}
+	public void setRESERVE_NUM(int num) {
+		RESERVE_NUM = num;
+	}
 	public String getID() {
 		return ID;
 	}
