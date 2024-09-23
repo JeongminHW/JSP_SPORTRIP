@@ -165,7 +165,7 @@ public class BoardMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "update board ? set ? + 1 where team_num = ? and board_num = ?";
+			sql = "update board set ? = ? + 1 where team_num = ? and board_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, command);
 			pstmt.setString(2, command);
@@ -190,7 +190,7 @@ public class BoardMgr {
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			sql = "update board views set views + 1 where team_num = ? and board_num = ?";
+			sql = "update board set views = views + 1 where team_num = ? and board_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, teamNum);
 			pstmt.setInt(2, boardNum);
