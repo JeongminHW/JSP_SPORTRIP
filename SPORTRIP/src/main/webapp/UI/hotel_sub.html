@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTRIP 숙박</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script>
+        function goMain(){
+            document.location.href="mainPage.jsp";
+        }
+
+        function goList(){
+            document.location.href="hotel_main.html";
+        }
+    </script>
+</head>
+<body>
+    <header class="header header_logo">
+        <a style="cursor: pointer" onclick="goMain()"><img src="./assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
+        <div class="login-signup-box">
+            <ul>
+                <li><a href="login.html" style="font-family: BMJUA; color: black;">로그인</a></li>
+                <li><a href="signup.html" style="font-family: BMJUA; color: black;">회원가입</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="h_top">
+		<div class="item" style="background-color: #083660;">
+			<a href="hotel_main.html">호텔</a>
+		</div>
+		<div class="item" style="background-color: #236FB5;">
+			<a href="food_main.html">맛집</a>
+		</div>
+	</div>
+    <div class="search-box">
+        <input name="searchText" type="text" placeholder="경기장을 검색하세요">
+        <button><img src="assets/images/search_icon.png" alt="검색" title="검색"></button>
+    </div>
+    <div style="float: left;" class="date-box">
+        <span>여행 날짜</span>
+        <input type="date" class="start-date">
+        <span style="margin-left: 10px;">~</span>
+        <input type="date" class="end-date">
+    </div>
+
+    <div class="search-menu-box">
+        <div class="hotel-box">
+            <div class="hotel-img">
+                <img src="assets/images/hotel_img/hotel1.png" alt="">
+            </div>
+            <div class="hotel-info-box">
+                <section class="info-item">
+                    <span class="title" style="font-size: 24px;">스탠다드 더블룸</span><br>
+                    <p class="service"><img src="assets/images/service_img.png"> 무료 wifi, 금연, 에어컨, 시티 뷰</p>
+                </section>
+                <section class="info-item">
+                    <p>60,000원</p>
+                    <button class="show-detail" onclick="reserve">예약 하기</button>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <input type="button" value="목록" onclick="goList()">
+    </div>
+</body>
+</html>

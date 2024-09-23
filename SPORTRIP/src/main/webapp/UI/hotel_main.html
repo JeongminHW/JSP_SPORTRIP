@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTRIP 숙박</title>
     <link rel="stylesheet" href="assets/css/style.css">
-<script>
-	function goMain(){
-		document.location.href="mainPage.jsp";
-	}
-</script>
+
+    <script>
+        function goMain(){
+            document.location.href="mainPage.jsp";
+        }
+
+        function showHotel(){
+            document.location.href="hotel_sub.html";
+        }
+    </script>
 </head>
 <body>
-<header class="header header_logo">
-	<a style="cursor: pointer" onclick="goMain()"><img src="./assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
+    <header class="header header_logo">
+        <a style="cursor: pointer" onclick="goMain()"><img src="./assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
         <div class="login-signup-box">
             <ul>
                 <li><a href="login.html" style="font-family: BMJUA; color: black;">로그인</a></li>
@@ -50,6 +55,7 @@
             </script>
         </select>
     </div>
+
     <div class="search-menu-box">
         <div class="hotel-box">
             <div class="hotel-img">
@@ -63,7 +69,7 @@
                 </section>
                 <section class="info-item">
                     <p>60,000원</p>
-                    <button class="show-detail">객실 보기</button>
+                    <button class="show-detail" onclick="showHotel()">객실 보기</button>
                 </section>
             </div>
         </div>
@@ -89,23 +95,25 @@
         </div>
     </div>
     
-    <div class="search-menu-box">
-        <div class="hotel-box">
-            <div class="hotel-img">
-                <img src="assets/images/hotel_img/hotel1.png" alt="">
-            </div>
-            <div class="food-info-box">
-                <section class="info-item">
-                    <span class="title" style="font-size: 24px;">스타즈 호텔 울산</span><br>
-                    <p class="address">울산광역시 남구 남중로 65, 44712</p>
-                    <button class="show-location"><img src="assets/images/location_img.png"> 위치보기</button>
-                </section>
-                <section class="info-item">
-                    <p>60,000원</p>
-                    <button class="show-detail">객실 보기</button>
-                </section>
+    <form action="">
+        <div class="search-menu-box">
+            <div class="hotel-box">
+                <div class="hotel-img">
+                    <img src="assets/images/hotel_img/hotel1.png" alt="">
+                </div>
+                <div class="food-info-box">
+                    <section class="info-item">
+                        <span class="title" style="font-size: 24px;">스타즈 호텔 울산</span><br>
+                        <p class="address">울산광역시 남구 남중로 65, 44712</p>
+                        <button class="show-location"><img src="assets/images/location_img.png"> 위치보기</button>
+                    </section>
+                    <section class="info-item">
+                        <p>60,000원</p>
+                        <button class="show-detail">객실 보기</button>
+                    </section>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </body>
 </html>

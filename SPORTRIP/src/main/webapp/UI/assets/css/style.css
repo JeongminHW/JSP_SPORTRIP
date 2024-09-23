@@ -1,6 +1,8 @@
 @font-face {
 	font-family: 'BMJUA';
-	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+		format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -101,7 +103,7 @@ a {
 	cursor: pointer;
 }
 
-.input_label > button {
+.input_label>button {
 	font-size: 18px;
 	width: 80px;
 	height: 30px;
@@ -214,106 +216,30 @@ img {
 	pointer-events: none; /* 부모 영역 클릭 이벤트 차단 */
 }
 
-.button-list button {
-	font-family: 'BMJUA';
-	font-size: 24px; /* 버튼 텍스트 크기 조정 */
-	width: 40px; /* 버튼 너비 */
-	height: 40px; /* 버튼 높이 */
-	background-color: rgba(0, 0, 0, 0.5); /* 버튼 배경색 (반투명) */
-	color: white;
-	border: none;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-	pointer-events: auto; /* 버튼 클릭 가능하도록 설정 */
-	transition: background-color 0.3s ease;
+.highlight-container{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    bottom: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.button-list button:hover {
-	background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버 시 버튼 배경색 변경 */
-}
-
-.button-left {
-	position: absolute;
-	left: 10px; /* 배너의 왼쪽 끝에 버튼 위치 */
-}
-
-.button-right {
-	position: absolute;
-	right: 10px; /* 배너의 오른쪽 끝에 버튼 위치 */
-}
-
-.indicator-list {
-	position: absolute;
-	bottom: 10px; /* 배너 하단에 위치 */
-	left: 50%;
-	transform: translateX(-50%);
-	display: flex;
-	gap: 8px;
-}
-
-.indicator {
-	width: 12px;
-	height: 12px;
-	background-color: #bbb; /* 기본 배경색 */
-	border-radius: 50%;
-	transition: background-color 0.3s ease;
-}
-
-.indicator.active {
-	background-color: #fff; /* 활성화된 배경색 */
-}
-
-.rank-table {
-	margin-top: 20px;
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	border: 1px solid #c2c2c2;
-}
-
-thead {
-	background-color: #EBF2FF;
-}
-
-td, th {
-	border: 1px solid #c2c2c2;
-	padding: 10px;
-}
-
-tbody {
-	text-align: center;
-	font-weight: bold;
-	vertical-align: middle;
-	height: 60px;
-	td > img{
-    width: 50px;
-	vertical-align: middle;
-	margin-right: 4px;
-	}
-    td > div{
-      display: inline-block;
-      margin-right: 10px;
-      img {
-        width: 50px;
-        vertical-align: middle;
-        margin-right: 4px;
-    }
+.highlight-box{
+  width: 560px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+              0 2px 2px rgba(0,0,0,0.15), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.15);
+  margin-bottom: 50px;
+  font-size: 18px;
+  .info-box{
+    height: 82px;
   }
-}
-
-.highlight-container {
-	margin-top: 40px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	bottom: 0;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  span{
+    padding: 10px;
+    font-weight: 500;
+  }
 }
 
 .button-list button {
@@ -381,6 +307,7 @@ table {
 
 thead {
 	background-color: #EBF2FF;
+	font-size: 20px;
 }
 
 td, th {
@@ -388,25 +315,31 @@ td, th {
 	padding: 10px;
 }
 
-tbody {
-	text-align: center;
-	font-weight: bold;
-	vertical-align: middle;
-	height: 60px;
-	td
-	>div{
-	display
-	:
-	inline;
+tbody{
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    height: 60px;
+	font-size: 18px;
+    td>img{
+        width: 50px;
+        vertical-align: middle;
+        margin-right: 4px;
+    }
+    span{
+      display: inline-block;
+      margin-right: 30px;
+      img{
+        width: 50px;
+        vertical-align: middle;
+        margin-right: 4px;
+      }
+	}
+	.team2{
+		margin: 0;
+	}
 }
 
-td>div>img {
-	width: 30px;
-	vertical-align: middle;
-	margin-right: 4px;
-}
-
-}
 .highlight-container {
 	margin-top: 40px;
 	display: flex;
@@ -445,28 +378,17 @@ td>div>img {
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-.select {
-	font-size: 18px;
-	width: 100px;
-	height: 30px;
-	background-color: #ffffff;
-	border: none;
-	border-radius: 10px;
-	cursor: pointer;
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-}
-
-.login-signup-box {
-	float: right;
-	margin-top: 40px;
-	margin-right: 10px;
-	font-size: 20px;
-	ul >li::after {
-	content: " | ";
-	}
-	ul > li:last-child::after {
-	content: "";
-	}
+.login-signup-box{
+  float: right;
+  margin-top: 40px;
+  margin-right: 10px;
+  font-size: 20px;
+  ul>li::after{
+    content: " | ";
+  }
+  ul>li:last-child::after{
+    content: "";
+  }
 }
 
 #sub_wrap {
@@ -583,33 +505,33 @@ td>div>img {
 	}
 }
 
-.team-info-box {
-	display: flex;
-	flex-wrap: nowrap;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	div {
-	margin-top: 50px;
-	width: 1024px;
-	text-align: center;
-	span {
-	font-size: 30px;
-	}
-	img {
-		width: 1024px;
-		margin-top: 20px;
-		border: 2px solid #ffc029;
-		}
+.team-info-box{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div{
+    margin-top: 50px;
+    width: 1024px;
+    text-align: center;
+    span{
+      font-size: 30px;
+    }
+    img{
+      width: 1024px;
+      margin-top: 20px;
+      border: 2px solid #ffc029;
+    }
+    
+    .ulsan-E{
+      border: none;
+    }
 
-	.ulsan-E {
-		border: none;
-		}
-
-	.ulsan-U {
-		border: none;
-		}
-	}
+    .ulsan-U{
+      border: none;
+    }
+  }
 }
 
 .h_top{
@@ -633,8 +555,8 @@ td>div>img {
     padding: 10px;
     border: 1px solid #9e9e9e;
     border-radius: 10px;
- 	}
-  	button{
+  }
+  button{
     background-color: #ffffff;
     border: none;
     cursor: pointer;
@@ -698,7 +620,6 @@ td>div>img {
 .info-item:nth-child(2){
 	font-family: 'NanumSquareNeoBold';
 	font-size: 22px;
-	margin-top: 8%;
 	width: 150px;
 	text-align: center;
 	button{
@@ -896,7 +817,6 @@ td>div>img {
     border: none;
     cursor: pointer;
     width: 30px;
-
 }
 
 .cart {
@@ -926,5 +846,38 @@ td>div>img {
 .shopping_cart {
     width: 30px; /* 장바구니 아이콘 크기 */
     height: 30px; /* 아이콘 높이 */
+}
 
+.date-box{
+	margin-left: 10px;
+	font-size: 20px;
+}
+
+.date-box input{
+	border: 1px	solid #888888;
+	border-radius: 10px;
+	padding: 5px;
+	margin-left: 10px;
+	width: 150px;
+	font-size: 20px;
+}
+
+.service{
+	img{
+		width: 30px;
+	}
+}
+
+.footer{
+	text-align: center;
+	margin-top: 5%;
+	input{
+		width: 80px;
+		height: 32px;
+		font-size: 20px;
+		background-color: #ffffff;
+		border: 1px solid #888888;
+		border-radius: 10px;
+		cursor: pointer;
+	}
 }
