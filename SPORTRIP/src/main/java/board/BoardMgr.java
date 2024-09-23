@@ -22,9 +22,16 @@ public class BoardMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert board values(null, bean.getTITLE(), bean.getCONTENTS(), now(), bean.getIP(), bean.getID(), bean.getRECOMMAND(), bean.getNONRECOMMAND(), bean.getTEAM_NUM(), bean.getBOARD_IMG())";
+			sql = "insert into board values(null, ?, ?, now(), ?, ?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
-
+			pstmt.setString(1, bean.getTITLE());
+			pstmt.setString(2, bean.getCONTENTS());
+			pstmt.setString(3, bean.getIP());
+			pstmt.setString(4, bean.getID());
+			pstmt.setInt(5, bean.getRECOMMAND());
+			pstmt.setInt(6, bean.getNONRECOMMAND());
+			pstmt.setInt(7, bean.getTEAM_NUM());
+			pstmt.setString(8, bean.getBOARD_IMG());
 			if(pstmt.executeUpdate() == 1) {
 				flag = true;
 			}
