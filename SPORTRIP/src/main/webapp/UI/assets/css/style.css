@@ -907,7 +907,7 @@ input::-webkit-inner-spin-button {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 20px;
+	padding: 30px;
 	background: #ffffff;
 	border-radius: 20px;
 	font-size: 20px;
@@ -934,6 +934,7 @@ input::-webkit-inner-spin-button {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	width: 450px;
 	input{
 		margin: 10px;
 	}
@@ -948,4 +949,18 @@ input::-webkit-inner-spin-button {
 		border: none;
 		cursor: pointer;
 	}
+}
+
+.paytype-box{
+	width: 350px;
+	margin: 10px;
+	button{
+		width: 80px;
+		height: 30px;
+		border: 1px solid #236FB5;
+	}
+}
+
+.reserve-box{
+	margin-top: 10px;
 }
