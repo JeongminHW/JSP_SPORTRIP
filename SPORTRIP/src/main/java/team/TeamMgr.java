@@ -86,4 +86,42 @@ public class TeamMgr {
 		}
 		return bean;
 	}
+	
+	// 팀 순위대로 출력
+	public Vector<TeamBean> TeamRank(int sportNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<TeamBean> vlist = new Vector<TeamBean>();
+		try {
+			con = pool.getConnection();
+			sql = "select * from team where sport_num = ? order by ranking asc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sportNum);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				TeamBean bean = new TeamBean();
+				bean.setTEAM_NUM(rs.getInt(1));
+				bean.setSPORT_NUM(rs.getInt(2));
+				bean.setRANKING(rs.getInt(3));
+				bean.setTEAM_NAME(rs.getString(4));
+				bean.setGAME(rs.getInt(5));
+				bean.setPOINT(rs.getInt(6));
+				bean.setWIN(rs.getInt(7));
+				bean.setDRAW(rs.getInt(8));
+				bean.setLOSS(rs.getInt(9));
+				bean.setWIN_POINT(rs.getInt(10));
+				bean.setLOSS_POINT(rs.getInt(11));
+				bean.setCLUBINFO(rs.getString(12));
+				bean.setLOGO(rs.getString(13));
+				vlist.addElement(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
 }
