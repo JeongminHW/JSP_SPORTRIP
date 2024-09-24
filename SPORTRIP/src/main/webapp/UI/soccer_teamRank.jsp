@@ -1,3 +1,7 @@
+<%@page import="team.TeamBean"%>
+<%@page import="team.TeamMgr"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Vector" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -83,18 +87,30 @@
                     <th>실점</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> <!--  축구 2 -->
+                <%
+                    TeamMgr teamMgr = new TeamMgr();
+                    Vector<TeamBean> teamList = teamMgr.TeamRank(2);
+                    if (teamList != null) {
+                        for (TeamBean team : teamList) {
+                %>
                 <tr>
-                    <td>1</td>
-                    <td><img src="assets/images/logo_img/2_울산HD.png" alt=""> 울산</td>
-                    <td>38</td>
-                    <td>76</td>
-                    <td>23</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>63</td>
-                    <td>42</td>
+                    <td><%= team.getRANKING() %></td>
+                    <td><img src="<%= team.getLOGO()%>" alt=""><%= team.getTEAM_NAME() %></td>
+                    <td><%= team.getGAME() %></td>
+                    <td><%= team.getPOINT() %></td>
+                    <td><%= team.getWIN() %></td>
+                    <td><%= team.getDRAW() %></td>
+                    <td><%= team.getLOSS() %></td>
+                    <td><%= team.getWIN_POINT() %></td>
+                    <td><%= team.getLOSS_POINT() %></td>
                 </tr>
+                <%
+                        }
+                    } else {
+                        out.println("<tr><td colspan='9'>데이터가 없습니다.</td></tr>");
+                    }
+                %>
             </tbody>
         </table>
     </div>
