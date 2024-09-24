@@ -1,17 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
+<link rel="stylesheet" href="./assets/css/cartStyle.css">
 </head>
 <body>
-<header class="header header_logo">
-		<div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-			<img src="./assets/images/logo_img/2_울산HD.png" alt="울산" class="team_logo_img ulsan">
-		</div>
-		<a href="shopping_cart.html">
-			<img src="./assets/images/cart_icon.png" alt="장바구니" class="cart">
-		</a>
-	</header>
+<header class="header">
+    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
+        <img style="cursor: pointer;" src="./assets/images/logo_img/2_울산HD.png" alt="울산" onClick="location.href='teamPage_Store.html'">
+    </div>
+    <div style="position: relative;">
+        <img src="./assets/images/cart_icon.png" alt="장바구니" class="cart_img" onClick="location.href='shopping_cart.html'">
+    </div>
+</header>
+
+
+    <section class="cart">
+        <p class="title">
+            <span class="cart-title">장바구니</span> <span id="cartSize"> (2)</span>
+        </p>
+        <table class="cart__list">
+            <form>
+                <thead>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td colspan="2">상품정보</td>
+                        <td>수량</td>
+                        <td>상품금액</td>
+                        <td>배송비</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 첫 번째 상품 -->
+                    <tr class="cart__list__detail">
+                        <td><input type="checkbox"></td>
+                        <td class="img_td"><img src="./assets/images/goods_img/울산 뱃지.png" alt="UHDFC엠블럼 뱃지"></td>
+                        <td style="position: relative;">
+                            <p>Apple 매직 키보드 - 한국어(MK2A3KH/A)</p>
+                            <span class="price-info">116,620원</span>
+                          	<button class="cart__list__countbtn">삭제하기</button>
+                        </td>
+                        <td class="cart__list__count">
+                            <!-- 수량 조절 버튼 -->
+                            <div class="quantity-control">
+                                <button type="button" class="decrease">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" data-price="116620">
+                                <button type="button" class="increase">+</button>
+                            </div>
+                        </td>
+                        <td style="width: 200px;"><span class="product-price">116,620원</span></td>
+                        <td style="width: 200px;">3,500원</td>
+                    </tr>
+
+                    <!-- 두 번째 상품 -->
+                    <tr class="cart__list__detail">
+                        <td><input type="checkbox"></td>
+                        <td><img src="./assets/images/goods_img/울산 유니폼키링.png" alt="24선수 유니폼 키링"></td>
+                        <td style="position: relative;">
+                            <p>[애플] Magic Mouse [MK2E3KH/A]</p>
+                            <span class="price-info">88,900원</span>
+                      		<button class="cart__list__countbtn">삭제하기</button>
+                        </td>
+                        <td class="cart__list__count">
+                            <div class="quantity-control">
+                                <button type="button" class="decrease">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" data-price="88900">
+                                <button type="button" class="increase">+</button>
+                            </div>
+                        </td>
+                        <td><span class="product-price">88,900원</span></td>
+                        <td>3,500원</td>
+                    </tr>
+                </tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3" style="border-bottom: none;"></td>
+						<td style="border-bottom: none;"></td>
+						<td class="total-price">
+							<span>상품 합계</span><br> 
+							<span>배송비</span><br>
+						</td>
+						<td style="text-align: right;">
+							<span class="total-product">0원</span><br> 
+							<span class="delivery-fee">3,500원</span><br>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="border-bottom: none;"></td>
+						<td style="border-bottom: none;"></td>
+						<td class="final" style="border-bottom: none; text-align: right;"><span>합계</span>
+						</td>
+						<td
+							style="border-bottom: none; text-align: right; font-weight: bold;">
+							<span class="final-price">0원</span>
+						</td>
+					</tr>
+				</tfoot>
+			</form>
+        </table>
+        <div class="cart__mainbtns">
+            <button class="cart__bigorderbtn left" onClick="location.href='teamPage_Store.html'">쇼핑 계속하기</button>
+            <button class="cart__bigorderbtn right" onClick="location.href='order_Page.html'">주문하기</button>
+        </div>
+    </section>
+
+<script>
+	//상품정보 체크박스 선택 시 실행되는 함수
+	document.addEventListener("DOMContentLoaded", function() {
+	    const mainCheckbox = document.querySelector("thead input[type='checkbox']");
+	    const itemCheckboxes = document.querySelectorAll("tbody input[type='checkbox']");
+	
+	    // 상품정보 체크박스 클릭 시
+	    mainCheckbox.addEventListener("change", function() {
+	        // 상품정보 체크박스 상태에 따라 모든 상품 체크박스 상태 변경
+	        itemCheckboxes.forEach(function(checkbox) {
+	            checkbox.checked = mainCheckbox.checked;
+	        });
+	        // 모든 체크박스 상태가 변경된 후 가격 업데이트
+	        updateTotalPrice();
+	    });
+	});
+	
+    // 상품 금액 업데이트 함수
+    function updateProductPrice(quantityInput) {
+        const row = quantityInput.closest('tr');
+        const unitPrice = parseInt(quantityInput.dataset.price); // 개별 상품 가격
+        const quantity = parseInt(quantityInput.value); // 입력된 수량
+        const productPriceEl = row.querySelector('.product-price');
+        const newProductPrice = unitPrice * quantity;
+        productPriceEl.textContent = `${newProductPrice.toLocaleString()}원`;
+        updateTotalPrice();
+    }
+
+    // 체크된 상품들의 총 금액 계산
+    function updateTotalPrice() {
+        let totalPrice = 0;
+        const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                const row = checkbox.closest('tr');
+                const productPriceEl = row.querySelector('.product-price');
+                const productPrice = parseInt(productPriceEl.textContent.replace(/[^0-9]/g, ''));
+                totalPrice += productPrice;
+            }
+        });
+        
+        const totalProductEl = document.querySelector('.total-product');
+        totalProductEl.textContent = `${totalPrice.toLocaleString()}원`;
+
+        // 배송비 계산
+        let finalPrice = totalPrice;
+        const deliveryFeeEl = document.querySelector('.delivery-fee');
+        const deliveryFee = 3500;
+
+        if (totalPrice >= 100000) {
+            deliveryFeeEl.textContent = '0원';
+        } else {
+            deliveryFeeEl.textContent = `${deliveryFee.toLocaleString()}원`;
+            finalPrice += deliveryFee;
+        }
+
+        // 최종 합계
+        const finalPriceEl = document.querySelector('.final-price');
+        finalPriceEl.textContent = `${finalPrice.toLocaleString()}원`;
+    }
+
+    // 수량 증가 및 감소 버튼 이벤트
+    document.querySelectorAll('.increase').forEach(button => {
+        button.addEventListener('click', () => {
+            const quantityInput = button.previousElementSibling;
+            quantityInput.value = parseInt(quantityInput.value) + 1; // 수량 증가
+            updateProductPrice(quantityInput);
+        });
+    });
+
+    document.querySelectorAll('.decrease').forEach(button => {
+        button.addEventListener('click', () => {
+            const quantityInput = button.nextElementSibling;
+            if (parseInt(quantityInput.value) > 1) { // 수량이 1 밑으로 내려가지 않도록
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                updateProductPrice(quantityInput);
+            }
+        });
+    });
+
+ // 수량 직접 입력 이벤트
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', () => {
+            if (input.value < 1) input.value = 1; // 최소 수량 1로 제한
+            updateProductPrice(input); // 값이 변경된 후 금액 업데이트
+        });
+    });
+
+    // 체크박스 이벤트
+    document.querySelectorAll('tbody input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateTotalPrice();
+        });
+    });
+
+    // 페이지 로드 시 초기 계산
+    updateTotalPrice();
+</script>
+
+
 </body>
 </html>
