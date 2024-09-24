@@ -1,6 +1,5 @@
 <%@page import="team.TeamBean"%>
 <%@page import="java.util.Vector"%>
-<%@page import="java.io.Console"%>
 <%@page import="DB.MUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,6 +9,7 @@
 <jsp:setProperty property="*" name = "teamBean"/>
 <%
 	int sportNum =	MUtil.parseInt(request, "sportNum");
+	//int sportNum = 1;
 %>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-league</title>
+<title>SPORTRIP</title>
 <link rel="stylesheet" href="./assets/css/style.css">
 <script>
 	function goMain(){
@@ -33,7 +33,7 @@
 			Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 		%>
 		<div class="league_info">
-				<a href="#" onclick="sendSportNum(<%=sportNum%>)" style="margin-left: 20px; margin-right: 20px;"><img src="./assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
+				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src="./assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
 				<ul>
 					<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
@@ -51,7 +51,7 @@
 			<a href="soccer_teamRank.html">팀 순위</a>
 		</div>
 		<div class="item" style="background-color: #236FB5;">
-			<a href="soccer_teamHighlight.html">하이라이트 경기</a>
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'main_highlight')">하이라이트 경기</a>
 		</div>
 		<div class="item" style="background-color: #236FB5;">
 			<a href="soccer_teamLeagueDate.html">경기 일정</a>
@@ -164,11 +164,11 @@
 		let interval = getInterval(); // interval 등록
 	</script>
 	<script>
-	  function sendSportNum(sportNum) {
+	  function sendSportNum(sportNum, page) {
 	    // 폼을 생성
 	    var form = document.createElement("form");
 	    form.setAttribute("method", "POST");
-	    form.setAttribute("action", "sport_main.jsp"); // 데이터를 보낼 경로
+	    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
 	    
 	    // hidden input 생성하여 sportNum 값 전달
 	    var hiddenField = document.createElement("input");

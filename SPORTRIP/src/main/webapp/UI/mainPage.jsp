@@ -11,8 +11,7 @@
 	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
 	rel="stylesheet">
 <link href="./assets/css/MainText.css" rel="stylesheet" type="text/css">
-<link href="./assets/css/SportripLogo.css" rel="stylesheet"
-	type="text/css">
+<link href="./assets/css/SportripLogo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="container" id="animationContainer">
