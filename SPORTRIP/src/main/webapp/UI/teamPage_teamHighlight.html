@@ -51,7 +51,7 @@
                         const yyyy = localDate.getFullYear();
                         const mm = String(localDate.getMonth() + 1).padStart(2, '0');
                         const dd = String(localDate.getDate()).padStart(2, '0');
-                        return `${yyyy}-${mm}-${dd}`;
+                        return `${ "${yyyy}" }-${ "${mm}" }-${ "${dd}" }`;
                 }
         
                 function truncateTitle(title) {
@@ -68,10 +68,22 @@
                     url: apiurl,
                     contentType : "application/json",
                     success : function(data) {
+                        let divCount = 0; 
+
                         data.items.forEach(function(element, index) {
-                            const publishedDate = convertUTCToKST(element.snippet.publishedAt);
-                            const truncatedTitle = truncateTitle(element.snippet.title);
-                            $('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');
+                            const title = element.snippet.title;
+                            
+                            if (divCount >= 12) {
+                                return; 
+                            }
+                            
+                            if (title.includes("팀명")) {
+                                const publishedDate = convertUTCToKST(element.snippet.publishedAt);
+                                const truncatedTitle = truncateTitle(title);
+                                
+								$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
+                                divCount++; 
+                            }
                         });
                     },
                     complete : function(data) {
