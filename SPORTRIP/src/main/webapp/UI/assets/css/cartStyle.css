@@ -1,0 +1,253 @@
+@font-face {
+	font-family: 'BMJUA';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body button {
+	margin: 0;
+	font-family: 'BMJUA';
+}
+
+button {
+	cursor: pointer;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: 'BMJUA';
+	letter-spacing: 0.05em;
+	line-height: 1.5em;
+}
+
+p, span {
+	margin: 0;
+	font-family: 'BMJUA';
+}
+
+a {
+	color: black;
+}
+
+img {
+	display: block;
+	width: 100px;
+	height: 100px;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 140px;
+	background-color: #004190;
+	z-index: 10; /* header가 다른 요소보다 위에 표시되도록 설정 */
+}
+
+.img-box {
+	width: 100px;
+	height: auto;
+	margin-top: 20px; img { width : 100%;
+	height: auto;
+}
+
+}
+.cart_img {
+	float: right;
+	width: 30px;
+	height: auto;
+	margin-top: 50px;
+	margin-right: 100px;
+	filter: invert(100%) sepia(0%) saturate(7475%) hue-rotate(20deg) brightness(112%) contrast(99%);
+	cursor: pointer;
+}
+	
+.cart {
+	width: 1260px;
+	margin: auto;
+	padding: 30px;
+	padding-top: 180px; /* header의 높이만큼 padding을 추가 */
+}
+
+.title {
+	color: #222222;
+	font-size: 30px;
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	line-height: 1.5em;
+	width: 100%;
+	margin-bottom: 40px;
+	font-weight: 400;
+}
+
+table {
+	border-top: solid 1.5px black;
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 14px;
+}
+
+thead {
+	text-align: center;
+	font-weight: bold;
+}
+
+tbody {
+	font-size: 12px;
+}
+
+td {
+	padding: 15px 0px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.img_td {
+  width: 120px; /* 테이블 셀의 크기를 이미지 크기에 맞게 자동으로 설정 */
+  text-align: center; /* 이미지가 테이블 셀의 중앙에 위치하도록 설정 */
+}
+
+.img_td img {
+  max-width: 100px; /* 이미지의 최대 너비를 100px로 제한 */
+  height: 100px; /* 이미지 비율을 유지하면서 높이를 자동으로 조절 */
+}
+
+
+.cart__list__detail :nth-child(3) {
+	vertical-align: top;
+}
+
+.cart__list__detail :nth-child(3) a {
+	font-size: 12px;
+}
+
+.cart__list__detail :nth-child(3) p {
+	margin-top: 6px;
+	font-weight: bold;
+}
+
+.cart__list__count {
+	width: 180px;
+	vertical-align: middle;
+	padding: 20px;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.quantity-control {
+	display: inline-flex;
+	align-items: center;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.quantity-control button {
+	background-color: #f8f8f8;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+	font-size: 18px;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cart__list__countbtn {
+	position: absolute;
+    bottom: 0;
+    left: 0;
+	width: auto;
+	height: auto;
+	font-size: 12px;
+	margin: auto;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	background-color: white;
+	border: 1px black solid;
+	color: black;
+}
+
+.quantity-control button:hover {
+	background-color: #e0e0e0;
+}
+
+.quantity-input {
+	width: 60px;
+	text-align: center;
+	border: none;
+	font-size: 16px;
+	height: 40px;
+	margin: 0;
+	outline: none;
+}
+
+.quantity-input::-webkit-inner-spin-button, .quantity-input::-webkit-outer-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.cart__list__detail :nth-child(4), .cart__list__detail :nth-child(5),
+	.cart__list__detail :nth-child(6) {
+	border-left: 2px solid whitesmoke;
+}
+
+.cart__list__detail :nth-child(5), .cart__list__detail :nth-child(6) {
+	text-align: center;
+}
+
+.cart__list__detail :nth-child(5) button {
+	background-color: #236FB5;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 4px 8px;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.price-info {
+	font-weight: bold;
+}
+
+.final-price {
+	text-align: right;	
+}
+
+.total-price {
+	text-align: right;
+}
+
+.cart__mainbtns {
+	width: 420px;
+	height: 200px;
+	padding-top: 40px;
+	display: block;
+	margin: auto;
+}
+
+.cart__bigorderbtn {
+	width: 200px;
+	height: 50px;
+	font-size: 16px;
+	margin: auto;
+	border-radius: 5px;
+}
+
+.cart__bigorderbtn.left {
+	background-color: white;
+	border: 1px lightgray solid;
+}
+
+.cart__bigorderbtn.right {
+	background-color: #236FB5;
+	color: white;
+	border: none;
+}
