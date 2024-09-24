@@ -92,11 +92,33 @@
                     <span>이름</span>
                     <input type="text" class="input-text">
                 </div>
-                <div class="modal-item"></div>
+                <div class="modal-item">
+                    <span>이메일</span>
+                    <div class="email-box">
+                        <input style="width: 185px; margin-right: 0px;" type="text" class="input-text">
+                        <span>@</span>
+                        <select style="width: auto; margin-left: 0px;" name="domain" id="">
+                            <option value="naver">naver.com</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-item">
+                    <span>연락처</span>
+                    <input type="text" class="input-text">
+                </div>
+                <div class="modal-item">
+                    <span>결제방법</span>
+                    <div class="paytype-box">
+                        <button name="toss">토스페이</button>
+                        <button name="kakao">카카오페이</button>
+                        <button name="naver">네이버페이</button>
+                        <button name="credit">신용카드</button>
+                    </div>
+                </div>
             </div>
             <div class="reserve-box">
-                <button class="close-btn" onclick="closeModal()">취소하기</button>
-                <button class="reserve-btn">예약하기</button>
+                <button class="close-btn" onclick="closeModal()">취소</button>
+                <button class="reserve-btn">예약</button>
             </div>
         </div>
     </div>
