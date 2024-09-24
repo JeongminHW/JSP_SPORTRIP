@@ -197,7 +197,7 @@ ul, li {
 .inner {
 	padding: 0;
 	flex-shrink: 0; /* 요소가 줄어들지 않도록 설정 */
-	width: 100%;
+	width: 100%; 
 }
 
 img {

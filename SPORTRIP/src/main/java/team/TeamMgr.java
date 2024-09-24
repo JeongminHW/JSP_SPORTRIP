@@ -41,7 +41,7 @@ public class TeamMgr {
 				bean.setWIN_POINT(rs.getInt(10));
 				bean.setLOSS_POINT(rs.getInt(11));
 				bean.setCLUBINFO(rs.getString(12));
-				
+				bean.setLOGO(rs.getString(13));
 				vlist.addElement(bean);
 			}
 		} catch (Exception e) {
