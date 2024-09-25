@@ -9,6 +9,9 @@
 <jsp:setProperty property="*" name = "teamBean"/>
 <%
 	int sportNum =	MUtil.parseInt(request, "sportNum");
+	
+	TeamMgr teammgr = new TeamMgr();
+	Vector<TeamBean> teamList = teammgr.TeamRank(sportNum); //야구1 / 축구2 / 배구3
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -27,7 +30,7 @@
 	<header class="header header_logo">
 		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
         <div class="league_info">
-            <a href="soccer_main.html" style="margin-left: 50px;"><img src=".././assets/images/k-league_logo.svg" alt="리그" id="league_logo_img"></a>
+            <a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
             <ul>
                 <li>
                     <a href=""><img src=".././assets/images/logo_img/1_강원.png" alt="강원" class="team_logo_img" title="강원"></a>
@@ -96,9 +99,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% // 야구1 / 축구2 / 배구3
-                    TeamMgr teammgr = new TeamMgr();
-                    Vector<TeamBean> teamList = teammgr.TeamRank(sportNum);
+                <% 
                     if (teamList != null) {
                         for (TeamBean team : teamList) {
                 %>

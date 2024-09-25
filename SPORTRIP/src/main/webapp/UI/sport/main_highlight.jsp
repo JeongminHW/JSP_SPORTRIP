@@ -10,6 +10,7 @@
 
 <%
 	int sportNum =	MUtil.parseInt(request, "sportNum");
+	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,9 +29,6 @@
 <body>
 	<header class="header header_logo">
 		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-		<%
-			Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
-		%>
 		<div class="league_info">
 				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
 				<ul>
