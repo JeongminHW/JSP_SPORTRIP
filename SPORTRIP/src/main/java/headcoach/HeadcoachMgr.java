@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 
 import DB.DBConnectionMgr;
 
+
 public class HeadcoachMgr {
 	private DBConnectionMgr pool;
-
 	public HeadcoachMgr() {
 		pool = DBConnectionMgr.getInstance();
 	}
-
+	
 	// 팀 번호로 감독 검색
 	public HeadcoachBean getHeadcoach(int num) {
 		Connection con = null;

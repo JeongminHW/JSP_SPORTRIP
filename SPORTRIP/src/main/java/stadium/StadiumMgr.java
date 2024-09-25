@@ -7,13 +7,13 @@ import java.sql.ResultSet;
 import DB.DBConnectionMgr;
 import team.TeamBean;
 
-public class StadiumMgr {
+public class StadiumMgr {	
 	private DBConnectionMgr pool;
-
+	
 	public StadiumMgr() {
 		pool = DBConnectionMgr.getInstance();
 	}
-
+	
 	// 팀별 경기장 조회
 	public StadiumBean getStadium(int teamNum) {
 		Connection con = null;

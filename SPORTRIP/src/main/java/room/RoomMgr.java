@@ -9,18 +9,17 @@ import DB.DBConnectionMgr;
 
 public class RoomMgr {
 	private DBConnectionMgr pool;
-
 	public RoomMgr() {
 		pool = DBConnectionMgr.getInstance();
 	}
-
+	
 	// 숙소번호, 객실번호에 따른 객실 출력
 	public Vector<RoomBean> getRoom(int lnum, int rnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		Vector<RoomBean> roomlist = new Vector<RoomBean>();
+    	Vector<RoomBean> roomlist = new Vector<RoomBean>();
 		try {
 			con = pool.getConnection();
 			sql = "SELECT * FROM ROOM WHERE ROOM_NUM = ? AND LODGING_NUM = ?";
