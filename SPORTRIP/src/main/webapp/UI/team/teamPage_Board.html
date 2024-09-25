@@ -10,6 +10,10 @@
 	function goMain() {
 		document.location.href = "mainPage.jsp";
 	}
+
+    function postMessage(){
+        document.location.href = "Board_post.html";
+    }
 </script>
 </head>
 <body>
@@ -58,7 +62,7 @@
 
     <div class="table-list-box">
         <div class="write-btn">
-            <button>글쓰기</button>
+            <button onclick="postMessage()">글쓰기</button>
         </div>
         <div class="table-list">
             <table>

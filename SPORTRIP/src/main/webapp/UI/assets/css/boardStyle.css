@@ -9,6 +9,7 @@
         background-color: #ffffff;
         border: 1px solid #000000;
         border-radius: 4px;
+        cursor: pointer;
     }
 }
 
@@ -115,4 +116,32 @@
         border: 1px solid #9e9e9e;
         border-radius: 4px;
     }
-  }
+}
+
+.post-box{
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.post-table{
+    input{
+        width: 98%;
+        height: 20px;
+    }
+}
+
+.post-btn-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    button{
+        width: 80px;
+        height: 30px;
+        font-size: 20px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        margin: 10px;
+    }
+}
