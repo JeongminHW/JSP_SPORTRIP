@@ -10,7 +10,6 @@
 
 <%
 	int sportNum =	MUtil.parseInt(request, "sportNum");
-	//int sportNum = 3;
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -48,7 +47,7 @@
 	
 	<div class="top">
 		<div class="item" style="background-color: #236FB5;">
-			<a href="soccer_teamRank.html">팀 순위</a>
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'soccer_teamRank')">팀 순위</a>
 		</div>
 		<div class="item" style="background-color: #236FB5;">
 			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'main_highlight')">하이라이트 경기</a>

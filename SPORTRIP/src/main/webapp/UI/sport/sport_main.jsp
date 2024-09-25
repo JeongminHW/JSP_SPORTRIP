@@ -9,7 +9,6 @@
 <jsp:setProperty property="*" name = "teamBean"/>
 <%
 	int sportNum =	MUtil.parseInt(request, "sportNum");
-	//int sportNum = 1;
 %>
 
 <!DOCTYPE html>
@@ -38,7 +37,7 @@
 					<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
 					%>
-							<li><a href="teamPage_Player.html"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
+							<li><a href="teamPage_Player.jsp"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
 					<%
 						}
 					%>
@@ -48,7 +47,7 @@
 	
 	<div class="top">
 		<div class="item" style="background-color: #236FB5;">
-			<a href="soccer_teamRank.html">팀 순위</a>
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'soccer_teamRank')">팀 순위</a>
 		</div>
 		<div class="item" style="background-color: #236FB5;">
 			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'main_highlight')">하이라이트 경기</a>

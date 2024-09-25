@@ -1,7 +1,15 @@
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
+<%@page import="java.util.Vector"%>
+<%@page import="DB.MUtil"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.util.Vector" %>
+
+<jsp:useBean id="teamMgr" class="team.TeamMgr"/>
+<jsp:useBean id="teamBean" class="team.TeamBean"/>
+<jsp:setProperty property="*" name = "teamBean"/>
+<%
+	int sportNum =	MUtil.parseInt(request, "sportNum");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -62,10 +70,10 @@
     </header>
     <div class="top">
         <div class="item" style="background-color: #083660;">
-			<a href="soccer_teamRank.html">팀 순위</a>
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'soccer_teamRank')">팀 순위</a>
 		</div>
 		<div class="item" style="background-color: #236FB5;">
-			<a href="soccer_teamHighlight.html">하이라이트 경기</a>
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'main_highlight')">하이라이트 경기</a>
 		</div>
         <div class="item" style="background-color: #236FB5;">
             <a href="soccer_teamLeagueDate.html">경기 일정</a>
@@ -87,10 +95,10 @@
                     <th>실점</th>
                 </tr>
             </thead>
-            <tbody> <!--  축구 2 -->
-                <%
-                    TeamMgr teamMgr = new TeamMgr();
-                    Vector<TeamBean> teamList = teamMgr.TeamRank(2);
+            <tbody>
+                <% // 야구1 / 축구2 / 배구3
+                    TeamMgr teammgr = new TeamMgr();
+                    Vector<TeamBean> teamList = teammgr.TeamRank(sportNum);
                     if (teamList != null) {
                         for (TeamBean team : teamList) {
                 %>
@@ -114,5 +122,25 @@
             </tbody>
         </table>
     </div>
+    <script>
+	  function sendSportNum(sportNum, page) {
+	    // 폼을 생성
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
+	    
+	    // hidden input 생성하여 sportNum 값 전달
+	    var hiddenField = document.createElement("input");
+	    hiddenField.setAttribute("type", "hidden");
+	    hiddenField.setAttribute("name", "sportNum");
+	    hiddenField.setAttribute("value", sportNum);
+	    
+	    form.appendChild(hiddenField);
+	
+	    // 생성한 폼을 document에 추가한 후 제출
+	    document.body.appendChild(form);
+	    form.submit();
+	  }
+	</script>
 </body>
 </html>
