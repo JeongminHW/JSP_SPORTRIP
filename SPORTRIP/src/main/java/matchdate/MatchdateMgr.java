@@ -8,24 +8,29 @@ import java.util.Vector;
 import DB.DBConnectionMgr;
 
 public class MatchdateMgr {
-	
+
 	private DBConnectionMgr pool;
-	
+
 	public MatchdateMgr() {
 		pool = DBConnectionMgr.getInstance();
 	}
-	
+
 	// 오늘 이후 경기 일정 조회
-	public Vector<MatchdateBean> listMachedate(){
+	public Vector<MatchdateBean> listMachedate(int sport_num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		Vector<MatchdateBean> vlist = null;
+		Vector<MatchdateBean> vlist = new Vector<MatchdateBean>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from matchdate where MATCH_DATE >= now()";
+			sql = "select m.MATCH_DATE_NUM, m.STADIUM_NUM, m.MATCH_DATE,"
+					+ "m.TEAM_NUM1, m.TEAM_NUM2 from matchdate m join team t "
+					+ "on m.team_num1 = t.team_num "
+					+ "where m.MATCH_DATE >= now() and t.sport_num = ?";
+
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sport_num);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				MatchdateBean bean = new MatchdateBean();
@@ -43,4 +48,31 @@ public class MatchdateMgr {
 		}
 		return vlist;
 	}
+	
+	public String getstadiumName(int match_date_num) {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = null;
+	    String stadiumName = null;
+	    try {
+	        con = pool.getConnection();
+	        sql = "SELECT s.STADIUM_NAME " +
+	              "FROM matchdate m " +
+	              "JOIN stadium s ON m.STADIUM_NUM = s.STADIUM_NUM "
+	              + "WHERE m.MATCH_DATE_NUM = ?" ;
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setInt(1, match_date_num);
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	        	stadiumName = rs.getString(1);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        pool.freeConnection(con, pstmt, rs);
+	    }
+	    return stadiumName;
+	}
+
 }
