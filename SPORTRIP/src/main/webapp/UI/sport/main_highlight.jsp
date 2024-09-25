@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTRIP</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href=".././assets/css/style.css">
     <script>
     	function goMain(){
     		document.location.href="mainPage.jsp";
@@ -28,12 +28,12 @@
 </head>
 <body>
 	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()"><img src="./assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
+		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
 		<%
 			Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 		%>
 		<div class="league_info">
-				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src="./assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
+				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
 				<ul>
 					<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
