@@ -1,0 +1,443 @@
+@font-face {
+	font-family: 'BMJUA';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.order-header {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	background-color: #004190;
+	font-size: 20px;
+}
+
+.order-header>div {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+	color: #ffffff;
+}
+
+.order-section {
+	position: relative;
+	margin: 0 auto 100px;
+	width: 800px;
+	height: 100%;
+}
+
+.order-address, .order-product {
+	margin-top: 50px;
+}
+
+.order-address>span {
+	font-size: 20px;
+}
+
+.address-info-section {
+	margin-bottom: 10px;
+}
+
+.address-content {
+	display: flex;
+}
+
+.address-info {
+	flex: auto;
+	min-width: 0;
+}
+
+.receiver>span {
+	letter-spacing: 2px;
+}
+
+.phone-number {
+	font-size: 14px;
+	font-weight: 500;
+	color: #767678;
+}
+
+.address-change {
+	flex-shrink: 0;
+	padding-left: 15px;
+}
+
+.address-change-btn {
+	padding: 5px 9px;
+	border: 1px solid rgba(35, 111, 181, 0.5);
+	border-radius: 6px;
+	background-color: rgba(189, 222, 255, 0.3);
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.order-product>span {
+	font-size: 20px;
+}
+
+.product-wrap, .address-wrap {
+	margin-top: 10px;
+	width: 100%;
+	background-color: rgba(189, 222, 255, 0.7);
+	border-radius: 15px;
+	padding: 20px 16px 5px;
+}
+
+ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.product-list {
+	padding: 0;
+	margin: 0;
+}
+
+.product-info {
+	border-top: 1px solid rgba(35, 111, 181, 0.5);
+}
+
+.img-box {
+	width: 120px; /* 테이블 셀의 크기를 이미지 크기에 맞게 자동으로 설정 */
+	text-align: center; /* 이미지가 테이블 셀의 중앙에 위치하도록 설정 */ 
+	img { 
+		max-width: 100px; /* 이미지의 최대 너비를 100px로 제한 */
+		height: 100px; /* 이미지 비율을 유지하면서 높이를 자동으로 조절 */
+		border: 1px solid black;
+	}
+}
+
+.product-detail {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.price-wrap {
+	margin-top: 12px;
+	width: 100%;
+	background-color: rgba(189, 222, 255, 0.7);
+	border-radius: 15px;
+	padding: 20px 16px 5px;
+}
+
+.total-price-detail {
+	padding-bottom: 15px;
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+.total-product-price .delivery-fee {
+	display: flex !important; /* dt와 dd를 같은 줄에 배치 */
+	align-items: center; /* 세로 중앙 정렬 */
+	font-size: 15px;
+	line-height: 21px;
+	font-weight: 500;
+	color: #767678;
+}
+
+.delivery-fee {
+	margin-top: 8px;
+}
+
+.product-price {
+	display: flex;
+	min-width: 0; /* 추가 */
+	padding-right: 10px;
+	align-items: center; /* 세로 정렬을 위해 추가 */
+}
+
+.product-price-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.product-price-number {
+	flex-shrink: 0;
+	margin-left: auto; /* 오른쪽으로 배치 */
+	min-width: 0; /* 추가 */
+}
+
+.delivery-price {
+	display: flex;
+	min-width: 0;
+	padding-right: 10px;
+}
+
+.final-price {
+	display: flex; /* dt와 dd를 같은 줄에 배치 */
+	font-size: 17px;
+	line-height: 23px;
+	margin: -10px -16px;
+	padding: 20px 16px;
+	background-color: rgba(120, 183, 255);
+	border-radius: 0 0 15px 15px;
+}
+
+.final-price-text, .final-price-number {
+	flex-shrink: 0;
+}
+
+.final-price-text {
+	margin-right: auto; /* 텍스트가 좌측 정렬되도록 설정 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-right: 15px;
+}
+
+.final-price-number {
+	margin-left: auto; /* 숫자가 우측에 정렬되도록 설정 */
+}
+
+.total-product-price, .delivery-fee {
+	display: flex; /* dt와 dd를 같은 줄에 배치 */
+	justify-content: space-between; /* 공간을 양쪽으로 나누어서 배치 */
+	align-items: center; /* 세로 중앙 정렬 */
+}
+
+.total-product-price dt, .delivery-fee dt {
+	flex: 1; /* dt에 가변적인 공간을 부여 */
+}
+
+.total-product-price dd, .delivery-fee dd, .final-price dd {
+	margin-left: 10px; /* dd와 dt 사이의 간격을 조정 */
+	flex-shrink: 0; /* dd의 크기가 너무 줄어들지 않도록 고정 */
+}
+
+.payment-section {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	background-color: rgba(189, 222, 255);
+	box-shadow: 0 0 5px #004190;
+}
+
+.payment-content {
+	display: flex;
+	align-items: center;
+	max-width: 800px;
+	margin: 0 auto;
+	transform: translateY(40%);
+	justify-content: space-between; /* 추가된 부분 */
+}
+
+.agreement-content {
+	flex: 1 0 150px;
+	margin-right: 20px;
+	color: #767678;
+}
+
+.payment-button {
+	margin-left: auto;
+	width: 300px;
+}
+
+.payment-btn {
+	font-size: 20px;
+	line-height: 26px;
+	width: 100%;
+	padding: 5px 0 5px;
+	background-color: #004190;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, .1);
+	border: 0px; border-radius : 5px;
+	color: #fff;
+	border-radius: 5px;
+}
+
+/* 팝업 기본 스타일 */
+.popup-background {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup {
+	width: 400px; /* 가로 600px로 설정 */
+	height: 600px; /* 세로 800px로 설정 */
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.popup-header {
+	position: sticky;
+	top: 0;
+	background-color: #004190;
+	color: white;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
+	border-radius: 10px 10px 0 0;
+	z-index: 10;
+}
+
+.popup-content {
+	flex: 1;
+	padding: 10px 20px;
+	overflow-y: auto;
+}
+
+.new-address-btn {
+	width: 100%;
+	height: 30px; background-color : #fff;
+	border: 1px solid lightgrey;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #fff;
+}
+
+.address-list-area {
+	margin-top: 10px;
+	padding: 0;
+}
+
+.address-list-content {
+	max-height: 180px;
+}
+
+.address-content {
+	padding: 14px 0;
+}
+
+.address-area {
+	position: relative;
+}
+
+.button-area {
+	margin-top: 10px;
+}
+
+.popup .phone-number {
+	letter-spacing: -0.3px;
+}
+
+.popup .receiver-address {
+	letter-spacing: -0.5px;
+	font-size: 14px;
+}
+
+.popup .address-content {
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 1px solid rgba(35, 111, 181, 0.5);
+}
+
+.address-selected-btn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	letter-spacing: -0.5px;
+	border: 0 none;
+	background-color: transparent; > span { font-size : 16px;
+	line-height: 22px;
+	letter-spacing: -0.3px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #aaaaac;
+}
+
+}
+.address-select-btn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	letter-spacing: -0.5px;
+	border: 0 none;
+	background-color: transparent; 
+	> span { 
+		font-size : 14px;
+		line-height: 22px;
+		letter-spacing: -0.3px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 44px;
+		padding: 7px 0 5px;
+		border-radius: 4px;
+		background-color: rgba(189, 222, 255, 0.7);
+		color: #004190;
+	}
+}
+
+.modify-address {
+	margin-right: 8px;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: -0.3px;
+	width: 44px;
+	padding: 6px 0 4px;
+	border: 1px solid rgba(35, 111, 181, 0.5);
+	border-radius: 4px;
+	background-color: #fff;
+	vertical-align: top;
+	color: black;
+}
+
+.delete-address {
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: -0.3px;
+	width: 44px;
+	padding: 6px 0 4px;
+	border: 1px solid rgba(35, 111, 181, 0.5);
+	border-radius: 4px;
+	background-color: #fff;
+	vertical-align: top;
+	color: black;
+}
+
+.close-popup {
+	margin-top: auto; /* 남은 공간을 위쪽에 두어 버튼을 아래로 밀어냄 */
+	padding: 10px 20px;
+	background-color: #004190;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	align-self: center; /* 버튼을 가로축에서 중앙 정렬 */
+}
+
+.close-popup:hover {
+	background-color: #003080;
+}
