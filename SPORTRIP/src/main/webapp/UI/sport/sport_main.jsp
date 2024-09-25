@@ -2,14 +2,14 @@
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<jsp:useBean id="teamMgr" class="team.TeamMgr"/>
-<jsp:useBean id="teamBean" class="team.TeamBean"/>
-<jsp:setProperty property="*" name = "teamBean"/>
+<jsp:useBean id="teamMgr" class="team.TeamMgr" />
+<jsp:useBean id="teamBean" class="team.TeamBean" />
+<jsp:setProperty property="*" name="teamBean" />
 <%
 	int sportNum =	MUtil.parseInt(request, "sportNum");
-	//int sportNum = 1;
+	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 %>
 
 <!DOCTYPE html>
@@ -28,57 +28,68 @@
 <body>
 
 	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-		<%
-			Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
-		%>
+		<a style="cursor: pointer" onclick="goMain()"><img
+			src=".././assets/images/sportrip_logo.png" alt="sportrip 로고"
+			id="logo_img"></a>
 		<div class="league_info">
-				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
-				<ul>
-					<% for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')"
+				style="margin-left: 20px; margin-right: 20px;"><img
+				src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그"
+				id="league_logo_img"></a>
+			<ul>
+				<% 
+						if(teamVlist != null){
+							for(TeamBean team : teamVlist){
 					%>
-							<li><a href="teamPage_Player.html"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
-					<%
-						}
+				<li><a href="teamPage_Player.html"><img
+						src="<%=team.getLOGO()%>" alt="<%=team.getTEAM_NAME() %>"
+						class="team_logo_img"></a></li>
+				<%
+						}}
 					%>
-				</ul>
+			</ul>
 		</div>
 	</header>
-	
+
 	<div class="top">
 		<div class="item" style="background-color: #236FB5;">
-			<a href="soccer_teamRank.html">팀 순위</a>
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'team_rank')">팀 순위</a>
 		</div>
+
 		<div class="item" style="background-color: #236FB5;">
 			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'main_highlight')">하이라이트 경기</a>
 		</div>
+
 		<div class="item" style="background-color: #236FB5;">
-			<a href="soccer_teamLeagueDate.html">경기 일정</a>
+			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_matchDate')">경기 일정</a>
 		</div>
 	</div>
-	
+
 	<p>
-	
 	<div class="outer">
 		<div class="inner-list">
 			<div class="inner">
-				<img src=".././assets/images/banner_img/banner_image1.png" alt="배너이미지1" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image1.png"
+					alt="배너이미지1" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src=".././assets/images/banner_img/banner_image2.png" alt="배너이미지2" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image2.png"
+					alt="배너이미지2" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src=".././assets/images/banner_img/banner_image3.png" alt="배너이미지3" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image3.png"
+					alt="배너이미지3" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src=".././assets/images/banner_img/banner_image4.png" alt="배너이미지4" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image4.png"
+					alt="배너이미지4" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src=".././assets/images/banner_img/banner_image5.png" alt="배너이미지5" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image5.png"
+					alt="배너이미지5" id="banner_img">
 			</div>
 		</div>
-		
+
 		<div class="button-list">
 			<button class="button-left">&lt;</button>
 			<!-- '<' 기호 -->
@@ -87,11 +98,9 @@
 		</div>
 		<!-- 배너 인디케이터 -->
 		<div class="indicator-list">
-			<span class="indicator active"></span> 
-			<span class="indicator"></span>
-			<span class="indicator"></span> 
-			<span class="indicator"></span> 
-			<span class="indicator"></span>
+			<span class="indicator active"></span> <span class="indicator"></span>
+			<span class="indicator"></span> <span class="indicator"></span> <span
+				class="indicator"></span>
 		</div>
 	</div>
 

@@ -9,11 +9,11 @@ import DB.DBConnectionMgr;
 
 public class BoardMgr {
 	private DBConnectionMgr pool;
-	
+
 	public BoardMgr() {
 		pool = DBConnectionMgr.getInstance();
 	}
-	
+
 	// 게시글 등록
 	public boolean insertBoard(BoardBean bean) {
 		Connection con = null;
@@ -32,7 +32,7 @@ public class BoardMgr {
 			pstmt.setInt(6, bean.getNONRECOMMAND());
 			pstmt.setInt(7, bean.getTEAM_NUM());
 			pstmt.setString(8, bean.getBOARD_IMG());
-			if(pstmt.executeUpdate() == 1) {
+			if (pstmt.executeUpdate() == 1) {
 				flag = true;
 			}
 
@@ -43,7 +43,7 @@ public class BoardMgr {
 		}
 		return flag;
 	}
-	
+
 	// 게시글 수정
 	public boolean updateBoard(BoardBean bean) {
 		Connection con = null;
@@ -56,7 +56,7 @@ public class BoardMgr {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getBOARD_NUM());
 			pstmt.setInt(2, bean.getTEAM_NUM());
-			if(pstmt.executeUpdate() == 1) {
+			if (pstmt.executeUpdate() == 1) {
 				flag = true;
 			}
 
@@ -67,7 +67,7 @@ public class BoardMgr {
 		}
 		return flag;
 	}
-	
+
 	// 게시글 삭제
 	public boolean deleteBoard(int BoardNum) {
 		Connection con = null;
@@ -79,7 +79,7 @@ public class BoardMgr {
 			sql = "delete from board where board_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, BoardNum);
-			if(pstmt.executeUpdate() == 1) {
+			if (pstmt.executeUpdate() == 1) {
 				flag = true;
 			}
 
@@ -90,7 +90,7 @@ public class BoardMgr {
 		}
 		return flag;
 	}
-	
+
 	// 게시글 1개 조회(본인 글일 경우 수정/삭제 , 본인 글이 아닐 경우 추천/비추천 버튼 출력)
 	public BoardBean getBoard(int teamNum, int boardNum) {
 		Connection con = null;
@@ -117,7 +117,7 @@ public class BoardMgr {
 				bean.setTEAM_NUM(rs.getInt(9));
 				bean.setVIEWS(rs.getInt(10));
 				bean.setBOARD_IMG(rs.getString(11));
-				
+
 				updateViews(bean.getTEAM_NUM(), bean.getBOARD_NUM());
 			}
 		} catch (Exception e) {
@@ -127,7 +127,7 @@ public class BoardMgr {
 		}
 		return bean;
 	}
-	
+
 	// 게시글 리스트 조회
 	public Vector<BoardBean> listBoard(int teamNum) {
 		Connection con = null;
@@ -163,7 +163,7 @@ public class BoardMgr {
 		}
 		return vlist;
 	}
-	
+
 	// 게시글 추천, 비추천 상승
 	public boolean updateCommand(String command, int teamNum, int boardNum) {
 		Connection con = null;
@@ -178,7 +178,7 @@ public class BoardMgr {
 			pstmt.setString(2, command);
 			pstmt.setInt(3, teamNum);
 			pstmt.setInt(4, boardNum);
-			if(pstmt.executeUpdate() == 1) {
+			if (pstmt.executeUpdate() == 1) {
 				flag = true;
 			}
 
@@ -189,7 +189,7 @@ public class BoardMgr {
 		}
 		return flag;
 	}
-	
+
 	// 조회 수 증가
 	public void updateViews(int teamNum, int boardNum) {
 		Connection con = null;
@@ -210,6 +210,4 @@ public class BoardMgr {
 		}
 	}
 
-	
-	
 }

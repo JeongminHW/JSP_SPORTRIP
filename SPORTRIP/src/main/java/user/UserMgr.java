@@ -9,39 +9,39 @@ import player.PlayerBean;
 
 public class UserMgr {
 	private DBConnectionMgr pool;
-	
+
 	public UserMgr() {
-        pool = DBConnectionMgr.getInstance();
-    }
-	
+		pool = DBConnectionMgr.getInstance();
+	}
+
 	// 사용자 추가
-    public boolean addUser(UserBean user) {
-    	Connection con = null;
-    	PreparedStatement pstmt = null;
-    	String query = null;
-    	boolean flag = false;
-    	
-        try {
-            query = "INSERT INTO USER (ID, PW, NAME, ADDRESS, POSTCODE, PHONE, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            pstmt = con.prepareStatement(query);
-            pstmt.setString(1, user.getId());
-            pstmt.setString(2, user.getPw());
-            pstmt.setString(3, user.getName());
-            pstmt.setString(4, user.getAddress());
-            pstmt.setInt(5, user.getPostcode());
-            pstmt.setString(6, user.getPhone());
-            pstmt.setString(7, user.getEmail());
-            if(pstmt.executeUpdate() == 1) {
-            	flag = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return flag;
-    }
-    
-    // 로그인
+	public boolean addUser(UserBean user) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String query = null;
+		boolean flag = false;
+
+		try {
+			query = "INSERT INTO USER (ID, PW, NAME, ADDRESS, POSTCODE, PHONE, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, user.getId());
+			pstmt.setString(2, user.getPw());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4, user.getAddress());
+			pstmt.setInt(5, user.getPostcode());
+			pstmt.setString(6, user.getPhone());
+			pstmt.setString(7, user.getEmail());
+			if (pstmt.executeUpdate() == 1) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return flag;
+	}
+
+	// 로그인
 	public boolean checkLogin(String id, String pw) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
