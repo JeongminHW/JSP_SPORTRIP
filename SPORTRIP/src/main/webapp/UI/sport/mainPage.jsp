@@ -10,17 +10,17 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
 	rel="stylesheet">
-<link href="./assets/css/MainText.css" rel="stylesheet" type="text/css">
-<link href="./assets/css/SportripLogo.css" rel="stylesheet" type="text/css">
+<link href=".././assets/css/MainText.css" rel="stylesheet" type="text/css">
+<link href=".././assets/css/SportripLogo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="container" id="animationContainer">
 		<div id="textContainer">
 			<span id="S" class="letter">S</span> <span id="P" class="letter">P</span>
-			<img id="logo_YaChookBae" src="./assets/images/LOGO_YaChookBae.png"
+			<img id="logo_YaChookBae" src=".././assets/images/LOGO_YaChookBae.png"
 				alt="Logo_YaChookBae"> <img id="logo_DottedLine"
-				src="./assets/images/LOGO_DottedLine.png" alt="Logo_DottedLine">
-			<img id="logo_Airplane" src="./assets/images/LOGO_Airplane.png"
+				src=".././assets/images/LOGO_DottedLine.png" alt="Logo_DottedLine">
+			<img id="logo_Airplane" src=".././assets/images/LOGO_Airplane.png"
 				alt="LOGO_Airplane"> <span id="R" class="letter">R</span> <span
 				id="T" class="letter">T</span> <span id="R2" class="letter">R</span>
 			<span id="I" class="letter">I</span> <span id="P2" class="letter">P</span>

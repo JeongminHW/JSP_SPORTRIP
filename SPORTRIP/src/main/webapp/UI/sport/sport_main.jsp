@@ -18,7 +18,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SPORTRIP</title>
-<link rel="stylesheet" href="./assets/css/style.css">
+<link href=".././assets/css/style.css" rel="stylesheet" type="text/css">
 <script>
 	function goMain(){
 		document.location.href="mainPage.jsp";
@@ -28,12 +28,12 @@
 <body>
 
 	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()"><img src="./assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
+		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
 		<%
 			Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 		%>
 		<div class="league_info">
-				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src="./assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
+				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
 				<ul>
 					<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
@@ -63,19 +63,19 @@
 	<div class="outer">
 		<div class="inner-list">
 			<div class="inner">
-				<img src="./assets/images/banner_img/banner_image1.png" alt="배너이미지1" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image1.png" alt="배너이미지1" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src="./assets/images/banner_img/banner_image2.png" alt="배너이미지2" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image2.png" alt="배너이미지2" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src="./assets/images/banner_img/banner_image3.png" alt="배너이미지3" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image3.png" alt="배너이미지3" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src="./assets/images/banner_img/banner_image4.png" alt="배너이미지4" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image4.png" alt="배너이미지4" id="banner_img">
 			</div>
 			<div class="inner">
-				<img src="./assets/images/banner_img/banner_image5.png" alt="배너이미지5" id="banner_img">
+				<img src=".././assets/images/banner_img/banner_image5.png" alt="배너이미지5" id="banner_img">
 			</div>
 		</div>
 		
