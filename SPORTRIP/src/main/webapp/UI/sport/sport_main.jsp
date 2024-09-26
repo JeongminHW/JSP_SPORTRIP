@@ -1,15 +1,13 @@
-<%@page import="team.TeamBean"%>
-<%@page import="java.util.Vector"%>
-<%@page import="DB.MUtil"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="team.TeamBean"%> <%@page import="java.util.Vector"%> <%@page
+import="DB.MUtil"%> <%@ page language="java" contentType="text/html;
+charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:useBean id="teamMgr" class="team.TeamMgr"/>
-<jsp:useBean id="teamBean" class="team.TeamBean"/>
-<jsp:setProperty property="*" name = "teamBean"/>
-<%
-	int sportNum =	MUtil.parseInt(request, "sportNum");
-	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
+<jsp:useBean id="teamMgr" class="team.TeamMgr" />
+<jsp:useBean id="teamBean" class="team.TeamBean" />
+<jsp:setProperty property="*" name="teamBean" />
+<% 
+	int sportNum = MUtil.parseInt(request, "sportNum"); 
+	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum); 
 %>
 
 <!DOCTYPE html>
@@ -97,55 +95,55 @@
 /*
   div 사이즈 동적으로 구하기
 */
-		const outer = document.querySelector('.outer');
-		const innerList = document.querySelector('.inner-list');
-		const inners = document.querySelectorAll('.inner');
-		let currentIndex = 0; // 현재 슬라이드 화면 인덱스
-		
-		inners.forEach((inner) => {
-		  inner.style.width = `${outer.clientWidth}px`; // inner의 width를 모두 outer의 width로 만들기
-		});
-		
-		innerList.style.width = `${outer.clientWidth * inners.length}px`; // innerList의 width를 inner의 width * inner의 개수로 만들기
-		
-		const indicators = document.querySelectorAll('.indicator');
-		
-		// 인디케이터 업데이트 함수
-		const updateIndicators = () => {
-		  indicators.forEach((indicator, index) => {
-		    indicator.classList.toggle('active', index === currentIndex);
-		  });
-		};
-		
-		/*
+        const outer = document.querySelector(".outer");
+        const innerList = document.querySelector(".inner-list");
+        const inners = document.querySelectorAll(".inner");
+        let currentIndex = 0; // 현재 슬라이드 화면 인덱스
+
+        inners.forEach((inner) => {
+          inner.style.width = `${outer.clientWidth}px`; // inner의 width를 모두 outer의 width로 만들기
+        });
+
+        innerList.style.width = `${outer.clientWidth * inners.length}px`; // innerList의 width를 inner의 width * inner의 개수로 만들기
+
+        const indicators = document.querySelectorAll(".indicator");
+
+        // 인디케이터 업데이트 함수
+        const updateIndicators = () => {
+          indicators.forEach((indicator, index) => {
+            indicator.classList.toggle("active", index === currentIndex);
+          });
+        };
+
+        /*
 		  버튼에 이벤트 등록하기
 		*/
-		const buttonLeft = document.querySelector('.button-left');
-		const buttonRight = document.querySelector('.button-right');
-		
-		buttonLeft.addEventListener('click', () => {
-		  currentIndex--;
-		  if (currentIndex < 0) {
-		    currentIndex = inners.length - 1; // 첫 번째 배너를 넘어가면 마지막 배너로 돌아감
-		  }
-		  innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-		  clearInterval(interval); // 기존 동작되던 interval 제거
-		  interval = getInterval(); // 새로운 interval 등록
-		  updateIndicators(); // 인디케이터 업데이트
-		});
-		
-		buttonRight.addEventListener('click', () => {
-		  currentIndex++;
-		  if (currentIndex >= inners.length) {
-		    currentIndex = 0; // 마지막 배너를 넘어가면 첫 번째 배너로 돌아감
-		  }
-		  innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
-		  clearInterval(interval); // 기존 동작되던 interval 제거
-		  interval = getInterval(); // 새로운 interval 등록
-		  updateIndicators(); // 인디케이터 업데이트
-		});
-		
-		/*
+        const buttonLeft = document.querySelector(".button-left");
+        const buttonRight = document.querySelector(".button-right");
+
+        buttonLeft.addEventListener("click", () => {
+          currentIndex--;
+          if (currentIndex < 0) {
+            currentIndex = inners.length - 1; // 첫 번째 배너를 넘어가면 마지막 배너로 돌아감
+          }
+          innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
+          clearInterval(interval); // 기존 동작되던 interval 제거
+          interval = getInterval(); // 새로운 interval 등록
+          updateIndicators(); // 인디케이터 업데이트
+        });
+
+        buttonRight.addEventListener("click", () => {
+          currentIndex++;
+          if (currentIndex >= inners.length) {
+            currentIndex = 0; // 마지막 배너를 넘어가면 첫 번째 배너로 돌아감
+          }
+          innerList.style.marginLeft = `-${outer.clientWidth * currentIndex}px`; // index만큼 margin을 주어 옆으로 밀기
+          clearInterval(interval); // 기존 동작되던 interval 제거
+          interval = getInterval(); // 새로운 interval 등록
+          updateIndicators(); // 인디케이터 업데이트
+        });
+
+        /*
 		  주기적으로 화면 넘기기
 		*/
 		const getInterval = () => {
@@ -226,4 +224,42 @@
  */
 	</script>
 </body>
+</html>
+=======
+        const getInterval = () => {
+          return setInterval(() => {
+            currentIndex++;
+            if (currentIndex >= inners.length) {
+              currentIndex = 0; // 마지막 배너를 넘어가면 첫 번째 배너로 돌아감
+            }
+            innerList.style.marginLeft = `-${
+              outer.clientWidth * currentIndex
+            }px`;
+            updateIndicators(); // 인디케이터 업데이트
+          }, 2000);
+        };
+
+        let interval = getInterval(); // interval 등록
+      </script>
+    <script>
+      function sendSportNum(sportNum, page) {
+        // 폼을 생성
+        var form = document.createElement("form");
+        form.setAttribute("method", "POST");
+        form.setAttribute("action", `${"${page}"}.jsp`); // 데이터를 보낼 경로
+
+        // hidden input 생성하여 sportNum 값 전달
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "sportNum");
+        hiddenField.setAttribute("value", sportNum);
+
+        form.appendChild(hiddenField);
+
+        // 생성한 폼을 document에 추가한 후 제출
+        document.body.appendChild(form);
+        form.submit();
+      }
+    </script>
+  </body>
 </html>
