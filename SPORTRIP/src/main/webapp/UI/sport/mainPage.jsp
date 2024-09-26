@@ -179,24 +179,21 @@ pageEncoding="UTF-8"%>
     </script>
 
     <script>
-      function sendSportNum(sportNum) {
-        // 폼을 생성
-        var form = document.createElement("form");
-        form.setAttribute("method", "POST");
-        form.setAttribute("action", "sport_main.jsp"); // 데이터를 보낼 경로
-
-        // hidden input 생성하여 sportNum 값 전달
+  	function sendSportNum(sportNum) {
+	    // 세션에 값을 설정
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action", "sport_main.jsp"); // 데이터를 보낼 경로
+		
         var hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("name", "sportNum");
         hiddenField.setAttribute("value", sportNum);
-
-        form.appendChild(hiddenField);
-
-        // 생성한 폼을 document에 추가한 후 제출
-        document.body.appendChild(form);
-        form.submit();
-      }
+	    form.appendChild(hiddenField);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+	}
     </script>
   </body>
 </html>

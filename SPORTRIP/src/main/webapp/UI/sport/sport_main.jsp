@@ -7,56 +7,19 @@ charset=UTF-8"
 
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
-<jsp:setProperty property="*" name="teamBean" />
+<jsp:useBean id="teamSession" scope="session" class="team.TeamBean" />
+<jsp:setProperty property="*" name="teamSession" />
 <%
-int sportNum = MUtil.parseInt(request, "sportNum");
-Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
-%>
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPORTRIP</title>
-<link href=".././assets/css/style.css" rel="stylesheet" type="text/css">
-<link href=".././assets/css/bannerStyle.css" rel="stylesheet" type="text/css" />
-<script>
-	function goMain(){
-		document.location.href="mainPage.jsp";
+	int teamNum = 0;
+	int sportNum = MUtil.parseInt(request, "sportNum", 0); // 폼에서 받은 값이 없으면 0
+	if (sportNum == 0) {
+		sportNum = (Integer) session.getAttribute("sportNum"); // 세션에서 팀 번호 가져오기
+	} else {
+	    session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
 	}
-</script>
-</head>
-<body>
-	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-		<div class="league_info">
-				<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_main')" style="margin-left: 20px; margin-right: 20px;"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
-				<ul>
-					<% for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
-					%>
-<%-- 						<li><a href="#" onclick="sendTeamAndSport(<%=sportNum%>, <%=teamBean.getTEAM_NUM()%>)"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li> --%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamBean.getTEAM_NUM()%>, '.././team/teamPage_Player')"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
-					<%
-						}
-					%>
-				</ul>
-		</div>
-	</header>
-	
-	<div class="top">
-		<div class="item" style="background-color: #236FB5;">
-			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'soccer_teamRank')">팀 순위</a>
-		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'main_highlight')">하이라이트 경기</a>
-		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="soccer_teamLeagueDate.html">경기 일정</a>
-		</div>
-	</div>
-	
+	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
+%>
+<jsp:include page="sport_header.jsp"/>
 	<p>
 	
 	<div class="slider">
@@ -127,43 +90,21 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 	document.querySelector('.button-left').addEventListener('click', prevSlide);
 	</script>
 	<script>
-	  function sendSportNum(sportNum, page) {
-	    // 폼을 생성
+	function sendTeamNum(teamNum, page) {
+	    // 세션에 값을 설정
 	    var form = document.createElement("form");
 	    form.setAttribute("method", "POST");
-	    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
-	    
-	    // hidden input 생성하여 sportNum 값 전달
-	    var hiddenField = document.createElement("input");
-	    hiddenField.setAttribute("type", "hidden");
-	    hiddenField.setAttribute("name", "sportNum");
-	    hiddenField.setAttribute("value", sportNum);
-	    
-	    form.appendChild(hiddenField);
+	    form.setAttribute("action", page + ".jsp");
 	
-	    // 생성한 폼을 document에 추가한 후 제출
+	    var teamField = document.createElement("input");
+	    teamField.setAttribute("type", "hidden");
+	    teamField.setAttribute("name", "teamNum");
+	    teamField.setAttribute("value", teamNum);
+	    form.appendChild(teamField);
+	
 	    document.body.appendChild(form);
 	    form.submit();
-	  }
-	  function sendTeamNum(teamNum, page) {
-		    // 폼을 생성
-		    var form = document.createElement("form");
-		    form.setAttribute("method", "POST");
-		    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
-		    
-		    // hidden input 생성하여 sportNum 값 전달
-		    var hiddenField = document.createElement("input");
-		    hiddenField.setAttribute("type", "hidden");
-		    hiddenField.setAttribute("name", "teamNum");
-		    hiddenField.setAttribute("value", teamNum);
-		    
-		    form.appendChild(hiddenField);
-		
-		    // 생성한 폼을 document에 추가한 후 제출
-		    document.body.appendChild(form);
-		    form.submit();
-		  }
-	  
+	}
 	  /* function sendTeamAndSport(teamNum, sportNum) {
 		    // 폼을 생성
 		    var form = document.createElement("form");

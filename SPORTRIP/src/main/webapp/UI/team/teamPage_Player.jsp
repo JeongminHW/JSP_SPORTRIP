@@ -9,27 +9,29 @@
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean id="login" scope="session" class="user.UserBean" />
+<jsp:useBean id="teamMgr" class="team.TeamMgr" />
+<jsp:useBean id="teamBean" class="team.TeamBean" />
 
-<jsp:useBean id="teammgr" class="team.TeamMgr"/>
-<jsp:useBean id="teamBean" class="team.TeamBean"/>
-<jsp:setProperty property="*" name = "teamBean"/>
 <%
-    /* int sportNum = MUtil.parseInt(request, "sportNum"); */
-    int teamNum = MUtil.parseInt(request, "teamNum");
-    
-    // 받은 값에 따라 팀 정보 가져오기
-    TeamMgr teamMgr = new TeamMgr();
-    PlayerMgr playerMgr = new PlayerMgr();
-    HeadcoachMgr coachMgr = new HeadcoachMgr();
-    
+    // POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
+    int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
+    if (teamNum == 0) {
+        teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
+    } else {
+        session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
+    }
     // 팀 정보와 선수 명단 가져오기
-    TeamBean teamInfo = teamMgr.getTeam(teamNum);  // teamNum을 사용하여 팀 정보 조회
-    Vector<PlayerBean> playerList = playerMgr.TeamPlayers(teamNum);  // teamNum을 사용하여 해당 팀의 선수 명단 조회
+    TeamBean teamInfo = teamMgr.getTeam(teamNum);
+    PlayerMgr playerMgr = new PlayerMgr();
+    Vector<PlayerBean> playerList = playerMgr.TeamPlayers(teamNum);
+
+    HeadcoachMgr coachMgr = new HeadcoachMgr();
     HeadcoachBean coachList = coachMgr.getHeadcoach(teamNum);
-    
+
     Set<String> positionList = new HashSet<>();
     for (PlayerBean player : playerList) {
-        positionList.add(player.getPOSITION());  // 포지션을 중복 없이 Set에 추가
+        positionList.add(player.getPOSITION());
     }
 %>
 
@@ -49,11 +51,11 @@
 <body>
 <header class="header header_logo">
 		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-	    <a href="#" onclick="sendSportNum(<%=teamInfo.getSPORT_NUM()%>, '.././sport/sport_main')" style="margin-left: 20px; margin-right: 20px;">
+	    <a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;">
 	    <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
 	    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
-    </div>
+	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
+    	</div>
 </header>
     <div class="t_top">
         <div class="item" style="background-color: #083660;">
@@ -121,44 +123,7 @@
 	    </div>
     </div>
 	<script>
-		// 스포츠 넘버 전송
-	  	function sendSportNum(sportNum, page) {
-		    // 폼을 생성
-		    var form = document.createElement("form");
-		    form.setAttribute("method", "POST");
-		    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
-		    
-		    // hidden input 생성하여 sportNum 값 전달
-		    var hiddenField = document.createElement("input");
-		    hiddenField.setAttribute("type", "hidden");
-		    hiddenField.setAttribute("name", "sportNum");
-		    hiddenField.setAttribute("value", sportNum);
-		    
-		    form.appendChild(hiddenField);
-		
-		    // 생성한 폼을 document에 추가한 후 제출
-		    document.body.appendChild(form);
-		    form.submit();
-	  	}
-		
-	  	function sendTeamNum(teamNum, page) {
-		    // 폼을 생성
-		    var form = document.createElement("form");
-		    form.setAttribute("method", "POST");
-		    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
-		    
-		    // hidden input 생성하여 sportNum 값 전달
-		    var hiddenField = document.createElement("input");
-		    hiddenField.setAttribute("type", "hidden");
-		    hiddenField.setAttribute("name", "teamNum");
-		    hiddenField.setAttribute("value", teamNum);
-		    
-		    form.appendChild(hiddenField);
-		
-		    // 생성한 폼을 document에 추가한 후 제출
-		    document.body.appendChild(form);
-		    form.submit();
-		  }
+
 	  
 	  	// 선수 출력
 	  	function showPlayers() {

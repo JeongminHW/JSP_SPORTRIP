@@ -6,69 +6,12 @@ charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="teamBean" class="team.TeamBean" />
 <jsp:setProperty property="*" name="teamBean" />
 
-<% int sportNum = MUtil.parseInt(request, "sportNum"); Vector<TeamBean>
-  teamVlist = teamMgr.listTeam(sportNum); %>
-
-  <!DOCTYPE html>
-  <html lang="ko">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>SPORTRIP</title>
-      <link rel="stylesheet" href=".././assets/css/style.css" />
-      <script>
-        function goMain() {
-          document.location.href = "mainPage.jsp";
-        }
-      </script>
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    </head>
-    <body>
-      <header class="header header_logo">
-        <a style="cursor: pointer" onclick="goMain()"
-          ><img
-            src=".././assets/images/sportrip_logo.png"
-            alt="sportrip 로고"
-            id="logo_img"
-        /></a>
-        <div class="league_info">
-          <a
-            href="#"
-            onclick="sendSportNum(<%=sportNum%>, 'sport_main')"
-            style="margin-left: 20px; margin-right: 20px"
-            ><img
-              src=".././assets/images/sport_logo<%=sportNum%>.svg"
-              alt="리그"
-              id="league_logo_img"
-          /></a>
-          <ul>
-            <% for(int i = 0; i < teamVlist.size(); i++){ teamBean =
-            teamVlist.get(i); %>
-            <li>
-              <a href="teamPage_Player.jsp"
-                ><img
-                  src="<%=teamBean.getLOGO()%>"
-                  alt="<%=teamBean.getTEAM_NAME() %>"
-                  class="team_logo_img"
-              /></a>
-            </li>
-            <% } %>
-          </ul>
-        </div>
-      </header>
-
-      <div class="top">
-		<div class="item" style="background-color: #236FB5;">
-			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'team_rank')">팀 순위</a>
-		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'main_highlight')">하이라이트 경기</a>
-		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="#" onclick="sendSportNum(<%=sportNum%>, 'sport_matchDate')">경기 일정</a>
-		</div>
-      </div>
-      <div class="highlight-container">
+<% 
+	int sportNum =	(int)session.getAttribute("sportNum");	
+	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum); 
+%>
+<jsp:include page="sport_header.jsp"/>
+       <div class="highlight-container">
         <script type="text/javascript">
           const sportNum = <%=sportNum%>;
           console.log(sportNum);
@@ -158,26 +101,22 @@ charset=UTF-8" pageEncoding="UTF-8"%>
         </script>
 
         <script>
-          function sendSportNum(sportNum, page) {
-            // 폼을 생성
-            var form = document.createElement("form");
-            form.setAttribute("method", "POST");
-            form.setAttribute("action", `${"${page}"}.jsp`); // 데이터를 보낼 경로
-
-            // hidden input 생성하여 sportNum 값 전달
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", "sportNum");
-            hiddenField.setAttribute("value", sportNum);
-
-            form.appendChild(hiddenField);
-
-            // 생성한 폼을 document에 추가한 후 제출
-            document.body.appendChild(form);
-            form.submit();
-          }
+    	function sendTeamNum(teamNum, page) {
+    	    // 세션에 값을 설정
+    	    var form = document.createElement("form");
+    	    form.setAttribute("method", "POST");
+    	    form.setAttribute("action", page + ".jsp");
+    	
+    	    var teamField = document.createElement("input");
+    	    teamField.setAttribute("type", "hidden");
+    	    teamField.setAttribute("name", "teamNum");
+    	    teamField.setAttribute("value", teamNum);
+    	    form.appendChild(teamField);
+    	
+    	    document.body.appendChild(form);
+    	    form.submit();
+    	}
         </script>
       </div>
     </body>
-  </html>
-</TeamBean>
+</html>
