@@ -35,7 +35,8 @@
 					<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
 					%>
-							<li><a href="teamPage_Player.jsp"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
+<%-- 						<li><a href="#" onclick="sendTeamAndSport(<%=sportNum%>, <%=teamBean.getTEAM_NUM()%>)"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li> --%>
+							<li><a href="#" onclick="sendTeamNum(<%=teamBean.getTEAM_NUM()%>, '.././team/teamPage_Player')"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
 					<%
 						}
 					%>
@@ -179,6 +180,50 @@
 	    document.body.appendChild(form);
 	    form.submit();
 	  }
+	  function sendTeamNum(teamNum, page) {
+		    // 폼을 생성
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "POST");
+		    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
+		    
+		    // hidden input 생성하여 sportNum 값 전달
+		    var hiddenField = document.createElement("input");
+		    hiddenField.setAttribute("type", "hidden");
+		    hiddenField.setAttribute("name", "teamNum");
+		    hiddenField.setAttribute("value", teamNum);
+		    
+		    form.appendChild(hiddenField);
+		
+		    // 생성한 폼을 document에 추가한 후 제출
+		    document.body.appendChild(form);
+		    form.submit();
+		  }
+	  
+	  /* function sendTeamAndSport(teamNum, sportNum) {
+		    // 폼을 생성
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "POST");
+		    form.setAttribute("action", "teamPage_Player.jsp"); // 데이터를 보낼 경로
+
+		    // hidden input 생성하여 teamNum 값 전달
+		    var teamField = document.createElement("input");
+		    teamField.setAttribute("type", "hidden");
+		    teamField.setAttribute("name", "teamNum");
+		    teamField.setAttribute("value", teamNum);
+		    form.appendChild(teamField);
+
+		    // hidden input 생성하여 sportNum 값 전달
+		    var sportField = document.createElement("input");
+		    sportField.setAttribute("type", "hidden");
+		    sportField.setAttribute("name", "sportNum");
+		    sportField.setAttribute("value", sportNum);
+		    form.appendChild(sportField);
+
+		    // 생성한 폼을 document에 추가한 후 제출
+		    document.body.appendChild(form);
+		    form.submit();
+		}
+ */
 	</script>
 </body>
 </html>
