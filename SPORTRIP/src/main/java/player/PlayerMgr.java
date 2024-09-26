@@ -15,33 +15,40 @@ public class PlayerMgr {
 	public PlayerMgr() {
         pool = DBConnectionMgr.getInstance();
     }
-	
-	// 전체 선수 목록 조회
-    public Vector<PlayerBean> getAllPlayer() {
-    	Connection con = null;
-    	PreparedStatement pstmt = null;
-    	ResultSet rs = null;
-    	String query = null;
-    	PlayerBean player = null;
-    	Vector<PlayerBean> playerList = new Vector<PlayerBean>();
+    
+    // 특정 팀의 선수 목록 조회
+    public Vector<PlayerBean> TeamPlayers(int teamNum) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String query = null;
+        PlayerBean player = null;
+        Vector<PlayerBean> playerList = new Vector<PlayerBean>();
+        
         try {
-        	con = pool.getConnection();
-            query = "SELECT * FROM PLAYER";
+            con = pool.getConnection();
+            query = "SELECT * FROM PLAYER WHERE TEAM_NUM = ?"; // 팀 번호로 필터링
             pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, teamNum); // 팀 번호 설정
             rs = pstmt.executeQuery();
+            
             while (rs.next()) {
-            	player.setPLAYER_NUM(rs.getInt(1));
+                player = new PlayerBean(); // 새로운 PlayerBean 객체 생성
+                player.setPLAYER_NUM(rs.getInt(1));
                 player.setTEAM_NUM(rs.getInt(2));
                 player.setPLAYER_NAME(rs.getString(3));
-                player.setPLAYER_IMG(rs.getString(4));
-                player.setBIRTH(rs.getDate(5));
+                player.setBIRTH(rs.getString(4));
+                player.setPLAYER_IMG(rs.getString(5));
                 player.setPOSITION(rs.getString(6));
                 player.setUNIFORM_NUM(rs.getString(7));
                 playerList.add(player);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } finally {
+            // 연결 종료
+            pool.freeConnection(con, pstmt, rs);
+        }       
         return playerList;
     }
     
@@ -57,7 +64,7 @@ public class PlayerMgr {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getTEAM_NUM());
 			pstmt.setString(2, bean.getPLAYER_NAME());
-			pstmt.setDate(3, bean.getBIRTH());
+			pstmt.setString(3, bean.getBIRTH());
 			pstmt.setString(4, bean.getPLAYER_IMG());
 			pstmt.setString(5, bean.getPOSITION());
 			pstmt.setString(6, bean.getUNIFORM_NUM());
