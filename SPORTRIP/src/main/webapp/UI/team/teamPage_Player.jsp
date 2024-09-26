@@ -96,7 +96,8 @@
                    </div>
                </div>
 	    </div>
-	    <div id="player-List" style="display: none;">
+	    <div class="players-section">
+	    	<div id="player-List" style="display: none;">
 	    	<!-- 포지션 버튼 생성 -->
 		    <div class="p_top">
 		        <% for (String position : positionList) { %>
@@ -116,7 +117,8 @@
             	</div>
             </div>
             <% } %>
-        </div>
+        	</div>
+	    </div>
     </div>
 	<script>
 		// 스포츠 넘버 전송
