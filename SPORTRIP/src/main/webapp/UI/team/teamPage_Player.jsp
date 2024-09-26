@@ -57,10 +57,10 @@
 </header>
     <div class="t_top">
         <div class="item" style="background-color: #083660;">
-            <a href="">선수 명단</a>
+            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Player')">선수 명단</a>
         </div>
 		    <div class="item" style="background-color: #236FB5;">
-			    <a href="teamPage_Stadium.html">경기장 소개</a>
+			    <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Stadium')">경기장 소개</a>
 		    </div>
 		    <div class="item" style="background-color: #236FB5;">
 			    <a href="teamPage_teamIntro.html">구단 소개</a>
@@ -140,6 +140,25 @@
 		    document.body.appendChild(form);
 		    form.submit();
 	  	}
+		
+	  	function sendTeamNum(teamNum, page) {
+		    // 폼을 생성
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "POST");
+		    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
+		    
+		    // hidden input 생성하여 sportNum 값 전달
+		    var hiddenField = document.createElement("input");
+		    hiddenField.setAttribute("type", "hidden");
+		    hiddenField.setAttribute("name", "teamNum");
+		    hiddenField.setAttribute("value", teamNum);
+		    
+		    form.appendChild(hiddenField);
+		
+		    // 생성한 폼을 document에 추가한 후 제출
+		    document.body.appendChild(form);
+		    form.submit();
+		  }
 	  
 	  	// 선수 출력
 	  	function showPlayers() {
