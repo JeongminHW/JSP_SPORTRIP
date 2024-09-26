@@ -22,7 +22,8 @@ public class UserMgr {
     	boolean flag = false;
     	
         try {
-            query = "INSERT INTO USER (ID, PW, NAME, ADDRESS, POSTCODE, PHONE, EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			con = pool.getConnection();
+            query = "INSERT INTO USER (ID, PW, NAME, ADDRESS, POSTCODE, PHONE, EMAIL, ADMIN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, user.getId());
             pstmt.setString(2, user.getPw());
@@ -31,6 +32,7 @@ public class UserMgr {
             pstmt.setInt(5, user.getPostcode());
             pstmt.setString(6, user.getPhone());
             pstmt.setString(7, user.getEmail());
+            pstmt.setInt(8, user.getAdmin());
             if(pstmt.executeUpdate() == 1) {
             	flag = true;
             }
@@ -73,8 +75,32 @@ public class UserMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "select count(*) from user where id = ? admin = 1";
+			sql = "select id from user where id = ? admin = 1";
 			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return flag;
+	}
+	
+	// 아아디 중복 확인
+	public boolean validateId(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "select id from user where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				flag = true;

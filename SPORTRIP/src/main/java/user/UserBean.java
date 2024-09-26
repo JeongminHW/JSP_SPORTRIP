@@ -8,6 +8,7 @@ public class UserBean {
     private int postcode;
     private String phone;
     private String email;
+    private int admin;
 
     public UserBean() {}
 
@@ -66,4 +67,14 @@ public class UserBean {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	public int getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
+    
+    
 }
