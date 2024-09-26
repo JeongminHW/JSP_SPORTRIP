@@ -52,12 +52,12 @@ public class UserMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "select count(*) from user where id = ? pw = ?";
+			sql = "select id from user where id = ? and pw = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				flag = true;
-			}
+			flag = rs.next();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -66,6 +66,36 @@ public class UserMgr {
 		return flag;
 	}
 
+	public UserBean getJoin(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		UserBean bean = new UserBean();
+		try {
+			con = pool.getConnection();
+			sql = "select * from user where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bean.setId(rs.getString(1));
+				bean.setPw(rs.getString(2));
+				bean.setName(rs.getString(3));
+				bean.setAddress(rs.getString(4));
+				bean.setPostcode(rs.getInt(5));
+				bean.setPhone(rs.getString(6));
+				bean.setEmail(rs.getString(7));
+				bean.setAdmin(rs.getInt(8));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return bean;
+	}
+	
 	// 관리자 여부 확인
 	public boolean checkAdmin(String id) {
 		Connection con = null;
