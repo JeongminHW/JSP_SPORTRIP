@@ -2,9 +2,237 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문하기</title>
+<title>주문/결제</title>
+<link rel="stylesheet" href=".././assets/css/cartStyle.css">
+<link rel="stylesheet" href=".././assets/css/orderStyle.css">
+
+<script>
+// 팝업 열기 함수
+function openPopup() {
+    // 팝업을 표시
+    document.querySelector('.popup-background').style.display = 'flex';
+
+    // 팝업 내용의 스크롤을 맨 위로 설정
+    document.querySelector('.popup-content').scrollTop = 0;
+}
+
+
+// 팝업 닫기 함수
+function closePopup() {
+	document.querySelector('.popup-background').style.display = 'none';
+}
+</script>
+
 </head>
 <body>
-
+	<header class="order-header">
+		<div>
+			<span>주문 및 결제</span>
+		</div>
+	</header>
+	<section class="order-section">
+		<div class="order-address"> 
+			<span>배송지</span>		
+			<div class="address-wrap">
+				<div class="address-info-section">
+					<div class="address-content">
+						<div class="address-info">
+							<strong class="receiver"><span>이상우</span></strong>
+							<div class="receiver-phone">
+								<span class="phone-number">010-4095-6897</span>
+							</div>
+							<div class="receiver-address">
+								<span>부산광역시 부산진구 엄광로 182번길 15-22 (가야동, 화이트원룸빌) 203호 (47339)</span>
+							</div>
+						</div>
+						<div class="address-chage">
+							<button type="button" class="address-change-btn" onclick="openPopup()">변경</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="order-product">
+			<span>주문상품</span>
+			<div class="product-wrap">
+				<div class="product-info-section">
+					<div class="team-name">
+						<span>울산 HD</span>
+					</div>
+					<ul class="product-list">
+						<li class="product-info">
+							<div class="product-detail">
+								<div class="img-box">
+									<img alt="UHDFC엠블럼 뱃지" src=".././assets/images/goods_img/울산 뱃지.png">
+								</div>
+								<div class="content">
+									<p>UHDFC엠블럼 뱃지</p>
+									<span class="price">9,000원</span>
+								</div>
+							</div>
+						</li>
+						<li class="product-info">
+							<div class="product-detail">
+								<div class="img-box">
+									<img alt="24선수 유니폼 키링" src=".././assets/images/goods_img/울산 유니폼키링.png">
+								</div>
+								<div class="content">
+									<p>24선수 유니폼 키링</p>
+									<span class="price">12,000원</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="product-wrap">
+				<div class="product-info-section">
+					<div class="team-name">
+						<span>롯데 자이언츠</span>
+					</div>
+					<ul class="product-list">
+						<li class="product-info">
+							<div class="product-detail">
+								<div class="img-box">
+									<img alt="전사머플러" src=".././assets/images/goods_img/MD/롯데 전사머플러.png">
+								</div>
+								<div class="content">
+									<p>짱구는 못말려 전사머플러(액션가면)</p>
+									<span class="price">20,000원</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="price-wrap">
+				<div class="total-price">
+					<dl class="total-price-detail">
+						<div class="total-product-price">
+							<dt class="product-price"><span class="product-price-text">상품금액</span></dt>
+							<dd class="product-price-number">0원</dd>
+						</div>
+						<div class="delivery-fee">
+							<dt class="delivery-price">
+								<span class="delivery-price-text">배송비</span>
+							</dt>
+							<dd class="delivery-price-number">+0원</dd>
+						</div>
+					</dl>
+					<dl class="final-price">
+						<dt class="final-price-text">총 주문금액</dt>
+						<dd class="final-price-number">0원</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- 팝업 창 -->
+	<div class="popup-background">
+		<div class="popup">
+			<div class="popup-header">배송지 목록</div>
+			<div class="popup-content">
+				<div class="new-address">
+					<button type="button" class="new-address-btn">+ 배송지 신규입력</button>
+				</div>
+				<ul class="address-list-area">
+					<li class="address-list-content">
+						<div class="address-content">
+							<div class="address-area">
+								<div class="address-info">
+									<strong class="receiver"><span>이상우</span></strong>
+									<div class="receiver-phone">
+										<span class="phone-number">010-4095-6897</span>
+									</div>
+									<div class="receiver-address">
+										<span>부산광역시 부산진구 엄광로 182번길 15-22 (가야동, 화이트원룸빌) 203호 (47339)</span>
+									</div>
+								</div>
+								<button type="button" class="address-selected-btn"><span>선택됨</span></button>
+							</div>
+							<div class="button-area">
+								<button type="button" class="modify-address">수정</button>
+								<button type="button" class="delete-address">삭제</button>
+							</div>
+						</div>
+					</li>
+					<li class="address-list-content">
+						<div class="address-content">
+							<div class="address-area">
+								<div class="address-info">
+									<strong class="receiver"><span>이상우</span></strong>
+									<div class="receiver-phone">
+										<span class="phone-number">010-4095-6897</span>
+									</div>
+									<div class="receiver-address">
+										<span>울산광역시 남구 번영로 165 (달동, 번영로 코아루 더 클래식) 201동 101호 (44695)</span>
+									</div>
+								</div>
+								<button type="button" class="address-select-btn"><span>선택</span></button>
+							</div>
+							<div class="button-area">
+								<button type="button" class="modify-address">수정</button>
+								<button type="button" class="delete-address">삭제</button>
+							</div>
+						</div>
+					</li>
+					<li class="address-list-content">
+						<div class="address-content">
+							<div class="address-area">
+								<div class="address-info">
+									<strong class="receiver"><span>이상우</span></strong>
+									<div class="receiver-phone">
+										<span class="phone-number">010-4095-6897</span>
+									</div>
+									<div class="receiver-address">
+										<span>부산광역시 부산진구 엄광로 176 (가야동, 동의대학교) 중앙도서관 8층 (47340)</span>
+									</div>
+								</div>
+								<button type="button" class="address-select-btn"><span>선택</span></button>
+							</div>
+							<div class="button-area">
+								<button type="button" class="modify-address">수정</button>
+								<button type="button" class="delete-address">삭제</button>
+							</div>
+						</div>
+					</li>
+					<li class="address-list-content">
+						<div class="address-content">
+							<div class="address-area">
+								<div class="address-info">
+									<strong class="receiver"><span>이상우</span></strong>
+									<div class="receiver-phone">
+										<span class="phone-number">010-4095-6897</span>
+									</div>
+									<div class="receiver-address">
+										<span>울산광역시 울주군 범서읍 대리로 15-12 (범서읍, 호반베르디움) 105동 1703호 (44920)</span>
+									</div>
+								</div>
+								<button type="button" class="address-select-btn"><span>선택</span></button>
+							</div>
+							<div class="button-area">
+								<button type="button" class="modify-address">수정</button>
+								<button type="button" class="delete-address">삭제</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<button class="close-popup" onclick="closePopup()">닫기</button>
+			</div>
+		</div>
+	</div>
+	
+	<footer class="payment-section">
+		<div class="payment-content">
+			<div class="agreement-content">
+				<div class="agreement">
+					<p><span>약관 및 주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</span></div>
+			</div>
+			<div class="payment-button">
+				<button type="button" class="payment-btn"><span>0원 </span>결제하기</button>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
