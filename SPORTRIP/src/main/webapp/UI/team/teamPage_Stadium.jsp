@@ -45,10 +45,10 @@
 </header>
     <div class="t_top">
         <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=teamInfo.getSPORT_NUM()%>, 'teamPage_Player')">선수 명단</a>
+            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Player')">선수 명단</a>
         </div>
         <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=teamInfo.getSPORT_NUM()%>, 'teamPage_Stadium')">경기장 소개</a>
+            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Stadium')">경기장 소개</a>
         </div>
         <div class="item" style="background-color: #236FB5;">
             <a href="teamPage_teamIntro.html">구단 소개</a>
@@ -66,7 +66,7 @@
     
     <div class="stadium-intro">
     	<div class="stadium-img">
-    		<img alt="문수축구경기장" src=".././assets/images/stadium_img.png" id="ulsan_stadium">
+    		<img alt=<%=StadiumInfo.getSTADIUM_NAME() %> src="<%=StadiumInfo.getSEATS() %>">
     	</div>
     	
     	<div class="stadium-info">
