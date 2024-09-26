@@ -337,7 +337,7 @@ tbody{
 }
 
 .player-card, .coach-card {
-	display: inlink-block;
+	display: inline-block;
 	position: relative; /* 부모 요소에 상대 위치를 지정 */
 	flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈되도록 설정 */
 	width: 180px;

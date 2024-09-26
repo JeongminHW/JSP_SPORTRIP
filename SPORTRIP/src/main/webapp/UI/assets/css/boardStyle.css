@@ -1,4 +1,8 @@
-.write-btn{
+.post-content-box, .comment-box, .update-btn>button{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.write-btn {
     width: 90%;
     text-align: right;
     margin: 30px;
@@ -30,7 +34,7 @@
                 width: 8%;
             }
             .size02{
-                width: 55%;
+                width: 53%;
             }
             .size03{
                 width: 15%;
@@ -143,5 +147,163 @@
         border: 1px solid #000000;
         border-radius: 4px;
         margin: 10px;
+    }
+}
+
+.post-content-box{
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    border-top: 2px solid #000000;
+    margin-bottom: 30px;
+}
+
+.user-box{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #000000;
+    span::after{
+        content: "│";
+        margin:0 10px 0 10px;
+        font-weight: normal;
+    }
+    span:last-child::after{
+        content: "";
+    }
+    .userInfo, .userView{
+        margin: 10px 0 10px 20px;
+    }
+    .userView{
+        text-align: right;
+    }
+}
+
+.post-title{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0 0 20px;
+    span{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    div{
+        text-align: right;
+        margin-right: 15px;
+    }
+    button{
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-left: 5px;
+        width: auto;
+        background-color: #ffffff;
+        cursor: pointer;
+    }
+}
+
+.post-content{
+    margin: 30px;
+    p>img{
+        position: relative;
+        max-width: 100%;
+        height: auto;
+        object-fit: scale-down;
+    }
+}
+
+.list-btn-top{
+    text-align: right;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;button{
+        width: 80px;
+        height: 30px;
+        font-size: 20px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        margin: 10px;
+    }
+}
+
+.list-btn{
+    text-align: center;
+    margin-top: 50px;
+    button{
+        width: 80px;
+        height: 30px;
+        font-size: 20px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        margin: 10px;
+    }
+}
+
+.rec-btn{
+    text-align: center;
+    border-bottom: 1px solid #000000;
+    button{
+        width: 120px;
+        height: 80px;
+        font-size: 20px;
+        background-color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        margin: 10px;
+        margin-bottom: 30px;
+        cursor: pointer;
+    }
+}
+
+#rec{
+    border: 3px solid #C43636;
+    img{
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+    }
+}
+
+#nrec{
+    border: 3px solid #3750AF;
+    img{
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+    }
+}
+
+.box{
+    width: 80%;
+    margin: auto;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+.comment-box{
+    margin: auto;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid #000000;
+    .user-box{
+        border-bottom: none;
+    }
+    .comment{
+        p {
+            margin: 10px 0 10px 20px;
+        }
+    }
+    .update-btn{
+        text-align: right;
+        margin: 10px 0 10px 20px;
+        button{
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-left: 5px;
+            width: auto;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
     }
 }
