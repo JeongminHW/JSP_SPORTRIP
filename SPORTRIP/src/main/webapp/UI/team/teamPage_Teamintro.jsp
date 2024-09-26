@@ -1,5 +1,3 @@
-<%@page import="stadium.StadiumBean"%>
-<%@page import="stadium.StadiumMgr"%>
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
@@ -14,11 +12,9 @@
     
     // 받은 값에 따라 팀 정보 가져오기
     TeamMgr teamMgr = new TeamMgr();
-    StadiumMgr stadium = new StadiumMgr();
-    
+
     // 팀, 경기장 정보 가져오기
     TeamBean teamInfo = teamMgr.getTeam(teamNum);  // teamNum을 사용하여 팀 정보 조회    
-    StadiumBean StadiumInfo = stadium.getStadium(teamNum);    
 %>
 
 <!DOCTYPE html>
@@ -63,22 +59,9 @@
             <a href="teamPage_Board.html">게시판</a>
         </div>
     </div>
-    
-    <div class="stadium-intro">
-    	<div class="stadium-img">
-    		<img alt=<%=StadiumInfo.getSTADIUM_NAME() %> src="<%=StadiumInfo.getSEATS() %>">
-    	</div>
-    	
-    	<div class="stadium-info">
-    		<div class="stadium-text">
-    			<span>명칭 : <%=StadiumInfo.getSTADIUM_NAME() %></span><br>
-    			<span>위치 : <%=StadiumInfo.getSTADIUM_ADDRESS() %></span><br>
-    			<span>수용 인원 : <%=StadiumInfo.getSEAT_CAPACITY_S() %>명</span><br>
-    		</div>
-    		<div class="climate-info">
-    			<button class="climate-button">날씨 정보 보기</button>
-    		</div>
-    	</div>
+
+    <div class="team-info-box">
+    	<img src="<%=teamInfo.getCLUBINFO()%>" alt="구단 소개">
     </div>
 	<script>
 		// 스포츠 넘버 전송

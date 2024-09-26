@@ -63,7 +63,7 @@
 			    <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Stadium')">경기장 소개</a>
 		    </div>
 		    <div class="item" style="background-color: #236FB5;">
-			    <a href="teamPage_teamIntro.html">구단 소개</a>
+			    <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Teamintro')">구단 소개</a>
 		    </div>
 		    <div class="item" style="background-color: #236FB5;">
 			    <a href="teamPage_teamHighlight.html">하이라이트 경기</a>
@@ -79,10 +79,10 @@
 	<!-- 감독 / 선수 -->
 	<div id="sub_wrap">
 		<div class="u_top">
-			<div class="item" style="background-color: #236FB5;">
+			<div class="item" style="background-color: #083660;" id="coach">
 				<a href="#" onclick="showCoaches()">감독</a>
 			</div>
-			<div class="item" style="background-color: #083660;">
+			<div class="item" style="background-color: #236FB5;" id="player">
 				<a href="#" onclick="showPlayers()">선수</a>
 			</div>
 		</div>
@@ -164,19 +164,28 @@
 	  	function showPlayers() {
         	document.getElementById('player-List').style.display = 'block';
         	document.getElementById('coach-List').style.display = 'none';
+        	document.getElementById('player').style.backgroundColor = '#083660'; 
+        	document.getElementById('coach').style.backgroundColor = '#236FB5'; 
+        	var playerCards = document.querySelectorAll('.player-card');
+            playerCards.forEach(function(card) {
+            	card.style.display = 'inline-block';
+            });
     	}
 		
 	  	// 감독 출력
     	function showCoaches() {
         	document.getElementById('player-List').style.display = 'none';
         	document.getElementById('coach-List').style.display = 'block';
+        	document.getElementById('player').style.backgroundColor = '#236FB5'; 
+        	document.getElementById('coach').style.backgroundColor = '#083660'; 
 	    }
+	  	
     	// 포지션에 따라 선수 필터링
         function filterByPosition(position) {
             var playerCards = document.querySelectorAll('.player-card');
             playerCards.forEach(function(card) {
                 if (card.getAttribute('data-position') === position) {
-                    card.style.display = 'block';
+                    card.style.display = 'inline-block';
                 } else {
                     card.style.display = 'none';
                 }
