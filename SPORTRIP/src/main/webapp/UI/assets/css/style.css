@@ -337,11 +337,13 @@ tbody{
 }
 
 .player-card, .coach-card {
+	display: inlink-block;
 	position: relative; /* 부모 요소에 상대 위치를 지정 */
 	flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈되도록 설정 */
 	width: 180px;
 	height: 240px;
 	overflow: hidden; /* 자식 요소가 부모 영역을 넘어가지 않도록 설정 */
+	margin: 10px;
 }
 
 .player-photo, .coach-photo {
@@ -391,7 +393,7 @@ tbody{
 
 .stadium-text {
 	font-family: BMJUA, sans-serif;
-	font-size: 25px;
+	font-size: 15px;
 }
 
 .climate-info {
