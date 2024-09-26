@@ -6,7 +6,7 @@ public class PlayerBean {
     private int PLAYER_NUM;
     private int TEAM_NUM;
     private String PLAYER_NAME;
-    private Date BIRTH;
+    private String BIRTH;
     private String PLAYER_IMG;
     private String POSITION;
     private String UNIFORM_NUM;
@@ -28,10 +28,10 @@ public class PlayerBean {
 	public void setPLAYER_NAME(String pLAYER_NAME) {
 		PLAYER_NAME = pLAYER_NAME;
 	}
-	public Date getBIRTH() {
+	public String getBIRTH() {
 		return BIRTH;
 	}
-	public void setBIRTH(Date bIRTH) {
+	public void setBIRTH(String bIRTH) {
 		BIRTH = bIRTH;
 	}
 	public String getPLAYER_IMG() {
