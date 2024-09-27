@@ -3,77 +3,51 @@ package lodging;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Vector;
-
+import java.util.ArrayList;
+import java.util.List;
 import DB.DBConnectionMgr;
 
-
 public class LodgingMgr {
-	private DBConnectionMgr pool;
-	public LodgingMgr() {
-		pool = DBConnectionMgr.getInstance();
-	}
-	
-	// 경기장 숙소 출력
-	public Vector<LodgingBean> getLodgings(String stardium) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-	    Vector<LodgingBean> lodgingList = new Vector<LodgingBean>();
-	    try {
-	        con = pool.getConnection();
-	        sql = "SELECT LODGING_NUM, LODGING_NAME, CATEGORY, GRADE, ADDRESS, LODGING_IMG, LON, LAT FROM LODGING WHERE STARDIUM = ?";
-	        pstmt = con.prepareStatement(sql);
-	        pstmt.setString(1, stardium);
-	        rs = pstmt.executeQuery();
-	        while (rs.next()) {
-	            LodgingBean bean = new LodgingBean();
-	            bean.setLODGING_NUM(rs.getInt(1));      
-	            bean.setLODGING_NAME(rs.getString(2)); 
-	            bean.setCATEGORY(rs.getString(3));         
-	            bean.setGRADE(rs.getString(4));               
-	            bean.setADDRESS(rs.getString(5));           
-	            bean.setLODGING_IMG(rs.getString(6));   
-	            bean.setLON(rs.getString(7));                   
-	            bean.setLAT(rs.getString(8));                   
-	            lodgingList.addElement(bean);
-	        }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-	    return lodgingList;
-	}
+    private DBConnectionMgr pool;
 
-	// 경기장 숙소 2개 출력(추천)
-	public Vector<LodgingBean> getLodgingsRecommend(String stardium) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-	    Vector<LodgingBean> lodgingList = new Vector<LodgingBean>();
-	    try {
-	        con = pool.getConnection();
-	        sql = "SELECT LODGING_NUM, LODGING_NAME, CATEGORY, GRADE, ADDRESS, LODGING_IMG, LON, LAT FROM LODGING WHERE STARDIUM = ?"
-	        		+ "LIMIT 2";	// 2개 제한
-	        pstmt = con.prepareStatement(sql);
-	        pstmt.setString(1, stardium);
-	        rs = pstmt.executeQuery();
-	        while (rs.next()) {
-	            LodgingBean bean = new LodgingBean();
-	            bean.setLODGING_NUM(rs.getInt(1));      
-	            bean.setLODGING_NAME(rs.getString(2)); 
-	            bean.setCATEGORY(rs.getString(3));         
-	            bean.setGRADE(rs.getString(4));               
-	            bean.setADDRESS(rs.getString(5));           
-	            bean.setLODGING_IMG(rs.getString(6));   
-	            bean.setLON(rs.getString(7));                   
-	            bean.setLAT(rs.getString(8));                   
-	            lodgingList.addElement(bean);
-	        }
+    public LodgingMgr() {
+        pool = DBConnectionMgr.getInstance();
+    }
+
+    // 경기장 이름에 따른 숙소 조회 메서드
+    public List<LodgingBean> getLodgingsByStadiumName(String stadiumName) {
+    	Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<LodgingBean> lodgingList = new ArrayList<>();
+
+        try {
+            con = pool.getConnection();
+            String sql = "SELECT l.* FROM LODGING l JOIN STADIUM s ON l.STARDIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
+            System.out.println("SQL Query: " + sql + " with parameter: " + stadiumName); // 디버깅용 출력
+            
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, new String(stadiumName.getBytes("ISO-8859-1"), "UTF-8"));
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                LodgingBean lodging = new LodgingBean();
+                lodging.setLODGING_NUM(rs.getInt("LODGING_NUM"));
+                lodging.setLODGING_NAME(rs.getString("LODGING_NAME"));
+                lodging.setCATEGORY(rs.getString("CATEGORY"));
+                lodging.setGRADE(rs.getString("GRADE"));
+                lodging.setADDRESS(rs.getString("ADDRESS"));
+                lodging.setLODGING_IMG(rs.getString("LODGING_IMG"));
+                lodging.setLON(rs.getString("LON"));
+                lodging.setLAT(rs.getString("LAT"));
+                lodging.setSTARDIUM(rs.getString("STARDIUM")); // STARDIUM 필드
+                lodgingList.add(lodging);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            pool.freeConnection(con, pstmt, rs); // 연결 해제
         }
-	    return lodgingList;
-	}
+        return lodgingList;
+    }
 }
