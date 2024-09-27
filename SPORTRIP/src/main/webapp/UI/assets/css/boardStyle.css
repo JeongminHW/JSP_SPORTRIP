@@ -289,6 +289,7 @@
         border-bottom: none;
     }
     .comment{
+        width: 85%;
         p {
             margin: 10px 0 10px 20px;
         }
@@ -305,5 +306,67 @@
             background-color: #ffffff;
             cursor: pointer;
         }
+    }
+}
+
+
+.comment-text-box{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    margin-top: 20px;
+    textarea{
+        width: 85%;
+        min-height: 3em;
+        max-height: 10em;
+        height: 3em;
+        resize: vertical;
+        margin-right: 10px;
+        font-size: 14px;
+        padding: 10px;
+    }
+    button{
+        width: 10%;
+        height: 60px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+}
+
+.comment-reple{
+    text-align: right;
+    button{
+        background-color: #ffffff;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+}
+
+.reple-box{
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    textarea{
+        width: 85%;
+        min-height: 3em;
+        max-height: 10em;
+        height: 3em;
+        resize: vertical;
+        margin-right: 10px;
+        font-size: 14px;
+        padding: 10px;
+    }
+    button{
+        width: 10%;
+        height: 60px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
     }
 }
