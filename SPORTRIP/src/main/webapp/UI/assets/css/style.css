@@ -556,6 +556,9 @@ tbody{
   display: block; /* 블록 레이아웃으로 변경하여 자식 요소가 아래로 쌓이도록 설정 */
 }
 
+.selected-item {
+    background-color: #083660 !important;  /* 선택된 버튼의 색상 */
+}
 
 .selectBox2 * {
 	box-sizing: border-box;

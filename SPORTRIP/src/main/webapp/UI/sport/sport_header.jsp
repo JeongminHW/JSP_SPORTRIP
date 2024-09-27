@@ -45,8 +45,7 @@ charset=UTF-8"
 							teamBean = teamVlist.get(i);
 							teamNum = teamBean.getTEAM_NUM();
 					%>
-<%-- 						<li><a href="#" onclick="sendTeamAndSport(<%=sportNum%>, <%=teamBean.getTEAM_NUM()%>)"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li> --%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, '.././team/teamPage_Player')"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, '.././team/teamPage_player')"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
 					<%
 						}
 					%>
