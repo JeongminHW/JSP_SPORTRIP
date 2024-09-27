@@ -15,7 +15,7 @@
 	} else {
 		session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
 	}
-	// 팀 정보와 선수 명단 가져오기
+	// 팀 정보 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	
 	String teamName = teamInfo.getTEAM_NAME();
@@ -25,28 +25,23 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><%=teamInfo.getTEAM_NAME()%></title>
-<link rel="stylesheet" href=".././assets/css/style.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%=teamInfo.getTEAM_NAME()%></title>
+	<link rel="stylesheet" href=".././assets/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()"><img
-			src=".././assets/images/sportrip_logo.png" alt="sportrip 로고"
-			id="logo_img"></a> <a href=".././sport/sport_main.jsp"
-			style="margin-left: 20px; margin-right: 20px;"> <img
-			src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg"
-			alt="리그" id="league_logo_img"></a>
-		<div
-			style="position: absolute; left: 50%; transform: translateX(-50%);"
-			class="img-box">
+		<a style="cursor: pointer" onclick="goMain()">
+			<img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a> 
+		<a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;"> 
+			<img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
+		<div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
 			<img src="<%=teamInfo.getLOGO()%>" alt="로고" class="team_logo_img">
 		</div>
 	</header>
-	    <div class="t_top">
+    <div class="t_top">
         <div class="item" style="background-color: #236FB5;">
             <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
         </div>
@@ -69,7 +64,7 @@
 	<div class="highlight-container">
 		<script type="text/javascript">
 	        function goMain(){
-	            document.location.href="mainPage.jsp";
+	            document.location.href=".././sport/mainPage.jsp";
 	        }
 	     	// 팀 번호 전달
 	    	function sendTeamNum(teamNum, page) {
