@@ -36,10 +36,22 @@ charset=UTF-8"
 </script>
 </head>
 <body>
-	<header class="header header_logo">
+	<header class="header">
 		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-		<div class="league_info">
-				<a href="sport_main.jsp" style="margin-left: 20px; margin-right: 20px;"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
+		<div class="header-view">
+			<div class="item">
+				<a href=".././sport/team_rank.jsp"><img src=".././assets/images/rank_img.png">구단 순위</a>
+			</div>
+			<div class="item">
+				<a href=".././sport/main_highlight.jsp"><img src=".././assets/images/star_img.png">하이라이트 경기</a>
+			</div>
+			<div class="item">
+				<a href=".././sport/sport_matchDate.jsp"><img src=".././assets/images/schedule_img.png">경기 일정</a>
+			</div>
+		</div>
+	</header>
+	<div class="league_info">
+				<a href="sport_main.jsp"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
 				<ul>
 					<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
@@ -51,16 +63,3 @@ charset=UTF-8"
 					%>
 				</ul>
 		</div>
-	</header>
-	
-	<div class="top">
-		<div class="item" style="background-color: #236FB5;">
-			<a href=".././sport/team_rank.jsp">팀 순위</a>
-		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href=".././sport/main_highlight.jsp">하이라이트 경기</a>
-		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href=".././sport/sport_matchDate.jsp">경기 일정</a>
-		</div>
-	</div>

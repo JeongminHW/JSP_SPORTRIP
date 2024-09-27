@@ -68,12 +68,39 @@ a {
 	text-decoration: none;
 }
 
-.item {
-	display: grid;
-	place-items: center; /*글씨 중간 정렬*/
-	font-size: 24px;
-	width: 100%;
-	height: 100%;
+.header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	padding: 20px;
+	height: 80px; /* 헤더 높이 */
+	position: relative;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.header-view{
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	height: 80px; /* 헤더 높이 */
+	position: relative;
+	.item {
+		display: grid;
+		place-items: center; /*글씨 중간 정렬*/
+		font-size: 20px;
+		width: auto;
+		margin-left: 20px;
+		a{
+			color: #000000;
+			margin-left: 10px;
+		}
+		img{
+			width: 30px;
+			vertical-align: middle;
+			margin-right: 5px;
+		}
+	}
 }
 
 .login_main {
@@ -143,21 +170,21 @@ input {
 
 .league_info {
 	display: inline;
-}
-
-ul, li {
-	list-style: none;
-	display: inline-block;
-	padding-left: 0px;
-}
-
-.top {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	place-items: center; /*글씨 중간 정렬*/
-	height: 50px;
-	gap: 1px;
-	margin-top: 20px;
+	text-align: center;
+	a{
+		margin: 50px;
+	}
+	ul, li {
+		list-style: none;
+		display: inline-block;
+		padding-left: 0px;
+		a{
+			margin: 0 10px 0 10px;
+		}
+		img{
+			width: 60px;
+		}
+	}
 }
 
 .t_top {
