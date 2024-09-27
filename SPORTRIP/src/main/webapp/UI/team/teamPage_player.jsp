@@ -139,7 +139,6 @@
 		    document.body.appendChild(form);
 		    form.submit();
 		}
-	 	
 	  	// 선수 출력
 	  	function showPlayers() {
         	document.getElementById('player-List').style.display = 'block';

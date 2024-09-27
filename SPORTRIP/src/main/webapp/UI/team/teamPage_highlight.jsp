@@ -2,8 +2,7 @@
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
@@ -20,7 +19,7 @@
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	
 	String teamName = teamInfo.getTEAM_NAME();
-	int sportNum = (int) session.getAttribute("sportNum");
+	int sportNum = (int)session.getAttribute("sportNum");
 %>
 
 <!DOCTYPE html>
