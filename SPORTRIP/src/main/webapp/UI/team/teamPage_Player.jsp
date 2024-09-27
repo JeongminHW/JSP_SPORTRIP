@@ -68,7 +68,7 @@
 			    <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Teamintro')">구단 소개</a>
 		    </div>
 		    <div class="item" style="background-color: #236FB5;">
-			    <a href="teamPage_teamHighlight.html">하이라이트 경기</a>
+			    <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_highlight')">하이라이트 경기</a>
 		    </div>
 		    <div class="item" style="background-color: #236FB5;">
 			    <a href="teamPage_Store.html">굿즈샵</a>
@@ -123,7 +123,21 @@
 	    </div>
     </div>
 	<script>
-
+		function sendTeamNum(teamNum, page) {
+		    // 세션에 값을 설정
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "POST");
+		    form.setAttribute("action", page + ".jsp");
+		
+		    var teamField = document.createElement("input");
+		    teamField.setAttribute("type", "hidden");
+		    teamField.setAttribute("name", "teamNum");
+		    teamField.setAttribute("value", teamNum);
+		    form.appendChild(teamField);
+		
+		    document.body.appendChild(form);
+		    form.submit();
+		}
 	  
 	  	// 선수 출력
 	  	function showPlayers() {

@@ -14,7 +14,7 @@ charset=UTF-8" pageEncoding="UTF-8"%>
        <div class="highlight-container">
         <script type="text/javascript">
           const sportNum = <%=sportNum%>;
-          console.log(sportNum);
+
           var searchData = null;
           var pageSize = 0;
           if(sportNum == 1){
