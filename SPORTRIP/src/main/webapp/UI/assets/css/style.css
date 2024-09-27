@@ -44,8 +44,8 @@
 }
 
 body, input, button {
-	font-family: 'BMJUA';
-}
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}	
 
 #logo_img {
 	width: 200px;
@@ -195,7 +195,6 @@ ul, li {
     flex-wrap: wrap;
     justify-content: space-evenly;
     bottom: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .highlight-box{
@@ -222,7 +221,6 @@ ul, li {
 table {
 	width: 100%;
 	border-collapse: collapse;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	border: 1px solid #c2c2c2;
 }
 
@@ -267,7 +265,6 @@ tbody{
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	bottom: 0;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .highlight-box {
@@ -324,7 +321,6 @@ tbody{
 }
 
 .position-title {
-	font-family: BMJUA, sans-serif;
 	font-size: 24px;
 	color: black;
 	margin-top: 40px;
@@ -353,7 +349,6 @@ tbody{
 }
 
 .player-name, .coach-name {
-	font-family: BMJUA, sans-serif;
 	width: 100%;
 	font-size: 16px;
 	position: absolute;
@@ -392,7 +387,6 @@ tbody{
 }
 
 .stadium-text {
-	font-family: BMJUA, sans-serif;
 	font-size: 15px;
 }
 
@@ -404,7 +398,6 @@ tbody{
 }
 
 .climate-button {
-	font-family: BMJUA, sans-serif;
 	font-size: 30px;
 	color: #fff;
 	width: 300px;
@@ -692,7 +685,6 @@ tbody{
 .goods-card {
     position: relative;
     width: 180px;
-    height: 240px;
     display: flex;
     flex-direction: column; /* 세로 방향으로 자식 요소 배치 */
     overflow: hidden;
@@ -716,7 +708,6 @@ tbody{
 }
 
 .goods-name {
-    font-family: BMJUA, sans-serif;
     font-size: 13px;
     text-align: center;
     padding: 4px 0;
@@ -729,7 +720,6 @@ tbody{
 }
 
 .goods-price {
-    font-family: BMJUA, sans-serif;
     font-size: 13px;
     color: black;
 }
