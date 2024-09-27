@@ -88,8 +88,8 @@ charset=UTF-8"
 	// 버튼 클릭 시 슬라이드 전환
 	document.querySelector('.button-right').addEventListener('click', nextSlide);
 	document.querySelector('.button-left').addEventListener('click', prevSlide);
-	</script>
-	<script>
+	
+	// 팀 번호 전달
 	function sendTeamNum(teamNum, page) {
 	    // 세션에 값을 설정
 	    var form = document.createElement("form");
@@ -105,31 +105,6 @@ charset=UTF-8"
 	    document.body.appendChild(form);
 	    form.submit();
 	}
-	  /* function sendTeamAndSport(teamNum, sportNum) {
-		    // 폼을 생성
-		    var form = document.createElement("form");
-		    form.setAttribute("method", "POST");
-		    form.setAttribute("action", "teamPage_Player.jsp"); // 데이터를 보낼 경로
-
-		    // hidden input 생성하여 teamNum 값 전달
-		    var teamField = document.createElement("input");
-		    teamField.setAttribute("type", "hidden");
-		    teamField.setAttribute("name", "teamNum");
-		    teamField.setAttribute("value", teamNum);
-		    form.appendChild(teamField);
-
-		    // hidden input 생성하여 sportNum 값 전달
-		    var sportField = document.createElement("input");
-		    sportField.setAttribute("type", "hidden");
-		    sportField.setAttribute("name", "sportNum");
-		    sportField.setAttribute("value", sportNum);
-		    form.appendChild(sportField);
-
-		    // 생성한 폼을 document에 추가한 후 제출
-		    document.body.appendChild(form);
-		    form.submit();
-		}
- */
 	</script>
 </body>
 </html>

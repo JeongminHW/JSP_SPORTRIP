@@ -21,6 +21,7 @@
     } else {
         session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
     }
+    
     // 팀 정보와 선수 명단 가져오기
     TeamBean teamInfo = teamMgr.getTeam(teamNum);
     PlayerMgr playerMgr = new PlayerMgr();
@@ -42,11 +43,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%=teamInfo.getTEAM_NAME() %></title>
 <link rel="stylesheet" href=".././assets/css/style.css">
-<script>
-    function goMain(){
-        document.location.href="mainPage.jsp";
-    }
-</script>
 </head>
 <body>
 <header class="header header_logo">
@@ -59,22 +55,22 @@
 </header>
     <div class="t_top">
         <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Player')">선수 명단</a>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
         </div>
-		    <div class="item" style="background-color: #236FB5;">
-			    <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Stadium')">경기장 소개</a>
-		    </div>
-		    <div class="item" style="background-color: #236FB5;">
-			    <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Teamintro')">구단 소개</a>
-		    </div>
-		    <div class="item" style="background-color: #236FB5;">
-			    <a href="teamPage_teamHighlight.html">하이라이트 경기</a>
-		    </div>
-		    <div class="item" style="background-color: #236FB5;">
-			    <a href="teamPage_Store.html">굿즈샵</a>
-		    </div>
-		    <div class="item" style="background-color: #236FB5;">
-			    <a href="teamPage_Board.html">게시판</a>
+	    <div class="item" style="background-color: #236FB5;">
+		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
+	    </div>
+	    <div class="item" style="background-color: #236FB5;">
+		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
+	    </div>
+	    <div class="item" style="background-color: #236FB5;">
+           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
+        </div>
+        <div class="item" style="background-color: #236FB5;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
+        </div>
+        <div class="item" style="background-color: #236FB5;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
 		</div>
 	</div>
 	
@@ -123,8 +119,27 @@
 	    </div>
     </div>
 	<script>
-
-	  
+	 	function goMain(){
+	        document.location.href=".././sport/mainPage.jsp";
+	    }
+	 	
+	 	// 팀 번호 전달
+		function sendTeamNum(teamNum, page) {
+		    // 세션에 값을 설정
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "POST");
+		    form.setAttribute("action", page + ".jsp");
+		
+		    var teamField = document.createElement("input");
+		    teamField.setAttribute("type", "hidden");
+		    teamField.setAttribute("name", "teamNum");
+		    teamField.setAttribute("value", teamNum);
+		    form.appendChild(teamField);
+		
+		    document.body.appendChild(form);
+		    form.submit();
+		}
+	 	
 	  	// 선수 출력
 	  	function showPlayers() {
         	document.getElementById('player-List').style.display = 'block';
@@ -148,6 +163,9 @@
     	// 포지션에 따라 선수 필터링
         function filterByPosition(position) {
             var playerCards = document.querySelectorAll('.player-card');
+            var positionItems  = document.querySelectorAll('.p_top .item');  // 포지션 버튼 선택
+            
+            // 선수 카드 필터링
             playerCards.forEach(function(card) {
                 if (card.getAttribute('data-position') === position) {
                     card.style.display = 'inline-block';
@@ -155,6 +173,13 @@
                     card.style.display = 'none';
                 }
             });
+         	// 이전 선택된 버튼에서 'selected-item' 클래스 제거
+            positionItems.forEach(function(item) {
+            	item.classList.remove('selected-item');
+            });
+            // 현재 클릭한 버튼에 'selected-item' 클래스 추가
+            var currentItem = event.target.parentElement;   // 현재 클릭한 버튼
+            currentItem.classList.add('selected-item');
         }
 
         // 모든 선수 보여주기 (초기 상태)

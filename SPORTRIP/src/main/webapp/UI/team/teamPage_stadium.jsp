@@ -1,3 +1,5 @@
+<%@page import="stadium.StadiumBean"%>
+<%@page import="stadium.StadiumMgr"%>
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
@@ -12,9 +14,11 @@
     
     // 받은 값에 따라 팀 정보 가져오기
     TeamMgr teamMgr = new TeamMgr();
-
+    StadiumMgr stadium = new StadiumMgr();
+    
     // 팀, 경기장 정보 가져오기
     TeamBean teamInfo = teamMgr.getTeam(teamNum);  // teamNum을 사용하여 팀 정보 조회    
+    StadiumBean StadiumInfo = stadium.getStadium(teamNum);    
 %>
 
 <!DOCTYPE html>
@@ -24,11 +28,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><%=teamInfo.getTEAM_NAME() %></title>
 <link rel="stylesheet" href=".././assets/css/style.css">
-<script>
-    function goMain(){
-        document.location.href="mainPage.jsp";
-    }
-</script>
 </head>
 <body>
 <header class="header header_logo">
@@ -41,29 +40,46 @@
 </header>
     <div class="t_top">
         <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Player')">선수 명단</a>
+            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_player')">선수 명단</a>
         </div>
         <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Stadium')">경기장 소개</a>
+            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_stadium')">경기장 소개</a>
         </div>
         <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_Teamintro')">구단 소개</a>
+            <a href="#" onclick="sendTeamNum(<%=teamInfo.getTEAM_NUM()%>, 'teamPage_teamintro')">구단 소개</a>
+        </div>
+	    <div class="item" style="background-color: #236FB5;">
+           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
         </div>
         <div class="item" style="background-color: #236FB5;">
-            <a href="teamPage_teamHighlight.html">하이라이트 경기</a>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
         </div>
         <div class="item" style="background-color: #236FB5;">
-            <a href="teamPage_Store.html">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="teamPage_Board.html">게시판</a>
-        </div>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
+		</div>
     </div>
-
-    <div class="team-info-box">
-    	<img src="<%=teamInfo.getCLUBINFO()%>" alt="구단 소개">
+    
+    <div class="stadium-intro">
+    	<div class="stadium-img">
+    		<img alt=<%=StadiumInfo.getSTADIUM_NAME() %> src="<%=StadiumInfo.getSEATS() %>">
+    	</div>
+    	
+    	<div class="stadium-info">
+    		<div class="stadium-text">
+    			<span>명칭 : <%=StadiumInfo.getSTADIUM_NAME() %></span><br>
+    			<span>위치 : <%=StadiumInfo.getSTADIUM_ADDRESS() %></span><br>
+    			<span>수용 인원 : <%=StadiumInfo.getSEAT_CAPACITY_S() %>명</span><br>
+    		</div>
+    		<div class="climate-info">
+    			<button class="climate-button">날씨 정보 보기</button>
+    		</div>
+    	</div>
     </div>
 	<script>
+	 	function goMain(){
+	        document.location.href=".././sport/mainPage.jsp";
+	    }
+	 	
 		// 스포츠 넘버 전송
 	  	function sendSportNum(sportNum, page) {
 		    // 폼을 생성
@@ -84,25 +100,22 @@
 		    form.submit();
 	  	}
 		
-	 	// 팀 넘버 전송
-	  	function sendTeamNum(teamNum, page) {
-		    // 폼을 생성
+	 	// 팀 번호 전달
+		function sendTeamNum(teamNum, page) {
+		    // 세션에 값을 설정
 		    var form = document.createElement("form");
 		    form.setAttribute("method", "POST");
-		    form.setAttribute("action",  `${ "${page}" }.jsp`);// 데이터를 보낼 경로
-		    
-		    // hidden input 생성하여 sportNum 값 전달
-		    var hiddenField = document.createElement("input");
-		    hiddenField.setAttribute("type", "hidden");
-		    hiddenField.setAttribute("name", "teamNum");
-		    hiddenField.setAttribute("value", teamNum);
-		    
-		    form.appendChild(hiddenField);
+		    form.setAttribute("action", page + ".jsp");
 		
-		    // 생성한 폼을 document에 추가한 후 제출
+		    var teamField = document.createElement("input");
+		    teamField.setAttribute("type", "hidden");
+		    teamField.setAttribute("name", "teamNum");
+		    teamField.setAttribute("value", teamNum);
+		    form.appendChild(teamField);
+		
 		    document.body.appendChild(form);
 		    form.submit();
-		  }
+		}
 	  </script>
 </body>
 </html>
