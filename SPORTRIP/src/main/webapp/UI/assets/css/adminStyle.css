@@ -1,0 +1,35 @@
+.active{
+    img{
+        border: 3px solid #f1290f;
+    }
+}
+
+.update-player{
+    text-align: right;
+    button{
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        width: 100px;
+        height: 30px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+}
+
+.addplayer-box{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.addplayer-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    input{
+        border-radius: 10px;
+        border: 1px solid #000000;
+    }
+}
