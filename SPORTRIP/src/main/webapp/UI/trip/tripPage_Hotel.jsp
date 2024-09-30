@@ -14,7 +14,7 @@
         }
 
         function showLodging() {
-            document.location.href="lodging_sub.html";
+            document.location.href="hotel_sub.jsp";
         }
     </script>
 </head>
@@ -36,7 +36,7 @@
             <a href="tripPage_Hotel.jsp">호텔</a>
         </div>
         <div class="item" style="background-color: #236FB5;">
-            <a href="food_main.html">맛집</a>
+            <a href="tripPage_Food.jsp">맛집</a>
         </div>
     </div>
 
@@ -99,7 +99,8 @@
                     </section>
                     <section class="info-item">
                         <p><%= lodging.getGRADE() %></p>
-                        <button class="show-detail" onclick="showLodging()">객실 보기</button>
+                        <button class="show-detail" onclick="location.href='hotel_sub.jsp?lodgingNum=<%= lodging.getLODGING_NUM() %>'">객실 보기</button>
+
                     </section>
                 </div>
             </div>

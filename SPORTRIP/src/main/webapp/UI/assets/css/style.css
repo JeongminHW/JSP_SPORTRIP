@@ -517,7 +517,7 @@ tbody{
   align-items: center;
 }
 
-.hotel-box, .food-box{
+.hotel-box, .food-box, .room-box{
 	font-family: 'NanumSquareNeo';
 	display: flex;
 	grid-template-columns: auto 1fr;
@@ -527,7 +527,7 @@ tbody{
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.hotel-img, .food-img{
+.hotel-img, .food-img, .room-img{
   width: 40%;  
     height: 300px; 
     border-radius: 10px 0 0 10px;
