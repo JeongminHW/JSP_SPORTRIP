@@ -3,45 +3,51 @@ package restaurant;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Vector;
-
+import java.util.ArrayList;
+import java.util.List;
 import DB.DBConnectionMgr;
 
 public class RestaurantMgr {
-	private DBConnectionMgr pool;
-	public RestaurantMgr() {
-		pool = DBConnectionMgr.getInstance();
-	}
-	
-	// 식당 숙소 2개 출력(추천)
-	public Vector<RestaurantBean> getRestaurantsRecommend(String stardium) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-	    Vector<RestaurantBean> restaurantList = new Vector<RestaurantBean>();
-	    try {
-	        con = pool.getConnection();
-	        sql = "SELECT RESTAURANT_NUM, RESTAURANT_NAME, CATEGORY, GRADE, ADDRESS, RESTAURANT_IMG, LON, LAT FROM LODGING WHERE STARDIUM = ?"
-	        		+ "LIMIT 2";	// 2개 제한
-	        pstmt = con.prepareStatement(sql);
-	        pstmt.setString(1, stardium);
-	        rs = pstmt.executeQuery();
-	        while (rs.next()) {
-	        	RestaurantBean bean = new RestaurantBean();
-	            bean.setRESTAURANT_NUM(rs.getInt(1));      
-	            bean.setRESTAURANT_NAME(rs.getString(2)); 
-	            bean.setCATEGORY(rs.getString(3));         
-	            bean.setGRADE(rs.getString(4));               
-	            bean.setADDRESS(rs.getString(5));           
-	            bean.setRESTAURANT_IMG(rs.getString(6));   
-	            bean.setLON(rs.getString(7));                   
-	            bean.setLAT(rs.getString(8));                   
-	            restaurantList.addElement(bean);
-	        }
+    private DBConnectionMgr pool;
+
+    public RestaurantMgr() {
+        pool = DBConnectionMgr.getInstance();
+    }
+
+    // 경기장 이름에 따른 맛집 조회 메서드
+    public List<RestaurantBean> getRestaurantsByStadiumName(String stadiumName) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<RestaurantBean> restaurantList = new ArrayList<>();
+
+        try {
+            con = pool.getConnection();
+            String sql = "SELECT r.* FROM RESTAURANT r JOIN STADIUM s ON r.STARDIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
+            System.out.println("SQL Query: " + sql + " with parameter: " + stadiumName); // 디버깅용 출력
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, new String(stadiumName.getBytes("ISO-8859-1"), "UTF-8"));
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                RestaurantBean restaurant = new RestaurantBean();
+                restaurant.setRESTAURANT_NUM(rs.getInt("RESTAURANT_NUM"));
+                restaurant.setRESTAURANT_NAME(rs.getString("RESTAURANT_NAME"));
+                restaurant.setCATEGORY(rs.getString("CATEGORY"));
+                restaurant.setGRADE(rs.getString("GRADE"));
+                restaurant.setADDRESS(rs.getString("ADDRESS"));
+                restaurant.setRESTAURANT_IMG(rs.getString("RESTAURANT_IMG"));
+                restaurant.setLON(rs.getString("LON"));
+                restaurant.setLAT(rs.getString("LAT"));
+                restaurant.setSTARDIUM(rs.getString("STARDIUM")); // STARDIUM 필드
+                restaurantList.add(restaurant);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            pool.freeConnection(con, pstmt, rs); // 연결 해제
         }
-	    return restaurantList;
-	}
+        return restaurantList;
+    }
 }
