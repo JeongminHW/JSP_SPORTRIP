@@ -77,8 +77,9 @@
 			</div>
 		</div>
 		<div class="update-player">
-			<button class="update-btn">삭제하기</button>
-			<button class="update-btn" onclick="addPlayer()">등록하기</button>
+			<button class="update-btn" id="delete">삭제</button>
+			<button class="update-btn" id="edit" onclick="editPlayer()")>수정</button>
+			<button class="update-btn" id="add" onclick="addPlayer()">등록</button>
 		</div>
 		<div id="coach-List" >
                <div class="coach-card">
@@ -153,7 +154,7 @@
         	document.getElementById('player-List').style.display = 'none';
         	document.getElementById('coach-List').style.display = 'block';
         	document.getElementById('player').style.backgroundColor = '#236FB5'; 
-        	document.getElementById('coach').style.backgroundColor = '#083660'; 
+        	document.getElementById('coach').style.backgroundColor = '#083660';
 	    }
 	  	
     	// 포지션에 따라 선수 필터링
@@ -186,11 +187,31 @@
             });
         }
         
+        // 등록하기
         function addPlayer(){
-        	document.location.href="admin_addPlayer.jsp";
+        	const playerFrame = document.getElementById('player-List');
+        	const coachFrame = document.getElementById('coach-List');
+        	if(coachFrame.style.display == 'block' || playerFrame.style.display == 'none'){
+        		document.location.href="admin_addCoach.jsp";
+        	}
+        	else{
+        		document.location.href="admin_addPlayer.jsp";
+        	}
         }
         
-     // 플레이어 카드 클릭 시 이벤트
+        // 수정하기
+        function editPlayer(){
+        	const playerFrame = document.getElementById('player-List');
+        	const coachFrame = document.getElementById('coach-List');
+        	if(coachFrame.style.display == 'block' || playerFrame.style.display == 'none'){
+            	document.location.href="admin_updateCoach.jsp";
+        	}
+        	else{
+        		document.location.href="admin_updatePlayer.jsp";
+        	}
+        }
+        
+     	// 플레이어 카드 클릭 시 이벤트
         document.querySelectorAll('.player-card').forEach((item) => {
             item.addEventListener('click', () => {
             item.classList.toggle('active');
