@@ -25,7 +25,6 @@
 	
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
-  
   Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
 <!DOCTYPE html>
