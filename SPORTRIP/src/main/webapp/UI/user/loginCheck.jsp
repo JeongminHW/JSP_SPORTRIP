@@ -28,5 +28,5 @@
 
 <script>
     alert("<%=msg%>");
-    location.href = ".././team/teamPage_Player.jsp"; // 로그인 후 다시 팀 페이지로 리다이렉트
+    location.href = ".././team/teamPage_player.jsp"; // 로그인 후 다시 팀 페이지로 리다이렉트
 </script>
