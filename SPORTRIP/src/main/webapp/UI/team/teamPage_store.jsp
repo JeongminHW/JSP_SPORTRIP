@@ -1,4 +1,3 @@
-<%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
@@ -6,7 +5,7 @@
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
-
+<jsp:useBean id="mdMgr" class="md.MDMgr" />
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
@@ -20,6 +19,8 @@
 	
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
+  
+  Vector<MDBean> vlist = mdMgr.listMD(10);
 %>
 
 <!DOCTYPE html>
@@ -68,6 +69,7 @@
             <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
 		</div>
 	</div>
+
 	<div class="goods-section">
 		<div class="selectBox2">
 			<button class="label">카테고리를 선택하세요</button>
@@ -80,87 +82,29 @@
 
 		<!-- goods-list를 selectBox2 아래로 이동 -->
 		<div class="goods-list">
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 브랜드유니폼.png" alt="굿즈 사진" class="goods-photo" id="uniform">
-			    <div class="goods-info">
-			        <div class="goods-name">울산 HD FC 2024 4th 유니폼</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩200,000</span>
-			            <button class="add-to-cart" onclick="addToCart('울산 HD FC 2024 4th 유니폼', 200000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 브랜드유니폼.png" alt="굿즈 사진"
-			        class="goods-photo" id="uniform">
-			    <div class="goods-info">
-			        <div class="goods-name">울산 HD FC 2024 4th 유니폼</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩200,000</span>
-			            <button class="add-to-cart" onclick="addToCart('울산 HD FC 2024 4th 유니폼', 200000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/롯데 니트머플러.png" alt="굿즈 사진"
-			        class="goods-photo" id="muffler">
-			    <div class="goods-info">
-			        <div class="goods-name">롯데 24 니트머플러</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩22,000</span>
-			            <button class="add-to-cart" onclick="addToCart('롯데 24 니트머플러', 22000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 볼캡.png" alt="굿즈 사진"
-			        class="goods-photo" id="etc">
-			    <div class="goods-info">
-			        <div class="goods-name">UHDFC 블랙 볼캡</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩38,000</span>
-			            <button class="add-to-cart" onclick="addToCart('UHDFC 블랙 볼캡', 38000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 뱃지.png" alt="굿즈 사진"
-			        class="goods-photo" id="etc">
-			    <div class="goods-info">
-			        <div class="goods-name">UHDFC엠블럼 뱃지</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩9,000</span>
-			            <button class="add-to-cart" onclick="addToCart('UHDFC엠블럼 뱃지', 9000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 유니폼키링.png" alt="굿즈 사진"
-			        class="goods-photo" id="etc">
-			    <div class="goods-info">
-			        <div class="goods-name">24선수 유니폼 키링</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩12,000</span>
-			            <button class="add-to-cart" onclick="addToCart('24선수 유니폼 키링', 12000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
+
+			<%
+				for (MDBean MDList : vlist){
+			%>
+					<div class="goods-card"> 
+					    <img src="<%= MDList.getMD_IMG() %>" alt="굿즈 사진" class="goods-photo" id="uniform">
+					    <div class="goods-info">
+					        <div class="goods-name"><%= MDList.getMD_NAME() %></div>
+					        <div class="price-and-cart">
+					            <span class="goods-price">₩<%=MDList.getMD_PRICE() %></span>
+					            <button class="add-to-cart" onclick="addToCart('<%= MDList.getMD_NAME() %>', <%=MDList.getMD_PRICE() %>">
+					                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
+					            </button>
+					        </div>
+					    </div>
+					</div>
+			<% } %>
+
 		</div>
 	</div>
 
 <script>
+
 	function goMain() {
 		document.location.href = "mainPage.jsp";
 	}
@@ -187,7 +131,6 @@
     const goodsCards = document.querySelectorAll('.goods-card');
     const cart = []; // 장바구니 배열
 
- 	// 선택한 옵션에 따라 상품을 필터링하는 함수
     const filterGoods = (category) => {
         goodsCards.forEach(card => {
             const cardId = card.querySelector('.goods-photo').id; // 상품의 ID 가져오기
