@@ -1,19 +1,13 @@
-const btn = document.querySelector('.selectbox-btn');
-const list = document.querySelector('.selectbox-option');
+const players = document.querySelectorAll('.player-card');
+const playerImg = document.querySelector('.player-photo');
 
-btn.addEventListener('click', () => {
-    btn.classList.toggle('on');
-});
-
-list.addEventListener('click', (event) => {
-    if (event.target.nodeName === "BUTTON") {
-        btn.innerText = event.target.innerText;
-        btn.classList.remove('on');
-    }
-});
-
-window.addEventListener('click', (event) => { 
-    if (!btn.contains(event.target)) {
-        btn.classList.remove('on');
-    }
+// 플레이어 카드 클릭 시 이벤트
+players.forEach((item) => {
+    item.addEventListener('click', () => {
+    // players.forEach((item) => {
+    //   item.classList.remove('active');
+    // });
+    item.classList.toggle('active');
+    playerImg.src = item.querySelector('img').src;
+  });
 });

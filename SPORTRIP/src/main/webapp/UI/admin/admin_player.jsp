@@ -43,6 +43,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><%=teamInfo.getTEAM_NAME() %></title>
 	<link rel="stylesheet" href=".././assets/css/style.css">
+	<link rel="stylesheet" href=".././assets/css/adminStyle.css">
 </head>
 <body>
 <header class="header header_logo">
@@ -94,6 +95,11 @@
                    </div>
                </div>
 	    </div>
+	    
+		<div class="update-player">
+			<button class="update-btn">삭제하기</button>
+			<button class="update-btn">등록하기</button>
+		</div>
 	    <div class="players-section">
 	    	<div id="player-List" style="display: none;">
 	    	<!-- 포지션 버튼 생성 -->
