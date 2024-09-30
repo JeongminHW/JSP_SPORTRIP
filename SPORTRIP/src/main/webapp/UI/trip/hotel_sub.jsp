@@ -1,11 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, room.RoomMgr, room.RoomBean" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTRIP 숙박</title>
+    <title>객실 정보</title>
     <link rel="stylesheet" href=".././assets/css/style.css">
-
+    
     <script>
         function goMain(){
             document.location.href="mainPage.jsp";
@@ -36,10 +38,10 @@
     </header>
     <div class="h_top">
 		<div class="item" style="background-color: #083660;">
-			<a href="hotel_main.html">호텔</a>
+			<a href="tripPage_Hotel.jsp">호텔</a>
 		</div>
 		<div class="item" style="background-color: #236FB5;">
-			<a href="food_main.html">맛집</a>
+			<a href="tripPage_Food.jsp">맛집</a>
 		</div>
 	</div>
     <div class="search-box">
@@ -52,24 +54,51 @@
         <span style="margin-left: 10px;">~</span>
         <input type="date" class="end-date">
     </div>
-
+    
     <div class="search-menu-box">
-        <div class="hotel-box">
-            <div class="hotel-img">
-                <img src=".././assets/images/hotel_img/hotel1.png" alt="">
+        <% 
+            String lodgingNumStr = request.getParameter("lodgingNum"); // lodgingNum 파라미터 받아오기
+            if (lodgingNumStr != null && !lodgingNumStr.equals("")) {
+                int lodgingNum = Integer.parseInt(lodgingNumStr);
+                RoomMgr roomMgr = new RoomMgr();
+                List<RoomBean> roomList = roomMgr.getRoomsByLodgingNum(lodgingNum); // LODGING_NUM에 맞는 객실 정보 가져오기
+
+                if (!roomList.isEmpty()) {
+                    for (RoomBean room : roomList) {
+        %>
+            <div class="hotel-box">
+                <div class="hotel-img">
+                    <img src="<%= room.getROOM_IMG() %>" alt="객실 이미지" style="width: 100%; height: auto;">
+                </div>
+                <div class="hotel-info-box">
+                    <section class="info-item">
+                        <span class="title" style="font-size: 24px;"><%= room.getROOM_NAME() %></span><br>
+                        <p class="service">
+                            <img src=".././assets/images/service_img.png" alt="서비스 이미지"> 
+                            수용 인원: <%= room.getSEAT_CAPACITY_R() %>명
+                        </p>
+                    </section>
+                    <section class="info-item">
+                        <p><%= room.getROOM_PRICE() %>원</p>
+                        <button class="show-detail" onclick="openModal()">예약하기</button>
+                    </section>
+                </div>
             </div>
-            <div class="hotel-info-box">
-                <section class="info-item">
-                    <span class="title" style="font-size: 24px;">스탠다드 더블룸</span><br>
-                    <p class="service"><img src=".././assets/images/service_img.png"> 무료 wifi, 금연, 에어컨, 시티 뷰</p>
-                </section>
-                <section class="info-item">
-                    <p>60,000원</p>
-                    <button class="show-detail" onclick="openModal()">예약하기</button>
-                </section>
-            </div>
-        </div>
+        <%
+                    }
+                } else {
+        %>
+                    <p>해당 숙소에 객실 정보가 없습니다.</p>
+        <%
+                }
+            } else {
+        %>
+                <p>숙소 정보가 제공되지 않았습니다.</p>
+        <%
+            }
+        %>
     </div>
+    
 
     <!-- 모달 팝업 시작 -->
     <div class="modal">
@@ -124,7 +153,7 @@
     </div>
     <!-- 모달 팝업 끝 -->
     <div class="footer">
-        <input type="button" value="목록" onclick="goList()">
+        <input type="button" value="목록" onclick="location.href='tripPage_Hotel.jsp'">
     </div>
 </body>
 </html>
