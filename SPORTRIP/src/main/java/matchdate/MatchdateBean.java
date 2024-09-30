@@ -6,6 +6,8 @@ public class MatchdateBean {
 	private String MATCH_DATE;
 	private int TEAM_NUM1;
 	private int TEAM_NUM2;
+	private String MATCH_TIME;
+	
 	public int getMATCH_DATE_NUM() {
 		return MATCH_DATE_NUM;
 	}
@@ -35,6 +37,12 @@ public class MatchdateBean {
 	}
 	public void setTEAM_NUM2(int tEAM_NUM2) {
 		TEAM_NUM2 = tEAM_NUM2;
+	}
+	public String getMATCH_TIME() {
+		return MATCH_TIME;
+	}
+	public void setMATCH_TIME(String mATCH_TIME) {
+		MATCH_TIME = mATCH_TIME;
 	}
 	
 	

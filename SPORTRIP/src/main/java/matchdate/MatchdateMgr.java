@@ -24,10 +24,11 @@ public class MatchdateMgr {
 		Vector<MatchdateBean> vlist = new Vector<MatchdateBean>();
 		try {
 			con = pool.getConnection();
-			sql = "select m.MATCH_DATE_NUM, m.STADIUM_NUM, m.MATCH_DATE,"
-					+ "m.TEAM_NUM1, m.TEAM_NUM2 from matchdate m join team t "
-					+ "on m.team_num1 = t.team_num "
-					+ "where m.MATCH_DATE >= now() and t.sport_num = ?";
+			sql = "select m.MATCH_DATE_NUM, m.STADIUM_NUM, m.MATCH_DATE, "
+				    + "m.TEAM_NUM1, m.TEAM_NUM2 from matchdate m "
+				    + "join team t on m.team_num1 = t.team_num "
+				    + "where m.MATCH_DATE >= now() and t.sport_num = ? "
+				    + "order by m.MATCH_DATE asc";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, sport_num);
