@@ -8,6 +8,7 @@
 <title>K-league</title>
 <link rel="stylesheet" href=".././assets/css/style.css">
 <link rel="stylesheet" href=".././assets/css/adminStyle.css">
+<script src=".././assets/js/main.js"></script>
 <script>
     function goMain(){
         document.location.href="mainPage.jsp";
@@ -28,50 +29,72 @@
         </ul>
     </div>
     </header>
-    <div class="t_top">
+    <div class="a_top">
         <div class="item" style="background-color: #083660;">
-            <a href="">선수 명단</a>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
         </div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="teamPage_Stadium.html">경기장 소개</a>
+        <div class="item" style="background-color: #236FB5;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
+        </div>
+        <div class="item" style="background-color: #236FB5;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
 		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="teamPage_teamIntro.html">구단 소개</a>
+	</div>
+    
+    <div class="u_top">
+		<div class="item" style="background-color: #083660;" id="coach">
+			<a href="#" onclick="showCoaches()">감독</a>
 		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="teamPage_teamHighlight.html">하이라이트 경기</a>
+		<div class="item" style="background-color: #236FB5;" id="player">
+			<a href="#" onclick="showPlayers()">선수</a>
 		</div>
-		<div class="item" style="background-color: #236FB5;">
-			<a href="teamPage_Store.html">굿즈샵</a>
-		</div>
-    </div>
+	</div>
 
     <div class="addplayer-box">
         <h2>선수 등록</h2>
         <form action="" method="post">
             <div class="addplayer-item">
-                <label for="player_name">선수 이름</label>
-                <input type="text" id="player_name" name="player_name">
+                <label class="label" for="player_name">선수 이름</label>
+                <input class="input" type="text" id="player_name" name="player_name">
             </div>
             <div class="addplayer-item">
-                <label for="player_number">선수 번호</label>
-                <input type="text" id="player_number" name="player_number">
+                <label class="label" for="player_number">선수 번호</label>
+                <input class="input" type="text" id="player_number" name="player_number">
             </div>
             <div class="addplayer-item">
-                <label for="player_position">선수 포지션</label>
-                <input type="text" id="player_position" name="player_position">
+                <label class="label" for="player_position">선수 포지션</label>
+                <input class="input" type="text" id="player_position" name="player_position">
             </div>
             <div class="addplayer-item">
-                <label for="player_backnum">선수 등번호</label>
-                <input type="text" id="player_backnum" name="player_backnum">
+                <label class="label" for="player_backnum">선수 등번호</label>
+                <input class="input" type="text" id="player_backnum" name="player_backnum">
+            </div>
+            <div class="addplayer-item file-box">
+                <label class="label" for="player_img">선수 이미지</label>
+				<div class="file-box">
+	            	<input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
+	            	<label id="file-label" for="file"></label>
+	                <input type="file" id="file" name="player_img">
+				</div>
             </div>
             <div class="addplayer-item">
-                <label for="player_img">선수 이미지</label>
-                <input type="file" id="player_img" name="player_img">
-            </div>
-            <div class="addplayer-item">
+                <input type="button" onclick="playerManager()" value="돌아가기">
                 <input type="submit" value="등록하기">
             </div>
     </div>
+    <script>
+	    function goMain(){
+	        document.location.href="mainPage.jsp";
+	    }
+	    
+	    function playerManager(){
+	    	document.location.href="admin_player.jsp";
+	    }
+    
+	    document.getElementById("file").addEventListener('change', function() {
+	        var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
+	        document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
+	    });
+	</script>
 </body>
 </html>
