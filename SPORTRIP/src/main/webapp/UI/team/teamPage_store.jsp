@@ -1,16 +1,20 @@
+<%@page import="basket.BasketBean"%>
+<%@page import="team.TeamBean"%>
+<%@page import="md.MDBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
-<jsp:useBean id="teamBean" class="team.TeamBean" />
 <jsp:useBean id="mdMgr" class="md.MDMgr" />
+<jsp:useBean id="basketMgr" class="basket.BasketMgr" />
 <%
-	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
-	int teamNum = 11; // 폼에서 받은 값이 없으면 0
 	
-/* 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
+	String url = request.getParameter("url");
+
+	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
+	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
 	if (teamNum == 0) {
 		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
 	} else {
@@ -22,7 +26,7 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
   
-  Vector<MDBean> vlist = mdMgr.listMD(10);
+    Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
 
 <!DOCTYPE html>
@@ -51,6 +55,7 @@
 			</ul>
 		</div>
 	</header>
+	
     <div class="t_top">
         <div class="item" style="background-color: #236FB5;">
             <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
@@ -89,12 +94,12 @@
 				for (MDBean MDList : vlist){
 			%>
 					<div class="goods-card"> 
-					    <img src="<%= MDList.getMD_IMG() %>" alt="굿즈 사진" class="goods-photo" id="uniform">
+					    <img src="<%= MDList.getMD_IMG() %>" alt="굿즈 사진" class="goods-photo" id="<%= MDList.getMD_KINDOF() %>">
 					    <div class="goods-info">
 					        <div class="goods-name"><%= MDList.getMD_NAME() %></div>
 					        <div class="price-and-cart">
 					            <span class="goods-price">₩<%=MDList.getMD_PRICE() %></span>
-					            <button class="add-to-cart" onclick="addToCart('<%= MDList.getMD_NAME() %>', <%=MDList.getMD_PRICE() %>">
+					            <button class="add-to-cart" onclick="addToCart('<%=MDList.getMD_NUM()%>')">
 					                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
 					            </button>
 					        </div>
@@ -104,7 +109,11 @@
 
 		</div>
 	</div>
-
+	<form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
+	    <input type="hidden" name="mdNum" id="mdNumInput">
+	    <input type="hidden" name="repairB" value="1">
+	    <input type="hidden" name="url" value="<%=url%>">
+	</form>
 <script>
 
 	function goMain() {
@@ -115,7 +124,7 @@
 	function sendTeamNum(teamNum, page) {
 	    // 세션에 값을 설정
 	    var form = document.createElement("form");
-	    form.setAttribute("method", "POST");
+		form.setAttribute("method", "POST");
 	    form.setAttribute("action", page + ".jsp");
 	
 	    var teamField = document.createElement("input");
@@ -131,16 +140,15 @@
     const label = document.querySelector('.label');
     const options = document.querySelectorAll('.optionItem');
     const goodsCards = document.querySelectorAll('.goods-card');
-    const cart = []; // 장바구니 배열
 
     const filterGoods = (category) => {
         goodsCards.forEach(card => {
             const cardId = card.querySelector('.goods-photo').id; // 상품의 ID 가져오기
-            if (category === '유니폼' && cardId === 'uniform') {
+            if (category === '유니폼' && cardId === '유니폼') {
                 card.style.display = 'block'; // '유니폼' 카테고리이고 ID가 'uniform'인 경우 표시
-            } else if (category === '머플러' && cardId === 'muffler') {
+            } else if (category === '머플러' && cardId === '머플러') {
                 card.style.display = 'block'; // '머플러' 카테고리이고 ID가 'muffler'인 경우 표시
-            } else if (category === '기타' && cardId === 'etc') {
+            } else if (category === '기타' && cardId === '기타') {
                 card.style.display = 'block'; // '기타' 카테고리이고 ID가 'etc'인 경우 표시
             } else {
                 card.style.display = 'none'; // 해당하지 않는 경우 숨김
@@ -169,12 +177,20 @@
 	    }
 	});
 
-    // 상품을 장바구니에 추가하는 함수
-    function addToCart(productName, price) {
-        cart.push({ name: productName, price: price });
-        alert(`${productName}이(가) 장바구니에 추가되었습니다.`);
-        console.log(cart); // 장바구니 내용을 콘솔에 출력
+    function addToCart(mdNum) {
+        document.getElementById('mdNumInput').value = mdNum;
+
+        if (<%=login.getId() != null ? true : false %>) {
+            alert("장바구니에 담았습니다.");
+            document.getElementById('basketForm').submit();
+        } else {
+            var currentUrl = window.location.href;
+			console.log(currentUrl);
+            alert("로그인을 진행하세요.");
+            document.location.href = ".././user/login.jsp?url=" + encodeURIComponent(currentUrl);
+        }
     }
+
 </script>
 </body>
 </html>

@@ -26,7 +26,7 @@
 	userBean.setEmail(email);
 	
 	if(userMgr.addUser(userBean)){
-		response.sendRedirect("login.html");
+		response.sendRedirect("login.jsp");
 	}
 %>
 

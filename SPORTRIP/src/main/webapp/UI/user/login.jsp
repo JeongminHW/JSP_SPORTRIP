@@ -1,13 +1,14 @@
 <%@page import="DB.MUtil"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:useBean id="login" class="user.UserBean" scope="session"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean id="login" class="user.UserBean" scope="session" />
 
 <%
-    String url = request.getParameter("url");
-    int teamNum = MUtil.parseInt(request, "teamNum", 0); // teamNum이 폼에 없을 경우 기본값 0
+    String previousUrl = request.getParameter("url");
+    
+    if (previousUrl != null && !previousUrl.isEmpty()) {
+        session.setAttribute("previousPage", previousUrl);
+    }
 %>
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -48,8 +49,7 @@
                     <input type="password" name="pw" placeholder="비밀번호">
                 </div>
                 <div class="login_button">
-                	<input type="hidden" name="url" value="<%=url%>">
-                	<input type="hidden" name="teamNum" value="<%=teamNum%>">
+                    <input type="hidden" name="url" value="<%= session.getAttribute("previousPage") %>">
                     <button type="submit">로그인하기</button>
                 </div>
             </form>
