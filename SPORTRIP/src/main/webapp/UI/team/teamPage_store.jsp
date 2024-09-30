@@ -10,10 +10,10 @@
 <jsp:useBean id="mdMgr" class="md.MDMgr" />
 <jsp:useBean id="basketMgr" class="basket.BasketMgr" />
 <%
-	
 	String url = request.getParameter("url");
 
 	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
+
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
 	if (teamNum == 0) {
 		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
@@ -26,9 +26,8 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
   
-    Vector<MDBean> vlist = mdMgr.listMD(teamNum);
+  Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -194,3 +193,4 @@
 </script>
 </body>
 </html>
+

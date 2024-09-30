@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, stadium.StadiumMgr, stadium.StadiumBean, lodging.LodgingMgr, lodging.LodgingBean" %>
+<%@ page import="java.util.*, stadium.StadiumMgr, stadium.StadiumBean, restaurant.RestaurantMgr, restaurant.RestaurantBean" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPORTRIP 숙박</title>
+    <title>SPORTRIP 맛집</title>
     <link rel="stylesheet" href=".././assets/css/style.css">
 
     <script>
@@ -13,9 +13,6 @@
             document.location.href="mainPage.jsp";
         }
 
-        function showLodging() {
-            document.location.href="hotel_sub.jsp";
-        }
     </script>
 </head>
 <body>
@@ -41,12 +38,12 @@
     </div>
 
     <div class="search-box">
-        <input name="searchText" type="text" placeholder="경기장을 검색하세요">
+        <input name="searchText" type="text" placeholder="음식점을 검색하세요">
         <button><img src=".././assets/images/search_icon.png" alt="검색" title="검색"></button>
     </div>
 
     <div style="float: left;" class="select-box">
-        <form method="POST" action="tripPage_Hotel.jsp" accept-charset="UTF-8">
+        <form method="POST" action="tripPage_Food.jsp" accept-charset="UTF-8">
             <select name="sportNum" class="select year" onchange="this.form.submit()">
                 <option value="0">종류</option>
                 <option value="1" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("1")) ? "selected" : "" %>>야구</option>
@@ -81,26 +78,21 @@
         <%
             String selectedStadium = request.getParameter("stadium");
             if (selectedStadium != null && !selectedStadium.equals("0")) {
-                LodgingMgr lodgingMgr = new LodgingMgr();
-                List<LodgingBean> lodgingList = lodgingMgr.getLodgingsByStadiumName(selectedStadium);
+                RestaurantMgr restaurantMgr = new RestaurantMgr();
+                List<RestaurantBean> restaurantList = restaurantMgr.getRestaurantsByStadiumName(selectedStadium);
 
-                if (!lodgingList.isEmpty()) {
-                    for (LodgingBean lodging : lodgingList) {
+                if (!restaurantList.isEmpty()) {
+                    for (RestaurantBean restaurant : restaurantList) {
         %>
-            <div class="hotel-box">
-                <div class="hotel-img">
-                    <img src="<%= lodging.getLODGING_IMG() %>" alt="호텔 이미지">
+            <div class="food-box">
+                <div class="food-img">
+                    <img src="<%= restaurant.getRESTAURANT_IMG() %>" alt="맛집 이미지">
                 </div>
-                <div class="hotel-info-box">
+                <div class="food-info-box">
                     <section class="info-item">
-                        <span class="title" style="font-size: 24px;"><%= lodging.getLODGING_NAME() %></span><br>
-                        <p class="address"><%= lodging.getADDRESS() %></p>
+                        <span class="title" style="font-size: 24px;"><%= restaurant.getRESTAURANT_NAME() %></span><br>
+                        <p class="address"><%= restaurant.getADDRESS() %></p>
                         <button class="show-location"><img src=".././assets/images/location_img.png"> 위치보기</button>
-                    </section>
-                    <section class="info-item">
-                        <p><%= lodging.getGRADE() %></p>
-                        <button class="show-detail" onclick="location.href='hotel_sub.jsp?lodgingNum=<%= lodging.getLODGING_NUM() %>'">객실 보기</button>
-
                     </section>
                 </div>
             </div>
@@ -108,7 +100,7 @@
                     }
                 } else {
         %>
-                    <p>근처 숙소 정보가 없습니다.</p>
+                    <p>근처 맛집 정보가 없습니다.</p>
         <%
                 }
             }
