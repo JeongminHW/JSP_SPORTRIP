@@ -1,10 +1,17 @@
-.active{
-    img{
-        border: 3px solid #f1290f;
-    }
+.a_top {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	place-items: center; /*글씨 중간 정렬*/
+	height: 50px;
+	gap: 1px;
+	margin-top: 20px;
 }
 
-.update-player{
+.active{
+	border: 3px solid #f1290f;
+}
+
+.update-player, .update-goods{
     text-align: right;
     button{
         background-color: #ffffff;
@@ -18,18 +25,75 @@
     }
 }
 
-.addplayer-box{
+.addplayer-box, .addgoods-box, .updateplayer-box, .updategoods-box{
     text-align: center;
     margin-top: 20px;
 }
 
-.addplayer-item{
+.addplayer-item, .addgoods-item, .updateplayer-item, .updategoods-item{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    height: auto;
+    gap: 20px;
     input{
         border-radius: 10px;
-        border: 1px solid #000000;
+    	border: 1px solid #121212;
+    	height: 40px;
+    	padding: 0 10px;
     }
+    input[type='submit'], input[type='button']{
+    	width: 120px;
+    	height: 40px;
+    	background: transparent;
+    	cursor: pointer;
+    }
+    select{
+    	height: 40px;
+    	padding: 0 10px;
+    }
+    .label{
+    	flex: 0 1 80px;
+    	text-align: left;
+    }
+    .input, div, select{
+    	flex: 0 1 400px;
+    }
+}
+
+.addgoods-item:first-child, .updategoods-item:first-child{
+	margin-bottom: 20px;
+}
+
+.file-box .upload-file {
+    height: 40px;
+    padding: 0 15px;
+    vertical-align: middle;
+    border: 1px solid #121212;
+    width: 390px;
+    color: #999999;
+    position: relative;
+}
+
+.file-box #file-label {
+	position: absolute;
+    padding: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    height: auto;
+    border-radius: 10px;
+    background-image: url(".././images/fileLink_img.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-left: -41px;
+    margin-top: 11px;
+}
+
+.file-box input[type='file'] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
 }

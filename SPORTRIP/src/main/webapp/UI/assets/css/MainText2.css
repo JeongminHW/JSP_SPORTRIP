@@ -1,0 +1,296 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	margin: 0;
+}
+
+#secondScreen {
+    position: fixed;
+    bottom: -200vh; /* 처음엔 화면 아래에 위치 */
+    width: 100%;
+    height: 100vh; /* 화면 높이에 맞춰서 조정 */
+    background-color: transparent;
+    z-index: 2; 
+    transition: transform 1s ease-out;
+}
+
+#secondScreen.show {
+    transform: translateY(-200vh); /* 위로 슬라이드해서 올라오는 애니메이션 */
+}
+
+#background {
+    display: none; /* 처음에 헤더는 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    transition: 0.5s ease;
+}
+
+#background.show {
+    display: block; /*화면이 올라올 때 보여짐 */
+}
+
+#background .b_wrap {
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	> img {
+		width: 101vw;
+		height: auto;
+	}
+}
+
+#campaign .c_marquee {
+	position: relative;
+}
+
+.area01 {
+	padding: 300px 0;
+}
+
+#wrap {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	min-width: 320px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#campaign .c_hero {
+	position: relative;
+	z-index: 1;
+	width: 100vw;
+	padding-bottom: 350px;
+}
+
+#campaign {
+	display: inline-block;
+	vertical-align: middle;
+	background-color: transparent;
+	width: 100%;
+}
+
+#campaign>section {
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+	width: 100%;
+}
+
+#campaign .c_marquee .cm_wrap {
+	width: 100%;
+	height: 180px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#campaign .c_marquee .cm_wrap.t2 {
+	position: relative;
+}
+
+#campaign .c_marquee .marquee, #campaign .c_marquee .marqueereverse {
+	position: absolute;
+	display: inline-block;
+	white-space: nowrap;
+	background: none;
+	font-family: 'Black Han Sans', sans-serif;
+	font-size: 200px;
+	font-weight: 900;
+	line-height: 180px;
+	color: transparent;
+	-webkit-text-stroke: #fff 1px;
+}
+
+#campaign .c_marquee .marquee {
+	animation: slidemarquee 120s linear infinite;
+}
+
+#campaign .c_marquee .marquee.t1 {
+	animation-delay: -60s;
+}
+
+#campaign .c_marquee .marqueereverse {
+	color: #fff;
+	animation: slidereversemarquee 120s linear infinite;
+}
+
+#campaign .c_marquee .marquee, #campaign .c_marquee .marqueereverse {
+	font-size: 90px;
+	line-height: 80px;
+}
+
+#campaign .c_marquee .marqueereverse.t1 {
+	animation-delay: -60s;
+}
+
+@keyframes slidemarquee { 
+	0% {transform: translateX(100%);}
+	100%{transform: translateX(-100%);}
+}
+
+@keyframes slidereversemarquee { 
+	0% {transform: translateX(-100%);}
+	100%{transform: translateX(100%);}
+}
+
+#campaign .c_hero .c_marquee {
+	transform: rotate(-8deg);
+}
+
+#campaign .c_marquee .cm_wrap {
+	height: 140px;
+}
+
+#campaign .c_marquee .marquee, #campaign .c_marquee .marqueereverse {
+	font-size: 160px;
+	line-height: 140px;
+}																																																																																									
+
+#campaign .c_hero {
+    padding-top: 300px;
+    padding-bottom: 350px;
+    position: relative;
+    top: 35px; /* 위치 보정용 */
+}
+
+#campaign .c_hero .ch_title {
+	top: -101px;
+}
+
+#campaign .c_hero .ch_title span {
+	height: 80px;
+	font-size: 60px;
+	line-height: 90px;
+}
+
+@keyframes slidemarquee { 
+	0% { transform: translateX(100%); }
+	100% { transform: translateX(-100%); }
+}
+
+@keyframes slidereversemarquee { 
+	0% { transform: translateX(-100%); }
+	100% { transform: translateX(100%); }
+}
+
+/* 팝업 기본 스타일 */
+.popup-background {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup {
+	margin-top: 100px;
+	width: 500px;
+	height: 350px;
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.popup-content {
+	flex: 1;
+	padding: 10px 20px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* 컨텐츠를 중앙으로 정렬 */
+}
+
+/* login_img 크기 조정 */
+.login_img img {
+  width: 70px; /* 너비를 줄였습니다 */
+  height: auto; /* 비율을 유지하면서 높이 자동 설정 */
+  display: block;
+  margin: 30px auto;
+  margin-bottom: 30px;
+}
+
+.login_form {
+	width: 80%;
+}
+
+/* input_box 스타일링 */
+.input_box {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* input을 중앙으로 정렬 */
+}
+
+.input_box input {
+  width: 100%;
+  padding: 10px 15px; /* 여유 공간을 주어 입력 상자를 넓게 만듦 */
+  margin-bottom: 20px;
+  border-radius: 8px; /* 둥근 모서리 */
+  border: 1px solid #ccc; /* 부드러운 회색 테두리 */
+  font-size: 16px;
+  background-color: #f9f9f9; /* 연한 배경색 */
+  transition: all 0.3s ease;
+}
+
+/* input_box의 입력 중 효과 */
+.input_box input:focus {
+  border-color: #007BFF; /* 포커스 시 파란색 테두리 */
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 파란색 외곽선 그림자 */
+}
+
+/* login_button 스타일링 */
+.login_button {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 버튼을 중앙으로 정렬 */
+}
+
+.login_button button {
+  width: 100%;
+  align-content: center;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #007BFF;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 버튼 호버 효과 */
+.login_button button:hover {
+  background-color: #0056b3;
+}
+
+.u-popup {
+	font-weight: 300;
+	margin: 50px auto;
+	color: #fff;
+}
+
+.sign-up {
+	font-weight: 600;
+}
+
+
