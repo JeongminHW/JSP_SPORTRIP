@@ -68,5 +68,5 @@ public class StadiumMgr {
 	    }
 	    return stadiumList;
 	}
-
+	
 }

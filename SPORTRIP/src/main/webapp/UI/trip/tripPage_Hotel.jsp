@@ -25,8 +25,8 @@
         </a>
         <div class="login-signup-box">
             <ul>
-                <li><a href="login.html" style="font-family: BMJUA; color: black;">로그인</a></li>
-                <li><a href="signup.html" style="font-family: BMJUA; color: black;">회원가입</a></li>
+                <li><a href="login.jsp" style="font-family: BMJUA; color: black;">로그인</a></li>
+                <li><a href="signup.jsp" style="font-family: BMJUA; color: black;">회원가입</a></li>
             </ul>
         </div>
     </header>
@@ -73,7 +73,6 @@
                     }
                 %>
             </select>
-            <!-- 검색 버튼 제거 -->
         </form>
     </div>
 

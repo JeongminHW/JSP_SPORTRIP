@@ -50,4 +50,38 @@ public class LodgingMgr {
         }
         return lodgingList;
     }
+    
+    public List<LodgingBean> getAllLodgings() {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<LodgingBean> lodgingList = new ArrayList<>();
+
+        try {
+            con = pool.getConnection();
+            String sql = "SELECT * FROM LODGING"; // 모든 숙소 정보 가져오기
+            pstmt = con.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                LodgingBean lodging = new LodgingBean();
+                lodging.setLODGING_NUM(rs.getInt("LODGING_NUM"));
+                lodging.setLODGING_NAME(rs.getString("LODGING_NAME"));
+                lodging.setCATEGORY(rs.getString("CATEGORY"));
+                lodging.setGRADE(rs.getString("GRADE"));
+                lodging.setADDRESS(rs.getString("ADDRESS"));
+                lodging.setLODGING_IMG(rs.getString("LODGING_IMG"));
+                lodging.setLON(rs.getString("LON"));
+                lodging.setLAT(rs.getString("LAT"));
+                lodging.setSTARDIUM(rs.getString("STARDIUM")); // STARDIUM 필드
+                lodgingList.add(lodging);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            pool.freeConnection(con, pstmt, rs); // 연결 해제
+        }
+        return lodgingList;
+    }
+
 }
