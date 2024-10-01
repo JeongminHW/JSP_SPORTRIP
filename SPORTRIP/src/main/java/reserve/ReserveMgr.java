@@ -1,8 +1,10 @@
 package reserve;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import DB.DBConnectionMgr;
 
@@ -46,30 +48,37 @@ public class ReserveMgr {
 	}
 	
 	// 예약 정보 저장
-	public boolean saveReserve(ReserveBean bean) {
+	public String saveReserve(ReserveBean bean) {
 	    Connection con = null;
 	    PreparedStatement pstmt = null;
 	    String sql = null;
-	    boolean result = false;
+	    String errorMsg = null; 
 	    try {
 	        con = pool.getConnection();
-	        sql = "INSERT INTO LODGING (RESERVE_NUM, ID, LODGING_NUM, ROOM_NUM, HEADCOUNT, RESERVE_PRICE, CHECK_IN, CHECK_OUT) "
-	            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	        sql = "INSERT INTO RESERVE (ID, LODGING_NUM, ROOM_NUM, HEADCOUNT, RESERVE_PRICE, CHECK_IN, CHECK_OUT) "
+	                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 	        pstmt = con.prepareStatement(sql);
-	        pstmt.setInt(1, bean.getRESERVE_NUM());  
-	        pstmt.setString(2, bean.getID());        
-	        pstmt.setInt(3, bean.getLODGING_NUM());  
-	        pstmt.setInt(4, bean.getROOM_NUM());     
-	        pstmt.setInt(5, bean.getHEADCOUNT());    
-	        pstmt.setInt(6, bean.getRESERVE_PRICE());
-	        pstmt.setDate(7, bean.getCHECK_IN());    
-	        pstmt.setDate(8, bean.getCHECK_OUT());   
+	        pstmt.setString(1, bean.getID());        
+	        pstmt.setInt(2, bean.getLODGING_NUM());  
+	        pstmt.setInt(3, bean.getROOM_NUM());     
+	        pstmt.setInt(4, bean.getHEADCOUNT());    
+	        pstmt.setInt(5, bean.getRESERVE_PRICE());
+	        pstmt.setDate(6, new Date(bean.getCHECK_IN().getTime())); 
+	        pstmt.setDate(7, new Date(bean.getCHECK_OUT().getTime())); 
+	        
 	        if (pstmt.executeUpdate() > 0) {
-	            result = true;
+	            return null; // 성공 시 null 반환
+	        } else {
+	            errorMsg = "DB 저장 실패"; // DB에 저장이 안될 경우
 	        }
+	    } catch (SQLException e) {
+	        errorMsg = e.getMessage(); // SQL 예외 발생 시 메시지 저장
 	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }	    
-	    return result;
+	        errorMsg = "예약 저장 중 오류 발생: " + e.getMessage();
+	    } finally {
+	        pool.freeConnection(con, pstmt, null); 
+	    }
+	    
+	    return errorMsg; // 실패 시 오류 메시지 반환
 	}
 }
