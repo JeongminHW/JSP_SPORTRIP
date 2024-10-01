@@ -41,26 +41,26 @@
 		</div>
 	</div>
 
-    <div class="addplayer-box">
+    <div class="updateplayer-box">
         <h2>선수 등록</h2>
         <form action="" method="post">
-            <div class="addplayer-item">
+            <div class="updateplayer-item">
                 <label class="label" for="player_name">선수 이름</label>
                 <input class="input" type="text" id="player_name" name="player_name">
             </div>
-            <div class="addplayer-item">
+            <div class="updateplayer-item">
                 <label class="label" for="player_number">선수 번호</label>
                 <input class="input" type="text" id="player_number" name="player_number">
             </div>
-            <div class="addplayer-item">
+            <div class="updateplayer-item">
                 <label class="label" for="player_position">선수 포지션</label>
                 <input class="input" type="text" id="player_position" name="player_position">
             </div>
-            <div class="addplayer-item">
+            <div class="updateplayer-item">
                 <label class="label" for="player_backnum">선수 등번호</label>
                 <input class="input" type="text" id="player_backnum" name="player_backnum">
             </div>
-            <div class="addplayer-item file-box">
+            <div class="updateplayer-item file-box">
                 <label class="label" for="player_img">선수 이미지</label>
 				<div class="file-box">
 	            	<input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
@@ -68,7 +68,7 @@
 	                <input type="file" id="file" name="player_img">
 				</div>
             </div>
-            <div class="addplayer-item">
+            <div class="updateplayer-item">
                 <input type="button" onclick="playerManager()" value="목록">
                 <input type="submit" value="수정">
             </div>

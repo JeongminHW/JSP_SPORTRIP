@@ -30,10 +30,10 @@
     </div>
     </header>
     <div class="a_top">
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
-        </div>
         <div class="item" style="background-color: #236FB5;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">선수 관리</a>
+        </div>
+        <div class="item" style="background-color: #083660;">
             <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
         </div>
         <div class="item" style="background-color: #236FB5;">
@@ -41,23 +41,35 @@
 		</div>
 	</div>
 
-    <div class="updateplayer-box">
-        <h2>감독 수정</h2>
+    <div class="addgoods-box">
+        <h2>굿즈 등록</h2>
         <form action="" method="post">
-            <div class="updateplayer-item">
-                <label class="label" for="player_name">감독 이름</label>
-                <input class="input" type="text" id="player_name" name="player_name">
+            <div class="addgoods-item">
+                <label class="label" for="goods_name">굿즈 종류</label>
+                <select class="goods-select">
+                	<option value="유니푬">유니폼</option>
+                	<option value="머플러">머플러</option>
+                	<option value="기타">기타</option>
+                </select>
             </div>
-            <div class="updateplayer-item file-box">
-                <label class="label" for="player_img">감독 이미지</label>
+            <div class="addgoods-item file-box">
+                <label class="label" for="goods_img">굿즈 이미지</label>
 				<div class="file-box">
 	            	<input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
 	            	<label id="file-label" for="file"></label>
-	                <input type="file" id="file" name="player_img">
+	                <input type="file" id="file" name="goods_img">
 				</div>
             </div>
-            <div class="updateplayer-item">
-                <input type="button" onclick="playerManager()" value="목록">
+            <div class="addgoods-item">
+                <label class="label" for="player_name">굿즈 이름</label>
+                <input class="input" type="text" id="player_name" name="player_name">
+            </div>
+            <div class="addgoods-item">
+                <label class="label" for="player_name">굿즈 가격</label>
+                <input class="input" type="text" id="player_name" name="player_name">
+            </div>
+            <div class="addgoods-item">
+                <input type="button" onclick="goodsManager()" value="목록">
                 <input type="submit" value="수정">
             </div>
     </div>
@@ -66,8 +78,8 @@
 	        document.location.href="mainPage.jsp";
 	    }
 	    
-	    function playerManager(){
-	    	document.location.href="admin_player.jsp";
+	    function goodsManager(){
+	    	document.location.href="admin_goods.jsp";
 	    }
     
 	    document.getElementById("file").addEventListener('change', function() {
