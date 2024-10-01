@@ -73,4 +73,33 @@ public class MDMgr {
         }
         return mdVector;
     }
+    
+    // 해당 넘버를 가진 상품 조회
+    public MDBean getMD(int md_num) {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	String query = null;
+    	MDBean md = new MDBean();
+    	
+    	try {
+    		con = pool.getConnection();
+    		query = "SELECT * FROM MD WHERE md_num = ?";
+    		pstmt = con.prepareStatement(query);
+    		pstmt.setInt(1, md_num);
+    		rs = pstmt.executeQuery();
+    		while (rs.next()) {
+    			md.setMD_NUM(rs.getInt(1));
+    			md.setTEAM_NUM(rs.getInt(2));
+    			md.setSPORT_NUM(rs.getInt(3));
+    			md.setMD_NAME(rs.getString(4));
+    			md.setMD_PRICE(rs.getInt(5));
+    			md.setMD_KINDOF(rs.getString(6));
+    			md.setMD_IMG(rs.getString(7));
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return md;
+    }
 }

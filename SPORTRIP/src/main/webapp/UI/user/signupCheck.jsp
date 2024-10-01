@@ -1,5 +1,5 @@
 <%@page import="DB.MUtil"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="userMgr" class="user.UserMgr" />
 <jsp:useBean id="userBean" class="user.UserBean" />
 <jsp:setProperty property="*" name="userBean" />
