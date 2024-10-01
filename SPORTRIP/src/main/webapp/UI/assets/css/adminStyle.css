@@ -97,3 +97,62 @@
     overflow: hidden;
     border: 0;
 }
+
+.write-btn {
+    width: 88%;
+    text-align: right;
+    margin: 30px;
+    button{
+        width: auto;
+        height: 40px;
+        font-size: 20px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+}
+
+.del-btn{
+	width: 88%;
+	margin: auto;
+	margin-bottom: 10px;
+	button{
+        width: auto;
+        height: auto;
+        font-size: 20px;
+        color: red;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+}
+
+.table-list{
+	colgroup{
+            .size01{
+                width: 10%;
+            }
+            .size02{
+                width: 53%;
+            }
+            .size03{
+                width: 15%;
+            }
+            .size04{
+                width: 10%;
+            }
+            .size05{
+                width: 7%;
+            }
+            .size06{
+                width: 7%;
+            }
+        }
+    input[type="checkbox"]{
+        width: 15px;
+        height: 15px;
+        margin: 5px 10px 0 0;
+    }
+}
