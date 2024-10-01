@@ -8,12 +8,10 @@
 }
 
 .active{
-    img{
-        border: 3px solid #f1290f;
-    }
+	border: 3px solid #f1290f;
 }
 
-.update-player{
+.update-player, .update-goods{
     text-align: right;
     button{
         background-color: #ffffff;
@@ -27,12 +25,12 @@
     }
 }
 
-.addplayer-box{
+.addplayer-box, .addgoods-box, .updateplayer-box, .updategoods-box{
     text-align: center;
     margin-top: 20px;
 }
 
-.addplayer-item{
+.addplayer-item, .addgoods-item, .updateplayer-item, .updategoods-item{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,13 +48,21 @@
     	background: transparent;
     	cursor: pointer;
     }
+    select{
+    	height: 40px;
+    	padding: 0 10px;
+    }
     .label{
     	flex: 0 1 80px;
     	text-align: left;
     }
-    .input, div{
+    .input, div, select{
     	flex: 0 1 400px;
     }
+}
+
+.addgoods-item:first-child, .updategoods-item:first-child{
+	margin-bottom: 20px;
 }
 
 .file-box .upload-file {
