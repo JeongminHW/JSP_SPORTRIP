@@ -17,7 +17,7 @@ public class BasketMgr {
     }
 	
 	// 아이디로 장바구니 목록 조회
-    public Vector<BasketBean> getBasket(String id) {
+    public Vector<BasketBean> listBasket(String id) {
     	Connection con = null;
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
@@ -44,6 +44,35 @@ public class BasketMgr {
         return basketList;
     }
     
+	// 해당 아이디가 동일한 제품을 주문 했는지 판별
+	public boolean vaildateBasket(String id, int md_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = null;
+		BasketBean basket = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			// md_num으로 그룹화하고 repair_b의 합계를 구함
+			query = "SELECT * FROM BASKET WHERE ID = ?, MD_NUM = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 리소스 해제
+			if (rs != null) try { rs.close(); } catch (Exception e) {}
+			if (pstmt != null) try { pstmt.close(); } catch (Exception e) {}
+			if (con != null) try { con.close(); } catch (Exception e) {}
+		}
+		return flag;
+	}
+    
     // 장바구니 담기
     public boolean insertBasket(BasketBean bean) {
 		Connection con = null;
@@ -52,11 +81,20 @@ public class BasketMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert into basket values(null, ?, ?, ?)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bean.getID());
-			pstmt.setInt(2, bean.getMD_NUM());
-			pstmt.setInt(3, bean.getREPAIR_B());
+			BasketMgr mgr = new BasketMgr();
+			if(mgr.vaildateBasket(bean.getID(), bean.getMD_NUM())) {
+				sql = "update basket set REPAIR_B = REPAIR_B + ? where basket_num = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, bean.getBASKET_NUM());
+				pstmt.setInt(2, bean.getREPAIR_B());
+			}else {
+				sql = "insert into basket values(null, ?, ?, ?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, bean.getID());
+				pstmt.setInt(2, bean.getMD_NUM());
+				pstmt.setInt(3, bean.getREPAIR_B());
+			}
+			
 			if(pstmt.executeUpdate() == 1) {
 				flag = true;
 			}
@@ -93,7 +131,7 @@ public class BasketMgr {
 	}
     
     // 장바구니 수량 수정
-    public boolean updateBasket(BasketBean bean) {
+    public boolean updateBasket(int basket_num, int quantity) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
@@ -102,8 +140,8 @@ public class BasketMgr {
 			con = pool.getConnection();
 			sql = "update basket set REPAIR_B = ? where basket_num = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, bean.getREPAIR_B());
-			pstmt.setInt(2, bean.getBASKET_NUM());
+			pstmt.setInt(1, quantity);
+			pstmt.setInt(2, basket_num);
 			if(pstmt.executeUpdate() == 1) {
 				flag = true;
 			}

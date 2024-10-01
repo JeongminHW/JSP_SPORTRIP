@@ -26,7 +26,7 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
   
-  Vector<MDBean> vlist = mdMgr.listMD(teamNum);
+    Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -45,7 +45,7 @@
 		<div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
 			<img src="<%=teamInfo.getLOGO()%>" alt="로고" class="team_logo_img">
 		</div>
-		<a href=".././md/shopping_cart.html">	<%-- md --%>
+		<a href=".././md/shoppingPage_basket.jsp">	<%-- md --%>
 			<img src=".././assets/images/cart_icon.png" alt="장바구니" class="cart"></a>
 		<div class="login-signup-box">
 			<ul>
@@ -93,6 +93,7 @@
 				for (MDBean MDList : vlist){
 			%>
 					<div class="goods-card"> 
+					
 					    <img src="<%= MDList.getMD_IMG() %>" alt="굿즈 사진" class="goods-photo" id="<%= MDList.getMD_KINDOF() %>">
 					    <div class="goods-info">
 					        <div class="goods-name"><%= MDList.getMD_NAME() %></div>
@@ -104,6 +105,7 @@
 					        </div>
 					    </div>
 					</div>
+				
 			<% } %>
 
 		</div>

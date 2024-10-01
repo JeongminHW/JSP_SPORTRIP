@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/UI/md/shoppingPage_basket.jsp=UTF-8
+encoding//src/main/webapp/UI/md/shoppingPage_payment.jsp=UTF-8
 encoding//src/main/webapp/UI/team/board_post.jsp=UTF-8
 encoding//src/main/webapp/UI/team/teamPage_board.jsp=UTF-8
 encoding//src/main/webapp/UI/team/teamPage_highlight.jsp=UTF-8
