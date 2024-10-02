@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SPORTRIP</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"/>
-    <link href=".././assets/css/MainText3.css" rel="stylesheet" type="text/css"/>
+    <link href=".././assets/css/signup.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
 	<div id="secondScreen">
@@ -18,7 +18,7 @@
 				<img alt="" src=".././assets/images/newpage_img.png">
 			</div>
 		</div>
-		<div id="campaign" class="index" style="margin-top: -160px">
+		<div id="campaign" class="index" style="margin-top: -120px">
 			<section class="c_hero area01">
 				<div class="c_marquee value02">
 					<div class="cm_wrap t1">
@@ -53,7 +53,6 @@
 				<div class="popup-content">
 					<div class="logo-section">
 						<div class="singup_img">
-							<img src=".././assets/images/logo_img/2_울산HD.png" alt="울산HD" id="team_img"> 
 							<img src=".././assets/images/sportrip_logo.png" alt="울산HD" id="sportrip_logo">
 							<div class="signup_button">
 								<button type="button" onclick="return validateForm()">회원가입</button>

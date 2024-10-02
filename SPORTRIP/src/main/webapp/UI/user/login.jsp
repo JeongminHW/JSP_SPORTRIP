@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SPORTRIP</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"/>
-    <link href=".././assets/css/MainText2.css" rel="stylesheet" type="text/css"/>
+    <link href=".././assets/css/login.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
 	<div id="secondScreen">
@@ -24,37 +24,31 @@
 				<img alt="" src=".././assets/images/newpage_img.png">
 			</div>
 		</div>
-		<div id="campaign" class="index" style="margin-top: -160px">
+		<div id="campaign" class="index" style="margin-top: -120px">
 			<section class="c_hero area01">
 				<div class="c_marquee value02">
 					<div class="cm_wrap t1">
 						<div class="marquee">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
-								KOVO</span>
+							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S KOVO</span>
 						</div>
 						<div class="marquee t1">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
-								KOVO</span>
+							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S KOVO</span>
 						</div>
 					</div>
 					<div class="cm_wrap t2">
 						<div class="marqueereverse">
-							<span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span> <span>LET’S
-								SPORTRIP</span>
+							<span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span>
 						</div>
 						<div class="marqueereverse t1">
-							<span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span> <span>LET’S
-								SPORTRIP</span>
+							<span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span> <span>LET’S SPORTRIP</span>
 						</div>
 					</div>
 					<div class="cm_wrap t3">
 						<div class="marquee">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
-								KOVO</span>
+							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S KOVO</span>
 						</div>
 						<div class="marquee t1">
-							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S
-								KOVO</span>
+							<span>LET’S KFA</span> <span>LET’S KBO</span> <span>LET’S KOVO</span>
 						</div>
 					</div>
 				</div>
@@ -84,7 +78,7 @@
 				</div>
 			</div>
 			<div class="u-popup">
-				<span class="u-popup-text">스포트립이 처음이신가요? </span><a class="sign-up" onclick="sendSportNum(1)">회원가입</a>
+				<span class="u-popup-text">스포트립이 처음이신가요? </span><a class="sign-up" onclick="location.href='signup.jsp'">회원가입</a>
 			</div>
 		</div>
 	</div>
