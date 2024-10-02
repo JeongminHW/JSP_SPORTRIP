@@ -233,20 +233,14 @@ body {
 }
 
 /* login_img 크기 조정 */
-#team_img{
-  width: 120px; /* 너비를 줄였습니다 */
-  height: auto; /* 비율을 유지하면서 높이 자동 설정 */
-  display: block;
-  margin: 30px auto;
-  margin-bottom: 30px;
-}
 
 #sportrip_logo {
-  width: 150px; /* 너비를 줄였습니다 */
+  width: 250px; /* 너비를 줄였습니다 */
   height: auto; /* 비율을 유지하면서 높이 자동 설정 */
   display: block;
-  margin: 30px auto;
-  margin-bottom: 30px;	
+  margin: 0 auto;
+  margin-bottom: 60px;	
+  margin-left: 60px;
 }
 
 .signup_button button {
