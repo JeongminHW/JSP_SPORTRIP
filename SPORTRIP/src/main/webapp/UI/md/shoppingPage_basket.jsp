@@ -15,7 +15,7 @@
 <jsp:useBean id="basketMgr" class="basket.BasketMgr" />
 <%
 	String url = request.getParameter("url");
-
+	int fee = 3500;
 	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
 
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
@@ -28,6 +28,7 @@
 
 	int sportNum = (int)session.getAttribute("sportNum");
 	Vector<BasketBean> basketVList = basketMgr.listBasket(login.getId());
+	int basketNum = 0;
 	
 %>
 <!DOCTYPE html>
@@ -55,97 +56,104 @@
         <p class="title">
             <span class="cart-title">장바구니</span> <span id="cartSize"> (2)</span>
         </p>
-        <table class="cart__list">
-            <form id="paymnetForm" accept-charset="UTF-8" action="shoppingPage_paymnet.jsp" method="POST">
-                <thead>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td colspan="2">상품정보</td>
-                        <td>수량</td>
-                        <td>상품금액</td>
-                        <td>배송비</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 상품 -->
-                    <% 
-        
-                    	int total = 0;
-                    	ArrayList<BasketBean> selectedItems = new ArrayList<>();
-                    
-                    	for(BasketBean basketbean : basketVList){
-                    		MDBean MDBean = mdMgr.getMD(basketbean.getMD_NUM());
-                    		int sum = MDBean.getMD_PRICE() * basketbean.getREPAIR_B();
-                    		total += MDBean.getMD_PRICE() * basketbean.getREPAIR_B();
-                    		
-                    		TeamBean teamInfo = teamMgr.getTeam(MDBean.getTEAM_NUM());
-                    		String teamName = teamInfo.getTEAM_NAME();
-                    		
-                    %>
-                    		<tr class="cart__list__detail">
-                            <td>
-                            	<input type="checkbox" class="item-checkbox" 
-		                            data-md-num="<%=MDBean.getMD_NUM()%>" 
-		                            data-md-name="<%=MDBean.getMD_NAME()%>" 
-		                            data-repair-c="<%=basketbean.getREPAIR_B()%>" 
-		                            data-price="<%=MDBean.getMD_PRICE()%>" 
-		                            data-img="<%=MDBean.getMD_IMG()%>"
-		                            data-team-name="<%=teamName%>">
-                            </td>
-                            <td class="img_td"><img src="<%=MDBean.getMD_IMG()%>" alt="<%=MDBean.getMD_NAME() %>"></td>
-                            <td style="position: relative;">
-                                <p><%=MDBean.getMD_NAME() %></p>
-                                
-                                <span class="price-info"><%= MDBean.getMD_PRICE()%>원</span>
-                              	<button class="cart__list__countbtn" onclick="deleteBasket(<%=basketbean.getBASKET_NUM()%>)">삭제하기</button>
-                            </td>
-                            <td class="cart__list__count">
-                            
-                                <!-- 수량 조절 버튼 -->z
-                                <div class="quantity-control">
-                                    <button type="button" class="decrease" onclick="decrease(<%=basketbean.getBASKET_NUM()%>)">-</button>
-                                    <input type="number" class="quantity-input" onchange="quantity_input(this)" value="<%=basketbean.getREPAIR_B() %>" min="1" data-price="<%=MDBean.getMD_PRICE()%>">
-                                    <button type="button" class="increase" onclick="increase(<%=basketbean.getBASKET_NUM()%>)" >+</button>
-                                </div>
-                            </td>
-                            <td style="width: 200px;"><span class="product-price"><%=sum %>원</span></td>
-                            <td style="width: 200px;">3,500원</td>
-                        </tr>
-                    <form action="/shoppingPage_payment.jsp?<%=login.getId() %>" method="get" class="order_form">
-						<input type="hidden" name="orders[0].MD_NUM" value="<%=MDBean.getMD_NUM()%>">
-						<input type="hidden" name="orders[0].REPAIR_C" value="<%=sum%>">
-						<input type="hidden" name="teamNum" value="<%= teamNum %>">
-					</form>
-                    
-                    <% } %>
-                    
-                </tbody>
-				<tfoot>
-					<tr>
-						<td colspan="3" style="border-bottom: none;"></td>
-						<td style="border-bottom: none;"></td>
-						<td class="total-price">
-							<span>상품 합계</span><br> 
-							<span>배송비</span><br>
-						</td>
-						<td style="text-align: right;">
-							<span class="total-product"><%=total %></span><br> 
-							<span class="delivery-fee">3,500원</span><br>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3" style="border-bottom: none;"></td>
-						<td style="border-bottom: none;"></td>
-						<td class="final" style="border-bottom: none; text-align: right;"><span>합계</span>
-						</td>
-						<td
-							style="border-bottom: none; text-align: right; font-weight: bold;">
-							<span class="final-price">0원</span>
-						</td>
-					</tr>
-				</tfoot>
-			</form>
-        </table>
+		<table class="cart__list">
+		    <form id="paymnetForm" accept-charset="UTF-8" action="shoppingPage_payment.jsp" method="POST">
+		        <thead>
+		            <tr>
+		                <td><input type="checkbox"></td>
+		                <td colspan="2">상품정보</td>
+		                <td>수량</td>
+		                <td>상품금액</td>
+		                <td>배송비</td> <!-- 배송비 컬럼 유지 -->
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <!-- 상품 -->
+		            <% 
+		                int total = 0;
+		                ArrayList<BasketBean> selectedItems = new ArrayList<>();
+		                
+		                for (int i = 0; i < basketVList.size(); i++) {
+		                    BasketBean basketbean = basketVList.get(i);
+		                    MDBean MDBean = mdMgr.getMD(basketbean.getMD_NUM());
+		                    int sum = MDBean.getMD_PRICE() * basketbean.getREPAIR_B();
+		                    total += MDBean.getMD_PRICE() * basketbean.getREPAIR_B();
+		
+		                    TeamBean teamInfo = teamMgr.getTeam(MDBean.getTEAM_NUM());
+		                    String teamName = teamInfo.getTEAM_NAME();
+		                    basketNum = basketbean.getBASKET_NUM();
+		
+							
+		            %>
+		            <tr class="cart__list__detail">
+		                <td>
+		                    <input type="checkbox" class="item-checkbox"
+		                        data-md-num="<%= MDBean.getMD_NUM() %>"
+		                        data-md-name="<%= MDBean.getMD_NAME() %>"
+		                        data-repair-c="<%= basketbean.getREPAIR_B() %>"
+		                        data-price="<%= MDBean.getMD_PRICE() %>"
+		                        data-img="<%= MDBean.getMD_IMG() %>"
+		                        data-team-name="<%= teamName %>">
+		                </td>
+		                <td class="img_td"><img src="<%= MDBean.getMD_IMG() %>" alt="<%= MDBean.getMD_NAME() %>"></td>
+		                <td style="position: relative;">
+		                    <p><%= MDBean.getMD_NAME() %></p>
+		                    <span class="price-info"><%= MDBean.getMD_PRICE() %>원</span>
+		                    <button class="cart__list__countbtn" onclick="deleteBasket(<%= basketbean.getBASKET_NUM() %>)">삭제하기</button>
+		                </td>
+		                <td class="cart__list__count">
+		                    <!-- 수량 조절 버튼 -->
+		                    <div class="quantity-control">
+		                        <button type="button" class="decrease" onclick="decrease(<%= basketbean.getBASKET_NUM() %>)">-</button>
+		                        <input type="number" class="quantity-input" onchange="quantity_input(this)" value="<%= basketbean.getREPAIR_B() %>" min="1" data-price="<%= MDBean.getMD_PRICE() %>">
+		                        <button type="button" class="increase" onclick="increase(<%= basketbean.getBASKET_NUM() %>)">+</button>
+		                    </div>
+		                </td>
+		                <td style="width: 200px;"><span class="product-price"><%= sum %>원</span></td>
+		
+		                <!-- 배송비는 첫 번째 행에만 rowspan을 적용하여 병합 -->
+		                <% if (i == 0) { %>
+		                <td rowspan="<%= basketVList.size() %>">
+		                    <span class="delivery-fee" id="fee1"><%= fee %>원</span>
+		                </td>
+		                <% } %>
+		            </tr>
+		            <form action="/shoppingPage_payment.jsp?<%= login.getId() %>" method="get" class="order_form">
+		                <input type="hidden" name="orders[0].MD_NUM" value="<%= MDBean.getMD_NUM() %>">
+		                <input type="hidden" name="orders[0].REPAIR_C" value="<%= sum %>">
+		                <input type="hidden" name="teamNum" value="<%= teamNum %>">
+		            </form>
+		            <% } %>
+		        </tbody>
+		        <tfoot>
+		            <tr>
+		                <td colspan="3" style="border-bottom: none;"></td>
+		                <td style="border-bottom: none;"></td>
+		                <td class="total-price">
+		                    <span>상품 합계</span><br>
+		                    <span>배송비</span><br>
+		                </td>
+		                <td style="text-align: right;">
+		                    <span class="total-product">0원</span><br>
+		                    <span class="delivery-fee" id="fee2"><%= fee %>원</span><br>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td colspan="3" style="border-bottom: none;"></td>
+		                <td style="border-bottom: none;"></td>
+		                <td class="final" style="border-bottom: none; text-align: right;"><span>합계</span>
+		                </td>
+		                <td style="border-bottom: none; text-align: right; font-weight: bold;">
+		                    <span class="final-price">0원</span> <!-- 최종 합계에 배송비 포함 -->
+		                </td>
+		            </tr>
+		        </tfoot>
+		    </form>
+		</table>
+
+		    </form>
+		</table>
+
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onClick="location.href='teamPage_store.jsp'">쇼핑 계속하기</button>
             <button class="cart__bigorderbtn right"  id="orderBtn">주문하기</button>
@@ -181,37 +189,53 @@
     }
 
     // 체크된 상품들의 총 금액 계산
-    function updateTotalPrice() {
-        let totalPrice = 0;
-        const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
-        checkboxes.forEach((checkbox) => {
-            if (checkbox.checked) {
-                const row = checkbox.closest('tr');
-                const productPriceEl = row.querySelector('.product-price');
-                const productPrice = parseInt(productPriceEl.textContent.replace(/[^0-9]/g, ''));
-                totalPrice += productPrice;
-            }
-        });
-        
-        const totalProductEl = document.querySelector('.total-product');
-        totalProductEl.textContent = totalPrice.toLocaleString() + "원";
+	function updateTotalPrice() {
+	    let totalPrice = 0;
+	    const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+	    checkboxes.forEach((checkbox) => {
+	        if (checkbox.checked) {
+	            const row = checkbox.closest('tr');
+	            const productPriceEl = row.querySelector('.product-price');
+	            const productPrice = parseInt(productPriceEl.textContent.replace(/[^0-9]/g, ''));
+	            totalPrice += productPrice;
+	        }
+	    });
+	
+	    const totalProductEl = document.querySelector('.total-product');
+	    totalProductEl.textContent = totalPrice.toLocaleString() + "원";
+	
+	    // 배송비 계산
+	    var deliveryFee = 3500; // 기본 배송비
+	    if (totalPrice >= 100000) {
+	        deliveryFee = 0; // 10만원 이상 무료 배송
+	    }
+	
+	    const fee1 = document.querySelector('#fee1');
+	    fee1.textContent = deliveryFee.toLocaleString() + "원";
+	    
+	    const fee2 = document.querySelector('#fee2');
+	    fee2.textContent = deliveryFee.toLocaleString() + "원";
+	
+	    const finalPrice = totalPrice + deliveryFee;
+	
+	    // 최종 합계
+	    const finalPriceEl = document.querySelector('.final-price');
+	    finalPriceEl.textContent = finalPrice.toLocaleString() + "원";
+	}
 
-        // 배송비 계산
-        let finalPrice = totalPrice;
-        const deliveryFeeEl = document.querySelector('.delivery-fee');
-        const deliveryFee = 3500;
+	// 상품 체크박스 변경 시 가격 업데이트
+	document.querySelectorAll('tbody input[type="checkbox"]').forEach(checkbox => {
+	    checkbox.addEventListener('change', () => {
+	        updateTotalPrice();
+	    });
+	});
+	
+	// 페이지 로드 시 초기 계산
+	document.addEventListener("DOMContentLoaded", function() {
+	    updateTotalPrice();
+	});
 
-        if (totalPrice >= 100000) {
-            deliveryFeeEl.textContent = '0원';
-        } else {
-            deliveryFeeEl.textContent = deliveryFee.toLocaleString() + "원";
-            finalPrice += deliveryFee;
-        }
-
-        // 최종 합계
-        const finalPriceEl = document.querySelector('.final-price');
-        finalPriceEl.textContent = finalPrice.toLocaleString() + "원";
-    }
+	// 체크박스 선택 시 data-fee에 span 태그 값을 삽입
 
     function updateBasketQuantity(basketNum, quantity) {
         const xhr = new XMLHttpRequest();

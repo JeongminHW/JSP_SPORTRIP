@@ -1,11 +1,18 @@
-<%@page import="DB.MUtil"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page import="DB.MUtil" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <jsp:useBean id="login" class="user.UserBean" scope="session"/>
 
 <%
-    String url = request.getParameter("url");
-    int teamNum = MUtil.parseInt(request, "teamNum", 0); // teamNum이 폼에 없을 경우 기본값 0
+    String url = request.getParameter("url"); 
+    if (url == null || url.isEmpty()) {
+        url = (String) session.getAttribute("previousPage");
+        if (url == null) {
+            url = ".././sport/sport_main.jsp"; 
+        }
+    }
+
+    session.setAttribute("previousPage", url); 
 %>
 
 <!DOCTYPE html>

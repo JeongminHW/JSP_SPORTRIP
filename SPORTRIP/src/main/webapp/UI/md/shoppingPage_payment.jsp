@@ -39,7 +39,8 @@
     String[] prices = request.getParameterValues("orders[0].PRICE");
     String[] imgs = request.getParameterValues("orders[0].MD_IMG");
     String[] names = request.getParameterValues("orders[0].TEAM_NAME");
-
+    
+    		
     List<PaymentBean> orders = new ArrayList<>();
     int i = 0;
     int sum = 0;
@@ -50,7 +51,7 @@
         String price = request.getParameter("orders[" + i + "].PRICE");
         String img = request.getParameter("orders[" + i + "].MD_IMG");
         String name = request.getParameter("orders[" + i + "].TEAM_NAME");
-        
+
         if (mdNum == null || mdName == null || repairC == null || price == null || img == null|| name == null) {
             break; 
         }
@@ -88,6 +89,11 @@
 
     // Pass the orders to the session or use directly
     session.setAttribute("orders", orders);
+    
+   	int fee = 3500;
+    if(sum >= 100000){
+    	fee = 0;
+    }
 %>
 
 
@@ -129,12 +135,12 @@ function closePopup() {
 					
 					
 						<div class="address-info">
-							<strong class="receiver"><span>이상우</span></strong>
+							<strong class="receiver"><span><%=login.getName()%></span></strong>
 							<div class="receiver-phone">
-								<span class="phone-number">010-4095-6897</span>
+								<span class="phone-number"><%=login.getPhone()%></span>
 							</div>
 							<div class="receiver-address">
-								<span>부산광역시 부산진구 엄광로 182번길 15-22 (가야동, 화이트원룸빌) 203호 (47339)</span>
+								<span><%=login.getAddress()%>(<%=login.getPostcode()%>)</span>
 							</div>
 						</div>
 						<div class="address-chage">
@@ -162,7 +168,7 @@ function closePopup() {
 					        </div>
 					
 					        <!-- Iterate over the products under the current team -->
-					        <% for (PaymentBean order : teamOrders) { %>
+					        <% for (PaymentBean order : teamOrders) {  %>
 					            <li class="product-info">
 					                <div class="product-detail">
 					                    <div class="img-box">
@@ -191,12 +197,12 @@ function closePopup() {
 							<dt class="delivery-price">
 								<span class="delivery-price-text">배송비</span>
 							</dt>
-							<dd class="delivery-price-number">+0원</dd>
+							<dd class="delivery-price-number">+<%= formatter.format(fee)%></dd>
 						</div>
 					</dl>
 					<dl class="final-price">
 						<dt class="final-price-text">총 주문금액</dt>
-						<dd class="final-price-number">0원</dd>
+						<dd class="final-price-number"><%= formatter.format(fee+sum)%>원</dd>
 					</dl>
 				</div>
 			</div>
@@ -206,29 +212,26 @@ function closePopup() {
 	<!-- 팝업 창 -->
 	<div class="popup-background">
 		<div class="popup">
-			<div class="popup-header">배송지 목록</div>
+			<div class="popup-header">회원 정보</div>
 			<div class="popup-content">
 				<ul class="address-list-area">
 					<li class="address-list-content">
 						<div class="address-content">
 							<div class="address-area">
 								<div class="address-info">
-									<strong class="receiver"><span>이상우</span></strong>
+									<strong class="receiver"><span><%=login.getName()%></span></strong>
 									<div class="receiver-phone">
-										<span class="phone-number">010-4095-6897</span>
+										<span class="phone-number"><%=login.getPhone()%></span>
 									</div>
 									<div class="receiver-address">
-										<span>부산광역시 부산진구 엄광로 182번길 15-22 (가야동, 화이트원룸빌) 203호 (47339)</span>
+										<span><%=login.getAddress()%>(<%=login.getPostcode()%>)</span>
 									</div>
 								</div>
-								<button type="button" class="address-selected-btn"><span>선택됨</span></button>
-							</div>
-							<div class="button-area">
-								<button type="button" class="modify-address">수정</button>
 							</div>
 						</div>
 					</li>
 				</ul>
+				<button type="button" class="modify-address">수정</button>
 				<button class="close-popup" onclick="closePopup()">닫기</button>
 			</div>
 		</div>
@@ -241,7 +244,7 @@ function closePopup() {
 					<p><span>약관 및 주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</span></div>
 			</div>
 			<div class="payment-button">
-				<button type="button" class="payment-btn"><span>0원 </span>결제하기</button>
+				<button type="button" class="payment-btn"><span><%= formatter.format(fee+sum)%>원 </span>결제하기</button>
 			</div>
 		</div>
 	</footer>
