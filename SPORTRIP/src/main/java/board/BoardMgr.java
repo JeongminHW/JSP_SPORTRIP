@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.Vector;
 
 import DB.DBConnectionMgr;
+import player.PlayerBean;
 
 public class BoardMgr {
 	private DBConnectionMgr pool;
@@ -91,41 +92,39 @@ public class BoardMgr {
 		return flag;
 	}
 	
-	// 게시글 1개 조회(본인 글일 경우 수정/삭제 , 본인 글이 아닐 경우 추천/비추천 버튼 출력)
-	public BoardBean getBoard(int teamNum, int boardNum) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = null;
-		BoardBean bean = new BoardBean();
-		try {
-			con = pool.getConnection();
-			sql = "select * from board where team_num = ? and board_num = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, teamNum);
-			pstmt.setInt(2, boardNum);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				bean.setBOARD_NUM(rs.getInt(1));
-				bean.setTITLE(rs.getString(2));
-				bean.setCONTENTS(rs.getString(3));
-				bean.setPOSTDATE(rs.getString(4));
-				bean.setIP(rs.getString(5));
-				bean.setID(rs.getString(6));
-				bean.setRECOMMAND(rs.getInt(7));
-				bean.setNONRECOMMAND(rs.getInt(8));
-				bean.setTEAM_NUM(rs.getInt(9));
-				bean.setVIEWS(rs.getInt(10));
-				bean.setBOARD_IMG(rs.getString(11));
-				
-				updateViews(bean.getTEAM_NUM(), bean.getBOARD_NUM());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt, rs);
-		}
-		return bean;
+	// 게시글 1개 조회
+	public BoardBean getBoard(int boardNum) {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = null;
+	    BoardBean bean = new BoardBean();
+	    try {
+	        con = pool.getConnection();
+	        sql = "SELECT * FROM board WHERE board_num = ?"; // WHERE 절 추가
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setInt(1, boardNum); // boardNum 값 바인딩
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            bean.setBOARD_NUM(rs.getInt(1));
+	            bean.setTITLE(rs.getString(2));
+	            bean.setCONTENTS(rs.getString(3));
+	            bean.setPOSTDATE(rs.getString(4));
+	            bean.setIP(rs.getString(5));
+	            bean.setID(rs.getString(6));
+	            bean.setRECOMMAND(rs.getInt(7));
+	            bean.setNONRECOMMAND(rs.getInt(8));
+	            bean.setTEAM_NUM(rs.getInt(9));
+	            bean.setVIEWS(rs.getInt(10));
+	            bean.setBOARD_IMG(rs.getString(11));
+	            updateViews(bean.getTEAM_NUM(), bean.getBOARD_NUM()); // 조회수 업데이트
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        pool.freeConnection(con, pstmt, rs);
+	    }
+	    return bean;
 	}
 	
 	// 게시글 리스트 조회
@@ -134,6 +133,7 @@ public class BoardMgr {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
+		BoardBean board = null;
 		Vector<BoardBean> vlist = new Vector<BoardBean>();
 		try {
 			con = pool.getConnection();
@@ -142,19 +142,19 @@ public class BoardMgr {
 			pstmt.setInt(1, teamNum);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				BoardBean bean = null;
-				bean.setBOARD_NUM(rs.getInt(1));
-				bean.setTITLE(rs.getString(2));
-				bean.setCONTENTS(rs.getString(3));
-				bean.setPOSTDATE(rs.getString(4));
-				bean.setIP(rs.getString(5));
-				bean.setID(rs.getString(6));
-				bean.setRECOMMAND(rs.getInt(7));
-				bean.setNONRECOMMAND(rs.getInt(8));
-				bean.setTEAM_NUM(rs.getInt(9));
-				bean.setVIEWS(rs.getInt(10));
-				bean.setBOARD_IMG(rs.getString(11));
-				vlist.addElement(bean);
+				board = new BoardBean(); // 새로운 Bean 객체 생성
+				board.setBOARD_NUM(rs.getInt(1));
+				board.setTITLE(rs.getString(2));
+				board.setCONTENTS(rs.getString(3));
+				board.setPOSTDATE(rs.getString(4));
+				board.setIP(rs.getString(5));
+				board.setID(rs.getString(6));
+				board.setRECOMMAND(rs.getInt(7));
+				board.setNONRECOMMAND(rs.getInt(8));
+				board.setTEAM_NUM(rs.getInt(9));
+				board.setVIEWS(rs.getInt(10));
+				board.setBOARD_IMG(rs.getString(11));
+				vlist.addElement(board);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

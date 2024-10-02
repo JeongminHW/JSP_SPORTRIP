@@ -1,3 +1,5 @@
+<%@page import="board.BoardBean"%>
+<%@page import="board.BoardMgr"%>
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
@@ -6,6 +8,8 @@
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
+<jsp:useBean id="boardMgr" class="board.BoardMgr" />
+<jsp:useBean id="boardBean" class="board.BoardBean" />
 
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
@@ -17,6 +21,12 @@
 	}
 	// 팀 정보 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
+	// 게시글 정보 가져오기
+	Vector<BoardBean> boardInfo = boardMgr.listBoard(teamNum);
+	// NullPointerException 방지
+    if (boardInfo == null) {
+        boardInfo = new Vector<>();
+    }
 	
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
@@ -94,38 +104,22 @@
                         <th>추천</th>
                     </tr>
                 </thead>
-                <tr>
-                    <td>1</td>
-                    <td><a href="viewPost.jsp">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><a href="">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
+                <tbody>
+                <% if (boardInfo != null && !boardInfo.isEmpty()) { %>
+		            <% for (BoardBean board : boardInfo) { %>
+		            <tr>
+			            <td><%=board.getBOARD_NUM() %></td>
+	                    <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>,'.././board/viewPost')"><%=board.getTITLE() %></a></td>
+	                    <td><%=board.getID() %></td>
+	                    <td><%=board.getPOSTDATE() %></td>
+	                    <td><%=board.getVIEWS() %></td>
+	                    <td><%=board.getRECOMMAND() %></td>
+                    </tr>
+                  	<% } 
+		            } else { %>
+   						<tr><td colspan="6">게시글이 없습니다.</td></tr>
+		        <% } %>               
+                </tbody>
             </table>
         </div>
     </div>
@@ -143,8 +137,16 @@
 	        document.location.href=".././sport/mainPage.jsp";
 	    }
 	    
-	    function postMessage(){
-	        document.location.href = ".././team/board_post.jsp";
+	    function postMessage() {
+	        // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
+	        var userId = "<%=login.getId() != null ? login.getId() : "" %>"; // 로그인 여부를 세션에서 체크
+
+	        if (userId !== "") { // 로그인 되어 있으면
+	            document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
+	        } else {
+	            alert("로그인이 필요합니다."); // 로그인 필요 메시지 출력
+	            document.location.href = ".././user/login.jsp"; // 로그인 페이지로 이동
+	        }
 	    }
 	    
 	 	// 팀 번호 전달
@@ -159,6 +161,23 @@
 		    teamField.setAttribute("name", "teamNum");
 		    teamField.setAttribute("value", teamNum);
 		    form.appendChild(teamField);
+		
+		    document.body.appendChild(form);
+		    form.submit();
+		}
+	 	
+		// 게시글 번호 전달
+		function sendBoardNum(boardNum, page) {
+		    // 세션에 값을 설정
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "POST");
+		    form.setAttribute("action", page + ".jsp");
+		
+		    var boardField = document.createElement("input");
+		    boardField.setAttribute("type", "hidden");
+		    boardField.setAttribute("name", "boardNum");
+		    boardField.setAttribute("value", boardNum);
+		    form.appendChild(boardField);
 		
 		    document.body.appendChild(form);
 		    form.submit();

@@ -1,10 +1,10 @@
 eclipse.preferences.version=1
-encoding//src/main/webapp/UI/team/board_post.jsp=UTF-8
+encoding//src/main/webapp/UI/board/board_post.jsp=UTF-8
+encoding//src/main/webapp/UI/board/viewPost.jsp=UTF-8
 encoding//src/main/webapp/UI/team/teamPage_board.jsp=UTF-8
 encoding//src/main/webapp/UI/team/teamPage_highlight.jsp=UTF-8
 encoding//src/main/webapp/UI/team/teamPage_stadium.jsp=UTF-8
 encoding//src/main/webapp/UI/team/teamPage_store.jsp=UTF-8
 encoding//src/main/webapp/UI/team/teamPage_teamintro.jsp=UTF-8
-encoding//src/main/webapp/UI/team/viewPost.jsp=UTF-8
 encoding//src/main/webapp/UI/user/signupCheck.jsp=UTF-8
 encoding/<project>=UTF-8
