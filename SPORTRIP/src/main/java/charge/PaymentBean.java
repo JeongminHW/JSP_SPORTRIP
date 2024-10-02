@@ -11,6 +11,7 @@ public class PaymentBean {
     private String TEAM_NAME;
     private String MD_NAME;
     private String MD_IMG;
+    private int fee;
     
 	public List<PaymentBean> getOrders() {
 		return orders;
@@ -60,7 +61,12 @@ public class PaymentBean {
 	public void setMD_IMG(String mD_IMG) {
 		MD_IMG = mD_IMG;
 	}
-	
+	public int getFee() {
+		return fee;
+	}
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
 	@Override
 	public String toString() {
 		return "OrderPageDTO [orders=" + orders + "]";
