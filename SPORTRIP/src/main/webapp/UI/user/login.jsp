@@ -84,7 +84,7 @@
 				</div>
 			</div>
 			<div class="u-popup">
-				<span class="u-popup-text">스포트립이 처음이신가요? </span><a class="sign-up">회원가입</a>
+				<span class="u-popup-text">스포트립이 처음이신가요? </span><a class="sign-up" onclick="sendSportNum(1)">회원가입</a>
 			</div>
 		</div>
 	</div>
