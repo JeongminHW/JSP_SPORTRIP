@@ -37,15 +37,11 @@
         </div>
     </div>
 
-    <div class="search-box">
-        <input name="searchText" type="text" placeholder="음식점을 검색하세요">
-        <button><img src=".././assets/images/search_icon.png" alt="검색" title="검색"></button>
-    </div>
 
     <div style="float: left;" class="select-box">
         <form method="POST" action="tripPage_Food.jsp" accept-charset="UTF-8">
             <select name="sportNum" class="select year" onchange="this.form.submit()">
-                <option value="0">종류</option>
+                <option value="0">스포츠</option>
                 <option value="1" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("1")) ? "selected" : "" %>>야구</option>
                 <option value="2" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("2")) ? "selected" : "" %>>축구</option>
                 <option value="3" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("3")) ? "selected" : "" %>>배구</option>
