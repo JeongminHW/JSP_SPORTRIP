@@ -1,4 +1,4 @@
-package Comment;
+package comment;
 
 public class CommentBean {
 	private int COMMENT_NUM;

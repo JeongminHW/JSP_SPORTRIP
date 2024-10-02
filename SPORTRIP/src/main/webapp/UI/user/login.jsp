@@ -101,8 +101,6 @@
         }, 200);
       };
 
-    </script>
-	<script>
   	function sendSportNum(sportNum) {
 	    // 세션에 값을 설정
 	    var form = document.createElement("form");
