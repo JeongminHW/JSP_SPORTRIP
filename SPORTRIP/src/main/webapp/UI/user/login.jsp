@@ -55,7 +55,7 @@
 			</section>
 		</div>
 		<div class="popup-background">
-			<div class="popup">
+			<div class="popup" id="popup">
 				<div class="popup-content">
 					<div class="login_img">
 						<img src=".././assets/images/logo_img/2_울산HD.png" alt="울산HD" id="team_img">
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="u-popup">
+			<div class="u-popup" id="u-popup">
 				<span class="u-popup-text">스포트립이 처음이신가요? </span><a class="sign-up" onclick="location.href='signup.jsp'">회원가입</a>
 			</div>
 		</div>
@@ -88,6 +88,8 @@
         setTimeout(() => {
           document.getElementById("secondScreen").classList.add("show");
           document.getElementById("background").classList.add("show");
+          document.getElementById("popup").classList.add("show");          
+          document.getElementById("u-popup").classList.add("show");          
         }, 200);
       };
 
