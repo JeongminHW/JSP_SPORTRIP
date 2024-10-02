@@ -22,46 +22,10 @@
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><%=teamInfo.getTEAM_NAME()%></title>
-	<link rel="stylesheet" href=".././assets/css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-<body>
-	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()">
-			<img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a> 
-		<a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;"> 
-			<img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
-		<div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-			<img src="<%=teamInfo.getLOGO()%>" alt="로고" class="team_logo_img">
-		</div>
-	</header>
-    <div class="t_top">
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
-        </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #083660;">
-           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
-		</div>
-	</div>
+<jsp:include page="team_header.jsp"/>
+
 	<div class="highlight-container">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script type="text/javascript">
 	        function goMain(){
 	            document.location.href=".././sport/mainPage.jsp";
@@ -172,6 +136,24 @@
                   }
               });
           });
+            
+            $(document).ready(function() {
+                // 페이지 로드 시 체크박스 해제
+                $('#toggle').prop('checked', false); // 체크박스 해제
+
+                // 햄버거 메뉴
+                $('#toggle').change(function() {
+                    $('.menu').toggleClass('open');
+                    $('#overlay').toggleClass('open');
+                });
+
+                // 클릭 시 메뉴 닫기
+                $('#overlay').click(function() {
+                    $('#toggle').prop('checked', false); // 체크박스 해제
+                    $('.menu').removeClass('open'); // 메뉴 숨김
+                    $('#overlay').removeClass('open'); // 배경 숨김
+                });
+            });
         </script>
 	</div>
 </body>

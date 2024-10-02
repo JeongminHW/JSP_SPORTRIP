@@ -54,18 +54,9 @@
 	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
     	</div>
 </header>
-    <div class="t_top">
+    <div class="a_top">
         <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
-        </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
         </div>
         <div class="item" style="background-color: #236FB5;">
             <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
@@ -85,6 +76,11 @@
 				<a href="#" onclick="showPlayers()">선수</a>
 			</div>
 		</div>
+		<div class="update-player">
+			<button class="update-btn" id="delete">삭제</button>
+			<button class="update-btn" id="edit" onclick="editPlayer()")>수정</button>
+			<button class="update-btn" id="add" onclick="addPlayer()">등록</button>
+		</div>
 		<div id="coach-List" >
                <div class="coach-card">
                	<!-- 감독 사진 출력 -->
@@ -96,10 +92,6 @@
                </div>
 	    </div>
 	    
-		<div class="update-player">
-			<button class="update-btn">삭제하기</button>
-			<button class="update-btn">등록하기</button>
-		</div>
 	    <div class="players-section">
 	    	<div id="player-List" style="display: none;">
 	    	<!-- 포지션 버튼 생성 -->
@@ -162,7 +154,7 @@
         	document.getElementById('player-List').style.display = 'none';
         	document.getElementById('coach-List').style.display = 'block';
         	document.getElementById('player').style.backgroundColor = '#236FB5'; 
-        	document.getElementById('coach').style.backgroundColor = '#083660'; 
+        	document.getElementById('coach').style.backgroundColor = '#083660';
 	    }
 	  	
     	// 포지션에 따라 선수 필터링
@@ -194,6 +186,49 @@
                 card.style.display = 'block';
             });
         }
+        
+        // 등록하기
+        function addPlayer(){
+        	const playerFrame = document.getElementById('player-List');
+        	const coachFrame = document.getElementById('coach-List');
+        	if(coachFrame.style.display == 'block' || playerFrame.style.display == 'none'){
+        		document.location.href="admin_addCoach.jsp";
+        	}
+        	else{
+        		document.location.href="admin_addPlayer.jsp";
+        	}
+        }
+        
+        // 수정하기
+        function editPlayer(){
+        	const playerFrame = document.getElementById('player-List');
+        	const coachFrame = document.getElementById('coach-List');
+        	if(coachFrame.style.display == 'block' || playerFrame.style.display == 'none'){
+            	document.location.href="admin_updateCoach.jsp";
+        	}
+        	else{
+        		document.location.href="admin_updatePlayer.jsp";
+        	}
+        }
+        
+     	// 플레이어 카드 클릭 시 이벤트
+        document.querySelectorAll('.player-card').forEach((item) => {
+            item.addEventListener('click', () => {
+            item.classList.toggle('active');
+           	
+            //name 요소 선택
+            const playerName = item.querySelector('.player-name');
+            
+         	// 활성화된 상태에 따라 margin 조정
+            if (item.classList.contains('active')) {
+                playerName.style.marginLeft = '3px'; // 활성화 시 3px 추가
+                playerName.style.bottom = '-3px';  // 활성화 시 3px 추가 (아래)
+            } else {
+                playerName.style.marginLeft = ''; // 비활성화 시 원래 상태로 복원
+                playerName.style.bottom = '';  // 활성화 시 3px 추가 (아래)
+            }
+          });
+        });
 	  </script>
 </body>
 </html>

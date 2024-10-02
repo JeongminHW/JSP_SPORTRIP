@@ -365,7 +365,6 @@ tbody{
 	flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈되도록 설정 */
 	width: 180px;
 	height: 240px;
-	overflow: hidden; /* 자식 요소가 부모 영역을 넘어가지 않도록 설정 */
 	margin: 10px;
 }
 
@@ -517,7 +516,7 @@ tbody{
   align-items: center;
 }
 
-.hotel-box, .food-box{
+.hotel-box, .food-box, .room-box{
 	font-family: 'NanumSquareNeo';
 	display: flex;
 	grid-template-columns: auto 1fr;
@@ -527,7 +526,7 @@ tbody{
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.hotel-img, .food-img{
+.hotel-img, .food-img, .room-img{
   width: 40%;  
     height: 300px; 
     border-radius: 10px 0 0 10px;
@@ -701,7 +700,6 @@ tbody{
     width: 180px;
     display: flex;
     flex-direction: column; /* 세로 방향으로 자식 요소 배치 */
-    overflow: hidden;
     display: inline-block; /* 이 설정을 추가하여 카드들이 블록 요소로 배치되지 않도록 함 */
     vertical-align: top; /* 세로 정렬을 맞추어 간격 없이 배치되도록 함 */
     margin: 0; /* 필요하다면 기존 margin 값을 조정하여 간격을 없앰 */
@@ -743,8 +741,10 @@ tbody{
     border: none;
     cursor: pointer;
     width: 30px;
-    > img {
+    outline: none; /* 기본 outline 제거 */
+   	img {
     	width: 16px;
+    	border: none;
     }
 }
 

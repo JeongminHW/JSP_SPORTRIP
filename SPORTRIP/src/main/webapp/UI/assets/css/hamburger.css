@@ -1,0 +1,106 @@
+/* Hamburger */
+.hamburger {
+  height: 30px;
+    margin: 10px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    position: relative; /* 상대 위치 */
+    z-index: 20; /* 메뉴보다 높은 z-index */
+}
+  
+.hamburger div {
+  background-color: #000;
+  position: relative;
+  width: 30px;
+  height: 2px;
+  margin-top: 7px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 35px;
+}
+  
+#toggle {
+  display: none;
+}
+  
+#toggle:checked + .hamburger .top {
+  transform: rotate(45deg);
+  margin-top: 22.5px;
+}
+  
+#toggle:checked + .hamburger .middle {
+  transform: rotate(-45deg);
+  margin-top: -2px;
+}
+  
+#toggle:checked + .hamburger .bottom {
+  transform: scale(0);
+}
+
+.menu{
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  right: -302px;
+  z-index: 15;
+  border: 1px solid #c9c9c9;
+  background-color: white;
+  text-align: center;
+  font-weight: bold;
+  transition: All 0.2s ease;
+  -webkit-transition: All 0.2s ease;
+  -moz-transition: All 0.2s ease;
+  -o-transition: All 0.2s ease;
+  padding-top: 50px;
+  padding-left: 0px;
+  padding-right: 40px;
+  a{
+    padding:0;
+    text-decoration: none;
+    font-size: 18px;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+  }
+  ul, li{
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  li{
+    padding: 10px;
+  }
+  li:hover{
+    background-color: #f2f2f2;
+  }
+  .menu-list>li:first-child{
+    background-color: transparent;
+    margin-top: 50px;
+    padding: 0 10px 0 10px;
+  }
+  .user-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* 기본적으로 숨김 */
+  z-index: 5;
+}
+
+.menu.open {
+  right: 0; /* 메뉴를 보이게 함 */
+}
+
+.overlay.open {
+  display: block; /* 배경 보이게 함 */
+}
