@@ -13,6 +13,8 @@
     }
 
     session.setAttribute("previousPage", url); 
+	
+	int sportNum = (int)session.getAttribute("sportNum");
 %>
 
 <!DOCTYPE html>
@@ -77,7 +79,6 @@
 							</div>
 							<div class="login_button">
 								<input type="hidden" name="url" value="<%=url%>"> 
-								<input type="hidden" name="teamNum" value="<%=teamNum%>">
 								<button type="submit">로그인</button>
 							</div>
 						</form>
