@@ -39,6 +39,24 @@ body {
     display: block; /*화면이 올라올 때 보여짐 */
 }
 
+#popup {
+    display: none; /* 처음에 헤더는 숨김 */
+    transition: 0.5s ease;
+}
+
+#popup.show {
+    display: block; /*화면이 올라올 때 보여짐 */
+}
+
+#u-popup {
+	display: none; /* 처음에 헤더는 숨김 */
+    transition: 0.5s ease;
+}
+
+#u-popup.show {
+    display: block; /*화면이 올라올 때 보여짐 */
+}
+
 #background .b_wrap {
 	display: inline-block;
 	vertical-align: middle;
@@ -291,6 +309,10 @@ body {
 
 .sign-up {
 	font-weight: 600;
+	cursor: pointer;
 }
 
+.sign-up:hover {
+	color: #D3D3D3
+}
 
