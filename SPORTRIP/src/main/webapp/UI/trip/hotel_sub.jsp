@@ -29,16 +29,6 @@
             <a href="tripPage_Food.jsp">맛집</a>
         </div>
     </div>
-    <div class="search-box">
-        <input name="searchText" type="text" placeholder="경기장을 검색하세요">
-        <button><img src=".././assets/images/search_icon.png" alt="검색" title="검색"></button>
-    </div>
-    <div style="float: left;" class="date-box">
-        <span>여행 날짜</span>
-        <input type="date" class="start-date">
-        <span style="margin-left: 10px;">~</span>
-        <input type="date" class="end-date">
-    </div>
 
     <div class="search-menu-box">
         <% 
@@ -126,6 +116,40 @@
     <div class="footer">
         <input type="button" value="목록" onclick="location.href='tripPage_Hotel.jsp'">
     </div>
+    
+    <script>
+    let selectedSport; // 선택된 스포츠
+    let selectedStadium; // 선택된 경기장
+
+    function goToSelectedCategory(){
+        // 선택된 스포츠와 경기장 정보에 따라 URL 설정
+        if (selectedSport && selectedStadium) {
+            document.location.href=`tripPage_Hotel.jsp?sport=${selectedSport}&stadium=${selectedStadium}`;
+        } else {
+            alert("선택된 스포츠와 경기장이 없습니다.");
+        }
+    }
+
+    // openModal 함수에서 선택된 스포츠와 경기장을 저장
+    function openModal(lodgingNum, roomNum, price){
+        selectedLodgingNum = lodgingNum; // 선택된 숙소 번호 저장
+        selectedRoomNum = roomNum; // 선택된 객실 번호 저장
+        roomPrice = price; // 객실 가격 저장
+        selectedSport = getSelectedSport(); // 현재 선택된 스포츠 가져오기
+        selectedStadium = getSelectedStadium(); // 현재 선택된 경기장 가져오기
+        document.querySelector('.modal').style.display = 'block';
+    }
+
+    function getSelectedSport() {
+        // 현재 선택된 스포츠 정보를 가져오는 로직 구현
+        return "soccer"; // 선택된 스포츠 이름을 반환
+    }
+
+    function getSelectedStadium() {
+        // 현재 선택된 경기장 정보를 가져오는 로직 구현
+        return "someStadium"; // 선택된 경기장 이름을 반환
+    }
+	</script>
 
     <script>
         let selectedLodgingNum; // 선택된 숙소 번호
@@ -182,8 +206,8 @@
         }
 
         function requestPayment(paymentData) {
-            const IMP = window.IMP; // 생략 가능
-            IMP.init('imp13042654'); // IAMPORT에서 발급받은 가맹점 ID로 변경하세요
+            const IMP = window.IMP; 
+            IMP.init('imp13042654');
 
             IMP.request_pay({
                 pg: "kakaopay.TC0ONETIME",
