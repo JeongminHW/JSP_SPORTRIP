@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, stadium.StadiumMgr, stadium.StadiumBean, lodging.LodgingMgr, lodging.LodgingBean" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html; charset=UTF-8");
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,7 +16,7 @@
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8afbb0c0c5d852ce84e4f0f3b93696b6"></script> <!-- 카카오 지도 API 스크립트 -->
 
     <script>
-    function openModal(lodgingName, lodgingLatitude, lodgingLongitude, stadiumName) {
+    function openModal(lodgingName, lodgingLatitude, lodgingLongitude, stadiumName, stadiumLatitude, stadiumLongitude ) {
     	const modal = document.getElementById('mapModal');
         modal.style.display = 'block';
 
@@ -22,7 +27,7 @@
         const mapContainer = document.getElementById('map'); // 지도를 표시할 div
         const mapOption = {
             center: new kakao.maps.LatLng(lodgingLatitude, lodgingLongitude), // 숙소의 위도와 경도를 중심으로 설정
-            level: 4 // 지도의 확대 레벨
+            level: 6 // 지도의 확대 레벨
         };
 
         const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -33,6 +38,17 @@
             title: lodgingName,
         });
         lodgingMarker.setMap(map);
+        
+     	// 경기장 마커 생성
+        const stadiumMarker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(stadiumLatitude, stadiumLongitude),
+            title: stadiumName,
+        });
+        stadiumMarker.setMap(map);
+        
+     // 콘솔에 위도, 경도 출력
+        console.log("숙소 위도:", lodgingLatitude, "숙소 경도:", lodgingLongitude);
+        console.log("경기장 위도:", stadiumLatitude, "경기장 경도:", stadiumLongitude);
 
     }
 
@@ -127,7 +143,7 @@
                         for (StadiumBean stadium : stadiumList) {
                 %>
                             <option value="<%= stadium.getSTADIUM_NAME() %>" <%= (request.getParameter("stadium") != null && request.getParameter("stadium").equals(stadium.getSTADIUM_NAME())) ? "selected" : "" %>>
-                                <%= stadium.getSTADIUM_NAME() %>
+                			<%= stadium.getSTADIUM_NAME() %>
                             </option>
                 <%
                         }
@@ -138,45 +154,62 @@
     </div>
 
     <div class="search-menu-box">
-        <%
-            String selectedStadium = request.getParameter("stadium");
-            if (selectedStadium != null && !selectedStadium.equals("0")) {
-                LodgingMgr lodgingMgr = new LodgingMgr();
-                List<LodgingBean> lodgingList = lodgingMgr.getLodgingsByStadiumName(selectedStadium);
+<% 
+      
+	String selectedStadium = request.getParameter("stadium");
+    StadiumBean selectedStadiumBean = null;
+    
+    if (selectedStadium != null && !selectedStadium.equals("0")) {
+        // 선택된 경기장 정보를 가져옴
+        StadiumMgr stadiumMgr = new StadiumMgr();
 
-                if (!lodgingList.isEmpty()) {
-                    for (LodgingBean lodging : lodgingList) {
-        %>
-            <div class="hotel-box">
-                <div class="hotel-img">
-                    <img src="<%= lodging.getLODGING_IMG() %>" alt="호텔 이미지">
+        selectedStadiumBean = stadiumMgr.getStadiumByName(selectedStadium);
+   
+        
+        // 숙소 정보를 가져옴
+        LodgingMgr lodgingMgr = new LodgingMgr();
+        List<LodgingBean> lodgingList = lodgingMgr.getLodgingsByStadiumName(selectedStadium);
+
+        if (!lodgingList.isEmpty()) {
+            for (LodgingBean lodging : lodgingList) {
+%>
+                <div class="hotel-box">
+                    <div class="hotel-img">
+                        <img src="<%= lodging.getLODGING_IMG() %>" alt="호텔 이미지">
+                    </div>
+                    <div class="hotel-info-box">
+                        <section class="info-item">
+                            <span class="title" style="font-size: 24px;"><%= lodging.getLODGING_NAME() %></span><br>
+                            <p class="address"><%= lodging.getADDRESS() %></p>
+                            <%
+                            	System.out.println("selectedStadiumBean"+selectedStadiumBean.getLAT());
+                            %>
+                            <button class="show-location" 
+                                onclick="openModal(
+                                '<%= lodging.getLODGING_NAME() %>',
+                                <%= lodging.getLAT() %>, <%= lodging.getLON() %>, 
+                                '<%= selectedStadiumBean.getSTADIUM_NAME() %>',
+                                <%= selectedStadiumBean.getLAT() %>, 
+                                <%= selectedStadiumBean.getLON() %>)">
+                                <img src=".././assets/images/location_img.png"> 위치보기
+                            </button>
+                        </section>
+                        <section class="info-item">
+                            <p><%= (lodging.getGRADE() != null) ? lodging.getGRADE() : "별점 없음" %></p>
+                            <button class="show-detail" onclick="location.href='hotel_sub.jsp?lodgingNum=<%= lodging.getLODGING_NUM() %>'">객실 보기</button>
+                        </section>
+                    </div>
                 </div>
-                <div class="hotel-info-box">
-                    <section class="info-item">
-                        <span class="title" style="font-size: 24px;"><%= lodging.getLODGING_NAME() %></span><br>
-                        <p class="address"><%= lodging.getADDRESS() %></p>
-                        <button class="show-location" 
-    onclick="openModal('<%= lodging.getLODGING_NAME() %>', <%= lodging.getLAT() %>, <%= lodging.getLON() %>, '<%= request.getParameter("stadium") %>')">
-    <img src=".././assets/images/location_img.png"> 위치보기
-</button>
-
-
-                    </section>
-                    <section class="info-item">
-                        <p><%= (lodging.getGRADE() != null) ? lodging.getGRADE() : "별점 없음" %></p>
-                        <button class="show-detail" onclick="location.href='hotel_sub.jsp?lodgingNum=<%= lodging.getLODGING_NUM() %>'">객실 보기</button>
-                    </section>
-                </div>
-            </div>
-        <%
-                    }
-                } else {
-        %>
-                    <p>근처 숙소 정보가 없습니다.</p>
-        <%
-                }
+<%
             }
-        %>
+        } else {
+%>
+            <p>근처 숙소 정보가 없습니다.</p>
+<%
+        }
+    }
+%>
+
         
     </div>
 

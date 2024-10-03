@@ -7,6 +7,8 @@ public class StadiumBean {
 	private String SEATS;
 	private int SEAT_CAPACITY_S;
 	private int TEAM_NUM;
+	private String LON;
+	private String LAT;
 	
 	public int getSTADIUM_NUM() {
 		return STADIUM_NUM;
@@ -44,6 +46,17 @@ public class StadiumBean {
 	public void setTEAM_NUM(int tEAM_NUM) {
 		TEAM_NUM = tEAM_NUM;
 	}
-	
-	
+	// LON과 LAT의 getter와 setter 추가
+    public String getLON() {
+        return LON;
+    }
+    public void setLON(String LON) {
+        this.LON = LON;
+    }
+    public String getLAT() {
+        return LAT;
+    }
+    public void setLAT(String LAT) {
+        this.LAT = LAT;
+    }
 }

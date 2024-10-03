@@ -27,7 +27,7 @@ public class LodgingMgr {
             System.out.println("SQL Query: " + sql + " with parameter: " + stadiumName); // 디버깅용 출력
             
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, new String(stadiumName.getBytes("ISO-8859-1"), "UTF-8"));
+            pstmt.setString(1, stadiumName);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
