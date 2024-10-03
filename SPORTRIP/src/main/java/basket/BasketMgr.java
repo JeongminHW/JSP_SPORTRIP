@@ -130,6 +130,30 @@ public class BasketMgr {
 		return flag;
 	}
     
+    // 결제 완료 장바구니 삭제
+    public boolean paymentDeleteBasket(String Id, int mdNum) {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+    	String sql = null;
+    	boolean flag = false;
+    	try {
+    		con = pool.getConnection();
+    		sql = "delete from basket where Id = ? and md_num = ?";
+    		pstmt = con.prepareStatement(sql);
+    		pstmt.setString(1, Id);
+    		pstmt.setInt(2, mdNum);
+    		if(pstmt.executeUpdate() == 1) {
+    			flag = true;
+    		}
+    		
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally {
+    		pool.freeConnection(con, pstmt);
+    	}
+    	return flag;
+    }
+    
     // 장바구니 수량 수정
     public boolean updateBasket(int basket_num, int quantity) {
 		Connection con = null;
