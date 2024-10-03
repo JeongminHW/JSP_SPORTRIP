@@ -3,6 +3,8 @@ package charge;
 public class ChargeBean {
     private int CHARGE_NUM;
     private String ID;
+    private String ORDER_NUM;
+    private String CHARGE_DATE;
     private int MD_NUM;
     private int REPAIR_C;
     private int PRICE;
@@ -36,6 +38,18 @@ public class ChargeBean {
 	}
 	public void setPRICE(int pRICE) {
 		PRICE = pRICE;
+	}
+	public String getORDER_NUM() {
+		return ORDER_NUM;
+	}
+	public void setORDER_NUM(String oRDER_NUM) {
+		ORDER_NUM = oRDER_NUM;
+	}
+	public String getCHARGE_DATE() {
+		return CHARGE_DATE;
+	}
+	public void setCHARGE_DATE(String cHARGE_DATE) {
+		CHARGE_DATE = cHARGE_DATE;
 	}
 
     

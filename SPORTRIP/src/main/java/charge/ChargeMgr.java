@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Vector;
 
 import DB.DBConnectionMgr;
+import basket.BasketMgr;
 
 public class ChargeMgr {
 	private DBConnectionMgr pool;
 	
 	public ChargeMgr() {
         pool = DBConnectionMgr.getInstance();
+        
     }
 	
 	// 아이디로 결제 내역 조회
@@ -34,9 +36,11 @@ public class ChargeMgr {
             	charge = new ChargeBean();
                 charge.setCHARGE_NUM(rs.getInt(1));
                 charge.setID(rs.getString(2));
-                charge.setMD_NUM(rs.getInt(3));
-                charge.setREPAIR_C(rs.getInt(4));
-                charge.setPRICE(rs.getInt(5));
+                charge.setORDER_NUM(rs.getString(3));
+                charge.setCHARGE_DATE(rs.getString(5));
+                charge.setMD_NUM(rs.getInt(6));
+                charge.setREPAIR_C(rs.getInt(7));
+                charge.setPRICE(rs.getInt(8));
                 chargeList.addElement(charge);
             }
         } catch (Exception e) {
@@ -53,14 +57,19 @@ public class ChargeMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert into md values(null, ?, ?, ?, ?)";
+			sql = "insert into charge values(null, ?, ?, now(), ?, ?, ? )";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getID());
-			pstmt.setInt(2, bean.getMD_NUM());
-			pstmt.setInt(3, bean.getREPAIR_C());
-			pstmt.setInt(4, bean.getPRICE());
+			pstmt.setString(2, bean.getORDER_NUM());
+			pstmt.setInt(3, bean.getMD_NUM());
+			pstmt.setInt(4, bean.getREPAIR_C());
+			pstmt.setInt(5, bean.getPRICE());
+			
 			if(pstmt.executeUpdate() == 1) {
-				flag = true;
+				BasketMgr basketmgr = new BasketMgr();
+				if(basketmgr.paymentDeleteBasket(bean.getID(), bean.getMD_NUM())) {
+					flag = true;
+				}
 			}
 
 		} catch (Exception e) {
