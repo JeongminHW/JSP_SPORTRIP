@@ -1,3 +1,5 @@
+<%@page import="board.BoardBean"%>
+<%@page import="board.BoardMgr"%>
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
@@ -6,10 +8,13 @@
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
+<jsp:useBean id="boardMgr" class="board.BoardMgr" />
+<jsp:useBean id="boardBean" class="board.BoardBean" />
 
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
+	int boardNum = MUtil.parseInt(request, "boardNum", 0);
 	if (teamNum == 0) {
 		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
 	} else {
@@ -22,68 +27,7 @@
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시판</title>
-	<link rel="stylesheet" href=".././assets/css/style.css">
-	<link rel="stylesheet" href=".././assets/css/boardStyle.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
-	<script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
-	<script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-<script>
-	function goMain() {
-		document.location.href = ".././sport/mainPage.jsp";
-	}
-
-    function postMessage(){
-        document.location.href = ".././team/board_post.jsp";
-    }
-</script>
-    
-<body>
-	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()">
-			<img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a> 
-		<a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;"> 
-			<img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
-		<div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-			<img src="<%=teamInfo.getLOGO()%>" alt="로고" class="team_logo_img">
-		</div>
-		<a href=".././md/shopping_cart.html">	<%-- md --%>
-			<img src=".././assets/images/cart_icon.png" alt="장바구니" class="cart"></a>
-		<div class="login-signup-box">
-			<ul>
-				<li><a href=".././user/login.jsp" style="font-family: BMJUA; color: black;">로그인</a></li>
-				<li><a href=".././user/signup.jsp"	style="font-family: BMJUA; color: black;">회원가입</a></li>
-			</ul>
-		</div>
-	</header>
-    <div class="t_top">
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
-        </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
-		</div>
-	</div>
+<jsp:include page=".././team/team_header.jsp"/>
     <div class="post-box">
         <form action="" name="postForm">
             <!-- 글 작성 테이블 -->
@@ -98,7 +42,7 @@
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td><input type="text" name="writer" readonly></td>
+                    <td><input type="text" name="writer" value="<%=login.getId() %>" readonly></td>
                 </tr>
                 <tr>
                     <th>내용</th>
@@ -109,7 +53,7 @@
     </div>
 
     <div class="post-btn-box">
-        <button type="button" class="post-btn" onclick="post()">등록</button>
+        <button type="button" class="post-btn" onclick="postboard()">등록</button>
         <button type="button" class="post-btn" onclick="goList()">목록</button>
     </div>
     <script>
@@ -119,6 +63,11 @@
 	    
 	    function postMessage(){
 	        document.location.href = ".././team/board_post.jsp";
+	    }
+	    
+	    function goList() {
+	    	history.back(); // 이전 페이지로 이동
+	    	location.href = document.referrer;	// 새로고침
 	    }
 	    
 	 	// 팀 번호 전달
@@ -137,6 +86,10 @@
 		    document.body.appendChild(form);
 		    form.submit();
 		}
+	 	
+	 	function postboard() {
+	 		
+	 	} 
 	 	
 		jQuery(document).ready(function() {
             jQuery("#summernote").summernote({
@@ -159,6 +112,29 @@
 					    ['height', ['height']]
   					]
             });
+        });
+
+		// 페이지 로드 시 체크박스 해제
+		window.addEventListener('load', function() {
+        const toggle = document.getElementById('toggle');
+        toggle.checked = false; // 체크박스 해제
+    	});
+        
+        // 햄버거 메뉴
+        document.getElementById('toggle').addEventListener('change', function() {
+            const menu = document.querySelector('.menu');
+            const overlay = document.getElementById('overlay');
+            
+            menu.classList.toggle('open');
+            overlay.classList.toggle('open');
+        });
+
+        // 클릭 시 메뉴 닫기
+        overlay.addEventListener('click', function() {
+            document.getElementById('toggle').checked = false; // 체크박스 해제
+            const menu = document.querySelector('.menu');
+            menu.classList.remove('open'); // 메뉴 숨김
+            overlay.classList.remove('open'); // 배경 숨김
         });
     </script>
 </body>

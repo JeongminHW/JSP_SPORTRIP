@@ -1,3 +1,5 @@
+<%@page import="board.BoardBean"%>
+<%@page import="board.BoardMgr"%>
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
@@ -6,6 +8,8 @@
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
+<jsp:useBean id="boardMgr" class="board.BoardMgr" />
+<jsp:useBean id="boardBean" class="board.BoardBean" />
 
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
@@ -17,59 +21,19 @@
 	}
 	// 팀 정보 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
+	// 게시글 정보 가져오기
+	Vector<BoardBean> boardInfo = boardMgr.listBoard(teamNum);
+	// NullPointerException 방지
+    if (boardInfo == null) {
+        boardInfo = new Vector<>();
+    }
 	
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시판</title>
-	<link rel="stylesheet" href=".././assets/css/style.css">
-	<link rel="stylesheet" href=".././assets/css/boardStyle.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-<body>
-	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()">
-			<img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a> 
-		<a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;"> 
-			<img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
-		<div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-			<img src="<%=teamInfo.getLOGO()%>" alt="로고" class="team_logo_img">
-		</div>
-		<a href=".././md/shopping_cart.html">	<%-- md --%>
-			<img src=".././assets/images/cart_icon.png" alt="장바구니" class="cart"></a>
-		<div class="login-signup-box">
-			<ul>
-				<li><a href=".././user/login.jsp" style="font-family: BMJUA; color: black;">로그인</a></li>
-				<li><a href=".././user/signup.jsp"	style="font-family: BMJUA; color: black;">회원가입</a></li>
-			</ul>
-		</div>
-	</header>
-    <div class="t_top">
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
-        </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
-		</div>
-	</div>
+<jsp:include page="team_header.jsp"/>
+
     <div class="table-list-box">
         <div class="write-btn">
             <button onclick="postMessage()">글쓰기</button>
@@ -94,38 +58,22 @@
                         <th>추천</th>
                     </tr>
                 </thead>
-                <tr>
-                    <td>1</td>
-                    <td><a href="viewPost.jsp">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><a href="">dsfjqlwkefj;lkadjf;lwkefjlwkjflskdjflksjdlfkj</a></td>
-                    <td>작성자1</td>
-                    <td>2024.09.24</td>
-                    <td>1000</td>
-                    <td>100</td>
-                </tr>
+                <tbody>
+                <% if (boardInfo != null && !boardInfo.isEmpty()) { %>
+		            <% for (BoardBean board : boardInfo) { %>
+		            <tr>
+			            <td><%=board.getBOARD_NUM() %></td>
+	                    <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>,'.././board/viewPost')"><%=board.getTITLE() %></a></td>
+	                    <td><%=board.getID() %></td>
+	                    <td><%=board.getPOSTDATE() %></td>
+	                    <td><%=board.getVIEWS() %></td>
+	                    <td><%=board.getRECOMMAND() %></td>
+                    </tr>
+                  	<% } 
+		            } else { %>
+   						<tr><td colspan="6">게시글이 없습니다.</td></tr>
+		        <% } %>               
+                </tbody>
             </table>
         </div>
     </div>
@@ -143,8 +91,16 @@
 	        document.location.href=".././sport/mainPage.jsp";
 	    }
 	    
-	    function postMessage(){
-	        document.location.href = ".././team/board_post.jsp";
+	    function postMessage() {
+	        // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
+	        var userId = "<%=login.getId() != null ? login.getId() : "" %>"; // 로그인 여부를 세션에서 체크
+
+	        if (userId !== "") { // 로그인 되어 있으면
+	            document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
+	        } else {
+	            alert("로그인이 필요합니다."); // 로그인 필요 메시지 출력
+	            document.location.href = ".././user/login.jsp"; // 로그인 페이지로 이동
+	        }
 	    }
 	    
 	 	// 팀 번호 전달
@@ -163,6 +119,46 @@
 		    document.body.appendChild(form);
 		    form.submit();
 		}
+	 	
+		// 게시글 번호 전달
+		function sendBoardNum(boardNum, page) {
+		    // 세션에 값을 설정
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "POST");
+		    form.setAttribute("action", page + ".jsp");
+		
+		    var boardField = document.createElement("input");
+		    boardField.setAttribute("type", "hidden");
+		    boardField.setAttribute("name", "boardNum");
+		    boardField.setAttribute("value", boardNum);
+		    form.appendChild(boardField);
+		
+		    document.body.appendChild(form);
+		    form.submit();
+		}
+
+		// 페이지 로드 시 체크박스 해제
+		window.addEventListener('load', function() {
+        const toggle = document.getElementById('toggle');
+        toggle.checked = false; // 체크박스 해제
+    	});
+        
+        // 햄버거 메뉴
+        document.getElementById('toggle').addEventListener('change', function() {
+            const menu = document.querySelector('.menu');
+            const overlay = document.getElementById('overlay');
+            
+            menu.classList.toggle('open');
+            overlay.classList.toggle('open');
+        });
+
+        // 클릭 시 메뉴 닫기
+        overlay.addEventListener('click', function() {
+            document.getElementById('toggle').checked = false; // 체크박스 해제
+            const menu = document.querySelector('.menu');
+            menu.classList.remove('open'); // 메뉴 숨김
+            overlay.classList.remove('open'); // 배경 숨김
+        });
     </script>
 </body>
 </html>
