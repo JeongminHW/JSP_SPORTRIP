@@ -23,16 +23,13 @@ public class BoardMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert into board values(null, ?, ?, now(), ?, ?, ?, ?, ?, ?)";
+			sql = "insert into board values(null, ?, ?, now(), ?, ?, 0, 0, ?, 0)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getTITLE());
 			pstmt.setString(2, bean.getCONTENTS());
 			pstmt.setString(3, bean.getIP());
 			pstmt.setString(4, bean.getID());
-			pstmt.setInt(5, bean.getRECOMMAND());
-			pstmt.setInt(6, bean.getNONRECOMMAND());
-			pstmt.setInt(7, bean.getTEAM_NUM());
-			pstmt.setString(8, bean.getBOARD_IMG());
+			pstmt.setInt(5, bean.getTEAM_NUM());
 			if(pstmt.executeUpdate() == 1) {
 				flag = true;
 			}
@@ -116,7 +113,6 @@ public class BoardMgr {
 	            bean.setNONRECOMMAND(rs.getInt(8));
 	            bean.setTEAM_NUM(rs.getInt(9));
 	            bean.setVIEWS(rs.getInt(10));
-	            bean.setBOARD_IMG(rs.getString(11));
 	            updateViews(bean.getTEAM_NUM(), bean.getBOARD_NUM()); // 조회수 업데이트
 	        }
 	    } catch (Exception e) {
@@ -153,7 +149,6 @@ public class BoardMgr {
 				board.setNONRECOMMAND(rs.getInt(8));
 				board.setTEAM_NUM(rs.getInt(9));
 				board.setVIEWS(rs.getInt(10));
-				board.setBOARD_IMG(rs.getString(11));
 				vlist.addElement(board);
 			}
 		} catch (Exception e) {
