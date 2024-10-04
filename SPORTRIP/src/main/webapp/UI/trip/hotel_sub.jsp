@@ -157,7 +157,7 @@
         let roomPrice; // 객실 가격
 
         function goMain(){
-            document.location.href="mainPage.jsp";
+            document.location.href=".././sport/mainPage.jsp";
         }
 
         function openModal(lodgingNum, roomNum, price){

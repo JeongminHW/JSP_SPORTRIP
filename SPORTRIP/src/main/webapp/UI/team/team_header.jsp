@@ -59,7 +59,7 @@
         <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
 	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
     	</div>
-        <input id="toggle" type="checkbox" />
+        <input id="toggle" type="checkbox"/>
         <label class="hamburger" for="toggle">
             <div class="top"></div>
             <div class="middle"></div>
