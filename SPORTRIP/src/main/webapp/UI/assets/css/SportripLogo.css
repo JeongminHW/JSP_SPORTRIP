@@ -16,7 +16,7 @@ body {
     font-family: 'Black Han Sans', sans-serif;
     font-size: 96px;
     font-weight: bold;
-    color: #236FB5;
+    color: #fff;
     opacity: 0;
     transition: opacity 1s ease-in;
     margin: 0 2px;
@@ -49,7 +49,7 @@ body {
     opacity: 0;
     transition: opacity 1s ease-in;
     left: calc(76% - 290px);
-    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
+    filter: invert(98%) sepia(13%) saturate(2%) hue-rotate(155deg) brightness(119%) contrast(100%); 
 }
 
 #logo_DottedLine.show {
@@ -113,6 +113,6 @@ body {
     position: absolute;
     top: 0%; /* 화면의 위쪽에서 8% */
     left: 0; /* 화면의 왼쪽에서 0% */
-    transform: translate(-20%, 40%) scale(0.5); /* X 축으로 -50% 이동하여 완전히 왼쪽에 붙임 */
+    transform: translate(-30%, 20%) scale(0.3); /* X 축으로 -20% 이동하여 완전히 왼쪽에 붙임 */
     transition: transform 1s ease;
 }
