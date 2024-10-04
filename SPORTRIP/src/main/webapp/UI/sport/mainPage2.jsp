@@ -7,41 +7,20 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SPORTRIP</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href=".././assets/css/MainText.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href=".././assets/css/SportripLogo.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"/>
+    <link href=".././assets/css/MainText.css" rel="stylesheet" type="text/css"/>
+    <link href=".././assets/css/mainStyle.css" rel="stylesheet" type="text/css"/>
+    <link href=".././assets/css/SportripLogo.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href=".././assets/css/hamburger.css">
   </head>
   <body>
     <div class="container" id="animationContainer">
       <div id="textContainer">
         <span id="S" class="letter">S</span>
         <span id="P" class="letter">P</span>
-        <img
-          id="logo_YaChookBae"
-          src=".././assets/images/LOGO_YaChookBae.png"
-          alt="Logo_YaChookBae"
-        />
-        <img
-          id="logo_DottedLine"
-          src=".././assets/images/LOGO_DottedLine.png"
-          alt="Logo_DottedLine"
-        />
-        <img
-          id="logo_Airplane"
-          src=".././assets/images/LOGO_Airplane.png"
-          alt="LOGO_Airplane"
-        />
+        <img id="logo_YaChookBae" src=".././assets/images/LOGO_YaChookBae.png" alt="Logo_YaChookBae"/>
+        <img id="logo_DottedLine" src=".././assets/images/LOGO_DottedLine.png" alt="Logo_DottedLine"/>
+        <img id="logo_Airplane" src=".././assets/images/LOGO_Airplane.png" alt="LOGO_Airplane"/>
         <span id="R" class="letter">R</span>
         <span id="T" class="letter">T</span>
         <span id="R2" class="letter">R</span>
@@ -59,28 +38,39 @@ pageEncoding="UTF-8"%>
               <ul>
                 <li class="baseball">
                   <a href="#" onclick="sendSportNum(1)">
-                    <span>야구</span>
+                    <span>BaseBall</span>
                   </a>
                 </li>
                 <li class="soccer">
                   <a href="#" onclick="sendSportNum(2)">
-                    <span>축구</span>
+                    <span>Soccer</span>
                   </a>
                 </li>
                 <li class="volleyball">
                   <a href="#" onclick="sendSportNum(3)">
-                    <span>배구</span>
+                    <span>VolleyBall</span>
                   </a>
                 </li>
                 <li class="trip">
-                  <a href=".././trip/tripPage_Hotel.jsp"> <span>여행</span> </a>
+                  <a href=".././trip/tripPage_Hotel.jsp"> <span>Trip</span> </a>
                 </li>
               </ul>
             </div>
           </nav>
+          <input id="toggle" type="checkbox"/>
+        	<label class="hamburger" for="toggle">
+            <div class="top"></div>
+            <div class="middle"></div>
+            <div class="bottom"></div>
+        	</label>
         </div>
       </div>
-      <div id="campaign" class="index" style="margin-top: -130px">
+    <div id="background" class="c_main">
+		<div class="b_wrap">
+			<img alt="" src=".././assets/images/newpage_img.png">
+		</div>
+	</div>
+      <div id="campaign" class="index" style="/* margin-top: -130px */">
         <section class="c_hero area01">
           <div class="c_marquee value02">
             <div class="cm_wrap t1">
@@ -174,6 +164,7 @@ pageEncoding="UTF-8"%>
         setTimeout(() => {
           document.getElementById("secondScreen").classList.add("show");
           document.getElementById("header").classList.add("show");
+          document.getElementById("background").classList.add("show");     
         }, 3200);
       };
     </script>
@@ -194,6 +185,29 @@ pageEncoding="UTF-8"%>
 	    document.body.appendChild(form);
 	    form.submit();
 	}
+  	
+	// 페이지 로드 시 체크박스 해제
+	window.addEventListener('load', function() {
+    const toggle = document.getElementById('toggle');
+    toggle.checked = false; // 체크박스 해제
+	});
+    
+    // 햄버거 메뉴
+    document.getElementById('toggle').addEventListener('change', function() {
+        const menu = document.querySelector('.menu');
+        const overlay = document.getElementById('overlay');
+        
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+    });
+
+    // 클릭 시 메뉴 닫기
+    overlay.addEventListener('click', function() {
+        document.getElementById('toggle').checked = false; // 체크박스 해제
+        const menu = document.querySelector('.menu');
+        menu.classList.remove('open'); // 메뉴 숨김
+        overlay.classList.remove('open'); // 배경 숨김
+    });
     </script>
   </body>
 </html>

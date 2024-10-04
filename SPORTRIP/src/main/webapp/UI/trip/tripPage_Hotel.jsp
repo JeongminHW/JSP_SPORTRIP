@@ -102,7 +102,7 @@
 </head>
 <body>
     <header class="header header_logo">
-        <a style="cursor: pointer" onclick="goMain()">
+        <a style="cursor: pointer" href=".././sport/mainPage.jsp">
             <img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img">
         </a>
         <div class="login-signup-box">
