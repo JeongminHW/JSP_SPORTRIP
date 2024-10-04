@@ -7,41 +7,27 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SPORTRIP</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href=".././assets/css/MainText.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href=".././assets/css/SportripLogo.css"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"/>
+    <link href=".././assets/css/MainText.css" rel="stylesheet" type="text/css"/>
+    <link href=".././assets/css/SportripLogo.css" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+
+	</style>
   </head>
   <body>
-    <div class="container" id="animationContainer">
+	<div id="background" class="c_main">
+		<div class="b_wrap">
+			<img src=".././assets/images/main_page_img.png">
+		</div>
+	</div>
+	
+	<div class="container" id="animationContainer">
       <div id="textContainer">
         <span id="S" class="letter">S</span>
         <span id="P" class="letter">P</span>
-        <img
-          id="logo_YaChookBae"
-          src=".././assets/images/LOGO_YaChookBae.png"
-          alt="Logo_YaChookBae"
-        />
-        <img
-          id="logo_DottedLine"
-          src=".././assets/images/LOGO_DottedLine.png"
-          alt="Logo_DottedLine"
-        />
-        <img
-          id="logo_Airplane"
-          src=".././assets/images/LOGO_Airplane.png"
-          alt="LOGO_Airplane"
-        />
+        <img id="logo_YaChookBae" src=".././assets/images/LOGO_YaChookBae.png" alt="Logo_YaChookBae"/>
+        <img id="logo_DottedLine" src=".././assets/images/LOGO_DottedLine.png" alt="Logo_DottedLine"/>
+        <img id="logo_Airplane" src=".././assets/images/LOGO_Airplane.png" alt="LOGO_Airplane"/>
         <span id="R" class="letter">R</span>
         <span id="T" class="letter">T</span>
         <span id="R2" class="letter">R</span>
