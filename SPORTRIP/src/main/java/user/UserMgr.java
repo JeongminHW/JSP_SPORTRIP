@@ -57,7 +57,9 @@ public class UserMgr {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
-			flag = rs.next();
+			if(rs.next()) {
+				flag = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -105,8 +107,9 @@ public class UserMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "select id from user where id = ? admin = 1";
+			sql = "select id from user where id = ? and admin = 1";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				flag = true;

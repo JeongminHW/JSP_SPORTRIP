@@ -26,7 +26,6 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
-
 <jsp:include page=".././team/team_header.jsp"/>
     <div class="post-box">
         <form action="" name="postForm">
@@ -70,49 +69,55 @@
 	    	location.href = document.referrer;	// 새로고침
 	    }
 	    
-	 	// 팀 번호 전달
-		function sendTeamNum(teamNum, page) {
-		    // 세션에 값을 설정
-		    var form = document.createElement("form");
-		    form.setAttribute("method", "POST");
-		    form.setAttribute("action", page + ".jsp");
-		
-		    var teamField = document.createElement("input");
-		    teamField.setAttribute("type", "hidden");
-		    teamField.setAttribute("name", "teamNum");
-		    teamField.setAttribute("value", teamNum);
-		    form.appendChild(teamField);
-		
-		    document.body.appendChild(form);
-		    form.submit();
-		}
-	 	
-	 	function postboard() {
-	 		
-	 	} 
-	 	
-		jQuery(document).ready(function() {
-            jQuery("#summernote").summernote({
-                  height : 550  // 에디터 높이
-                , minHeight : null  // 최소 높이
-                , maxHeight : null  // 최대 높이
-                , focus : true  // 에디터 로딩후 포커스를 맞출지 여부( true, false )
-                , lang : "ko-KR"    // 한글 설정
-                , placeholder : "내용을 입력하세요."    //placeholder 설정
-                , fontNames : [ "맑은 고딕", "궁서", "굴림체", "굴림", "돋움체", "바탕체", "Arial", "Arial Black", "Comic Sans MS", "Courier New" ]
-                , fontNamesIgnoreCheck : ["맑은 고딕"]  // 기본 폰트 설정( 2024-01-28 동작하지 않음, `sans-serif` 자동선택 )
-                , fontSizes : [ "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "28", "30", "36", "50", "72" ]
-                , toolbar: [
-					    // [groupName, [list of button]]
-					    ['fontname', ['fontname']],
-					    ['fontsize', ['fontsize']],
-					    ['color', ['color']],
-					    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-					    ['para', ['ul', 'ol', 'paragraph']],
-					    ['height', ['height']]
-  					]
-            });
-        });
+	    $(document).ready(function() {
+	        $('#summernote').summernote({
+	            height: 550, // 에디터 높이
+	            lang: "ko-KR", // 한글 설정
+	            placeholder: "내용을 입력하세요.", // placeholder 설정
+	            toolbar: [
+	                ['fontname', ['fontname']],
+	                ['fontsize', ['fontsize']],
+	                ['color', ['color']],
+	                ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+	                ['para', ['ul', 'ol', 'paragraph']],
+	                ['height', ['height']],
+	                ['insert', ['picture']]
+	            ]
+	        });
+	    });
+
+	    function postboard() {
+	        var content = $('#summernote').val();
+	        var title = $('input[name="title"]').val();
+
+	        console.log("Title: ", title); // Debugging line
+	        console.log("Content: ", content); // Debugging line
+
+	        var formData = $('form[name="postForm"]').serialize(); 
+	        formData += '&postediter=' + encodeURIComponent(content); 
+	        formData += '&title=' + title;  
+
+	        $.ajax({
+	            url: ".././board/board_in.jsp",
+	            type: "POST",
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            data: formData,
+	            success: function(response) {
+	                alert(response);
+	                alert(formData);
+	                if (response.includes('success')) {
+	                    alert("글이 성공적으로 등록되었습니다.");
+	                    location.href = ".././team/teamPage_board.jsp"; 
+	                } else {
+	                    alert("글 등록에 실패했습니다.");
+	                }
+	            },
+	            error: function() {
+	                alert("오류가 발생했습니다.");
+	            }
+	        });
+	    }
+
 
 		// 페이지 로드 시 체크박스 해제
 		window.addEventListener('load', function() {

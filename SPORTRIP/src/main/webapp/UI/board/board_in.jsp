@@ -1,41 +1,62 @@
+<%@page import="DB.MUtil"%>
 <%@page import="board.BoardBean"%>
 <%@page import="board.BoardMgr"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="boardMgr" class="board.BoardMgr" />
-
 <%
-	//요청 인코딩 설정
-	request.setCharacterEncoding("UTF-8");
-	int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-	String title = request.getParameter("title");
-	String content = request.getParameter("content");
-	String ip = request.getParameter("ip");
-	String id = request.getParameter("id");
-	
-	// null 체크
-	if ( ip == null || id == null) {
-	    out.print("fail");
-	    return; // 값이 null일 경우 종료
-	}
-	
-	BoardBean board = new BoardBean();
-	board.setTITLE(title);
-	board.setCONTENTS(content);
-	board.setIP(ip);
-	board.setID(id);
-	
-	// 받아와지는 내용 콘솔로 확인
-	System.out.println("내용: " + content);
-	System.out.println("IP: " + ip);
-	System.out.println("ID: " + id);
-	System.out.println("게시판 번호: " + boardNum);
-	
-	boolean result = boardMgr.insertBoard(board);
-	
-	if (result) {
-	    out.print("success");
-	} else {
-	    out.print("fail");
-	}
+
+    request.setCharacterEncoding("UTF-8");
+
+    String title = request.getParameter("title"); 
+    String content = request.getParameter("postediter"); 
+    String id = login.getId(); 
+    String ipAddress = request.getRemoteAddr();
+
+    int teamNum = MUtil.parseInt(request, "teamNum", 0); 
+
+    if (teamNum == 0) {
+        teamNum = (Integer) session.getAttribute("teamNum"); 
+    } else {
+        session.setAttribute("teamNum", teamNum); 
+    }
+
+    // Handle IPv6 local host cases
+    if ("0:0:0:0:0:0:0:1".equals(ipAddress) || "::1".equals(ipAddress)) {
+        ipAddress = "127.0.0.1";
+    } else if (ipAddress.startsWith("::ffff:")) {
+        ipAddress = ipAddress.substring(7);
+    }
+
+    BoardBean board = new BoardBean();
+    board.setTITLE(title); // Set title
+    board.setCONTENTS(content); // Set content (including images)
+    board.setIP(ipAddress); // Set IP address
+    board.setID(id); // Set user ID
+    board.setTEAM_NUM(teamNum); // Set team number
+    
+    System.out.println("제목: " + title);
+    System.out.println("내용: " + content);
+    System.out.println("IP: " + ipAddress);
+    System.out.println("ID: " + id);
+
+    if (ipAddress == null || id == null || title == null || content == null) {
+        out.print("fail");
+        return;
+    }
+    
+    boolean result = boardMgr.insertBoard(board);
+
+    if (result) {
+        out.print("success");
+    } else {
+        out.print("fail");
+    }
+    
+    try {
+        // Existing code for handling the post
+    } catch (Exception e) {
+        out.println("Error: " + e.getMessage()); // Output error message
+        e.printStackTrace(); // Log the full stack trace
+    }
 %>

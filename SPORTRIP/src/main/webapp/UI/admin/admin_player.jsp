@@ -109,7 +109,7 @@
                 <img src="<%=player.getPLAYER_IMG() %>" alt="<%=player.getPLAYER_NAME() %>" class="player-photo">
                 <!-- 선수 이름, 나이 출력 -->
                 <div class="player-name">
-                    <span> <%=player.getPLAYER_NUM() %> </span> <%=player.getPLAYER_NAME() %>
+                    <span> <%=player.getUNIFORM_NUM() %> </span> <%=player.getPLAYER_NAME() %>
             	</div>
             </div>
             <% } %>

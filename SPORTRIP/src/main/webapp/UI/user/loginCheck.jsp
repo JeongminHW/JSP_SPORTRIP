@@ -17,18 +17,31 @@
         previousUrl = (String) session.getAttribute("previousPage");
     }
     String redirectUrl = previousUrl != null ? previousUrl : defaultUrl;
+	String id = login.getId();
 
-    // Check login credentials
-    boolean result = userMgr.checkLogin(login.getId(), login.getPw());
+    boolean result = userMgr.checkLogin(id, login.getPw());
     String msg = "로그인에 실패하였습니다.";
-
-    if (result) {
-        msg = "로그인에 성공하였습니다.";
-        login = userMgr.getJoin(login.getId());
-        session.setAttribute("idKey", login.getId());
-        session.setAttribute("login", login);
-        session.removeAttribute("previousPage");  // Clear previous page after login
+	
+    if(userMgr.checkAdmin(id)){
+        if (result) {
+            msg = "관리자 로그인에 성공하였습니다.";
+            login = userMgr.getJoin(login.getId());
+            session.setAttribute("idKey", login.getId());
+            session.setAttribute("login", login);
+            redirectUrl = ".././admin/admin_player.jsp";
+            session.removeAttribute("previousPage"); 
+        }
+    }else{
+        if (result) {
+            msg = "로그인에 성공하였습니다.";
+            login = userMgr.getJoin(login.getId());
+            session.setAttribute("idKey", login.getId());
+            session.setAttribute("login", login);
+            session.removeAttribute("previousPage");  
+        }
     }
+    
+
 %>
 
 <script>
