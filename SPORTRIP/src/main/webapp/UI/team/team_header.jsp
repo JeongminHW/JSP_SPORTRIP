@@ -43,8 +43,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=teamInfo.getTEAM_NAME() %></title>
     <link rel="stylesheet" href=".././assets/css/style.css">
-    <link rel="stylesheet" href=".././assets/css/hamburger.css">
     <link rel="stylesheet" href=".././assets/css/boardStyle.css">
+    <link rel="stylesheet" href=".././assets/css/hamburger.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
+    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.5.1.min.js">
+    <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
 </head>
 <body>
     <header class="header team_header">

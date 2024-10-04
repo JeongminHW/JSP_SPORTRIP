@@ -8,7 +8,7 @@
 <jsp:setProperty property="*" name="userBean" />
 
 <%
-    String id = request.getParameter("id");
+   String id = request.getParameter("id");
     String password = request.getParameter("password");
     String password_check = request.getParameter("password_check");
     String name = request.getParameter("name");
@@ -26,7 +26,6 @@
     userBean.setPhone(phone);
     userBean.setEmail(email);
 
-    System.out.println(address);
 
     if(userMgr.addUser(userBean)){
         response.sendRedirect("login.jsp");
