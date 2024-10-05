@@ -27,13 +27,6 @@
     PlayerMgr playerMgr = new PlayerMgr();
     Vector<PlayerBean> playerList = playerMgr.TeamPlayers(teamNum);
 
-    HeadcoachMgr coachMgr = new HeadcoachMgr();
-    HeadcoachBean coachList = coachMgr.getHeadcoach(teamNum);
-
-    Set<String> positionList = new HashSet<>();
-    for (PlayerBean player : playerList) {
-        positionList.add(player.getPOSITION());
-    }
 %>
 
 <!DOCTYPE html>
@@ -74,14 +67,11 @@
 
     <div class="addplayer-box">
         <h2>선수 등록</h2>
-        <form action="" method="post">
+        <form action="insert_player.jsp" method="post" enctype="multipart/form-data">
+
             <div class="addplayer-item">
                 <label class="label" for="player_name">선수 이름</label>
                 <input class="input" type="text" id="player_name" name="player_name">
-            </div>
-            <div class="addplayer-item">
-                <label class="label" for="player_number">선수 번호</label>
-                <input class="input" type="text" id="player_number" name="player_number">
             </div>
             <div class="addplayer-item">
                 <label class="label" for="player_position">선수 포지션</label>
