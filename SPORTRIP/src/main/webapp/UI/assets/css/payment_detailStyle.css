@@ -1,0 +1,142 @@
+body {
+	margin: 0;
+	background-color: lightgrey;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	letter-spacing: 0.05em;
+	line-height: 1.5em;
+}
+
+button {
+	cursor: pointer;
+}
+
+.payment-detail {
+	width: 800px;
+	margin: auto;	
+}
+
+.payment-info-section, .payment-detail-section {
+	margin: 50px auto;
+	border-radius: 10px;
+	background-color: white;
+	padding: 50px;
+}
+
+.payment-info-header {
+	padding-bottom: 30px;
+	> span {
+		font-size: 30px;
+		font-weight: bold;
+	}
+}
+
+.payment-info-content {
+	padding-top: 30px;
+	display: flex;
+	justify-content: space-between;
+	border-top: 2px solid #48494a;
+}
+
+.purchase-info, .payment-price{
+	display: flex;
+	flex-direction: column;
+	justify-content: center
+}
+
+.order-number {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.order-name {
+	margin-top: 30px;
+}
+
+.payment-price {
+	margin-left: 150px;
+	font-size: 30px;
+	font-weight: bold;
+	align-items: center
+}
+
+.payment-method {
+	width: 100px;
+	font-size: 15px;
+	font-weight: normal;
+	text-align: center;
+	border: 1px solid black;
+	margin-top: 5px;
+}
+
+.payment-status {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	> div {
+		text-align: center;
+	}
+	> span {
+		text-align: center;
+		margin-top: 10px;
+		font-size: 12px;
+	}
+} 
+
+.payment-complete {
+	color: #F16E1E;
+	font-weight: bold;
+}
+
+.payment-cancel {
+	margin-left: 10px;
+	padding: 0px 10px;
+	background-color: white;
+	border: 1px solid black; 
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 15px;
+	text-align: center;
+	border-left: none;
+	border-right: none;
+	font-size: 13px;
+}
+
+th {
+	font-weight: normal;
+	background-color: #f2f2f2;
+	width: 170px;
+}
+
+td {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.item-row td {
+	text-align: left;
+}
+
+.payment-total-price {
+	margin-top: 40px;
+	text-align: right;
+	> .text {
+	margin-right: 20px;
+	font-weight: normal;
+	}
+	> span {
+		font-size: 25px;
+		font-weight: bold;
+	}
+}
+

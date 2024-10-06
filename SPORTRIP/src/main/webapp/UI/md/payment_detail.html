@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주문/결제내역</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"/>
+<link href=".././assets/css/payment_detailStyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="payment-detail">
+		<div class="payment-info-section">
+			<header class="payment-info-header">
+				<span>주문/결제내역</span>
+			</header>
+			<div class="payment-info-content">
+				<div class="purchase-info">
+					<span class="order-number">주문번호: 1</span>
+					<span class="order-date">2024.09.02</span>
+					<span class="order-name">인천유니폼 외 1개</span>
+				</div>
+				<div class="payment-price"> 
+					<span>400,000원</span>
+					<span class="payment-method">카카오페이</span>
+				</div>
+				<div class="payment-status">
+					<div>
+						<span class="payment-complete">결제완료</span>
+						<button type="button" class="payment-cancel">결제취소</button>
+					</div> 
+					<span>주문 2일 이내 취소 가능</span>
+				</div>
+			</div>
+		</div>
+		<div class="payment-detail-section">
+			<table>
+				<tr>
+					<th>주문번호</th>
+					<td colspan="3">1</td>
+				</tr>
+				<tr>
+					<th>현재구매상태</th>
+					<td colspan="3">결제완료</td>
+				</tr>
+				<tr>
+					<th>결제방식</th>
+					<td colspan="3">카카오페이</td>
+				</tr>
+				<tr>
+					<th>결제일</th>
+					<td colspan="3">2024.09.02</td>
+				</tr>
+				<tr class="item-row">
+					<th rowspan="3">상품</th>
+					<td>인천 유니폼 1개</td>
+					<th rowspan="3">금액</th>
+					<td>000</td>
+				</tr>
+				<tr class="item-row">
+					<td>인천 유니폼 1개</td>
+					<td>000</td>
+				</tr>
+				<tr class="item-row">
+					<td>인천 유니폼 1개</td>
+					<td>000</td>
+				</tr>
+				<tr>
+					<th>배송비</th>
+					<td colspan="3">3,500</td>
+				</tr>
+			</table>
+			<div class="payment-total-price">
+				<span class="text">총 금액 </span>
+				<span>400,000원</span>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

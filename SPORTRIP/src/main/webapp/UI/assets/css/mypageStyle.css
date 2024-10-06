@@ -1,0 +1,496 @@
+@font-face {
+	font-family: 'BMJUA';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	background-color: lightgrey;
+}
+
+button {
+	cursor: pointer;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	letter-spacing: 0.05em;
+	line-height: 1.5em;
+}
+
+span {
+	margin: 0;
+	font-size: 20px;
+}
+
+a {
+	cursor: pointer;
+	color: grey;
+	font-size: 14px;
+}
+
+.mypage {
+	width: 1260px;
+	margin: auto;
+}
+
+.member-info, .myorder-area, .myhotel-area, .myboard-area {
+	margin: 50px auto;
+	border-radius: 10px;
+	background-color: white;
+	padding: 50px;
+	padding-left: 80px;
+	padding-right: 80px;
+}
+
+.info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%; > span { margin-right : 20px; /* 회원 정보 수정 버튼과 약간의 간격 */
+	font-size: 30px;
+	text-align: left;
+	font-weight: bold;
+}
+
+>
+.basket-icon {
+	margin-left: auto; /* 장바구니 이미지를 오른쪽 끝에 정렬 */
+	text-align: right;
+}
+
+}
+.modify-button, .save-button {
+	margin-left: 20px;
+	text-align: center;
+	width: 200px;
+	height: auto;
+	padding: 10px;
+	border-radius: 30px;
+	font-size: 16px;
+	background-color: #fff;
+	border: 1px solid #007BFF;
+	transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.modify-button:hover {
+	background-color: #007BFF; /* 마우스를 올렸을 때 배경색 */
+	color: #fff; /* 마우스를 올렸을 때 글자색 */
+	box-shadow: 0 0 10px rgba(0, 123, 255, 0.6); /* 파란색 외곽선 그림자 */
+	border: 1px solid #007BFF; /* 외곽선 테두리 */
+}
+
+.basket-icon {
+	width: 30px;
+	cursor: pointer;
+}
+
+.basket-icon:hover {
+	filter: invert(46%) sepia(71%) saturate(481%) hue-rotate(8deg)
+		brightness(98%) contrast(90%);
+}
+
+.save-button:hover {
+	background-color: #007BFF; /* 마우스를 올렸을 때 배경색 */
+	color: #fff; /* 마우스를 올렸을 때 글자색 */
+	box-shadow: 0 0 10px rgba(0, 123, 255, 0.6); /* 파란색 외곽선 그림자 */
+	border: 1px solid #007BFF; /* 외곽선 테두리 */
+}
+
+.popup-background {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+}
+
+.modify-popup {
+	width: 600px; /* 가로 600px로 설정 */
+	height: 750px; /* 세로 800px로 설정 */
+	background: white;
+	border-radius: 30px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.popup-header {
+	display: flex;
+	justify-content: space-between;
+	padding: 30px 50px;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 10px 10px 0 0;
+	z-index: 10;
+	>
+	span
+	{
+	font-size
+	:
+	25px;
+}
+
+>
+a {
+	padding-top: 10px;
+}
+
+}
+.popup-content {
+	flex: 1;
+	padding: 0px 50px;
+	overflow-y: auto;
+}
+
+/* input_box 스타일링 */
+.input_box {
+	width: 100%;
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: space-between
+}
+
+.input_box input {
+	width: 70%;
+	padding: 10px 15px; /* 여유 공간을 주어 입력 상자를 넓게 만듦 */
+	margin-bottom: 15px;
+	border-radius: 10px; /* 둥근 모서리 */
+	border: 2px solid #ccc; /* 부드러운 회색 테두리 */
+	font-size: 14px;
+	background-color: #fff; /* 연한 배경색 */
+	transition: all 0.3s ease;
+}
+
+/* input_box의 입력 중 효과 */
+.input_box input:focus {
+	border-color: #007BFF; /* 포커스 시 파란색 테두리 */
+	outline: none;
+	box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 파란색 외곽선 그림자 */
+}
+
+.input_label {
+	display: inline-block;
+	vertical-align: top; > button { width : 100px;
+	padding: 10px 10px 11px 10px;
+	border-radius: 10px;
+	border: 1px solid #007BFF;
+	background-color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+}
+
+/* 버튼 호버 효과 */
+.input_label button:hover {
+	border-color: #007BFF; /* 포커스 시 파란색 테두리 */
+	outline: none;
+	box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 파란색 외곽선 그림자 */
+}
+
+#zipcode {
+	width: 40%;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 17px;
+	margin-bottom: 5px;
+}
+
+#address {
+	margin-bottom: 5px;
+}
+
+#extraAddr {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: -25px;
+}
+
+.secession {
+	margin-top: 10px;
+	text-align: right;
+}
+
+.myorder-title, .myhotel-title, .myboard-header {
+	font-size: 20px;
+	margin-bottom: 30px;
+	> span {
+		font-weight: bold;
+	}
+}
+
+.sports-button, .hotel-button {
+	margin-bottom: 30px;
+}
+
+.sports-button button {
+	width: 120px;
+	margin-right: 30px;
+	padding: 10px 20px;
+	background-color: #fff; /* 기본 배경색 */
+	color: #000; /* 기본 글자색 */
+	border-radius: 30px;
+	border: 1px solid #007BFF;
+	font-size: 20px;
+	transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.sports-button button:hover {
+	background-color: #007BFF; /* 마우스를 올렸을 때 배경색 */
+	color: #fff; /* 마우스를 올렸을 때 글자색 */
+	box-shadow: 0 0 10px rgba(0, 123, 255, 0.6); /* 파란색 외곽선 그림자 */
+	border: 1px solid #007BFF; /* 외곽선 테두리 */
+}
+
+.sports-button button.active, .sports-button button:focus {
+	background-color: #007BFF; /* 클릭되었을 때 배경색 */
+	color: #fff; /* 클릭되었을 때 글자색 */
+	box-shadow: 0 0 10px rgba(0, 123, 255, 0.6); /* 파란색 외곽선 그림자 */
+	border: 1px solid #007BFF; /* 외곽선 테두리 */
+	outline: none; /* 클릭 시 기본 테두리 제거 */
+}
+
+.myorder-area, .myhotel-area, .myboard-area {
+	position: relative; /* 부모 요소에 상대적 위치 지정 */
+	transition: height 0.5s ease; /* 높이 변화 애니메이션 추가 */
+	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+}
+
+.tab-content-wrapper, .hotel-content-wrapper {
+	position: relative;
+	overflow: hidden;
+	display: flex; /* Enable flexbox */
+	width: 1050px; /* 한 화면에 보일 최대 width */
+	margin-left: 20px;
+}
+
+.tab-content-container, .hotel-content-container {
+	display: flex;
+	transition: transform 0.3s ease;
+	width: calc(200px * 5); /* 5개의 탭이 보이도록 설정 */
+}
+
+.tab-content {
+	min-width: 200px;
+	flex-shrink: 0;
+	box-sizing: border-box;
+	margin-right: 10px;
+}
+
+.myorder-list, .myhotel-list {
+	display: flex;
+	flex-wrap: wrap; /* 여러 줄로 나열 가능 */
+	gap: 10px; /* 가로 간격 */
+	transition: opacity 0.5s ease; /* 불투명도 변화에 애니메이션 추가 */
+}
+
+.myorder-content, .myhotel-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 200px;
+}
+
+.myorder-content img {
+	width: 184px;
+	height: 184px;
+	object-fit: cover;
+	margin-bottom: 10px;
+}
+
+.goods-info, .hotel-info {
+	text-align: center;
+}
+
+.goods-price, .hotel-price {
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+.goods-name, .hotel-name {
+	font-size: 14px;
+}
+
+.myhotel-content img {
+	width: 184px;
+	height: 184px;
+	object-fit: cover;
+	margin-bottom: 10px;
+}
+
+.hotel-button button {
+	width: 150px;
+	margin-right: 30px;
+	padding: 10px 20px;
+	background-color: #fff; /* 기본 배경색 */
+	color: #000; /* 기본 글자색 */
+	border-radius: 30px;
+	border: 1px solid #007BFF;
+	font-size: 20px;
+	transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.hotel-button button:hover {
+	background-color: #007BFF; /* 마우스를 올렸을 때 배경색 */
+	color: #fff; /* 마우스를 올렸을 때 글자색 */
+	box-shadow: 0 0 10px rgba(0, 123, 255, 0.6); /* 파란색 외곽선 그림자 */
+	border: 1px solid #007BFF; /* 외곽선 테두리 */
+}
+
+.hotel-button button.active, .hotel-button button:focus {
+	background-color: #007BFF; /* 클릭되었을 때 배경색 */
+	color: #fff; /* 클릭되었을 때 글자색 */
+	box-shadow: 0 0 10px rgba(0, 123, 255, 0.6); /* 파란색 외곽선 그림자 */
+	border: 1px solid #007BFF; /* 외곽선 테두리 */
+	outline: none; /* 클릭 시 기본 테두리 제거 */
+}
+
+.arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: rgba(255, 255, 255, 0.8); /* 더 밝은 배경색 */
+	color: #007BFF; /* 트렌디한 파란색으로 강조 */
+	border: 2px solid #007BFF; /* 깔끔한 파란색 테두리 */
+	cursor: pointer;
+	margin: 70px 30px 0px 30px;;
+	padding: 5px 15px;
+	font-size: 22px;
+	border-radius: 12px; /* 둥글면서도 깔끔한 모서리 */
+	transition: background-color 0.3s ease, transform 0.3s ease, box-shadow
+		0.3s ease;
+	z-index: 10;
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3); /* 살짝의 그림자로 깊이감을 줌 */
+}
+
+.arrow:hover {
+	background-color: #007BFF; /* 마우스 올렸을 때 파란색으로 변화 */
+	color: white; /* 텍스트는 흰색으로 대비 */
+	transform: translateY(-50%) scale(1.1);
+	box-shadow: 0px 6px 18px rgba(0, 123, 255, 0.5); /* 더 강한 그림자 */
+}
+
+.arrow:active {
+	transform: translateY(-50%) scale(0.95);
+}
+
+.arrow-left {
+	left: 0px; /* 위치 조정 */
+}
+
+.arrow-right {
+	right: 0px; /* 위치 조정 */
+}
+
+table {
+	border-top: solid 1.5px black;
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 12px;
+	>
+	span
+	{
+	font-size
+	:
+	15px;
+}
+
+}
+thead {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	border-bottom: solid 1.5px black;
+}
+
+tbody {
+	font-size: 12px;
+	text-align: center;
+	color: #8e9091;
+}
+
+td {
+	padding: 15px 0px;
+}
+
+tr {
+	border-bottom: 1px solid lightgrey;
+}
+
+.myboard-area {
+	transition: height 0.1s ease; /* 높이 변화 애니메이션 추가 */
+	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+}
+
+.myboard__list__detail {
+	display: table-row;
+	opacity: 1;
+	transform: translateY(0);
+	border-bottom: 1px solid lightgrey; /* 기본 border-bottom */
+	transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease,
+		border-bottom 0.5s ease; /* border-bottom 추가 */
+	cursor: pointer;
+}
+
+.myboard__list__detail.hidden {
+	opacity: 0;
+	transform: translateY(-20px);
+	height: 0;
+	border-bottom: none; /* 숨김 상태일 때 border-bottom 제거 */
+	overflow: hidden;
+	display: none; /* 숨겨진 요소는 공간을 차지하지 않음 */
+}
+
+.myboard__list__detail.hidden::after {
+	opacity: 0;
+}
+
+.load-more-container {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px; > div { display : flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+}
+#load-more {
+	display: inline-block;
+	padding: 10px 5px 10px 20px;
+	background-color: transparent;
+	color: #8e9091;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+#down-arrow {
+	width: 20px;
+	height: 20px;
+	transition: transform 0.3s;
+	margin-left: 5px;
+}
+
+.rotate {
+	transform: rotate(180deg); /* 상하 반전 */
+}
