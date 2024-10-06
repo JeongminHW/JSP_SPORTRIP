@@ -148,8 +148,9 @@
 #campaign .c_hero {
     padding-top: 300px;
     padding-bottom: 350px;
-    position: relative;
+    position: fixed;
     top: 35px; /* 위치 보정용 */
+    z-index: 1;
 }
 
 #campaign .c_hero .ch_title {
