@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SPORTRIP</title>
+    <title>Gate</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"/>
     <link href=".././assets/css/MainText.css" rel="stylesheet" type="text/css"/>
     <link href=".././assets/css/SportripLogo.css" rel="stylesheet" type="text/css"/>
@@ -45,21 +45,21 @@ pageEncoding="UTF-8"%>
               <ul>
                 <li class="baseball">
                   <a href="#" onclick="sendSportNum(1)">
-                    <span>야구</span>
+                    <span>Baseball</span>
                   </a>
                 </li>
                 <li class="soccer">
                   <a href="#" onclick="sendSportNum(2)">
-                    <span>축구</span>
+                    <span>Soccer</span>
                   </a>
                 </li>
                 <li class="volleyball">
                   <a href="#" onclick="sendSportNum(3)">
-                    <span>배구</span>
+                    <span>Volleyball</span>
                   </a>
                 </li>
                 <li class="trip">
-                  <a href=".././trip/tripPage_Hotel.jsp"> <span>여행</span> </a>
+                  <a href=".././trip/tripPage_Hotel.jsp"> <span>Trip</span> </a>
                 </li>
               </ul>
             </div>
