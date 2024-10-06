@@ -64,9 +64,6 @@
         });
         stadiumMarker.setMap(map);
 
-        // 콘솔에 위도, 경도 출력
-        console.log("숙소 위도:", lodgingLatitude, "숙소 경도:", lodgingLongitude);
-        console.log("경기장 위도:", stadiumLatitude, "경기장 경도:", stadiumLongitude);
     }
 
     function closeModal() {
@@ -199,9 +196,6 @@
                         <section class="info-item">
                             <span class="title" style="font-size: 24px;"><%= lodging.getLODGING_NAME() %></span><br>
                             <p class="address"><%= lodging.getADDRESS() %></p>
-                            <%
-                            	System.out.println("selectedStadiumBean"+selectedStadiumBean.getLAT());
-                            %>
                             <button class="show-location" 
                                 onclick="openModal(
                                 '<%= lodging.getLODGING_NAME() %>',

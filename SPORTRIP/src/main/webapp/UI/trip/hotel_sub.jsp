@@ -55,7 +55,7 @@
                     </section>
                     <section class="info-item">
                         <p><%= room.getROOM_PRICE() %>원</p>
-                        <button class="show-detail" onclick="openModal(<%= lodgingNum %>, <%= room.getROOM_NUM() %>, <%= room.getROOM_PRICE() %>)">예약하기</button>
+                        <button class="show-detail" onclick="openModal(<%= lodgingNum %>, <%= room.getROOM_NUM() %>, <%= room.getROOM_PRICE() %>, <%= room.getSEAT_CAPACITY_R() %>)">예약하기</button>
                     </section>
                 </div>
             </div>
@@ -83,10 +83,6 @@
                 <div class="modal-item">
                     <span>인원 수</span>
                     <select name="person" id="select-person">
-                        <option value="1">1명</option>
-                        <option value="2">2명</option>
-                        <option value="3">3명</option>
-                        <option value="4">4명</option>
                     </select>
                 </div>
                 <div class="modal-item">
@@ -99,11 +95,11 @@
                 </div>
                 <div class="modal-item">
                     <span>체크인 날짜</span>
-                    <input type="date" id="check_in_date" class="input-text start-date" name="checkIn">
+                    <input type="date" id="check_in_date" class="input-text start-date" name="checkIn" onchange="updateCheckoutDate()" min="">
                 </div>
                 <div class="modal-item">
                     <span>체크아웃 날짜</span>
-                    <input type="date" id="check_out_date" class="input-text end-date" name="checkOut">
+                    <input type="date" id="check_out_date" class="input-text end-date" name="checkOut" min="">
                 </div>
             </div>
             <div class="reserve-box">
@@ -120,31 +116,50 @@
     <script>
     let selectedSport; // 선택된 스포츠
     let selectedStadium; // 선택된 경기장
+    let selectedLodgingNum; // 선택된 숙소 번호
+    let selectedRoomNum; // 선택된 객실 번호
+    let roomPrice; // 객실 가격
 
-    function goToSelectedCategory(){
-        // 선택된 스포츠와 경기장 정보에 따라 URL 설정
-        if (selectedSport && selectedStadium) {
-            document.location.href=`tripPage_Hotel.jsp?sport=${selectedSport}&stadium=${selectedStadium}`;
-        } else {
-            alert("선택된 스포츠와 경기장이 없습니다.");
-        }
+    function goMain(){
+        document.location.href="mainPage.jsp";
     }
 
-    // openModal 함수에서 선택된 스포츠와 경기장을 저장
-    function openModal(lodgingNum, roomNum, price){
-        selectedLodgingNum = lodgingNum; // 선택된 숙소 번호 저장
+    function openModal(lodgingNum, roomNum, price, capacity){
+    	
+    	selectedLodgingNum = lodgingNum; // 선택된 숙소 번호 저장
         selectedRoomNum = roomNum; // 선택된 객실 번호 저장
         roomPrice = price; // 객실 가격 저장
-        selectedSport = getSelectedSport(); // 현재 선택된 스포츠 가져오기
-        selectedStadium = getSelectedStadium(); // 현재 선택된 경기장 가져오기
+        document.querySelector('.modal').style.display = 'block';
+        
+        
+        // 인원 수 선택 옵션 초기화
+        const selectPerson = document.getElementById("select-person");
+        selectPerson.innerHTML = ''; // 기존 옵션을 비웁니다.
+
+        // 수용 인원에 맞게 옵션 생성
+        for (let i = 1; i <= capacity; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.innerText = i; 
+            selectPerson.appendChild(option);
+        }
         document.querySelector('.modal').style.display = 'block';
     }
 
-    function getSelectedSport() {
-        // 현재 선택된 스포츠 정보를 가져오는 로직 구현
-        return "soccer"; // 선택된 스포츠 이름을 반환
+    function closeModal(){
+        document.querySelector('.modal').style.display = 'none';
+        document.getElementById("select-person").value = ""; 
+        document.getElementById("reserve_name").value = "";
+        document.getElementById("contact").value = "";
+        document.getElementById("check_in_date").value = "";
+        document.getElementById("check_out_date").value = "";
     }
+    
+ 	// 현재 날짜 이후 선택 가능하게 설정하는 함수
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('check_in_date').setAttribute('min', today);
 
+<<<<<<< Updated upstream
     function getSelectedStadium() {
         // 현재 선택된 경기장 정보를 가져오는 로직 구현
         return "someStadium"; // 선택된 경기장 이름을 반환
@@ -175,86 +190,88 @@
             document.getElementById("check_in_date").value = "";
             document.getElementById("check_out_date").value = "";
         }
+=======
+    function updateCheckoutDate() {
+        const checkInDate = document.getElementById('check_in_date').value;
+>>>>>>> Stashed changes
         
-        function submitReservation() {
-            const headcount = document.getElementById("select-person").value;
-            const name = document.getElementById("reserve_name").value;
-            const contact = document.getElementById("contact").value;
-            const checkIn = document.getElementById("check_in_date").value;
-            const checkOut = document.getElementById("check_out_date").value;
+        // 체크인 날짜 이후부터 체크아웃 날짜 선택 가능하게 설정
+        document.getElementById('check_out_date').setAttribute('min', checkInDate);
+    }
+    
+    function submitReservation() {
+        const headcount = document.getElementById("select-person").value;
+        const name = document.getElementById("reserve_name").value;
+        const contact = document.getElementById("contact").value;
+        const checkIn = document.getElementById("check_in_date").value;
+        const checkOut = document.getElementById("check_out_date").value;
 
-            // 유효성 검사
-            if (!headcount || !name || !contact || !checkIn || !checkOut) {
-                alert('모든 필드를 입력해 주세요.');
-                return;
+        // 유효성 검사
+        if (!headcount || !name || !contact || !checkIn || !checkOut) {
+            alert('모든 필드를 입력해 주세요.');
+            return;
+        }
+
+        // 결제 요청을 위한 데이터 객체
+        const paymentData = {
+            lodgingNum: selectedLodgingNum,
+            roomNum: selectedRoomNum,
+            headcount: headcount,
+            name: name,
+            contact: contact,
+            checkIn: checkIn,
+            checkOut: checkOut,
+            price: roomPrice
+        };
+
+        // 결제 API 호출
+        requestPayment(paymentData);
+    }
+
+    function requestPayment(paymentData) {
+        const IMP = window.IMP; 
+        IMP.init('imp13042654');
+
+        IMP.request_pay({
+            pg: "kakaopay.TC0ONETIME",
+            pay_method: "card",
+            merchant_uid: "order_" + new Date().getTime(),
+            name: "호텔 예약",
+            amount: paymentData.price,
+            buyer_name: paymentData.name,
+            buyer_tel: paymentData.contact,
+            buyer_email: "user@example.com",
+            // 추가 결제 정보
+        }, function (response) {
+            if (response.success) {
+                // 결제 성공
+                alert("결제가 완료되었습니다.");
+                closeModal(); // 모달 닫기
+                // 데이터베이스에 예약 정보 저장 요청
+                saveReservation(paymentData);
+            } else {
+                // 결제 실패
+                alert("결제에 실패하였습니다. 에러: " + response.error_msg);
             }
+        });
+    }
 
-            // 결제 요청을 위한 데이터 객체
-            const paymentData = {
-                lodgingNum: selectedLodgingNum,
-                roomNum: selectedRoomNum,
-                headcount: headcount,
-                name: name,
-                contact: contact,
-                checkIn: checkIn,
-                checkOut: checkOut,
-                price: roomPrice
-            };
-
-            // 결제 API 호출
-            requestPayment(paymentData);
-        }
-
-        function requestPayment(paymentData) {
-            const IMP = window.IMP; 
-            IMP.init('imp13042654');
-
-            IMP.request_pay({
-                pg: "kakaopay.TC0ONETIME",
-                pay_method: "card",
-                merchant_uid: "order_" + new Date().getTime(),
-                name: "호텔 예약",
-                amount: paymentData.price,
-                buyer_name: paymentData.name,
-                buyer_tel: paymentData.contact,
-                buyer_email: "user@example.com",
-                // 추가 결제 정보
-            }, function (response) {
-                if (response.success) {
-                    // 결제 성공 처리
-                    alert("결제가 완료되었습니다.");
-                    // 여기서 데이터베이스에 예약 정보 저장 로직 추가
-                    saveReservation(paymentData);
-                } else {
-                    // 결제 실패 처리
-                    alert("결제에 실패하였습니다. 에러 메시지: " + response.error_msg);
-                }
-            });
-        }
-
-        function saveReservation(paymentData) {
-            $.ajax({
-                type: 'POST',
-                url: 'saveReserve.jsp', // 예약 정보를 저장할 JSP 파일
-                data: {
-                    lodgingNum: paymentData.lodgingNum,
-                    roomNum: paymentData.roomNum,
-                    headcount: paymentData.headcount,
-                    name: paymentData.name,
-                    contact: paymentData.contact,
-                    checkIn: paymentData.checkIn,
-                    checkOut: paymentData.checkOut,
-                },
-                success: function(response) {
-                    alert("예약이 완료되었습니다.");
-                    closeModal(); // 모달 닫기
-                    location.reload(); // 페이지 새로 고침
-                },
-                error: function() {
-                    alert("예약 저장 중 오류가 발생했습니다.");
-                }
-            });
-        }
+    function saveReservation(data) {
+        // AJAX 호출 등으로 서버에 예약 정보 저장
+        // 예시:
+        $.ajax({
+            url: 'saveReserve.jsp', // 서버로의 요청 URL
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                alert("예약이 완료되었습니다.");
+                location.reload(); // 페이지 새로고침
+            },
+            error: function(xhr, status, error) {
+                alert("예약 저장에 실패했습니다. 에러: " + error);
+            }
+        });
+    }
     </script>
 </body>
 </html>
