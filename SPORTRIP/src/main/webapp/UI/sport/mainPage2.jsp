@@ -12,6 +12,7 @@ pageEncoding="UTF-8"%>
     <link href=".././assets/css/mainStyle.css" rel="stylesheet" type="text/css"/>
     <link href=".././assets/css/SportripLogo.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href=".././assets/css/hamburger.css">
+    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
   </head>
   <body>
     <div class="container" id="animationContainer">
@@ -65,6 +66,40 @@ pageEncoding="UTF-8"%>
         	</label>
         </div>
       </div>
+      <div class="menu">
+        <nav>
+            <ul class="menu-list">
+                <li class="menu-item"><a href="#">Home</a>
+                    <ul>
+                        <li><a href="#">Home 1</a></li>
+                        <li><a href="#">Home 2</a></li>
+                        <li><a href="#">Home 3</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#">About</a>
+                    <ul>
+                        <li><a href="#">About 1</a></li>
+                        <li><a href="#">About 2</a></li>
+                        <li><a href="#">About 3</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#">Services</a>
+                    <ul>
+                        <li><a href="#">Services 1</a></li>
+                        <li><a href="#">Services 2</a></li>
+                        <li><a href="#">Services 3</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#">Contact</a>
+                    <ul>
+                        <li><a href="#">Contact 1</a></li>
+                        <li><a href="#">Contact 2</a></li>
+                        <li><a href="#">Contact 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
     <div id="background" class="c_main">
 		<div class="b_wrap">
 			<img alt="" src=".././assets/images/newpage_img.png">
