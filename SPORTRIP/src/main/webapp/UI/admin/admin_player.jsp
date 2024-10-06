@@ -103,16 +103,16 @@
 		        <% } %>
 		    </div>
 	    	<!-- 선수 리스트 -->
-    		<% for (PlayerBean player : playerList) { %>
-            <div class="player-card" data-position="<%= player.getPOSITION() %>">
-                <!-- 선수 사진 출력 -->
-                <img src="<%=player.getPLAYER_IMG() %>" alt="<%=player.getPLAYER_NAME() %>" class="player-photo">
-                <!-- 선수 이름, 나이 출력 -->
-                <div class="player-name">
-                    <span> <%=player.getUNIFORM_NUM() %> </span> <%=player.getPLAYER_NAME() %>
-            	</div>
-            </div>
-            <% } %>
+				<% for (PlayerBean player : playerList) { %>
+				    <div class="player-card" data-position="<%= player.getPOSITION() %>" data-player-num="<%=player.getPLAYER_NUM() %>">
+				        <!-- 선수 사진 출력 -->
+				        <img src="<%=player.getPLAYER_IMG() %>" alt="<%=player.getPLAYER_NAME() %>" class="player-photo">
+				        <!-- 선수 이름, 나이 출력 -->
+				        <div class="player-name">
+				            <span> <%=player.getUNIFORM_NUM() %> </span> <%=player.getPLAYER_NAME() %>
+				        </div>
+				    </div>
+				<% } %>
         	</div>
 	    </div>
     </div>
@@ -199,36 +199,47 @@
         	}
         }
         
-        // 수정하기
-        function editPlayer(){
-        	const playerFrame = document.getElementById('player-List');
-        	const coachFrame = document.getElementById('coach-List');
-        	if(coachFrame.style.display == 'block' || playerFrame.style.display == 'none'){
-            	document.location.href="admin_updateCoach.jsp";
-        	}
-        	else{
-        		document.location.href="admin_updatePlayer.jsp";
-        	}
-        }
-        
-     	// 플레이어 카드 클릭 시 이벤트
+     // 선수 클릭 시 번호 저장
+        let selectedPlayerNum = null;
+
         document.querySelectorAll('.player-card').forEach((item) => {
             item.addEventListener('click', () => {
-            item.classList.toggle('active');
-           	
-            //name 요소 선택
-            const playerName = item.querySelector('.player-name');
-            
-         	// 활성화된 상태에 따라 margin 조정
-            if (item.classList.contains('active')) {
-                playerName.style.marginLeft = '3px'; // 활성화 시 3px 추가
-                playerName.style.bottom = '-3px';  // 활성화 시 3px 추가 (아래)
-            } else {
-                playerName.style.marginLeft = ''; // 비활성화 시 원래 상태로 복원
-                playerName.style.bottom = '';  // 활성화 시 3px 추가 (아래)
-            }
-          });
+                // 토글을 통해 카드가 활성화됨을 표시
+                item.classList.toggle('active');
+                
+                // 선택한 선수의 번호 가져오기
+                selectedPlayerNum = item.getAttribute('data-player-num');
+                
+                // 이름 요소를 찾아 스타일 적용
+                const playerName = item.querySelector('.player-name');
+                
+                if (item.classList.contains('active')) {
+                    playerName.style.marginLeft = '3px'; // 활성화 시 3px 추가
+                    playerName.style.bottom = '-3px';  // 활성화 시 3px 추가 (아래)
+                } else {
+                    playerName.style.marginLeft = ''; // 비활성화 시 원래 상태로 복원
+                    playerName.style.bottom = '';  // 비활성화 시 원래 상태로 복원
+                }
+            });
         });
+
+        // 수정하기 함수 업데이트
+        function editPlayer() {
+            const playerFrame = document.getElementById('player-List');
+            const coachFrame = document.getElementById('coach-List');
+
+            if (coachFrame.style.display === 'block' || playerFrame.style.display === 'none') {
+                document.location.href = "admin_updateCoach.jsp";
+            } else {
+                // 선수 번호가 선택된 경우에만 수정 페이지로 이동
+                if (selectedPlayerNum) {
+                    document.location.href = `admin_updatePlayer.jsp?playerNum=${selectedPlayerNum}`;
+                } else {
+                    alert("수정할 선수를 선택하세요.");
+                }
+            }
+        }
+
 	  </script>
 </body>
 </html>
