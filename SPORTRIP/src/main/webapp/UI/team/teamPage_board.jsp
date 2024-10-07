@@ -60,10 +60,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                <% if (boardInfo != null && !boardInfo.isEmpty()) { %>
+                <% int index = 1; 
+                if (boardInfo != null && !boardInfo.isEmpty()) { %>
 		            <% for (BoardBean board : boardInfo) { %>
 		            <tr>
-			            <td><%=board.getBOARD_NUM() %></td>
+			            <td><%=index++ %></td>
 	                    <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>,'.././board/viewPost')"><%=board.getTITLE() %></a></td>
 	                    <td><%=board.getID() %></td>
 	                    <td><%=board.getPOSTDATE() %></td>

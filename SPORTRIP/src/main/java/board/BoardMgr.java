@@ -160,30 +160,36 @@ public class BoardMgr {
 	}
 	
 	// 게시글 추천, 비추천 상승
-	public boolean updateCommand(String command, int teamNum, int boardNum) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		boolean flag = false;
-		try {
-			con = pool.getConnection();
-			sql = "update board set ? = ? + 1 where team_num = ? and board_num = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, command);
-			pstmt.setString(2, command);
-			pstmt.setInt(3, teamNum);
-			pstmt.setInt(4, boardNum);
-			if(pstmt.executeUpdate() == 1) {
-				flag = true;
-			}
+	public boolean updateCommand(String command, int boardNum) {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    String sql = null;
+	    boolean flag = false;
+	    try {
+	        con = pool.getConnection();
+	        
+	        // command가 'RECOMMAND'나 'NONRECOMMAND'인 경우에만 처리
+	        if ("RECOMMAND".equals(command) || "NONRECOMMAND".equals(command)) {
+	            // 컬럼명을 동적으로 설정
+	            sql = "UPDATE board SET " + command + " = " + command + " + 1 WHERE board_num = ?";
+	            pstmt = con.prepareStatement(sql);
+	            pstmt.setInt(1, boardNum);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-		return flag;
+	            if (pstmt.executeUpdate() == 1) {
+	                flag = true;
+	            }
+	        } else {
+	            System.out.println("Invalid command: " + command);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        pool.freeConnection(con, pstmt);
+	    }
+	    return flag;
 	}
+
 	
 	// 조회 수 증가
 	public void updateViews(int teamNum, int boardNum) {

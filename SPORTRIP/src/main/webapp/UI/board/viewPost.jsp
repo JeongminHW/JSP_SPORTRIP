@@ -27,9 +27,6 @@
 
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
-	
-	// 댓글 수정 폼에서 넘긴 값을 바로 받아서 처리
-    String editedContent = request.getParameter("editComment");
 %>
 
 <jsp:include page=".././team/team_header.jsp"/>
@@ -66,11 +63,11 @@
 		    <% } %>
 		</div>
 		<div class="rec-btn">
-			<button type="button" id="rec" onclick="">
+			<button type="button" id="rec" onclick="updateRecommand('RECOMMAND', <%=boardNum%>)">
 				<span><img src=".././assets/images/recommend_img.png" alt=""> <%=board.getRECOMMAND() %></span><br>
 				<span>추천</span>
 			</button>
-			<button type="button" id="nrec" onclick="">
+			<button type="button" id="nrec" onclick="updateRecommand('NONRECOMMAND', <%=boardNum%>)">
 				<span><img src=".././assets/images/notRecommend_img.png" alt=""> <%=board.getNONRECOMMAND() %></span><br>
 				<span>비추천</span>
 			</button>
@@ -168,6 +165,32 @@
 	    $bottomBtn.onclick = () => {
 	      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 	    };
+	    
+	 	// 추천/비추천
+	    function updateRecommand(command, boardNum) {
+	        $.ajax({
+	            url: 'board_command.jsp', 
+	            type: 'POST',
+	            data: {
+	                command: command,
+	                boardNum: boardNum
+	            },
+	            success: function(response) {
+	                if (command === 'RECOMMAND') {
+	                    // 추천 개수 업데이트
+	                    $('#recCount').text(response);
+	                    location.reload(); // 새로고침
+	                } else if (command === 'NONRECOMMAND') {
+	                    // 비추천 개수 업데이트
+	                    $('#nrecCount').text(response);
+	                    location.reload(); // 새로고침
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('Error: ' + error);
+	            }
+	        });
+	    }
 	</script>
 </body>
 </html>
