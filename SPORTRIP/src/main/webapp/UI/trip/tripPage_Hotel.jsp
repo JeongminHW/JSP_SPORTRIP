@@ -13,7 +13,8 @@
     <title>SPORTRIP 숙박</title>
     <link rel="stylesheet" href=".././assets/css/style.css">
 
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8afbb0c0c5d852ce84e4f0f3b93696b6"></script> <!-- 카카오 지도 API 스크립트 -->
+
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8afbb0c0c5d852ce84e4f0f3b93696b6"></script> <!-- 카카오 지도 API 스크립트 -->
 
     <script>
     function goMain() {
@@ -115,7 +116,7 @@
         }
     </style>
 </head>
-<body>
+<body style="margin: 0; background-color: #EEEEEE;">
     <header class="header header_logo">
         <a style="cursor: pointer" href=".././sport/mainPage.jsp">
             <img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img">
@@ -128,102 +129,109 @@
         </div>
     </header>
 
-    <div class="h_top">
-        <div class="item" style="background-color: #083660;">
-            <a href="tripPage_Hotel.jsp">호텔</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="tripPage_Food.jsp">맛집</a>
-        </div>
-    </div>
-
-    <div style="float: left;" class="select-box">
-        <form method="POST" action="tripPage_Hotel.jsp" accept-charset="UTF-8">
-            <select name="sportNum" class="select year" onchange="this.form.submit()">
-                <option value="0">스포츠</option>
-                <option value="1" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("1")) ? "selected" : "" %>>야구</option>
-                <option value="2" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("2")) ? "selected" : "" %>>축구</option>
-                <option value="3" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("3")) ? "selected" : "" %>>배구</option>
-            </select>
-
-            <select name="stadium" id="stadiumSelect" class="select month" onchange="this.form.submit()">
-                <option value="0">경기장</option>
-                <% 
-                    String sportNumStr = request.getParameter("sportNum");
-                    if (sportNumStr != null && !sportNumStr.equals("0")) {
-                        int sportNum = Integer.parseInt(sportNumStr);
-                        StadiumMgr stadiumMgr = new StadiumMgr();
-                        List<StadiumBean> stadiumList = stadiumMgr.getStadiumsBySport(sportNum);
-
-                        for (StadiumBean stadium : stadiumList) {
-                %>
-                            <option value="<%= stadium.getSTADIUM_NAME() %>" <%= (request.getParameter("stadium") != null && request.getParameter("stadium").equals(stadium.getSTADIUM_NAME())) ? "selected" : "" %>>
-                			<%= stadium.getSTADIUM_NAME() %>
-                            </option>
-                <%
-                        }
-                    }
-                %>
-            </select>
-        </form>
-    </div>
-
-    <div class="search-menu-box">
-<% 
-      
-	String selectedStadium = request.getParameter("stadium");
-    StadiumBean selectedStadiumBean = null;
-    
-    if (selectedStadium != null && !selectedStadium.equals("0")) {
-        // 선택된 경기장 정보를 가져옴
-        StadiumMgr stadiumMgr = new StadiumMgr();
-
-        selectedStadiumBean = stadiumMgr.getStadiumByName(selectedStadium);
-   
-        
-        // 숙소 정보를 가져옴
-        LodgingMgr lodgingMgr = new LodgingMgr();
-        List<LodgingBean> lodgingList = lodgingMgr.getLodgingsByStadiumName(selectedStadium);
-
-        if (!lodgingList.isEmpty()) {
-            for (LodgingBean lodging : lodgingList) {
-%>
-                <div class="hotel-box">
-                    <div class="hotel-img">
-                        <img src="<%= lodging.getLODGING_IMG() %>" alt="호텔 이미지">
-                    </div>
-                    <div class="hotel-info-box">
-                        <section class="info-item">
-                            <span class="title" style="font-size: 24px;"><%= lodging.getLODGING_NAME() %></span><br>
-                            <p class="address"><%= lodging.getADDRESS() %></p>
-                            <button class="show-location" 
-                                onclick="openModal(
-                                '<%= lodging.getLODGING_NAME() %>',
-                                <%= lodging.getLAT() %>, <%= lodging.getLON() %>, 
-                                '<%= selectedStadiumBean.getSTADIUM_NAME() %>',
-                                <%= selectedStadiumBean.getLAT() %>, 
-                                <%= selectedStadiumBean.getLON() %>)">
-                                <img src=".././assets/images/location_img.png"> 위치보기
-                            </button>
-                        </section>
-                        <section class="info-item">
-                            <p><%= (lodging.getGRADE() != null) ? lodging.getGRADE() : "별점 없음" %></p>
-                            <button class="show-detail" onclick="location.href='hotel_sub.jsp?lodgingNum=<%= lodging.getLODGING_NUM() %>'">객실 보기</button>
-                        </section>
-                    </div>
-                </div>
-<%
-            }
-        } else {
-%>
-            <p>근처 숙소 정보가 없습니다.</p>
-<%
-        }
-    }
-%>
-
-        
-    </div>
+	<div class="hotel_main">
+	    <div class="h_top">
+	        <div class="item">
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_Hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
+	            <button type="button" class="food-btn" onclick="location.href='tripPage_Food.jsp'">식당</button>
+	        </div>
+	    </div>
+	
+		<div class="hotel-info-section">
+			<div style="float: left;" class="select-box">
+			  <form method="POST" action="tripPage_Hotel.jsp" accept-charset="UTF-8">
+			    <div class="custom-select-wrapper">
+			      <select name="sportNum" class="select year" onchange="this.form.submit()">
+			        <option value="0">스포츠</option>
+			        <option value="1" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("1")) ? "selected" : "" %>>야구</option>
+			        <option value="2" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("2")) ? "selected" : "" %>>축구</option>
+			        <option value="3" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("3")) ? "selected" : "" %>>배구</option>
+			      </select>
+			      <span class="custom-arrow">▼</span>
+			    </div>
+			
+			    <div class="custom-select-wrapper">
+			      <select name="stadium" id="stadiumSelect" class="select month" onchange="this.form.submit()">
+			        <option value="0">경기장</option>
+			        <% 
+			            String sportNumStr = request.getParameter("sportNum");
+			            if (sportNumStr != null && !sportNumStr.equals("0")) {
+			                int sportNum = Integer.parseInt(sportNumStr);
+			                StadiumMgr stadiumMgr = new StadiumMgr();
+			                List<StadiumBean> stadiumList = stadiumMgr.getStadiumsBySport(sportNum);
+			
+			                for (StadiumBean stadium : stadiumList) {
+			        %>
+			          <option value="<%= stadium.getSTADIUM_NAME() %>" <%= (request.getParameter("stadium") != null && request.getParameter("stadium").equals(stadium.getSTADIUM_NAME())) ? "selected" : "" %>>
+			            <%= stadium.getSTADIUM_NAME() %>
+			          </option>
+			        <%
+			                }
+			            }
+			        %>
+			      </select>
+			      <span class="custom-arrow">▼</span>
+			    </div>
+			  </form>
+			</div>
+		
+		    <div class="search-menu-box">
+		<% 
+		      
+			String selectedStadium = request.getParameter("stadium");
+		    StadiumBean selectedStadiumBean = null;
+		    
+		    if (selectedStadium != null && !selectedStadium.equals("0")) {
+		        // 선택된 경기장 정보를 가져옴
+		        StadiumMgr stadiumMgr = new StadiumMgr();
+		
+		        selectedStadiumBean = stadiumMgr.getStadiumByName(selectedStadium);
+		   
+		        
+		        // 숙소 정보를 가져옴
+		        LodgingMgr lodgingMgr = new LodgingMgr();
+		        List<LodgingBean> lodgingList = lodgingMgr.getLodgingsByStadiumName(selectedStadium);
+		
+		        if (!lodgingList.isEmpty()) {
+		            for (LodgingBean lodging : lodgingList) {
+		%>
+				<div class="hotel-box">
+					<div class="hotel-img">
+						<img src="<%=lodging.getLODGING_IMG()%>" alt="호텔 이미지">
+					</div>
+					<div class="info-item">
+						<span class="title" style="font-size: 24px;"><%=lodging.getLODGING_NAME()%></span>
+						<div class="info-item-text">
+							<p class="address"><%=lodging.getADDRESS()%></p>
+							<span>★ <%=(lodging.getGRADE() != null) ? lodging.getGRADE() : "별점 없음"%></span>
+						</div>
+						<button class="show-location" onclick="openModal(
+		                                '<%=lodging.getLODGING_NAME()%>',
+		                                <%=lodging.getLAT()%>, <%=lodging.getLON()%>, 
+		                                '<%=selectedStadiumBean.getSTADIUM_NAME()%>',
+		                                <%=selectedStadiumBean.getLAT()%>, 
+		                                <%=selectedStadiumBean.getLON()%>)">
+							<img src=".././assets/images/location_img.png"> 위치보기
+						</button>
+					</div>
+					<div class="info-item-button">
+						<button class="show-detail" onclick="location.href='hotel_sub.jsp?lodgingNum=<%=lodging.getLODGING_NUM()%>'">객실 보기</button>
+					</div>
+				</div>
+				<%
+				}
+				} else {
+				%>
+		            <p>근처 숙소 정보가 없습니다.</p>
+		<%
+		}
+		}
+		%>
+		
+		        
+		    </div>
+	    </div>
+	</div>
 
     <!-- 모달 팝업 -->
     <div id="mapModal" class="modal">

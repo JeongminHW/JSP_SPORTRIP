@@ -11,7 +11,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
-<body>
+<body style="margin: 0; background-color: #EEEEEE;">
     <header class="header header_logo">
         <a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
         <div class="login-signup-box">
@@ -21,59 +21,60 @@
             </ul>
         </div>
     </header>
-    <div class="h_top">
-        <div class="item" style="background-color: #083660;">
-            <a href="tripPage_Hotel.jsp">호텔</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="tripPage_Food.jsp">맛집</a>
-        </div>
-    </div>
-
-    <div class="search-menu-box">
-        <% 
-            String lodgingNumStr = request.getParameter("lodgingNum");
-            if (lodgingNumStr != null && !lodgingNumStr.equals("")) {
-                int lodgingNum = Integer.parseInt(lodgingNumStr);
-                RoomMgr roomMgr = new RoomMgr();
-                List<RoomBean> roomList = roomMgr.getRoomsByLodgingNum(lodgingNum);
-
-                if (!roomList.isEmpty()) {
-                    for (RoomBean room : roomList) {
-        %>
-            <div class="hotel-box">
-                <div class="hotel-img">
-                    <img src="<%= room.getROOM_IMG() %>" alt="객실 이미지" style="width: 100%; height: auto;">
-                </div>
-                <div class="hotel-info-box">
-                    <section class="info-item">
-                        <span class="title" style="font-size: 24px;"><%= room.getROOM_NAME() %></span><br>
-                        <p class="service">
-                            <img src=".././assets/images/service_img.png" alt="서비스 이미지"> 
-                            수용 인원: <%= room.getSEAT_CAPACITY_R() %>명
-                        </p>
-                    </section>
-                    <section class="info-item">
-                        <p><%= room.getROOM_PRICE() %>원</p>
-                        <button class="show-detail" onclick="openModal(<%= lodgingNum %>, <%= room.getROOM_NUM() %>, <%= room.getROOM_PRICE() %>, <%= room.getSEAT_CAPACITY_R() %>)">예약하기</button>
-                    </section>
-                </div>
-            </div>
-        <%
-                    }
-                } else {
-        %>
-                    <p>해당 숙소에 객실 정보가 없습니다.</p>
-        <%
-                }
-            } else {
-        %>
-                <p>숙소 정보가 제공되지 않았습니다.</p>
-        <%
-            }
-        %>
-    </div>
-
+    <div class="room_main">
+	    <div class="h_top">
+	        <div class="item">
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_Hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
+	            <button type="button" class="food-btn" onclick="location.href='tripPage_Food.jsp'">식당</button>
+	        </div>
+	    </div>
+	
+		<div class="room-info-section">
+		    <div class="search-menu-box">
+		        <% 
+		            String lodgingNumStr = request.getParameter("lodgingNum");
+		            if (lodgingNumStr != null && !lodgingNumStr.equals("")) {
+		                int lodgingNum = Integer.parseInt(lodgingNumStr);
+		                RoomMgr roomMgr = new RoomMgr();
+		                List<RoomBean> roomList = roomMgr.getRoomsByLodgingNum(lodgingNum);
+		
+		                if (!roomList.isEmpty()) {
+		                    for (RoomBean room : roomList) {
+		        %>
+		            <div class="room-box">
+					<div class="room-img">
+						<img src="<%=room.getROOM_IMG()%>" alt="객실 이미지">
+						<div class="original-img">
+							<img src="<%=room.getROOM_IMG()%>" alt="원본 이미지">
+						</div>
+					</div>
+					<div class="info-item">
+		                    <span class="title" style="font-size: 24px;"><%= room.getROOM_NAME() %></span><br>
+		                    <p class="service">
+		                        <img src=".././assets/images/service_img.png" alt="서비스 이미지">수용 인원: <%= room.getSEAT_CAPACITY_R() %>명
+		                    </p>
+		                </div>
+		                <div class="info-item-button">
+		                    <p><%= room.getROOM_PRICE() %>원</p>
+		                    <button class="show-detail" onclick="openModal(<%= lodgingNum %>, <%= room.getROOM_NUM() %>, <%= room.getROOM_PRICE() %>, <%= room.getSEAT_CAPACITY_R() %>)">예약하기</button>
+		                </div>
+		            </div>
+		        <%
+		                    }
+		                } else {
+		        %>
+		                    <p>해당 숙소에 객실 정보가 없습니다.</p>
+		        <%
+		                }
+		            } else {
+		        %>
+		                <p>숙소 정보가 제공되지 않았습니다.</p>
+		        <%
+		            }
+		        %>
+		    </div>
+	    </div>
+	</div>
     <div class="modal">
         <div class="modal-popup">
             <div class="modal-header">
@@ -110,7 +111,7 @@
     </div>
 
     <div class="footer">
-        <input type="button" value="목록" onclick="location.href='tripPage_Hotel.jsp'">
+        <button type="button"onclick="location.href='tripPage_Hotel.jsp'" class="list_btn">목록</button>
     </div>
     
     <script>
