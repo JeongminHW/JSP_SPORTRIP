@@ -14,10 +14,6 @@
         CommentBean comment = new CommentBean();
         comment.setCONTENTS(content);
 	    comment.setCOMMENT_NUM(commentNum);
-	    
-	 	// 받아와지는 내용 콘솔로 확인
-	    System.out.println("댓글번호:" + commentNum);
-	    System.out.println("내용:" + content);
 
         boolean result = commentMgr.updateComment(comment);
 

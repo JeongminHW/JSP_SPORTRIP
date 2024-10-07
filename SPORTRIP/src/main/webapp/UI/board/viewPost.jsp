@@ -40,7 +40,7 @@
 				<% if (login != null && board.getID().equals(login.getId())) {%> <!-- 본인 게시글만 수정/삭제 -->
 				<div class="update-btn">
 					<button type="button" onclick="sendboardNum(<%=board.getBOARD_NUM() %>, 'board_post)">수정</button>
-					<button type="button" onclick="">삭제</button>
+					<button type="button" onclick="deleteboard(<%=board.getBOARD_NUM() %>)">삭제</button>
 				</div>
 				<% } %>
             </div>
@@ -190,6 +190,33 @@
 	                console.error('Error: ' + error);
 	            }
 	        });
+	    }
+	 	
+	 	// 게시글 삭제
+	    function deleteboard(boardNum) {
+	        if (confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
+	            // AJAX 호출로 삭제 요청
+	            fetch('board_delete.jsp', {
+	                method: 'POST',
+	                headers: {
+	                    'Content-Type': 'application/x-www-form-urlencoded'
+	                },
+	                body: new URLSearchParams({
+	                    'boardNum': boardNum
+	                }).toString()
+	            })
+	            .then(response => response.text())
+	            .then(data => {
+	                if (data.trim() === "success") {
+	                    alert('게시글이 삭제되었습니다.');
+	                    // 게시글 삭제 성공 후 목록으로 이동
+	                    window.location.href = '.././team/teamPage_board.jsp'; // 게시글 목록 페이지로 이동
+	                } else {
+	                    alert('게시글 삭제를 실패하였습니다.');
+	                }
+	            })
+	            .catch(error => console.error('Error:', error));
+	        }
 	    }
 	</script>
 </body>

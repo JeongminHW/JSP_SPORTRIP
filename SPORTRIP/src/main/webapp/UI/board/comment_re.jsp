@@ -25,14 +25,7 @@
 	comment.setIP(ip);
 	comment.setID(id);
 	comment.setBOARD_NUM(boardNum);
-	
-	// 받아와지는 내용 콘솔로 확인
-	System.out.println("내용: " + replynum);
-	System.out.println("내용: " + content);
-	System.out.println("IP: " + ip);
-	System.out.println("ID: " + id);
-	System.out.println("게시판 번호: " + boardNum);
-	
+
 	boolean result = commentMgr.postReply(comment);
 	
 	if (result) {
