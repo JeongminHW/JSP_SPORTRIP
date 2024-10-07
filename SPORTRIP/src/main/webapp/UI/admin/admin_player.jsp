@@ -224,21 +224,28 @@
         });
 
         // 수정하기 함수 업데이트
-        function editPlayer() {
-            const playerFrame = document.getElementById('player-List');
-            const coachFrame = document.getElementById('coach-List');
+		function editPlayer() {
+		    const playerFrame = document.getElementById('player-List');
+		    const coachFrame = document.getElementById('coach-List');
+		
+		    if (selectedPlayerNum) {
+		            var form = document.createElement("form");
+		            form.setAttribute("method", "POST");
+		            form.setAttribute("action", "admin_updatePlayer.jsp");
+		
+		            var playerField = document.createElement("input");
+		            playerField.setAttribute("type", "hidden");
+		            playerField.setAttribute("name", "playerNum");
+		            playerField.setAttribute("value", selectedPlayerNum);
+		            form.appendChild(playerField);
+		
+		            document.body.appendChild(form);
+		            form.submit();
+		        } else {
+		            alert("수정할 선수를 선택하세요.");
+		        }
+		    }
 
-            if (coachFrame.style.display === 'block' || playerFrame.style.display === 'none') {
-                document.location.href = "admin_updateCoach.jsp";
-            } else {
-                // 선수 번호가 선택된 경우에만 수정 페이지로 이동
-                if (selectedPlayerNum) {
-                    document.location.href = `admin_updatePlayer.jsp?playerNum=${selectedPlayerNum}`;
-                } else {
-                    alert("수정할 선수를 선택하세요.");
-                }
-            }
-        }
 
 	  </script>
 </body>

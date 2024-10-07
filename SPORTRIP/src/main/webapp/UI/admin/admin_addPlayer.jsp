@@ -67,32 +67,34 @@
 
     <div class="addplayer-box">
         <h2>선수 등록</h2>
-        <form action="insert_player.jsp" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
 
             <div class="addplayer-item">
-                <label class="label" for="player_name">선수 이름</label>
-                <input class="input" type="text" id="player_name" name="player_name">
+                <label class="label" for="playerName" >선수 이름</label>
+                <input class="input" type="text" id="playerName" name="playerName">
             </div>
             <div class="addplayer-item">
-                <label class="label" for="player_position">선수 포지션</label>
-                <input class="input" type="text" id="player_position" name="player_position">
+                <label class="label" for="playerPosition">선수 포지션</label>
+                <input class="input" type="text" id="playerPosition" name="playerPosition">
             </div>
             <div class="addplayer-item">
-                <label class="label" for="player_backnum">선수 등번호</label>
-                <input class="input" type="text" id="player_backnum" name="player_backnum">
+                <label class="label" for="playerBacknum">선수 등번호</label>
+                <input class="input" type="text" id="playerBacknum" name="playerBacknum">
             </div>
             <div class="addplayer-item file-box">
                 <label class="label" for="player_img">선수 이미지</label>
 				<div class="file-box">
 	            	<input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
 	            	<label id="file-label" for="file"></label>
-	                <input type="file" id="file" name="player_img">
+	                <input type="file" id="file" name="playerImg">
+
 				</div>
             </div>
             <div class="addplayer-item">
                 <input type="button" onclick="playerManager()" value="목록">
-                <input type="submit" value="등록">
+                <input type="button" onclick="insertPlayer()" value="등록">
             </div>
+            </form>
     </div>
     <script>
 	    function goMain(){
@@ -107,6 +109,40 @@
 	        var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
 	        document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
 	    });
+	    
+	    function insertPlayer() {
+	        let playerName = document.getElementById('playerName').value;
+	        let playerPosition = document.getElementById('playerPosition').value;
+	        let playerBacknum = document.getElementById('playerBacknum').value;
+	        let playerImg = document.getElementById('file').files[0]; // Get the file from the input
+	        let teamNum = <%=teamNum%>;
+
+	        const formData = new FormData();
+	        formData.append('teamNum', teamNum);
+	        formData.append('playerName', playerName);
+	        formData.append('playerPosition', playerPosition);
+	        formData.append('playerBacknum', playerBacknum);
+	        formData.append('playerImg', playerImg); // Add the file to FormData
+
+	        fetch('insert_player.jsp', {
+	            method: 'POST',
+	            body: formData // Use FormData as body
+	        })
+	        .then(response => response.text())
+	        .then(data => {
+	            if (data.includes("success")) { 
+	                alert('선수 등록이 완료되었습니다.');
+	                location.href = "admin_player.jsp"; 
+	            } else {
+	                alert('선수 등록이 되지 않았습니다.');
+	            }
+	        })
+	        .catch(error => console.error('Error:', error));
+	    }
+
+
+		
+	    
 	</script>
 </body>
 </html>
