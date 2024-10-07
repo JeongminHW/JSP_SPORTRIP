@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		<div class="update-player">
-			<button class="update-btn" id="delete">삭제</button>
+			<button class="update-btn" id="delete" onclick="deletePlayer()">삭제</button>
 			<button class="update-btn" id="edit" onclick="editPlayer()")>수정</button>
 			<button class="update-btn" id="add" onclick="addPlayer()">등록</button>
 		</div>
@@ -245,6 +245,27 @@
 		            alert("수정할 선수를 선택하세요.");
 		        }
 		    }
+        
+		function deletePlayer() {
+
+		    const params = new URLSearchParams();
+		    params.append('selectedPlayerNum', selectedPlayerNum);
+
+		    fetch('delete_player.jsp?' + params.toString(), {
+		        method: 'GET', // Change to GET for testing
+		    })
+		    .then(response => response.text())
+		    .then(data => {
+		        console.log("Response:", data); // Log the response for debugging
+		        if (data.includes("success")) { 
+		            alert('선수 삭제가 완료되었습니다.');
+		            location.href = "admin_player.jsp"; 
+		        } else {
+		            alert('선수 삭제가 되지 않았습니다.');
+		        }
+		    })
+		    .catch(error => console.error('Error:', error));
+		}
 
 
 	  </script>
