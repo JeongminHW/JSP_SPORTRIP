@@ -1,57 +1,60 @@
 @charset "UTF-8";
 
+#secondScreen {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100vh; /* 화면 높이에 맞춰서 조정 */
+    background-color: transparent;
+    z-index: 1; 
+    transition: transform 1s ease-out;
+}
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
+
+#textContainer span{
+	color: #ffffff;
+}
+
+.logo{
+	position: absolute;
+    top: 5%; /* 화면의 위쪽에서 8% */
+    left: 2%; /* 화면의 왼쪽에서 0% */
+    z-index: 2;
+	#logo_img {
+		width: 200px;
+	}
+}
+
 #background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  transition: 0.5s ease;
-  width: 100%;
-  height: 100%;
+    display: block; /* 처음에 헤더는 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    transition: 0.5s ease;
 }
 
 #background .b_wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-#background .b_wrap img {
-  width: 101vw;
-  height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#background::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.28); /* This darkens the image */
-  z-index: 2;
-}
-
-#secondscreen {
-	background-color: transparent;
-}
-
-#campaign {
-	background-color: transparent;
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	img {
+		max-width: 100%;
+		height: auto;
+		object-fit: cover;
+		filter: brightness(60%)
+	}
 }
 
 #header {
-    display: none; /* 처음에 헤더는 숨김 */
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -64,69 +67,9 @@
     transition: 0.5s ease;
 }
 
-#header.show {
-    display: block; /* 2번 화면이 올라올 때 보여짐 */
-}
-
-/* 헤더 안의 네비게이션 리스트 */
-#header .h_wrap {
-	display: inline-block;
-	vertical-align: middle;
-	width: 100%;
-}
-
-#header .h_gnb {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-#header .h_gnb .hg_list {
-	display: inline-flex;
-	vertical-align: middle;
-	font-size: 0; /* Flexbox 아이템 간의 간격을 줄이기 위해 0으로 설정 */
-	line-height: 0;
-}
-
-#header .h_gnb .hg_list li {
-	display: inline-block;
-	vertical-align: middle;
-	padding: 0 30px;
-	font-size: 20px;
-	line-height: 1.5;
-	color: white;
-	cursor: pointer;
-}
-
-#header .h_gnb .hg_list li span {
-    font-family: 'Pretendard-Regular';
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 2px; /* 자간 */
-    color: #ffffff;
-}
-
-#header .h_gnb .hg_list li a {
-    text-decoration: none; /* 밑줄 제거 */
-}
-
 #campaign .c_marquee {
 	position: relative;
 }
-
-#secondScreen {
-    position: fixed;
-    bottom: -200vh; /* 처음엔 화면 아래에 위치 */
-    width: 100%;
-    height: 100vh; /* 화면 높이에 맞춰서 조정 */
-    background-color: transparent;
-    z-index: 1; 
-    transition: transform 1s ease-out;
-}
-
-#secondScreen.show {
-    transform: translateY(-200vh); /* 위로 슬라이드해서 올라오는 애니메이션 */
-}
-
 
 .area01 {
 	padding: 300px 0;
@@ -143,14 +86,15 @@
 
 #campaign .c_hero {
 	position: relative;
-	z-index: 1;
-	width: 100%;
+	z-index: 100;
+	width: 100vw;
 	padding-bottom: 350px;
 }
 
 #campaign {
 	display: inline-block;
 	vertical-align: middle;
+	background-color: transparent;
 	width: 100%;
 }
 
@@ -229,13 +173,14 @@
 #campaign .c_marquee .marquee, #campaign .c_marquee .marqueereverse {
 	font-size: 160px;
 	line-height: 140px;
-}
+}																																																																																									
 
 #campaign .c_hero {
     padding-top: 300px;
     padding-bottom: 350px;
-    position: relative;
+    position: fixed;
     top: 35px; /* 위치 보정용 */
+    z-index: 1;
 }
 
 #campaign .c_hero .ch_title {
@@ -256,4 +201,9 @@
 @keyframes slidereversemarquee { 
 	0% { transform: translateX(-100%); }
 	100% { transform: translateX(100%); }
+}
+
+.hamburger{
+	float: right;
+    right: 5%;
 }
