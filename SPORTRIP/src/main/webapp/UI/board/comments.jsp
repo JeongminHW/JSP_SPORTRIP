@@ -4,12 +4,22 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="commentMgr" class="comment.CommentMgr" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <%
+	String boardNumStr = request.getParameter("boardNum");
+	if (boardNumStr == null) {
+	    System.out.println("boardNum이 전달되지 않았습니다.");
+	} else {
+	    int boardNum = Integer.parseInt(boardNumStr);
+	    System.out.println("boardNum: " + boardNum); // 확인용 로그
+	}
+
 	//요청 인코딩 설정
 	request.setCharacterEncoding("UTF-8");
 	int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-    Vector<CommentBean> commentList = commentMgr.listComment(boardNum); // 댓글 목록 가져오기
+	System.out.println("boardNum: " + boardNum); // 로그로 확인
+    Vector<CommentBean> commentList = commentMgr.listComment(boardNum); // 댓글 목록 가져오기 
 %>
 <div class="box">
 <!-- 댓글 -->
