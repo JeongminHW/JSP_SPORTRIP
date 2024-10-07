@@ -10,6 +10,7 @@
 <jsp:useBean id="teamBean" class="team.TeamBean" />
 <jsp:useBean id="boardMgr" class="board.BoardMgr" />
 <jsp:useBean id="boardBean" class="board.BoardBean" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)

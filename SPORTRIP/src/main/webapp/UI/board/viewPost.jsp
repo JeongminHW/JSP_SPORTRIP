@@ -10,6 +10,7 @@
 <jsp:useBean id="teamBean" class="team.TeamBean" />
 <jsp:useBean id="boardMgr" class="board.BoardMgr" />
 <jsp:useBean id="boardBean" class="board.BoardBean" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
@@ -27,7 +28,7 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
 	
-	 // 댓글 수정 폼에서 넘긴 값을 바로 받아서 처리
+	// 댓글 수정 폼에서 넘긴 값을 바로 받아서 처리
     String editedContent = request.getParameter("editComment");
 %>
 
@@ -77,7 +78,7 @@
 		</div>
     </div>
 	<!-- 댓글 출력 -->
-	<div id="comments-section"></div>
+	<jsp:include page="comments.jsp"/>
 	<!-- 목록 -->
     <div class="list-btn"><button type="button" onclick="goList()">목록</button></div>
     <script>
@@ -151,21 +152,6 @@
             overlay.classList.remove('open'); // 배경 숨김
         });
 		
-		// 댓글 로딩 함수
-        function loadComments() {
-        	 $.ajax({
-        	        url: 'comments.jsp', // 댓글 폼 불러오기
-        	        type: 'GET',
-        	        data: { boardNum: '<%= boardNum %>' }, // 게시글 번호 전달
-        	        success: function (data) {
-        	            $('#comments-section').html(data);
-        	        },
-        	        error: function () {
-        	            alert('댓글을 불러오지 못했습니다.');
-        	        }
-        	    });
-        }
-
         // 페이지 로딩 시 댓글을 불러옴
         $(document).ready(function() {
             loadComments(); // 댓글 불러오기 호출
