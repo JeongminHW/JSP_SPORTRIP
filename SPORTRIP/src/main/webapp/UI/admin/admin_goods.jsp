@@ -1,3 +1,4 @@
+<%@page import="md.MDBean"%>
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
@@ -6,20 +7,26 @@
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
+<jsp:useBean id="mdMgr" class="md.MDMgr" />
 
 <%
-	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
+	String url = request.getParameter("url");
+	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
+
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
 	if (teamNum == 0) {
 		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
 	} else {
 		session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
 	}
+	
 	// 팀 정보와 선수 명단 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	
 	String teamName = teamInfo.getTEAM_NAME();
+	
 	int sportNum = (int)session.getAttribute("sportNum");
+    Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
 
 <!DOCTYPE html>
@@ -77,95 +84,36 @@
 				<li class="optionItem">머플러</li>
 				<li class="optionItem">기타</li>
 			</ul>
-		</div>
-		
-		<div class="update-goods">
-			<button class="update-btn" id="delete">삭제</button>
-			<button class="update-btn" id="edit" onclick="editPlayer()")>수정</button>
-			<button class="update-btn" id="add" onclick="addPlayer()">등록</button>
+			<div class="insert-goods">
+				<button class="insert-btn" id="add" onclick="addGoods()">등록</button>
+			</div>
 		</div>
 
 		<!-- goods-list를 selectBox2 아래로 이동 -->
 		<div class="goods-list">
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 브랜드유니폼.png" alt="굿즈 사진" class="goods-photo" id="uniform">
-			    <div class="goods-info">
-			        <div class="goods-name">울산 HD FC 2024 4th 유니폼</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩200,000</span>
-			            <button class="add-to-cart" onclick="addToCart('울산 HD FC 2024 4th 유니폼', 200000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 브랜드유니폼.png" alt="굿즈 사진"
-			        class="goods-photo" id="uniform">
-			    <div class="goods-info">
-			        <div class="goods-name">울산 HD FC 2024 4th 유니폼</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩200,000</span>
-			            <button class="add-to-cart" onclick="addToCart('울산 HD FC 2024 4th 유니폼', 200000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/롯데 니트머플러.png" alt="굿즈 사진"
-			        class="goods-photo" id="muffler">
-			    <div class="goods-info">
-			        <div class="goods-name">롯데 24 니트머플러</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩22,000</span>
-			            <button class="add-to-cart" onclick="addToCart('롯데 24 니트머플러', 22000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 볼캡.png" alt="굿즈 사진"
-			        class="goods-photo" id="etc">
-			    <div class="goods-info">
-			        <div class="goods-name">UHDFC 블랙 볼캡</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩38,000</span>
-			            <button class="add-to-cart" onclick="addToCart('UHDFC 블랙 볼캡', 38000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 뱃지.png" alt="굿즈 사진"
-			        class="goods-photo" id="etc">
-			    <div class="goods-info">
-			        <div class="goods-name">UHDFC엠블럼 뱃지</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩9,000</span>
-			            <button class="add-to-cart" onclick="addToCart('UHDFC엠블럼 뱃지', 9000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
-			<div class="goods-card"> 
-			    <img src=".././assets/images/goods_img/MD/울산 유니폼키링.png" alt="굿즈 사진"
-			        class="goods-photo" id="etc">
-			    <div class="goods-info">
-			        <div class="goods-name">24선수 유니폼 키링</div>
-			        <div class="price-and-cart">
-			            <span class="goods-price">₩12,000</span>
-			            <button class="add-to-cart" onclick="addToCart('24선수 유니폼 키링', 12000)">
-			                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-			            </button>
-			        </div>
-			    </div>
-			</div>
+
+			<%
+				for (MDBean MDList : vlist){
+			%>
+					<div class="goods-card"> 
+					    <img src="<%= MDList.getMD_IMG() %>" alt="굿즈 사진" class="goods-photo" id="<%= MDList.getMD_KINDOF() %>">
+					    <div class="goods-info">
+					        <div class="goods-name"><%= MDList.getMD_NAME() %></div>
+					        <div class="price-and-cart">
+					            <span class="goods-price">₩<%=MDList.getMD_PRICE() %></span>
+					        </div>
+					    </div>
+					</div>
+				
+			<% } %>
+
 		</div>
 	</div>
+	<form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
+	    <input type="hidden" name="mdNum" id="mdNumInput">
+	    <input type="hidden" name="repairB" value="1">
+	    <input type="hidden" name="url" value="<%=url%>">
+	</form>
 
 <script>
 	function goMain() {
@@ -189,12 +137,11 @@
 	    form.submit();
 	}
 	
-    const label = document.querySelector('.label');
-    const options = document.querySelectorAll('.optionItem');
-    const goodsCards = document.querySelectorAll('.goods-card');
-    const cart = []; // 장바구니 배열
+	const label = document.querySelector('.label');
+	const options = document.querySelectorAll('.optionItem');
+	const goodsCards = document.querySelectorAll('.goods-card');
 
- 	// 선택한 옵션에 따라 상품을 필터링하는 함수
+    // 선택한 옵션에 따라 상품을 필터링하는 함수
     const filterGoods = (category) => {
         goodsCards.forEach(card => {
             const cardId = card.querySelector('.goods-photo').id; // 상품의 ID 가져오기
@@ -210,52 +157,40 @@
         });
     }
 
- 	// 클릭한 옵션의 텍스트를 라벨 안에 넣고 필터링 실행
+    // 클릭한 옵션의 텍스트를 라벨 안에 넣고 필터링 실행
     const handleSelect = (item) => {
         label.parentNode.classList.remove('active');
         label.innerHTML = item.textContent;
-        filterGoods(item.textContent);// 필터링 함수 호출
+        filterGoods(item.textContent); // 필터링 함수 호출
     }
 
- 	// 옵션 클릭 시 클릭한 옵션을 넘김
+    // 옵션 클릭 시 클릭한 옵션을 넘김
     options.forEach(option => {
         option.addEventListener('click', () => handleSelect(option))
     });
 
- 	// 라벨을 클릭 시 옵션 목록이 열림/닫힘
-	label.addEventListener('click', () => {
-	    if(label.parentNode.classList.contains('active')) {
-	        label.parentNode.classList.remove('active');
-	    } else {
-	        label.parentNode.classList.add('active');
-	    }
-	});
-
-    // 상품을 장바구니에 추가하는 함수
-    function addToCart(productName, price) {
-        cart.push({ name: productName, price: price });
-        alert(`${productName}이(가) 장바구니에 추가되었습니다.`);
-        console.log(cart); // 장바구니 내용을 콘솔에 출력
-    }
+    // 라벨을 클릭 시 옵션 목록이 열림/닫힘
+    label.addEventListener('click', () => {
+        if(label.parentNode.classList.contains('active')) {
+            label.parentNode.classList.remove('active');
+        } else {
+            label.parentNode.classList.add('active');
+        }
+    });
     
+
  	// 등록하기
-    function addPlayer(){
+    function addGoods(){
     	const goodsFrame = document.getElementById('goods-List');
 		document.location.href="admin_addGoods.jsp";
     }
-    
-    // 수정하기
-    function editPlayer(){
-    	const goodsFrame = document.getElementById('goods-List');
-    	document.location.href="admin_updateGoods.jsp";
-    }
-    
+
+ 	
  	// md 클릭 시 이벤트
     document.querySelectorAll('.goods-card').forEach((item) => {
         item.addEventListener('click', () => {
         item.classList.toggle('active');
         
-        const cart = item.querySelector('.add-to-cart');
         if (item.classList.contains('active')) {
         	cart.style.border = 'none'
         }

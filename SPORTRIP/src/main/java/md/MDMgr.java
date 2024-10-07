@@ -24,7 +24,7 @@ public class MDMgr {
         Vector<MDBean> mdVector = new Vector<MDBean>();
         try {
         	con = pool.getConnection();
-            query = "SELECT * FROM MD where team_num = ?";
+            query = "SELECT * FROM md where team_num = ?";
             pstmt = con.prepareStatement(query);
             pstmt.setInt(1, TeamNum);
             rs = pstmt.executeQuery();
@@ -55,7 +55,7 @@ public class MDMgr {
     	Vector<MDBean> mdVector = new Vector<MDBean>();
         try {
         	con = pool.getConnection();
-            query = "SELECT * FROM MD WHERE MD_KINDOF = ?";
+            query = "SELECT * FROM md WHERE MD_KINDOF = ?";
             pstmt = con.prepareStatement(query);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -84,7 +84,7 @@ public class MDMgr {
     	
     	try {
     		con = pool.getConnection();
-    		query = "SELECT * FROM MD WHERE md_num = ?";
+    		query = "SELECT * FROM md WHERE md_num = ?";
     		pstmt = con.prepareStatement(query);
     		pstmt.setInt(1, md_num);
     		rs = pstmt.executeQuery();
@@ -101,5 +101,35 @@ public class MDMgr {
     		e.printStackTrace();
     	}
     	return md;
+    }
+    
+    // 상품 등록
+    public boolean insertMD(MDBean bean) {
+    	Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		
+		try {
+			con = pool.getConnection();
+			sql = "insert md values(null, ?, ?, ?, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bean.getTEAM_NUM());
+			pstmt.setInt(2, bean.getSPORT_NUM());
+			pstmt.setString(3, bean.getMD_NAME());
+			pstmt.setInt(4, bean.getMD_PRICE());
+			pstmt.setString(5, bean.getMD_KINDOF());
+			pstmt.setString(6, bean.getMD_IMG());
+			
+			if(pstmt.executeUpdate() == 1) {
+				flag = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
     }
 }
