@@ -27,7 +27,7 @@ public class PlayerMgr {
         
         try {
             con = pool.getConnection();
-            query = "SELECT * FROM PLAYER WHERE TEAM_NUM = ?"; // 팀 번호로 필터링
+            query = "SELECT * FROM player WHERE TEAM_NUM = ?"; // 팀 번호로 필터링
             pstmt = con.prepareStatement(query);
             pstmt.setInt(1, teamNum); // 팀 번호 설정
             rs = pstmt.executeQuery();
@@ -62,7 +62,7 @@ public class PlayerMgr {
     	
     	try {
     		con = pool.getConnection();
-    		query = "SELECT * FROM PLAYER WHERE PLAYER_NUM = ?"; // 팀 번호로 필터링
+    		query = "SELECT * FROM player WHERE PLAYER_NUM = ?"; // 팀 번호로 필터링
     		pstmt = con.prepareStatement(query);
     		pstmt.setInt(1, playerNum); // 팀 번호 설정
     		rs = pstmt.executeQuery();
