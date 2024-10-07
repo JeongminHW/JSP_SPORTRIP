@@ -78,8 +78,8 @@
 	<!-- 목록 -->
     <div class="list-btn"><button type="button" onclick="goList()">목록</button></div>
     <div class="btns">
-		<div class="moveTopBtn">↑</div>
-		<div class="moveBottomBtn">↓</div>
+		<div><button class="moveTopBtn">↑</button></div>
+		<div><button class="moveBottomBtn">↓</button></div>
 	</div>
     <script>
 		function goMain() {

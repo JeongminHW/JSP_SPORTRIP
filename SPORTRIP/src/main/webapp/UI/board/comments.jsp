@@ -38,28 +38,31 @@
 			<button onclick="repleComment(<%=com.getCOMMENT_NUM()%>)">답글</button>
 		</div>
 		<!-- 답글 출력 -->
-		<div class="replies" style="display: none;">
+			<div class="replies" style="display: none;">
 		<%
 			Vector<CommentBean> recommentList = commentMgr.listReply(com.getCOMMENT_NUM()); // 답글 목록 가져오기
 			if (recommentList != null && !recommentList.isEmpty()) {
 				for (CommentBean reCom : recommentList) {
 		%>
 			<div class="recomment-box" id="recomment_<%=reCom.getCOMMENT_NUM() %>">
-				<div class="user-box">
-					<div class="userInfo">
-						<span style="font-weight: bold;"><%=reCom.getID() %></span> <!-- 답글 작성자 ID -->
-						<span><%=reCom.getPOSTDATE() %></span>
-						<span><%=reCom.getIP() %></span>
-					</div>
-					<% if (login != null && com.getID().equals(login.getId())) { %> <!-- 본인 답글만 수정/삭제 -->
-					<div class="update-btn">
-						<button type="button" onclick="editComment(<%=reCom.getCOMMENT_NUM() %>)">수정</button>
-		                <button type="button" onclick="deleteComment(<%=reCom.getCOMMENT_NUM() %>)">삭제</button>
-					</div>
-					<% } %>
-				</div>
-				<div class="comment">
-					<p><%=reCom.getCONTENTS() %></p>
+				<img src=".././assets/images/reply_icon.png">
+				<div class="recomment-content">
+					<div class="user-box">
+							<div class="userInfo">
+								<span style="font-weight: bold;"><%=reCom.getID() %></span> <!-- 답글 작성자 ID -->
+								<span><%=reCom.getPOSTDATE() %></span>
+								<span><%=reCom.getIP() %></span>
+							</div>
+							<% if (login != null && com.getID().equals(login.getId())) { %> <!-- 본인 답글만 수정/삭제 -->
+							<div class="update-btn">
+								<button type="button" onclick="editComment(<%=reCom.getCOMMENT_NUM() %>)">수정</button>
+				                <button type="button" onclick="deleteComment(<%=reCom.getCOMMENT_NUM() %>)">삭제</button>
+							</div>
+							<% } %>
+						</div>
+						<div class="comment">
+							<p><%=reCom.getCONTENTS() %></p>
+						</div>
 				</div>
 				<!-- 답글 수정-->
 				<div class="comment-text-box" id="editForm_<%=reCom.getCOMMENT_NUM()%>" style="display:none;">
@@ -208,7 +211,7 @@
 	    // 답글 목록 및 답글 작성 창 토글
 	    if (repliesDiv.style.display === 'none' || repliesDiv.style.display === '') {
 	        repliesDiv.style.display = 'block';  // 답글 목록 보이기
-	        repleBox.style.display = 'block';    // 답글 작성 창 보이기
+	        repleBox.style.display = 'flex';    // 답글 작성 창 보이기
 	    } else {
 	        repliesDiv.style.display = 'none';   // 답글 목록 숨기기
 	        repleBox.style.display = 'none';     // 답글 작성 창 숨기기
@@ -245,4 +248,24 @@
 	    })
 	    .catch(error => console.error('Error:', error));
 	}
+	
+	// floatPosition을 정의
+	var floatPosition = 200;
+
+	// 스크롤 이벤트 리스너 추가
+	window.addEventListener('scroll', function() {
+	    // 현재 스크롤 위치
+	    var currentTop = window.scrollY; // 스크롤 위치
+	    var bannerTop = currentTop + floatPosition + "px"; // 배너 위치 계산
+
+	    // sideBanner 요소 선택
+	    var sideBanner = document.querySelector('.btns');
+
+	    // 이동 애니메이션
+	    sideBanner.style.transition = 'top 0.2s'; // 애니메이션 시간 설정
+	    sideBanner.style.top = bannerTop; // 배너 위치 업데이트
+	});
+
+	// 페이지 로드 시 스크롤 이벤트 발생
+	window.dispatchEvent(new Event('scroll'));
 </script>

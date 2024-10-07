@@ -320,9 +320,10 @@
     margin: auto;
     display: flex;
     margin-top: 20px;
+    justify-content: center;
     textarea{
         width: 85%;
-        min-height: 3em;
+        min-height: 4.3em;
         max-height: 10em;
         height: 3em;
         resize: vertical;
@@ -355,9 +356,10 @@
     margin: auto;
     margin-top: 10px;
     display: flex;
+    justify-content: center;
     textarea{
         width: 85%;
-        min-height: 3em;
+        min-height: 4.3em;
         max-height: 10em;
         height: 3em;
         resize: vertical;
@@ -376,38 +378,51 @@
     }
 }
 
-html, body {
-  height: 100%;
-}
 .btns {
-  display: flex;
-  position: fixed;
-  right: 0.4rem;
-  bottom: 0.4rem;
-  z-index: 1000; /* 다른 요소 위로 올리기 */
+    position: absolute;
+    width: 50px;
+    top: 150px;
+    right: 2%;
+    text-align: center;
 }
 
-.btns > div {
-  padding: 0.6rem 1.5rem;
-  background: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.2s;
-  color: #fff;
-  margin-right: 0.4rem;
+.moveTopBtn, .moveBottomBtn{
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	border: 1px solid #000;
+    border-radius: 5px;
+	font-size: 22px;
+	font-weight: bold;
+	margin: 1px;
 }
 
 .moveTopBtn:hover,
 .moveBottomBtn:hover {
   color: #000;
-  background: #febf00;
+  background: #eeeeee;
 }
 
 .list > div {
   margin-bottom: 1rem;
   margin-left: .4rem;
   font-size: 1.4rem;
+}
+
+.replies{
+	display: flex;
+	align-content: center;
+	img{
+		height: 12px;
+    	margin-left: 20px;
+	}
+}
+
+.recomment-box{
+	width: 100%;
+	display: flex;
+}
+
+.recomment-content{
+	width: 100%;
 }
