@@ -7,7 +7,21 @@ public class MatchdateBean {
 	private int TEAM_NUM1;
 	private int TEAM_NUM2;
 	private String MATCH_TIME;
+	private int TEAM1_POINT;
+	private int TEAM2_POINT;
 	
+	public int getTEAM1_POINT() {
+		return TEAM1_POINT;
+	}
+	public void setTEAM1_POINT(int tEAM1_POINT) {
+		TEAM1_POINT = tEAM1_POINT;
+	}
+	public int getTEAM2_POINT() {
+		return TEAM2_POINT;
+	}
+	public void setTEAM2_POINT(int tEAM2_POINT) {
+		TEAM2_POINT = tEAM2_POINT;
+	}
 	public int getMATCH_DATE_NUM() {
 		return MATCH_DATE_NUM;
 	}
