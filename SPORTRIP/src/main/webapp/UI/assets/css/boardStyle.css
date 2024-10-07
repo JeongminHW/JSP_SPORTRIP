@@ -375,3 +375,39 @@
         font-size: 16px;
     }
 }
+
+html, body {
+  height: 100%;
+}
+.btns {
+  display: flex;
+  position: fixed;
+  right: 0.4rem;
+  bottom: 0.4rem;
+  z-index: 1000; /* 다른 요소 위로 올리기 */
+}
+
+.btns > div {
+  padding: 0.6rem 1.5rem;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.2s;
+  color: #fff;
+  margin-right: 0.4rem;
+}
+
+.moveTopBtn:hover,
+.moveBottomBtn:hover {
+  color: #000;
+  background: #febf00;
+}
+
+.list > div {
+  margin-bottom: 1rem;
+  margin-left: .4rem;
+  font-size: 1.4rem;
+}
