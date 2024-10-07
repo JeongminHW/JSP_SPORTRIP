@@ -48,19 +48,26 @@
 	    	}
 	     
 	        const sportNum = <%=sportNum%>;
-	
-	        var searchteamName = encodeURI("<%=teamName%>");
+
+	        var trimsearchteamName = "<%=teamName%>".split(" ");
+	        var searchteamName = null;
+	        
+        	if(trimsearchteamName[1] == "서울"){
+        		searchteamName = trimsearchteamName[1];
+	        }else{
+	        	searchteamName = trimsearchteamName[0];
+	        }
 	        var pageSize = 0;
 	        if(sportNum == 1){
-	        	searchData = searchteamName + "KBO%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8&";
+	        	searchData = encodeURI(searchteamName) + encodeURI("KBO하이라이트");
 	        	pageSize = 12;
 	        }
 	        else if(sportNum == 2){
-	        	searchData =  searchteamName + "K%EB%A6%AC%EA%B7%B81%20%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8&";
+	        	searchData =  encodeURI(searchteamName) + encodeURI("K리그1하이라이트");
 	        	pageSize = 24;
 	        }
 	        else if(sportNum == 3){
-	        	searchData =  searchteamName + "kobo%EC%97%AC%EC%9E%90%EB%B0%B0%EA%B5%AC%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8&";
+	        	searchData =  encodeURI(searchteamName) + encodeURI("KOVO하이라이트");
 	        	pageSize = 12;
 	        }
 
@@ -68,7 +75,7 @@
 	          	const apiurl = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&"
 	          		+ "maxResults="+ pageSize +"&order=date&"
 	          		+ "q="+ searchData
-	          		+ "type=video&"
+	          		+ "&type=video&"
 	          		+ "videoDuration=medium&"
 	          		+ "key=AIzaSyADuItf8mzFqwyrWiWKYs89YaWA7TuwdWs";
 	
@@ -108,25 +115,16 @@
                           if (divCount >= 12) {
                               return; 
                           }
-                          if (title.includes(team[0]) && team[1] != "서울") {
-                          	if(sportNum == 2){
-                                  if (title.includes("K리그1")) {
-                                  	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
-                						divCount++;
-                                  } 	
-  							}
-                          	else{
-                          		$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
-  								divCount++; 
-                          	}
-                          }
-                          
-                         	if (title.includes(team[1]) && team[1] == "서울"){
-                                 if (title.includes("K리그1")) {
-                                 	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
-               						divCount++;
-                                 } 	
-                          }
+                    	  if(sportNum == 2){
+                              if (title.includes("K리그1") && title.includes(searchteamName)) {
+                              	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
+            						divCount++;
+                              } 	
+							}
+                      	else{
+                      		$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
+								divCount++; 
+                      	}
                       });
                   },
                   complete : function(data) {
