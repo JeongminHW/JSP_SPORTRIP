@@ -18,7 +18,6 @@
 	//요청 인코딩 설정
 	request.setCharacterEncoding("UTF-8");
 	int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-	System.out.println("boardNum: " + boardNum); // 로그로 확인
     Vector<CommentBean> commentList = commentMgr.listComment(boardNum); // 댓글 목록 가져오기 
 %>
 <div class="box">

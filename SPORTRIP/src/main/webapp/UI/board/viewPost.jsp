@@ -36,7 +36,6 @@
 	<div class="list-btn-top">
         <button type="button" onclick="goList()">목록</button>
     </div>
-
     <div class="post-content-box">
         <div class="post-header">
             <div class="post-title">
@@ -81,6 +80,10 @@
 	<jsp:include page="comments.jsp"/>
 	<!-- 목록 -->
     <div class="list-btn"><button type="button" onclick="goList()">목록</button></div>
+    <div class="btns">
+		<div class="moveTopBtn">↑</div>
+		<div class="moveBottomBtn">↓</div>
+	</div>
     <script>
 		function goMain() {
 			document.location.href = "mainPage.jsp";
@@ -152,9 +155,19 @@
             overlay.classList.remove('open'); // 배경 숨김
         });
 		
-        // 페이지 로딩 시 댓글을 불러옴
-        $(document).ready(function() {
-            loadComments(); // 댓글 불러오기 호출
+        const $topBtn = document.querySelector(".moveTopBtn");
+
+	    // 버튼 클릭 시 맨 위로 이동
+	    $topBtn.onclick = () => {
+	      window.scrollTo({ top: 0, behavior: "smooth" });  
+	    }
+	
+	    const $bottomBtn = document.querySelector(".moveBottomBtn");
+	
+	    // 버튼 클릭 시 페이지 하단으로 이동
+	    $bottomBtn.onclick = () => {
+	      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+	    };
 	</script>
 </body>
 </html>
