@@ -113,7 +113,7 @@
         }
     </style>
 </head>
-<body>
+<body style="margin: 0; background-color: #EEEEEE;">
     <header class="header header_logo">
         <a style="cursor: pointer" onclick="goMain()">
             <img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img">
@@ -125,96 +125,102 @@
             </ul>
         </div>
     </header>
-
-    <div class="h_top">
-        <div class="item" style="background-color: #083660;">
-            <a href="tripPage_Hotel.jsp">호텔</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="tripPage_Food.jsp">맛집</a>
-        </div>
-    </div>
-
-
-    <div style="float: left;" class="select-box">
-        <form method="POST" action="tripPage_Food.jsp" accept-charset="UTF-8">
-            <select name="sportNum" class="select year" onchange="this.form.submit()">
-                <option value="0">스포츠</option>
-                <option value="1" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("1")) ? "selected" : "" %>>야구</option>
-                <option value="2" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("2")) ? "selected" : "" %>>축구</option>
-                <option value="3" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("3")) ? "selected" : "" %>>배구</option>
-            </select>
-
-            <select name="stadium" id="stadiumSelect" class="select month" onchange="this.form.submit()">
-                <option value="0">경기장</option>
-                <% 
-                    String sportNumStr = request.getParameter("sportNum");
-                    if (sportNumStr != null && !sportNumStr.equals("0")) {
-                        int sportNum = Integer.parseInt(sportNumStr);
-                        StadiumMgr stadiumMgr = new StadiumMgr();
-                        List<StadiumBean> stadiumList = stadiumMgr.getStadiumsBySport(sportNum);
-
-                        for (StadiumBean stadium : stadiumList) {
-                %>
-                            <option value="<%= stadium.getSTADIUM_NAME() %>" <%= (request.getParameter("stadium") != null && request.getParameter("stadium").equals(stadium.getSTADIUM_NAME())) ? "selected" : "" %>>
-                                <%= stadium.getSTADIUM_NAME() %>
-                            </option>
-                <%
-                        }
-                    }
-                %>
-            </select>
-        </form>
-    </div>
-
-    <div class="search-menu-box">
-        <%
-            String selectedStadium = request.getParameter("stadium");
-        	StadiumBean selectedStadiumBean = null;
-            if (selectedStadium != null && !selectedStadium.equals("0")) {
-            	
-            	// 선택된 경기장 정보를 가져옴
-                StadiumMgr stadiumMgr = new StadiumMgr();
-
-                selectedStadiumBean = stadiumMgr.getStadiumByName(selectedStadium);
-           		
-                //맛집 정보를 가져옴
-                RestaurantMgr restaurantMgr = new RestaurantMgr();
-                List<RestaurantBean> restaurantList = restaurantMgr.getRestaurantsByStadiumName(selectedStadium);
-
-                if (!restaurantList.isEmpty()) {
-                    for (RestaurantBean restaurant : restaurantList) {
-        %>
-            <div class="food-box">
-                <div class="food-img">
-                    <img src="<%= restaurant.getRESTAURANT_IMG() %>" alt="맛집 이미지">
-                </div>
-                <div class="food-info-box">
-                    <section class="info-item">
-                        <span class="title" style="font-size: 24px;"><%= restaurant.getRESTAURANT_NAME() %></span><br>
-                        <p class="address"><%= restaurant.getADDRESS() %></p>
-                        <button class="show-location"
-                        onclick="openModal(
-                                '<%= restaurant.getRESTAURANT_NAME() %>',
-                                <%= restaurant.getLAT() %>, <%= restaurant.getLON() %>, 
-                                '<%= selectedStadiumBean.getSTADIUM_NAME() %>',
-                                <%= selectedStadiumBean.getLAT() %>, 
-                                <%= selectedStadiumBean.getLON() %>)">
-                                <img src=".././assets/images/location_img.png">위치보기</button>
-                    </section>
-                </div>
-            </div>
-        <%
-                    }
-                } else {
-        %>
-                    <p>근처 맛집 정보가 없습니다.</p>
-        <%
-                }
-            }
-        %>
-        
-    </div>
+	<div class="food_main">
+	    <div class="h_top">
+	        <div class="item">
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_Hotel.jsp'">숙소</button>
+	            <button type="button" class="food-btn" onclick="location.href='tripPage_Food.jsp'" style="background-color: #236FB5; color: white;">식당</button>
+	        </div>
+	    </div>
+	
+		<div class="hotel-info-section">	
+		    <div style="float: left;" class="select-box">
+		        <form method="POST" action="tripPage_Food.jsp" accept-charset="UTF-8">
+			        <div class="custom-select-wrapper">
+			            <select name="sportNum" class="select year" onchange="this.form.submit()">
+			                <option value="0">스포츠</option>
+			                <option value="1" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("1")) ? "selected" : "" %>>야구</option>
+			                <option value="2" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("2")) ? "selected" : "" %>>축구</option>
+			                <option value="3" <%= (request.getParameter("sportNum") != null && request.getParameter("sportNum").equals("3")) ? "selected" : "" %>>배구</option>
+			            </select>
+						<span class="custom-arrow">▼</span>
+				    </div>
+				    
+				    <div class="custom-select-wrapper">
+			            <select name="stadium" id="stadiumSelect" class="select month" onchange="this.form.submit()">
+			                <option value="0">경기장</option>
+			                <% 
+			                    String sportNumStr = request.getParameter("sportNum");
+			                    if (sportNumStr != null && !sportNumStr.equals("0")) {
+			                        int sportNum = Integer.parseInt(sportNumStr);
+			                        StadiumMgr stadiumMgr = new StadiumMgr();
+			                        List<StadiumBean> stadiumList = stadiumMgr.getStadiumsBySport(sportNum);
+			
+			                        for (StadiumBean stadium : stadiumList) {
+			                %>
+			                            <option value="<%= stadium.getSTADIUM_NAME() %>" <%= (request.getParameter("stadium") != null && request.getParameter("stadium").equals(stadium.getSTADIUM_NAME())) ? "selected" : "" %>>
+			                                <%= stadium.getSTADIUM_NAME() %>
+			                            </option>
+			                <%
+			                        }
+			                    }
+			                %>
+			            </select>
+		        		<span class="custom-arrow">▼</span>
+			   	 	</div>
+		        </form>
+		    </div>
+		
+		    <div class="search-menu-box">
+		        <%
+		            String selectedStadium = request.getParameter("stadium");
+		        	StadiumBean selectedStadiumBean = null;
+		            if (selectedStadium != null && !selectedStadium.equals("0")) {
+		            	
+		            	// 선택된 경기장 정보를 가져옴
+		                StadiumMgr stadiumMgr = new StadiumMgr();
+		
+		                selectedStadiumBean = stadiumMgr.getStadiumByName(selectedStadium);
+		           		
+		                //맛집 정보를 가져옴
+		                RestaurantMgr restaurantMgr = new RestaurantMgr();
+		                List<RestaurantBean> restaurantList = restaurantMgr.getRestaurantsByStadiumName(selectedStadium);
+		
+		                if (!restaurantList.isEmpty()) {
+		                    for (RestaurantBean restaurant : restaurantList) {
+		        %>
+		            <div class="food-box">
+		                <div class="food-img">
+		                    <img src="<%= restaurant.getRESTAURANT_IMG() %>" alt="맛집 이미지">
+		                </div>
+		                <div class="food-info-box">
+		                    <section class="info-item">
+		                        <span class="title" style="font-size: 24px;"><%= restaurant.getRESTAURANT_NAME() %></span><br>
+		                        <p class="address"><%= restaurant.getADDRESS() %></p>
+		                        <button class="show-location"
+		                        onclick="openModal(
+		                                '<%= restaurant.getRESTAURANT_NAME() %>',
+		                                <%= restaurant.getLAT() %>, <%= restaurant.getLON() %>, 
+		                                '<%= selectedStadiumBean.getSTADIUM_NAME() %>',
+		                                <%= selectedStadiumBean.getLAT() %>, 
+		                                <%= selectedStadiumBean.getLON() %>)">
+		                                <img src=".././assets/images/location_img.png">위치보기</button>
+		                    </section>
+		                </div>
+		            </div>
+		        <%
+		                    }
+		                } else {
+		        %>
+		                    <p>근처 맛집 정보가 없습니다.</p>
+		        <%
+		                }
+		            }
+		        %>
+		        
+		    </div>
+		</div>    
+	</div>
     <!-- 모달 팝업 -->
     <div id="mapModal" class="modal">
         <div class="modal-content">
