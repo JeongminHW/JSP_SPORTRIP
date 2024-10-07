@@ -5,7 +5,6 @@
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="boardMgr" class="board.BoardMgr" />
 <%
-
     request.setCharacterEncoding("UTF-8");
 
     String title = request.getParameter("title"); 

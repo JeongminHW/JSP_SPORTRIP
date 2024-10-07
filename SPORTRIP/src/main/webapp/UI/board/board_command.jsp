@@ -9,10 +9,7 @@
 	// 파라미터로 넘어온 값
 	String command = request.getParameter("command");
 	int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-	
-	System.out.println("command : " + command);
-    System.out.println("boardNum : " + boardNum);
-	
+
 	// BoardMgr 호출
 	boolean success = boardMgr.updateCommand(command, boardNum);
 	
