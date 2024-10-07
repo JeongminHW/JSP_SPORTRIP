@@ -62,29 +62,29 @@
 		<form action="updatePlayer.jsp" method="post" enctype="multipart/form-data">
 		    <input type="hidden" name="playerNum" value="<%= playerNum %>">
 		    <div class="updateplayer-item">
-		        <label class="label" for="player_name">선수 이름</label>
-		        <input class="input" type="text" id="player_name" name="player_name" value="<%= playerBean.getPLAYER_NAME() %>">
+		        <label class="label" for="playerName">선수 이름</label>
+		        <input class="input" type="text" id="playerName" name="playerName" value="<%= playerBean.getPLAYER_NAME() %>">
 		    </div>
 		    <div class="updateplayer-item">
-		        <label class="label" for="player_position">선수 포지션</label>
-		        <input class="input" type="text" id="player_position" name="player_position" value="<%= playerBean.getPOSITION() %>">
+		        <label class="label" for="playerPosition">선수 포지션</label>
+		        <input class="input" type="text" id="playerPosition" name="playerPosition" value="<%= playerBean.getPOSITION() %>">
 		    </div>
 		    <div class="updateplayer-item">
-		        <label class="label" for="player_backnum">선수 등번호</label>
-		        <input class="input" type="text" id="player_backnum" name="player_backnum" value="<%= playerBean.getUNIFORM_NUM() %>">
+		        <label class="label" for="playerBacknum">선수 등번호</label>
+		        <input class="input" type="text" id="playerBacknum" name="playerBacknum" value="<%= playerBean.getUNIFORM_NUM() %>">
 		    </div>
 		    <div class="updateplayer-item file-box">
-		        <label class="label" for="player_img">선수 이미지</label>
+		        <label class="label" for="playerImg">선수 이미지</label>
 		        <div class="file-box">
 		            <input class="upload-file" placeholder="첨부파일" readonly>
 		            <label id="file-label" for="file"></label>
-		            <input type="file" id="file" name="player_img">
+		            <input type="file" id="file" name="playerImg">
 		        </div>
 		    </div>
 		    <div class="updateplayer-item">
 		        <input type="button" onclick="playerManager()" value="목록">
-		        <input type="hidden" id="player_num" name="player_num" value="<%= playerBean.getPLAYER_NUM() %>">
-		        <input type="submit" value="수정">
+		        <input type="hidden" id="playerNum" name="playerNum" value="<%= playerBean.getPLAYER_NUM() %>">
+		        <input type="button" onclick="updatePlayer()" value="수정">
 		    </div>
 		</form>
 
@@ -102,6 +102,42 @@
 	        var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
 	        document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
 	    });
+	    
+	    function updatePlayer() {
+	        let playerName = document.getElementById('playerName').value;
+	        let playerPosition = document.getElementById('playerPosition').value;
+	        let playerBacknum = document.getElementById('playerBacknum').value;
+	        let playerImg = document.getElementById('file').files[0]; 
+	        let playerNum = document.getElementById('playerNum').value;
+
+	        console.log(playerName);
+	        console.log(playerPosition);
+	        console.log(playerBacknum);
+	        console.log(playerImg);
+	        console.log(playerNum);
+	        
+	        const formData = new FormData();
+	        formData.append('playerNum', playerNum);
+	        formData.append('playerName', playerName);
+	        formData.append('playerPosition', playerPosition);
+	        formData.append('playerBacknum', playerBacknum);
+	        formData.append('playerImg', playerImg); 
+
+	        fetch('update_player.jsp', {
+	            method: 'POST',
+	            body: formData 
+	        })
+	        .then(response => response.text())
+	        .then(data => {
+	            if (data.includes("success")) { 
+	                alert('선수 수정이 완료되었습니다.');
+	                location.href = "admin_player.jsp"; 
+	            } else {
+	                alert('선수 등록이 되지 않았습니다.');
+	            }
+	        })
+	        .catch(error => console.error('Error:', error));
+	    }
 	</script>
 </body>
 </html>

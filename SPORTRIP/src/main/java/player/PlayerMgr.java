@@ -68,6 +68,7 @@ public class PlayerMgr {
     		rs = pstmt.executeQuery();
     		
     		if (rs.next()) {
+
     			player = new PlayerBean(); // 새로운 PlayerBean 객체 생성
     			player.setPLAYER_NUM(rs.getInt(1));
     			player.setTEAM_NUM(rs.getInt(2));
@@ -121,14 +122,14 @@ public class PlayerMgr {
     	boolean flag = false;
     	try {
     		con = pool.getConnection();
-    		sql = "update player set BIRTH = ?, PLAYER_IMG = ?, POSITION = ?, UNIFORM_NUM = ? where PLAYER_NUM = ?";
-    		pstmt = con.prepareStatement(sql);
-
+    		sql = "update player set PLAYER_NAME = ?, BIRTH = ?, POSITION = ?, UNIFORM_NUM = ?, PLAYER_IMG = ? where PLAYER_NUM = ?";
+			pstmt = con.prepareStatement(sql);
+			
     		pstmt.setString(1, bean.getPLAYER_NAME());
     		pstmt.setString(2, bean.getBIRTH());
-    		pstmt.setString(3, bean.getPLAYER_IMG());
-    		pstmt.setString(4, bean.getPOSITION());
-    		pstmt.setString(5, bean.getUNIFORM_NUM());
+    		pstmt.setString(3, bean.getPOSITION());
+    		pstmt.setString(4, bean.getUNIFORM_NUM());
+    		pstmt.setString(5, bean.getPLAYER_IMG());
     		pstmt.setInt(6, bean.getPLAYER_NUM());
     		
     		if(pstmt.executeUpdate() == 1) {

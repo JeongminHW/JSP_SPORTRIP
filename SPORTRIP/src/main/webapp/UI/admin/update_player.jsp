@@ -16,6 +16,7 @@
     MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, new DefaultFileRenamePolicy());
     
     // POST 데이터 받기
+    String playerNum = multi.getParameter("playerNum");
     String playerName = multi.getParameter("playerName");
     String playerPosition = multi.getParameter("playerPosition");
     String playerBacknum = multi.getParameter("playerBacknum");
@@ -23,8 +24,7 @@
     if(multi.getFile("playerImg") != null){
     	playerImgFile = multi.getFile("playerImg");
     }
-    int teamNum = Integer.parseInt(multi.getParameter("teamNum")); // 팀 번호 받기
-
+    
     String playerImgPath = null;
     if (playerImgFile != null) {
         String uniqueFileName = playerBacknum + playerName + ".png"; 
@@ -39,21 +39,21 @@
     	playerImgPath = ".././assets/images/player_img/기본.png";
     }
 
-    // 데이터베이스에 저장할 때 경로를 포함한 정보를 전달
     PlayerMgr playerMgr = new PlayerMgr();
     PlayerBean playerBean = new PlayerBean();
-    playerBean.setTEAM_NUM(teamNum);
+    
+    playerBean.setPLAYER_NUM(Integer.parseInt(playerNum));
     playerBean.setPLAYER_NAME(playerName);
     playerBean.setBIRTH("2000-08-29");
-    playerBean.setPLAYER_IMG(playerImgPath); 
     playerBean.setPOSITION(playerPosition);
     playerBean.setUNIFORM_NUM(playerBacknum);
-
-    boolean isInserted = playerMgr.insertPlayer(playerBean);
+    playerBean.setPLAYER_IMG(playerImgPath);
     
-    if (isInserted) {
-        out.print("success");
+    boolean updateStatus = playerMgr.updatePlayer(playerBean);
+
+    if (updateStatus) {
+        out.println("sucess");
     } else {
-        out.print("failure");
+        out.println("fail");
     }
 %>
