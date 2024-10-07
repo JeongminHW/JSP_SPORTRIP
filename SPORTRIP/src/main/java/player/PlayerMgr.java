@@ -145,14 +145,14 @@ public class PlayerMgr {
     }
     
     // 선수 삭제(관리자)
-    public boolean updatePlayer(int player_num) {
+    public boolean deletePlayer(int player_num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "delete player where player_num = ?";
+			sql = "delete from player where player_num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, player_num);
 			if(pstmt.executeUpdate() == 1) {
