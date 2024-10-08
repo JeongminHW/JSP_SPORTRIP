@@ -66,7 +66,6 @@
             <div class="bottom"></div>
         </label>
     </header>
-    
     <div class="overlay" id="overlay"></div>
     <nav class="menu">
         <ul class="menu-list">
@@ -82,3 +81,9 @@
 			</li>
         </ul>
     </nav>
+</body>
+<script>
+    function goMain(){
+        document.location.href=".././sport/mainPage.jsp";
+    }
+</script>

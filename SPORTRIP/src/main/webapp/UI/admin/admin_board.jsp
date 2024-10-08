@@ -62,13 +62,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-				int index = 1;
-				if (boardInfo != null && !boardInfo.isEmpty()) {
-				%>
-				<%
-				for (BoardBean board : boardInfo) {
-				%>
+				<% int index = 1; %>
+				<% if (boardInfo != null && !boardInfo.isEmpty()) {	%>
+				<% for (BoardBean board : boardInfo) { %>
 				<tr>
 					<td><%=index++%></td>
 					<td><a href="#"
@@ -78,16 +74,11 @@
 					<td><%=board.getVIEWS()%></td>
 					<td><%=board.getRECOMMAND()%></td>
 				</tr>
-				<%
-				}
-				} else {
-				%>
+				<% }} else { %>
 				<tr>
 					<td colspan="6">게시글이 없습니다.</td>
 				</tr>
-				<%
-				}
-				%>
+				<% } %>
 			</tbody>
 		</table>
 	</div>
@@ -101,20 +92,8 @@
 	<button>검색</button>
 </div>
 <script>
-    function goMain(){
-        document.location.href=".././sport/mainPage.jsp";
-    }
-    
     function postMessage() {
-        // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
-        var userId = "<%=login.getId() != null ? login.getId() : ""%>"; // 로그인 여부를 세션에서 체크
-
-        if (userId !== "") { // 로그인 되어 있으면
-            document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
-        } else {
-            alert("로그인이 필요합니다."); // 로그인 필요 메시지 출력
-            document.location.href = ".././user/login.jsp"; // 로그인 페이지로 이동
-        }
+        document.location.href = "admin_addBoard.jsp";
     }
     
  	// 팀 번호 전달
@@ -174,5 +153,3 @@
         overlay.classList.remove('open'); // 배경 숨김
     });
 </script>
-</body>
-</html>
