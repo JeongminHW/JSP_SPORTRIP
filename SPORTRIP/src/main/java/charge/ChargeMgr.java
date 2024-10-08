@@ -49,6 +49,43 @@ public class ChargeMgr {
         return chargeList;
     }
     
+    // 아이디와 스포츠로 결제 내역 조회
+    public Vector<ChargeBean> findSportCharge(String id, int sportNum) {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	String query = null;
+    	ChargeBean charge = null;
+    	Vector<ChargeBean> chargeList = new Vector<ChargeBean>();
+    	try {
+    		con = pool.getConnection();
+    		query = "SELECT c.*"
+    				+" FROM CHARGE c"
+    				+" JOIN MD m ON c.MD_NUM = m.MD_NUM"
+    				+" WHERE c.ID = ? and m.SPORT_NUM = ?";
+    		
+
+    		pstmt = con.prepareStatement(query);
+    		pstmt.setString(1, id);
+    		pstmt.setInt(2, sportNum);
+    		rs = pstmt.executeQuery();
+    		while (rs.next()) {
+    			charge = new ChargeBean();
+    			charge.setCHARGE_NUM(rs.getInt(1));
+    			charge.setID(rs.getString(2));
+    			charge.setORDER_NUM(rs.getString(3));
+    			charge.setCHARGE_DATE(rs.getString(4));
+    			charge.setMD_NUM(rs.getInt(5));
+    			charge.setREPAIR_C(rs.getInt(6));
+    			charge.setPRICE(rs.getInt(7));
+    			chargeList.addElement(charge);
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return chargeList;
+    }
+    
     // 굿즈 결제
     public boolean payMD(ChargeBean bean) {
 		Connection con = null;

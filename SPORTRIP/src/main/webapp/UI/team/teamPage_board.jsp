@@ -123,7 +123,7 @@
 		}
 	 	
 		// 게시글 번호 전달
-		function sendBoardNum(boardNum, page) {
+		function sendBoardNum(boardNum, teamNum, page) {
 		    // 세션에 값을 설정
 		    var form = document.createElement("form");
 		    form.setAttribute("method", "POST");

@@ -101,7 +101,7 @@ pageEncoding="UTF-8"%>
 						<li id="login"><a href=".././user/login.jsp"><span>로그인</span></a></li>
 						<li id="signup"><a href=".././user/signup.jsp"><span>회원가입</span></a></li>
                         <li><a href=".././md/shoppingPage_basket.jsp"><span>장바구니</span></a></li>
-                        <li><a href=".././user/myPage.html"><span>마이페이지</span></a></li>
+                        <li><a href=".././user/myPage.jsp"><span>마이페이지</span></a></li>
                     </ul>
                 </li>
             </ul>

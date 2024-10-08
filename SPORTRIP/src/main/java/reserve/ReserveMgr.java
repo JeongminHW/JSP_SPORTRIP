@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import DB.DBConnectionMgr;
 
@@ -45,6 +46,72 @@ public class ReserveMgr {
 	        pool.freeConnection(con, pstmt, rs);
 	    }
 	    return bean;
+	}
+	
+	// 사용자 예약 예정 정보 전체 출력
+	public Vector<ReserveBean> soonListReserve(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<ReserveBean> vlist = new Vector<ReserveBean>();
+		try {
+			con = pool.getConnection();
+			sql = "SELECT * FROM Reserve WHERE ID = ? and CHECK_IN > now()";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ReserveBean bean = new ReserveBean();
+				bean.setRESERVE_NUM(rs.getInt("RESERVE_NUM")); 
+				bean.setID(rs.getString("ID"));                
+				bean.setLODGING_NUM(rs.getInt("LODGING_NUM")); 
+				bean.setROOM_NUM(rs.getInt("ROOM_NUM"));       
+				bean.setHEADCOUNT(rs.getInt("HEADCOUNT"));     
+				bean.setRESERVE_PRICE(rs.getInt("RESERVE_PRICE"));
+				bean.setCHECK_IN(rs.getDate("CHECK_IN"));         
+				bean.setCHECK_OUT(rs.getDate("CHECK_OUT"));     
+				vlist.addElement(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
+	
+	// 사용자 예약 종료 정보 전체 출력
+	public Vector<ReserveBean> endListReserve(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<ReserveBean> vlist = new Vector<ReserveBean>();
+		try {
+			con = pool.getConnection();
+			sql = "SELECT * FROM Reserve WHERE ID = ? and CHECK_IN <= now()";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ReserveBean bean = new ReserveBean();
+				bean.setRESERVE_NUM(rs.getInt("RESERVE_NUM")); 
+				bean.setID(rs.getString("ID"));                
+				bean.setLODGING_NUM(rs.getInt("LODGING_NUM")); 
+				bean.setROOM_NUM(rs.getInt("ROOM_NUM"));       
+				bean.setHEADCOUNT(rs.getInt("HEADCOUNT"));     
+				bean.setRESERVE_PRICE(rs.getInt("RESERVE_PRICE"));
+				bean.setCHECK_IN(rs.getDate("CHECK_IN"));         
+				bean.setCHECK_OUT(rs.getDate("CHECK_OUT"));     
+				vlist.addElement(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
 	}
 	
 	// 예약 정보 저장

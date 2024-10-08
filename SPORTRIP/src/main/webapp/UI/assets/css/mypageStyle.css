@@ -49,22 +49,16 @@ a {
 }
 
 .info {
-	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 100%; > span { margin-right : 20px; /* 회원 정보 수정 버튼과 약간의 간격 */
+	width: 100%; > span { margin-right : 10px; /* 회원 정보 수정 버튼과 약간의 간격 */
 	font-size: 30px;
 	text-align: left;
 	font-weight: bold;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+	}
 }
 
->
-.basket-icon {
-	margin-left: auto; /* 장바구니 이미지를 오른쪽 끝에 정렬 */
-	text-align: right;
-}
-
-}
 .modify-button, .save-button {
 	margin-left: 20px;
 	text-align: center;
@@ -86,8 +80,12 @@ a {
 }
 
 .basket-icon {
-	width: 30px;
+	width: 40px;
 	cursor: pointer;
+	margin-left: auto; /* 장바구니 이미지를 오른쪽 끝에 정렬 */
+	text-align: center;
+	float:right; /* 오른쪽 정렬 */
+	
 }
 
 .basket-icon:hover {
@@ -485,10 +483,9 @@ tr {
 }
 
 #down-arrow {
-	width: 20px;
-	height: 20px;
+	width: 10px;
+	height: 10px;
 	transition: transform 0.3s;
-	margin-left: 5px;
 }
 
 .rotate {

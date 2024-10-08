@@ -43,6 +43,33 @@ public class UserMgr {
         return flag;
     }
     
+    // 사용자 수정
+    public boolean updateUser(UserBean user) {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+    	String query = null;
+    	boolean flag = false;
+    	
+    	try {
+    		con = pool.getConnection();
+    		query = "update user set NAME = ?, ADDRESS = ?, POSTCODE = ?, PHONE = ?, EMAIL = ? where ID = ?";
+    		pstmt = con.prepareStatement(query);
+    		pstmt.setString(1, user.getName());
+    		pstmt.setString(2, user.getAddress());
+    		pstmt.setInt(3, user.getPostcode());
+    		pstmt.setString(4, user.getPhone());
+    		pstmt.setString(5, user.getEmail());
+    		pstmt.setString(6, user.getId());
+    		if(pstmt.executeUpdate() == 1) {
+    			flag = true;
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return flag;
+    }
+    
     // 로그인
 	public boolean checkLogin(String id, String pw) {
 		Connection con = null;

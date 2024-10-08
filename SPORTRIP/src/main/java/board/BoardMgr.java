@@ -211,6 +211,40 @@ public class BoardMgr {
 		}
 	}
 
-	
+	// 본인이 작성한 글 리스트 조회
+	public Vector<BoardBean> findIdBoard(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		BoardBean board = null;
+		Vector<BoardBean> vlist = new Vector<BoardBean>();
+		try {
+			con = pool.getConnection();
+			sql = "select * from board where ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				board = new BoardBean(); // 새로운 Bean 객체 생성
+				board.setBOARD_NUM(rs.getInt(1));
+				board.setTITLE(rs.getString(2));
+				board.setCONTENTS(rs.getString(3));
+				board.setPOSTDATE(rs.getString(4));
+				board.setIP(rs.getString(5));
+				board.setID(rs.getString(6));
+				board.setRECOMMAND(rs.getInt(7));
+				board.setNONRECOMMAND(rs.getInt(8));
+				board.setTEAM_NUM(rs.getInt(9));
+				board.setVIEWS(rs.getInt(10));
+				vlist.addElement(board);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
 	
 }
