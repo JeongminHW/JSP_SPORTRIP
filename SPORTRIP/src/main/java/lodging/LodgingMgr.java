@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import DB.DBConnectionMgr;
+import reserve.ReserveBean;
 
 public class LodgingMgr {
     private DBConnectionMgr pool;
@@ -83,5 +84,38 @@ public class LodgingMgr {
         }
         return lodgingList;
     }
+    
+	public LodgingBean getLodging(int lodgingNum) {
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    String sql = null;
+	    LodgingBean lodging = null;
+	    try {
+	        con = pool.getConnection();
+	        sql = "SELECT * FROM LODGING WHERE LODGING_NUM = ?";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setInt(1, lodgingNum);
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+                lodging = new LodgingBean();
+                lodging.setLODGING_NUM(rs.getInt("LODGING_NUM"));
+                lodging.setLODGING_NAME(rs.getString("LODGING_NAME"));
+                lodging.setCATEGORY(rs.getString("CATEGORY"));
+                lodging.setGRADE(rs.getString("GRADE"));
+                lodging.setADDRESS(rs.getString("ADDRESS"));
+                lodging.setLODGING_IMG(rs.getString("LODGING_IMG"));
+                lodging.setLON(rs.getString("LON"));
+                lodging.setLAT(rs.getString("LAT"));
+                lodging.setSTARDIUM(rs.getString("STARDIUM")); // STARDIUM 필드
+                
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        pool.freeConnection(con, pstmt, rs);
+	    }
+	    return lodging;
+	}
 
 }

@@ -7,6 +7,7 @@
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 
 <%
+	request.setCharacterEncoding("UTF-8");
     // 파일이 저장될 경로 설정 (서버에서 사용할 실제 경로)
     String saveDirectory = application.getRealPath("/UI/assets/images/player_img/");
     int maxPostSize = 10 * 1024 * 1024; // 최대 파일 크기 10MB

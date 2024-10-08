@@ -94,6 +94,7 @@
         // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
         var userId = "<%=login.getId() != null ? login.getId() : ""%>"; // 로그인 여부를 세션에서 체크
 
+
         if (userId !== "") { // 로그인 되어 있으면
             document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
         } else {
@@ -135,6 +136,7 @@
 	    document.body.appendChild(form);
 	    form.submit();
 	}
+
 
 	// 페이지 로드 시 체크박스 해제
 	window.addEventListener('load', function() {
