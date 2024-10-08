@@ -6,6 +6,7 @@
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
@@ -21,140 +22,130 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
-
 <jsp:include page="team_header.jsp"/>
+<div class="highlight-container">
+	<script>
+  	// 팀 번호 전달
+ 	function sendTeamNum(teamNum, page) {
+ 	    // 세션에 값을 설정
+ 	    var form = document.createElement("form");
+ 	    form.setAttribute("method", "POST");
+ 	    form.setAttribute("action", page + ".jsp");
+ 	
+ 	    var teamField = document.createElement("input");
+ 	    teamField.setAttribute("type", "hidden");
+ 	    teamField.setAttribute("name", "teamNum");
+ 	    teamField.setAttribute("value", teamNum);
+ 	    form.appendChild(teamField);
+ 	
+ 	    document.body.appendChild(form);
+ 	    form.submit();
+	}
+  
+    const sportNum = <%=sportNum%>;
 
-	<div class="highlight-container">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script type="text/javascript">
-	        function goMain(){
-	            document.location.href=".././sport/mainPage.jsp";
-	        }
-	     	// 팀 번호 전달
-	    	function sendTeamNum(teamNum, page) {
-	    	    // 세션에 값을 설정
-	    	    var form = document.createElement("form");
-	    	    form.setAttribute("method", "POST");
-	    	    form.setAttribute("action", page + ".jsp");
-	    	
-	    	    var teamField = document.createElement("input");
-	    	    teamField.setAttribute("type", "hidden");
-	    	    teamField.setAttribute("name", "teamNum");
-	    	    teamField.setAttribute("value", teamNum);
-	    	    form.appendChild(teamField);
-	    	
-	    	    document.body.appendChild(form);
-	    	    form.submit();
-	    	}
-	     
-	        const sportNum = <%=sportNum%>;
-	
-	        var searchteamName = encodeURI("<%=teamName%>");
-	        var pageSize = 0;
-	        if(sportNum == 1){
-	        	searchData = searchteamName + "KBO%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8&";
-	        	pageSize = 12;
-	        }
-	        else if(sportNum == 2){
-	        	searchData =  searchteamName + "K%EB%A6%AC%EA%B7%B81%20%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8&";
-	        	pageSize = 24;
-	        }
-	        else if(sportNum == 3){
-	        	searchData =  searchteamName + "kobo%EC%97%AC%EC%9E%90%EB%B0%B0%EA%B5%AC%ED%95%98%EC%9D%B4%EB%9D%BC%EC%9D%B4%ED%8A%B8&";
-	        	pageSize = 12;
-	        }
+    var trimsearchteamName = "<%=teamName%>".split(" ");
+    var searchteamName = null;
+     
+    if(trimsearchteamName[1] == "서울"){
+    	searchteamName = trimsearchteamName[1];
+    } else {
+     	searchteamName = trimsearchteamName[0];
+    }
+    var pageSize = 0;
+    if(sportNum == 1){
+     	searchData = encodeURI(searchteamName) + encodeURI("KBO하이라이트");
+     	pageSize = 12;
+    }
+    else if(sportNum == 2){
+    	searchData =  encodeURI(searchteamName) + encodeURI("K리그1하이라이트");
+     	pageSize = 24;
+    }
+    else if(sportNum == 3){
+     	searchData =  encodeURI(searchteamName) + encodeURI("KOVO하이라이트");
+     	pageSize = 12;
+    }
 
-            $(document).ready(function() {
-	          	const apiurl = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&"
-	          		+ "maxResults="+ pageSize +"&order=date&"
-	          		+ "q="+ searchData
-	          		+ "type=video&"
-	          		+ "videoDuration=medium&"
-	          		+ "key=AIzaSyADuItf8mzFqwyrWiWKYs89YaWA7TuwdWs";
-	
-	            function convertUTCToKST(utcStr) {
-	                const date = new Date(utcStr);
-	                    const offset = 9 * 60; 
-	                    const localDate = new Date(date.getTime() + offset * 60000);
-	                    localDate.setDate(localDate.getDate() - 1); // 하루를 빼기
-	    
-	                    const yyyy = localDate.getFullYear();
-	                    const mm = String(localDate.getMonth() + 1).padStart(2, '0');
-	                    const dd = String(localDate.getDate()).padStart(2, '0');
-	                    return `${ "${yyyy}" }-${ "${mm}" }-${ "${dd}" }`;
+    $(document).ready(function() {
+   	const apiurl = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&"
+   		+ "maxResults="+ pageSize +"&order=date&"
+   		+ "q="+ searchData
+   		+ "&type=video&"
+   		+ "videoDuration=medium&"
+   		+ "key=AIzaSyADuItf8mzFqwyrWiWKYs89YaWA7TuwdWs";
+
+     function convertUTCToKST(utcStr) {
+         const date = new Date(utcStr);
+             const offset = 9 * 60; 
+             const localDate = new Date(date.getTime() + offset * 60000);
+             localDate.setDate(localDate.getDate() - 1); // 하루를 빼기
+
+             const yyyy = localDate.getFullYear();
+             const mm = String(localDate.getMonth() + 1).padStart(2, '0');
+             const dd = String(localDate.getDate()).padStart(2, '0');
+             return `${ "${yyyy}" }-${ "${mm}" }-${ "${dd}" }`;
+      }
+
+      function truncateTitle(title) {
+              const separatorIndex = title.indexOf('|');
+              if (separatorIndex !== -1) {
+                  return title.substring(0, separatorIndex).trim();
               }
+              return title;
+      }
       
-              function truncateTitle(title) {
-                      const separatorIndex = title.indexOf('|');
-                      if (separatorIndex !== -1) {
-                          return title.substring(0, separatorIndex).trim();
+      $.ajax({
+       type: "GET",
+       dataType: "json",
+       url: apiurl,
+       contentType : "application/json",
+       success : function(data) {
+           let divCount = 0; 
+
+           data.items.forEach(function(element, index) {
+               const title = element.snippet.title;
+               const publishedDate = convertUTCToKST(element.snippet.publishedAt);
+               const truncatedTitle = truncateTitle(title);
+	   		   var team = "<%=teamName%>".split(" ");
+                      if (divCount >= 12) {
+                          return; 
                       }
-                      return title;
+                	  if(sportNum == 2){
+                          if (title.includes("K리그1") && title.includes(searchteamName)) {
+                          	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
+        						divCount++;
+                          } 	
+			}
+                  	else{
+                  		$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
+				divCount++; 
+                  	}
+                  });
+              },
+              complete : function(data) {
+              },
+              error : function(xhr, status, error) {
+                  console.log("유튜브 요청 에러: "+error);
               }
-              
-              $.ajax({
-               type: "GET",
-               dataType: "json",
-               url: apiurl,
-               contentType : "application/json",
-               success : function(data) {
-                   let divCount = 0; 
-
-                   data.items.forEach(function(element, index) {
-                       const title = element.snippet.title;
-                       const publishedDate = convertUTCToKST(element.snippet.publishedAt);
-                       const truncatedTitle = truncateTitle(title);
-					   var team = "<%=teamName%>".split(" ");
-                          if (divCount >= 12) {
-                              return; 
-                          }
-                          if (title.includes(team[0]) && team[1] != "서울") {
-                          	if(sportNum == 2){
-                                  if (title.includes("K리그1")) {
-                                  	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
-                						divCount++;
-                                  } 	
-  							}
-                          	else{
-                          		$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
-  								divCount++; 
-                          	}
-                          }
-                          
-                         	if (title.includes(team[1]) && team[1] == "서울"){
-                                 if (title.includes("K리그1")) {
-                                 	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
-               						divCount++;
-                                 } 	
-                          }
-                      });
-                  },
-                  complete : function(data) {
-                  },
-                  error : function(xhr, status, error) {
-                      console.log("유튜브 요청 에러: "+error);
-                  }
-              });
           });
-            
-            $(document).ready(function() {
-                // 페이지 로드 시 체크박스 해제
-                $('#toggle').prop('checked', false); // 체크박스 해제
+      	});
+        
+        $(document).ready(function() {
+            // 페이지 로드 시 체크박스 해제
+            $('#toggle').prop('checked', false); // 체크박스 해제
 
-                // 햄버거 메뉴
-                $('#toggle').change(function() {
-                    $('.menu').toggleClass('open');
-                    $('#overlay').toggleClass('open');
-                });
-
-                // 클릭 시 메뉴 닫기
-                $('#overlay').click(function() {
-                    $('#toggle').prop('checked', false); // 체크박스 해제
-                    $('.menu').removeClass('open'); // 메뉴 숨김
-                    $('#overlay').removeClass('open'); // 배경 숨김
-                });
+            // 햄버거 메뉴
+            $('#toggle').change(function() {
+                $('.menu').toggleClass('open');
+                $('#overlay').toggleClass('open');
             });
-        </script>
-	</div>
-</body>
-</html>
+
+            // 클릭 시 메뉴 닫기
+            $('#overlay').click(function() {
+                $('#toggle').prop('checked', false); // 체크박스 해제
+                $('.menu').removeClass('open'); // 메뉴 숨김
+                $('#overlay').removeClass('open'); // 배경 숨김
+            });
+        });
+    </script>
+</div>

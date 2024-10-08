@@ -25,142 +25,139 @@
 	// 게시글 정보 가져오기
 	Vector<BoardBean> boardInfo = boardMgr.listBoard(teamNum);
 	// NullPointerException 방지
-    if (boardInfo == null) {
-        boardInfo = new Vector<>();
-    }
+	if (boardInfo == null) {
+		boardInfo = new Vector<>();
+	}
 	
 	String teamName = teamInfo.getTEAM_NAME();
-	int sportNum = (int)session.getAttribute("sportNum");
+	int sportNum = (int) session.getAttribute("sportNum");
 %>
 
-<jsp:include page="team_header.jsp"/>
+<jsp:include page="team_header.jsp" />
 
-    <div class="table-list-box">
-        <div class="write-btn">
-            <button onclick="postMessage()">글쓰기</button>
-        </div>
-        <div class="table-list">
-            <table>
-                <colgroup>
-                    <col class="size01" data-alias="num">
-                    <col class="size02" data-alias="title">
-                    <col class="size03" data-alias="writer">
-                    <col class="size04" data-alias="date">
-                    <col class="size05" data-alias="view">
-                    <col class="size06" data-alias="recommend">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>조회</th>
-                        <th>추천</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <% int index = 1; 
-                if (boardInfo != null && !boardInfo.isEmpty()) { %>
-		            <% for (BoardBean board : boardInfo) { %>
-		            <tr>
-			            <td><%=index++ %></td>
-	                    <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>,'.././board/viewPost')"><%=board.getTITLE() %></a></td>
-	                    <td><%=board.getID() %></td>
-	                    <td><%=board.getPOSTDATE() %></td>
-	                    <td><%=board.getVIEWS() %></td>
-	                    <td><%=board.getRECOMMAND() %></td>
-                    </tr>
-                  	<% } 
-		            } else { %>
-   						<tr><td colspan="6">게시글이 없습니다.</td></tr>
-		        <% } %>               
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="board-search-box">
-        <select name="type" id="">
-            <option value="제목">제목</option>
-            <option value="작성자">작성자</option>
-            <option value="작성자">작성일</option>
-        </select>
-        <input name="searchText" type="text" placeholder="검색어를 입력하세요.">
-        <button>검색</button>
-    </div>
-    <script>
-	    function goMain(){
-	        document.location.href=".././sport/mainPage.jsp";
-	    }
-	    
-	    function postMessage() {
-	        // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
-	        var userId = "<%=login.getId() != null ? login.getId() : "" %>"; // 로그인 여부를 세션에서 체크
+<div class="table-list-box">
+	<div class="write-btn">
+		<button onclick="postMessage()">글쓰기</button>
+	</div>
+	<div class="table-list">
+		<table>
+			<colgroup>
+				<col class="size01" data-alias="num">
+				<col class="size02" data-alias="title">
+				<col class="size03" data-alias="writer">
+				<col class="size04" data-alias="date">
+				<col class="size05" data-alias="view">
+				<col class="size06" data-alias="recommend">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회</th>
+					<th>추천</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% int index = 1; %>
+				<% if (boardInfo != null && !boardInfo.isEmpty()) { %>
+				<% for (BoardBean board : boardInfo) { %>
+				<tr>
+					<td><%=index++%></td>
+					<td><a href="#"
+						onclick="sendBoardNum(<%=board.getBOARD_NUM()%>,'.././board/viewPost')"><%=board.getTITLE()%></a></td>
+					<td><%=board.getID()%></td>
+					<td><%=board.getPOSTDATE()%></td>
+					<td><%=board.getVIEWS()%></td>
+					<td><%=board.getRECOMMAND()%></td>
+				</tr>
+				<% }} else { %>
+				<tr>
+					<td colspan="6">게시글이 없습니다.</td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="board-search-box">
+	<select name="type" id="">
+		<option value="제목">제목</option>
+		<option value="작성자">작성자</option>
+		<option value="작성자">작성일</option>
+	</select> <input name="searchText" type="text" placeholder="검색어를 입력하세요.">
+	<button>검색</button>
+</div>
+<script>
+    function postMessage() {
+        // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
+        var userId = "<%=login.getId() != null ? login.getId() : ""%>"; // 로그인 여부를 세션에서 체크
 
-	        if (userId !== "") { // 로그인 되어 있으면
-	            document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
-	        } else {
-	            alert("로그인이 필요합니다."); // 로그인 필요 메시지 출력
-	            document.location.href = ".././user/login.jsp"; // 로그인 페이지로 이동
-	        }
-	    }
-	    
-	 	// 팀 번호 전달
-		function sendTeamNum(teamNum, page) {
-		    // 세션에 값을 설정
-		    var form = document.createElement("form");
-		    form.setAttribute("method", "POST");
-		    form.setAttribute("action", page + ".jsp");
-		
-		    var teamField = document.createElement("input");
-		    teamField.setAttribute("type", "hidden");
-		    teamField.setAttribute("name", "teamNum");
-		    teamField.setAttribute("value", teamNum);
-		    form.appendChild(teamField);
-		
-		    document.body.appendChild(form);
-		    form.submit();
-		}
-	 	
-		// 게시글 번호 전달
-		function sendBoardNum(boardNum, teamNum, page) {
-		    // 세션에 값을 설정
-		    var form = document.createElement("form");
-		    form.setAttribute("method", "POST");
-		    form.setAttribute("action", page + ".jsp");
-		
-		    var boardField = document.createElement("input");
-		    boardField.setAttribute("type", "hidden");
-		    boardField.setAttribute("name", "boardNum");
-		    boardField.setAttribute("value", boardNum);
-		    form.appendChild(boardField);
-		
-		    document.body.appendChild(form);
-		    form.submit();
-		}
 
-		// 페이지 로드 시 체크박스 해제
-		window.addEventListener('load', function() {
-        const toggle = document.getElementById('toggle');
-        toggle.checked = false; // 체크박스 해제
-    	});
+        if (userId !== "") { // 로그인 되어 있으면
+            document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
+        } else {
+            alert("로그인이 필요합니다."); // 로그인 필요 메시지 출력
+            document.location.href = ".././user/login.jsp"; // 로그인 페이지로 이동
+        }
+    }
+    
+ 	// 팀 번호 전달
+	function sendTeamNum(teamNum, page) {
+	    // 세션에 값을 설정
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action", page + ".jsp");
+	
+	    var teamField = document.createElement("input");
+	    teamField.setAttribute("type", "hidden");
+	    teamField.setAttribute("name", "teamNum");
+	    teamField.setAttribute("value", teamNum);
+	    form.appendChild(teamField);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+ 	
+	// 게시글 번호 전달
+	function sendBoardNum(boardNum, page) {
+	    // 세션에 값을 설정
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action", page + ".jsp");
+	
+	    var boardField = document.createElement("input");
+	    boardField.setAttribute("type", "hidden");
+	    boardField.setAttribute("name", "boardNum");
+	    boardField.setAttribute("value", boardNum);
+	    form.appendChild(boardField);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+
+
+	// 페이지 로드 시 체크박스 해제
+	window.addEventListener('load', function() {
+       const toggle = document.getElementById('toggle');
+       toggle.checked = false; // 체크박스 해제
+   	});
+       
+    // 햄버거 메뉴
+    document.getElementById('toggle').addEventListener('change', function() {
+        const menu = document.querySelector('.menu');
+        const overlay = document.getElementById('overlay');
         
-        // 햄버거 메뉴
-        document.getElementById('toggle').addEventListener('change', function() {
-            const menu = document.querySelector('.menu');
-            const overlay = document.getElementById('overlay');
-            
-            menu.classList.toggle('open');
-            overlay.classList.toggle('open');
-        });
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+    });
 
-        // 클릭 시 메뉴 닫기
-        overlay.addEventListener('click', function() {
-            document.getElementById('toggle').checked = false; // 체크박스 해제
-            const menu = document.querySelector('.menu');
-            menu.classList.remove('open'); // 메뉴 숨김
-            overlay.classList.remove('open'); // 배경 숨김
-        });
-    </script>
-</body>
-</html>
+    // 클릭 시 메뉴 닫기
+    overlay.addEventListener('click', function() {
+        document.getElementById('toggle').checked = false; // 체크박스 해제
+        const menu = document.querySelector('.menu');
+        menu.classList.remove('open'); // 메뉴 숨김
+        overlay.classList.remove('open'); // 배경 숨김
+    });
+</script>

@@ -12,7 +12,7 @@
 <%
 	String url = request.getParameter("url");
 	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
-
+	
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
 	if (teamNum == 0) {
 		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
@@ -25,101 +25,44 @@
 	
 	String teamName = teamInfo.getTEAM_NAME();
 	
-	int sportNum = (int)session.getAttribute("sportNum");
-    Vector<MDBean> vlist = mdMgr.listMD(teamNum);
+	int sportNum = (int) session.getAttribute("sportNum");
+	Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=teamInfo.getTEAM_NAME()%></title>
-    <link rel="stylesheet" href=".././assets/css/style.css">
-    <link rel="stylesheet" href=".././assets/css/adminStyle.css">
-</head>
-<body>
-	<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()">
-			<img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a> 
-		<a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;"> 
-			<img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
-		<div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-			<img src="<%=teamInfo.getLOGO()%>" alt="로고" class="team_logo_img">
-		</div>
-		<a href=".././md/shopping_cart.html">	<%-- md --%>
-			<img src=".././assets/images/cart_icon.png" alt="장바구니" class="cart"></a>
-		<div class="login-signup-box">
-			<ul>
-				<li><a href=".././user/login.jsp" style="font-family: BMJUA; color: black;">로그인</a></li>
-				<li><a href=".././user/signup.jsp"	style="font-family: BMJUA; color: black;">회원가입</a></li>
-			</ul>
-		</div>
-	</header>
-    <div class="t_top">
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
-        </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
-	    </div>
-	    <div class="item" style="background-color: #236FB5;">
-           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
-        </div>
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
+<jsp:include page="admin_header.jsp" />
+<div class="goods-section">
+	<div class="selectBox2">
+		<button class="label">카테고리를 선택하세요</button>
+		<ul class="optionList">
+			<li class="optionItem">유니폼</li>
+			<li class="optionItem">머플러</li>
+			<li class="optionItem">기타</li>
+		</ul>
+		<div class="insert-goods">
+			<button class="insert-btn" id="add" onclick="addGoods()">등록</button>
 		</div>
 	</div>
-	<div class="goods-section">
-		<div class="selectBox2">
-			<button class="label">카테고리를 선택하세요</button>
-			<ul class="optionList">
-				<li class="optionItem">유니폼</li>
-				<li class="optionItem">머플러</li>
-				<li class="optionItem">기타</li>
-			</ul>
-			<div class="insert-goods">
-				<button class="insert-btn" id="add" onclick="addGoods()">등록</button>
+	<!-- goods-list를 selectBox2 아래로 이동 -->
+	<div class="goods-list">
+		<% for (MDBean MDList : vlist) { %>
+		<div class="goods-card">
+			<img src="<%=MDList.getMD_IMG()%>" alt="굿즈 사진" class="goods-photo"
+				id="<%=MDList.getMD_KINDOF()%>">
+			<div class="goods-info">
+				<div class="goods-name"><%=MDList.getMD_NAME()%></div>
+				<div class="price-and-cart">
+					<span class="goods-price">₩<%=MDList.getMD_PRICE()%></span>
+				</div>
 			</div>
 		</div>
-
-		<!-- goods-list를 selectBox2 아래로 이동 -->
-		<div class="goods-list">
-
-			<%
-				for (MDBean MDList : vlist){
-			%>
-					<div class="goods-card"> 
-					    <img src="<%= MDList.getMD_IMG() %>" alt="굿즈 사진" class="goods-photo" id="<%= MDList.getMD_KINDOF() %>">
-					    <div class="goods-info">
-					        <div class="goods-name"><%= MDList.getMD_NAME() %></div>
-					        <div class="price-and-cart">
-					            <span class="goods-price">₩<%=MDList.getMD_PRICE() %></span>
-					        </div>
-					    </div>
-					</div>
-				
-			<% } %>
-
-		</div>
+		<% } %>
 	</div>
-	<form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
-	    <input type="hidden" name="mdNum" id="mdNumInput">
-	    <input type="hidden" name="repairB" value="1">
-	    <input type="hidden" name="url" value="<%=url%>">
-	</form>
-
+</div>
+<form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
+	<input type="hidden" name="mdNum" id="mdNumInput"> <input
+		type="hidden" name="repairB" value="1"> <input type="hidden"
+		name="url" value="<%=url%>">
+</form>
 <script>
-	function goMain() {
-		document.location.href = "mainPage.jsp";
-	}
-	
  	// 팀 번호 전달
 	function sendTeamNum(teamNum, page) {
 	    // 세션에 값을 설정
@@ -196,6 +139,28 @@
         }
       });
     });
+ 	
+
+	// 페이지 로드 시 체크박스 해제
+	window.addEventListener('load', function() {
+       const toggle = document.getElementById('toggle');
+       toggle.checked = false; // 체크박스 해제
+   	});
+       
+    // 햄버거 메뉴
+    document.getElementById('toggle').addEventListener('change', function() {
+        const menu = document.querySelector('.menu');
+        const overlay = document.getElementById('overlay');
+        
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+    });
+
+    // 클릭 시 메뉴 닫기
+    overlay.addEventListener('click', function() {
+        document.getElementById('toggle').checked = false; // 체크박스 해제
+        const menu = document.querySelector('.menu');
+        menu.classList.remove('open'); // 메뉴 숨김
+        overlay.classList.remove('open'); // 배경 숨김
+    });
 </script>
-</body>
-</html>

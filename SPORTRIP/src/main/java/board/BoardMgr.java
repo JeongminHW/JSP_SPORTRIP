@@ -44,27 +44,34 @@ public class BoardMgr {
 	
 	// 게시글 수정
 	public boolean updateBoard(BoardBean bean) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		boolean flag = false;
-		try {
-			con = pool.getConnection();
-			sql = "update board set TITLE = bean.getTITLE(),CONTENTS = bean.getCONTENTS()), BOARD_IMG = bean.getBOARD_IMG() where team_num = ? and board_num = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, bean.getBOARD_NUM());
-			pstmt.setInt(2, bean.getTEAM_NUM());
-			if(pstmt.executeUpdate() == 1) {
-				flag = true;
-			}
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    String sql = null;
+	    boolean flag = false;
+	    try {
+	        con = pool.getConnection();
+	        // 게시글 번호(board_num)를 기준으로 제목(TITLE)과 내용(CONTENTS)을 수정
+	        sql = "UPDATE board SET TITLE = ?, CONTENTS = ?, POSTDATE = now() WHERE BOARD_NUM = ?";
+	        pstmt = con.prepareStatement(sql);
+	        
+	        // 제목, 내용, 이미지 값을 설정
+	        pstmt.setString(1, bean.getTITLE());  // 수정된 제목
+	        pstmt.setString(2, bean.getCONTENTS());  // 수정된 내용
+	        pstmt.setInt(3, bean.getBOARD_NUM());
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-		return flag;
+	        // 업데이트 성공 시 flag를 true로 설정
+	        if (pstmt.executeUpdate() == 1) {
+	            flag = true;
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        pool.freeConnection(con, pstmt);
+	    }
+	    return flag;
 	}
+
 	
 	// 게시글 삭제
 	public boolean deleteBoard(int BoardNum) {

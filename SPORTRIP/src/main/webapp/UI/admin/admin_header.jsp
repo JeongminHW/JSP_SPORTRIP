@@ -35,6 +35,7 @@
         positionList.add(player.getPOSITION());
     }
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -65,41 +66,24 @@
             <div class="bottom"></div>
         </label>
     </header>
-    
     <div class="overlay" id="overlay"></div>
     <nav class="menu">
         <ul class="menu-list">
 			<li><a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a></li>
-			<ul class="user-box">
-				<li id="login"><a href=".././user/login.jsp">로그인</a></li>
-				<li id="signup"><a href=".././user/signup.jsp">회원가입</a></li>
-			</ul>
             <li>
-				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
+				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
 			</li>
             <li>
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">게시판</a>
 			</li>
             <li>
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
-			</li>
-            <li>
-           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
-			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
-			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, '.././md/shoppingPage_basket')">장바구니</a>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">굿즈샵</a>
 			</li>
         </ul>
     </nav>
 </body>
 <script>
-	function goMain(){
-	    document.location.href=".././sport/mainPage.jsp";
-	}
+    function goMain(){
+        document.location.href=".././sport/mainPage.jsp";
+    }
 </script>
