@@ -35,7 +35,6 @@
         positionList.add(player.getPOSITION());
     }
 %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -94,7 +93,13 @@
             <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
 			</li>
             <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, '')">장바구니</a>
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, '.././md/shoppingPage_basket')">장바구니</a>
 			</li>
         </ul>
     </nav>
+</body>
+<script>
+	function goMain(){
+	    document.location.href=".././sport/mainPage.jsp";
+	}
+</script>

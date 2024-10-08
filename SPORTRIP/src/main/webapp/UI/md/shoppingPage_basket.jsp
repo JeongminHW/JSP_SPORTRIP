@@ -41,7 +41,7 @@
 <body>
 <header class="header">
     <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-        <img style="cursor: pointer; " src=".././assets/images/white_sportrip_logo.png" alt="sportrip" onClick="location.href='teamPage_Store.jsp'">
+        <img style="cursor: pointer; " src=".././assets/images/white_sportrip_logo.png" alt="sportrip" onClick="location.href='.././team/teamPage_store.jsp'">
     </div>
     <!-- 아이콘과 장바구니 이미지를 같은 div에 넣기 -->
     <div class="header-right">
@@ -155,7 +155,7 @@
 		</table>
 
         <div class="cart__mainbtns">
-            <button class="cart__bigorderbtn left" onClick="location.href='teamPage_store.jsp'">쇼핑 계속하기</button>
+            <button class="cart__bigorderbtn left" onClick="location.href='.././team/teamPage_store.jsp'">쇼핑 계속하기</button>
             <button class="cart__bigorderbtn right"  id="orderBtn">주문하기</button>
         </div>
     </section>

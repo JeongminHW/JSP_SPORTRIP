@@ -60,13 +60,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-				int index = 1;
-				if (boardInfo != null && !boardInfo.isEmpty()) {
-				%>
-				<%
-				for (BoardBean board : boardInfo) {
-				%>
+				<% int index = 1; %>
+				<% if (boardInfo != null && !boardInfo.isEmpty()) { %>
+				<% for (BoardBean board : boardInfo) { %>
 				<tr>
 					<td><%=index++%></td>
 					<td><a href="#"
@@ -76,16 +72,11 @@
 					<td><%=board.getVIEWS()%></td>
 					<td><%=board.getRECOMMAND()%></td>
 				</tr>
-				<%
-				}
-				} else {
-				%>
+				<% }} else { %>
 				<tr>
 					<td colspan="6">게시글이 없습니다.</td>
 				</tr>
-				<%
-				}
-				%>
+				<% } %>
 			</tbody>
 		</table>
 	</div>
@@ -99,10 +90,6 @@
 	<button>검색</button>
 </div>
 <script>
-    function goMain(){
-        document.location.href=".././sport/mainPage.jsp";
-    }
-    
     function postMessage() {
         // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
         var userId = "<%=login.getId() != null ? login.getId() : ""%>"; // 로그인 여부를 세션에서 체크

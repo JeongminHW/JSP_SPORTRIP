@@ -68,20 +68,14 @@
 		<div id="player-List" style="display: none;">
 			<!-- 포지션 버튼 생성 -->
 			<div class="p_top">
-				<%
-				for (String position : positionList) {
-				%>
+				<% for (String position : positionList) { %>
 				<div class="item" style="background-color: #236FB5;">
 					<a href="#" onclick="filterByPosition('<%=position%>')"><%=position%></a>
 				</div>
-				<%
-				}
-				%>
+				<% } %>
 			</div>
 			<!-- 선수 리스트 -->
-			<%
-			for (PlayerBean player : playerList) {
-			%>
+			<% for (PlayerBean player : playerList) { %>
 			<div class="player-card" data-position="<%=player.getPOSITION()%>"
 				data-player-num="<%=player.getPLAYER_NUM()%>">
 				<!-- 선수 사진 출력 -->
@@ -94,17 +88,11 @@
 					<%=player.getPLAYER_NAME()%>
 				</div>
 			</div>
-			<%
-			}
-			%>
+			<% } %>
 		</div>
 	</div>
 </div>
 <script>
- 	function goMain(){
-        document.location.href=".././sport/mainPage.jsp";
-    }
- 	
  	// 팀 번호 전달
 	function sendTeamNum(teamNum, page) {
 	    // 세션에 값을 설정
@@ -274,4 +262,3 @@
         overlay.classList.remove('open'); // 배경 숨김
     });
 </script>
-

@@ -43,10 +43,7 @@
 	</div>
 	<!-- goods-list를 selectBox2 아래로 이동 -->
 	<div class="goods-list">
-
-		<%
-		for (MDBean MDList : vlist) {
-		%>
+		<% for (MDBean MDList : vlist) { %>
 		<div class="goods-card">
 			<img src="<%=MDList.getMD_IMG()%>" alt="굿즈 사진" class="goods-photo"
 				id="<%=MDList.getMD_KINDOF()%>">
@@ -57,9 +54,7 @@
 				</div>
 			</div>
 		</div>
-		<%
-		}
-		%>
+		<% } %>
 	</div>
 </div>
 <form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
@@ -68,10 +63,6 @@
 		name="url" value="<%=url%>">
 </form>
 <script>
-	function goMain() {
-		document.location.href = "mainPage.jsp";
-	}
-	
  	// 팀 번호 전달
 	function sendTeamNum(teamNum, page) {
 	    // 세션에 값을 설정

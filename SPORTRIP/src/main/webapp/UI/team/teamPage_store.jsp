@@ -9,10 +9,11 @@
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="mdMgr" class="md.MDMgr" />
 <jsp:useBean id="basketMgr" class="basket.BasketMgr" />
+
 <%
 	String url = request.getParameter("url");
 	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
-
+	
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
 	if (teamNum == 0) {
 		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
@@ -23,57 +24,45 @@
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	
 	String teamName = teamInfo.getTEAM_NAME();
-	int sportNum = (int)session.getAttribute("sportNum");
-    Vector<MDBean> vlist = mdMgr.listMD(teamNum);
+	int sportNum = (int) session.getAttribute("sportNum");
+	Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
-
-<jsp:include page="team_header.jsp"/>
-
-	<div class="goods-section">
-		<div class="selectBox2">
-			<button class="label">카테고리를 선택하세요</button>
-			<ul class="optionList">
-				<li class="optionItem">유니폼</li>
-				<li class="optionItem">머플러</li>
-				<li class="optionItem">기타</li>
-			</ul>
-		</div>
-
-		<!-- goods-list를 selectBox2 아래로 이동 -->
-		<div class="goods-list">
-
-			<%
-				for (MDBean MDList : vlist){
-			%>
-					<div class="goods-card"> 
-					
-					    <img src="<%= MDList.getMD_IMG() %>" alt="굿즈 사진" class="goods-photo" id="<%= MDList.getMD_KINDOF() %>">
-					    <div class="goods-info">
-					        <div class="goods-name"><%= MDList.getMD_NAME() %></div>
-					        <div class="price-and-cart">
-					            <span class="goods-price">₩<%=MDList.getMD_PRICE() %></span>
-					            <button class="add-to-cart" onclick="addToCart('<%=MDList.getMD_NUM()%>')">
-					                <img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
-					            </button>
-					        </div>
-					    </div>
-					</div>
-				
-			<% } %>
-
-		</div>
+<jsp:include page="team_header.jsp" />
+<div class="goods-section">
+	<div class="selectBox2">
+		<button class="label">카테고리를 선택하세요</button>
+		<ul class="optionList">
+			<li class="optionItem">유니폼</li>
+			<li class="optionItem">머플러</li>
+			<li class="optionItem">기타</li>
+		</ul>
 	</div>
-	<form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
-	    <input type="hidden" name="mdNum" id="mdNumInput">
-	    <input type="hidden" name="repairB" value="1">
-	    <input type="hidden" name="url" value="<%=url%>">
-	</form>
+	<!-- goods-list를 selectBox2 아래로 이동 -->
+	<div class="goods-list">
+		<% for (MDBean MDList : vlist) { %>
+		<div class="goods-card">
+			<img src="<%=MDList.getMD_IMG()%>" alt="굿즈 사진" class="goods-photo"
+				id="<%=MDList.getMD_KINDOF()%>">
+			<div class="goods-info">
+				<div class="goods-name"><%=MDList.getMD_NAME()%></div>
+				<div class="price-and-cart">
+					<span class="goods-price">₩<%=MDList.getMD_PRICE()%></span>
+					<button class="add-to-cart"
+						onclick="addToCart('<%=MDList.getMD_NUM()%>')">
+						<img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
+					</button>
+				</div>
+			</div>
+		</div>
+		<% } %>
+	</div>
+</div>
+<form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
+	<input type="hidden" name="mdNum" id="mdNumInput"> <input
+		type="hidden" name="repairB" value="1"> <input type="hidden"
+		name="url" value="<%=url%>">
+</form>
 <script>
-
-	function goMain() {
-		document.location.href = "mainPage.jsp";
-	}
-	
  	// 팀 번호 전달
 	function sendTeamNum(teamNum, page) {
 	    // 세션에 값을 설정
@@ -134,7 +123,7 @@
     function addToCart(mdNum) {
         document.getElementById('mdNumInput').value = mdNum;
 
-        if (<%=login.getId() != null ? true : false %>) {
+        if (<%=login.getId() != null ? true : false%>) {
             alert("장바구니에 담았습니다.");
             document.getElementById('basketForm').submit();
         } else {
@@ -144,29 +133,27 @@
             document.location.href = ".././user/login.jsp?url=" + encodeURIComponent(currentUrl);
         }
     }
- 	// 페이지 로드 시 체크박스 해제
-		window.addEventListener('load', function() {
-       const toggle = document.getElementById('toggle');
-       toggle.checked = false; // 체크박스 해제
-   	});
-       
-       // 햄버거 메뉴
-       document.getElementById('toggle').addEventListener('change', function() {
-           const menu = document.querySelector('.menu');
-           const overlay = document.getElementById('overlay');
-           
-           menu.classList.toggle('open');
-           overlay.classList.toggle('open');
-       });
+    
+	// 페이지 로드 시 체크박스 해제
+	window.addEventListener('load', function() {
+	   const toggle = document.getElementById('toggle');
+	   toggle.checked = false; // 체크박스 해제
+	});
+	     
+    // 햄버거 메뉴
+    document.getElementById('toggle').addEventListener('change', function() {
+        const menu = document.querySelector('.menu');
+        const overlay = document.getElementById('overlay');
+        
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+    });
 
-       // 클릭 시 메뉴 닫기
-       overlay.addEventListener('click', function() {
-           document.getElementById('toggle').checked = false; // 체크박스 해제
-           const menu = document.querySelector('.menu');
-           menu.classList.remove('open'); // 메뉴 숨김
-           overlay.classList.remove('open'); // 배경 숨김
-       });
+    // 클릭 시 메뉴 닫기
+    overlay.addEventListener('click', function() {
+        document.getElementById('toggle').checked = false; // 체크박스 해제
+        const menu = document.querySelector('.menu');
+        menu.classList.remove('open'); // 메뉴 숨김
+        overlay.classList.remove('open'); // 배경 숨김
+    });
 </script>
-</body>
-</html>
-
