@@ -15,10 +15,6 @@
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8afbb0c0c5d852ce84e4f0f3b93696b6"></script> 
     	
     <script>
-        function goMain() {
-            document.location.href="mainPage.jsp";
-        }
-        
         function openModal(restaurantName, restaurantLatitude, restaurantLongitude, stadiumName, stadiumLatitude, stadiumLongitude) {
             const modal = document.getElementById('mapModal');
             modal.style.display = 'block';
@@ -115,7 +111,7 @@
 </head>
 <body style="margin: 0; background-color: #EEEEEE;">
     <header class="header header_logo">
-        <a style="cursor: pointer" onclick="goMain()">
+        <a style="cursor: pointer" href=".././sport/mainPage.jsp">
             <img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img">
         </a>
         <div class="login-signup-box">

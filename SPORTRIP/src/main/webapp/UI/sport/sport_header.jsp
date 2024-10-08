@@ -28,6 +28,8 @@ charset=UTF-8"
 <title>SPORTRIP</title>
 <link href=".././assets/css/style.css" rel="stylesheet" type="text/css">
 <link href=".././assets/css/bannerStyle.css" rel="stylesheet" type="text/css" />
+<link href=".././assets/css/mainhamburger.css" rel="stylesheet" type="text/css" />
+<link href=".././assets/css/highlightStyle.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 	function goMain(){
@@ -37,29 +39,69 @@ charset=UTF-8"
 </head>
 <body>
 	<header class="header">
-		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
+		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
 		<div class="header-view">
 			<div class="item">
-				<a href=".././sport/team_rank.jsp"><img src=".././assets/images/rank_img.png">구단 순위</a>
+				<a href=".././sport/team_rank.jsp">Rank</a>
 			</div>
 			<div class="item">
-				<a href=".././sport/main_highlight.jsp"><img src=".././assets/images/star_img.png">하이라이트 경기</a>
+				<a href=".././sport/main_highlight.jsp">Highlight</a>
 			</div>
 			<div class="item">
-				<a href=".././sport/sport_matchDate.jsp"><img src=".././assets/images/schedule_img.png">경기 일정</a>
+				<a href=".././sport/sport_matchDate.jsp">MatchDate</a>
 			</div>
 		</div>
+		<input id="toggle" type="checkbox"/>
+        	<label class="hamburger" for="toggle">
+            <div class="top"></div>
+            <div class="middle"></div>
+            <div class="bottom"></div>
+        	</label>
 	</header>
-	<div class="league_info">
-				<a href="sport_main.jsp"><img src=".././assets/images/sport_logo<%=sportNum%>.svg" alt="리그" id="league_logo_img"></a>
-				<ul>
-					<% for(int i = 0; i < teamVlist.size(); i++){
+	<div class="menu" style="position:fixed; z-index: 2;">
+        <nav>
+            <ul class="menu-list">
+                <li class="menu-item">
+                	<a href="#"><span>스포츠</span></a>
+                    <ul>
+                        <li class="baseball"><a href="#" onclick="sendSportNum(1)"><span>야구</span></a></li>
+                        <li class="soccer"><a href="#" onclick="sendSportNum(2)"><span>축구</span></a></li>
+                        <li class="volleyball"><a href="#" onclick="sendSportNum(3)"><span>배구</span></a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#"><span>리그 정보<span></a>
+                    <ul>
+                    	<li class="trip"><a href=".././trip/tripPage_Hotel.jsp"><span>팀 순위</span> </a></li>
+                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>하이라이트</span> </a></li>
+                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>경기 일정</span> </a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#"><span>팀<span></a>
+                    <ul>
+                    	<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
 							teamNum = teamBean.getTEAM_NUM();
-					%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, '.././team/teamPage_player')"><img src="<%=teamBean.getLOGO()%>" alt="<%=teamBean.getTEAM_NAME() %>" class="team_logo_img"></a></li>
-					<%
-						}
-					%>
-				</ul>
-		</div>
+						%>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, '.././team/teamPage_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
+						<%
+							}
+						%>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#">여행</a>
+                    <ul>
+						<li id="login"><a href=".././trip/tripPage_Hotel.jsp"><span>숙박</span></a></li>
+						<li id="signup"><a href=".././trip/tripPage_Food.jsp"><span>식당</span></a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#">회원정보</a>
+                    <ul>
+						<li id="login"><a href=".././user/login.jsp"><span>로그인</span></a></li>
+						<li id="signup"><a href=".././user/signup.jsp"><span>회원가입</span></a></li>
+                        <li><a href=".././md/shoppingPage_basket.jsp"><span>장바구니</span></a></li>
+                        <li><a href=".././user/myPage.html"><span>마이페이지</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
