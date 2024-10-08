@@ -77,7 +77,7 @@
 		<% if (login.getId() != null) {%>
 			<!-- 답글 -->
 			<div class="reple-box" style="display: none;">
-				<textarea name="comment" class="comment-text" id="recomment_<%=com.getCOMMENT_NUM() %>" placeholder="댓글을 입력해주세요."></textarea>
+				<textarea name="comment" class="comment-text" id="recomment_<%=com.getCOMMENT_NUM() %>" placeholder="답글을 입력해주세요."></textarea>
 				<button type="button" class="comment-btn" onclick="postRepleComment(<%=com.getCOMMENT_NUM()%>)">등록</button>
 			</div>
 		<%} %>
@@ -103,7 +103,12 @@
 <script>
 	// 댓글 작성
 	function postComment() {
-	    const content = document.getElementById('comment').value;
+	    const content = document.getElementById('comment').value.trim();
+	    
+	    if (content === '') {
+	        alert('댓글을 입력해 주세요.');
+	        return;
+	    }
 	    
 	 	// 파라미터
 	    const params = new URLSearchParams();
@@ -146,7 +151,13 @@
 	
 	// 댓글 수정
 	function updateComment(commentNum) {
-	    const updatedContent = document.getElementById('textarea_' + commentNum).value;
+	    const updatedContent = document.getElementById('textarea_' + commentNum).value.trim();
+	    
+	    if (updatedContent === '') {
+	        alert('내용을 입력해 주세요.');
+	        return;
+	    }
+	    
 	    // AJAX 호출로 수정 요청
 	    fetch('comment_update.jsp', {
 	        method: 'POST',
@@ -163,9 +174,18 @@
 	        if (data.trim() === "success") {
 	            console.log('서버 응답:', data); // 서버 응답 로그 출력
 	            const commentDiv = document.getElementById('comment_' + commentNum);
-	            commentDiv.querySelector('p').innerText = updatedContent;
-	            editComment(commentNum); // 수정 폼 닫기
-	            alert('댓글이 수정되었습니다.');
+	            if (commentDiv) {
+	                commentDiv.querySelector('p').innerText = updatedContent; // 댓글 수정 화면 반영
+	                editComment(commentNum); // 수정 폼 닫기
+	                alert('댓글이 수정되었습니다.');
+	            } else {
+	                const recommentDiv = document.getElementById('recomment_' + commentNum);
+	                if (recommentDiv) {
+	                    recommentDiv.querySelector('p').innerText = updatedContent; // 답글 수정 화면 반영
+	                    editComment(commentNum); // 수정 폼 닫기
+	                    alert('답글이 수정되었습니다.');
+	                }
+	            }
 	        } else {
 	            alert('댓글을 수정하지 못했습니다.'); // 서버 응답 로그 출력
 	        }
@@ -193,10 +213,14 @@
 	                commentDiv.remove(); // 댓글 삭제 성공 시 화면에서 삭제
 	                alert('댓글이 삭제되었습니다.');
 	            } else {
-	                console.error('댓글 요소를 찾을 수 없습니다:', commentNum);
+	            	const recommentDiv = document.getElementById('recomment_' + commentNum);
+	                if (recommentDiv) {
+	                    recommentDiv.remove(); // 답글 삭제 성공 시 화면에서 삭제
+	                    alert('답글이 삭제되었습니다.');
+	                }
 	            }
 	        } else {
-	            alert('댓글을 삭제하지 못했습니다.'); // 서버 응답 로그 출력
+	            alert('삭제하지 못했습니다.'); // 서버 응답 로그 출력
 	        }
 	    })
 	    .catch(error => console.error('Error:', error));
