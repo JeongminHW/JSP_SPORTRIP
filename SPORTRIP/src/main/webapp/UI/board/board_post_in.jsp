@@ -34,11 +34,6 @@
     board.setID(id); // Set user ID
     board.setTEAM_NUM(teamNum); // Set team number
     
-    System.out.println("제목: " + title);
-    System.out.println("내용: " + content);
-    System.out.println("IP: " + ipAddress);
-    System.out.println("ID: " + id);
-
     if (ipAddress == null || id == null || title == null || content == null) {
         out.print("fail");
         return;

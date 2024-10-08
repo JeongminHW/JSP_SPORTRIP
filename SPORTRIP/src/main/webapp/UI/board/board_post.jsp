@@ -51,7 +51,6 @@
             </table>
         </form>
     </div>
-
     <div class="post-btn-box">
         <button type="button" class="post-btn" onclick="postboard()">등록</button>
         <button type="button" class="post-btn" onclick="goList()">목록</button>
@@ -91,21 +90,16 @@
 	        var content = $('#summernote').val();
 	        var title = $('input[name="title"]').val();
 
-	        console.log("Title: ", title); // Debugging line
-	        console.log("Content: ", content); // Debugging line
-
 	        var formData = $('form[name="postForm"]').serialize(); 
 	        formData += '&postediter=' + encodeURIComponent(content); 
 	        formData += '&title=' + title;  
 
 	        $.ajax({
-	            url: ".././board/board_in.jsp",
+	            url: ".././board/board_post_in.jsp",
 	            type: "POST",
 	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	            data: formData,
 	            success: function(response) {
-	                alert(response);
-	                alert(formData);
 	                if (response.includes('success')) {
 	                    alert("글이 성공적으로 등록되었습니다.");
 	                    location.href = ".././team/teamPage_board.jsp"; 

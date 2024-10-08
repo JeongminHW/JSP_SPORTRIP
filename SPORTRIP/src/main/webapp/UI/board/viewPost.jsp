@@ -39,7 +39,7 @@
                 <span style="font-weight: bold; font-size: 22px;"><%=board.getTITLE() %></span>
 				<% if (login != null && board.getID().equals(login.getId())) {%> <!-- 본인 게시글만 수정/삭제 -->
 				<div class="update-btn">
-					<button type="button" onclick="sendboardNum(<%=board.getBOARD_NUM() %>, 'board_post)">수정</button>
+					<button type="button" href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM() %>, 'board_update')">수정</button>
 					<button type="button" onclick="deleteboard(<%=board.getBOARD_NUM() %>)">삭제</button>
 				</div>
 				<% } %>
@@ -78,8 +78,8 @@
 	<!-- 목록 -->
     <div class="list-btn"><button type="button" onclick="goList()">목록</button></div>
     <div class="btns">
-		<div><button class="moveTopBtn">↑</button></div>
-		<div><button class="moveBottomBtn">↓</button></div>
+		<div class="moveTopBtn">↑</div>
+		<div class="moveBottomBtn">↓</div>
 	</div>
     <script>
 		function goMain() {
