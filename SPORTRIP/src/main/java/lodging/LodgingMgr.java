@@ -24,7 +24,7 @@ public class LodgingMgr {
 
         try {
             con = pool.getConnection();
-            String sql = "SELECT l.* FROM LODGING l JOIN STADIUM s ON l.STARDIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
+            String sql = "SELECT l.* FROM lodging l JOIN STADIUM s ON l.STARDIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
             System.out.println("SQL Query: " + sql + " with parameter: " + stadiumName); // 디버깅용 출력
             
             pstmt = con.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class LodgingMgr {
 
         try {
             con = pool.getConnection();
-            String sql = "SELECT * FROM LODGING"; // 모든 숙소 정보 가져오기
+            String sql = "SELECT * FROM lodging"; // 모든 숙소 정보 가져오기
             pstmt = con.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
@@ -93,7 +93,7 @@ public class LodgingMgr {
 	    LodgingBean lodging = null;
 	    try {
 	        con = pool.getConnection();
-	        sql = "SELECT * FROM LODGING WHERE LODGING_NUM = ?";
+	        sql = "SELECT * FROM lodging WHERE LODGING_NUM = ?";
 	        pstmt = con.prepareStatement(sql);
 	        pstmt.setInt(1, lodgingNum);
 	        rs = pstmt.executeQuery();

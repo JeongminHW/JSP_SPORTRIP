@@ -7,7 +7,7 @@
 
 <%
     String id = login.getId();
-	
+    
     if (id == null) {
         out.println("<script>alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');</script>");
         response.sendRedirect(".././user/login.jsp");
@@ -24,7 +24,7 @@
 
     ChargeMgr chargeMgr = new ChargeMgr();
     boolean paymentSuccess = true;
-
+    
     int i = 0;
     while (true) {
         String mdNum = request.getParameter("orders[" + i + "].MD_NUM");
@@ -40,12 +40,21 @@
         chargeBean.setORDER_NUM(orderNumber);
         chargeBean.setMD_NUM(Integer.parseInt(mdNum));
         chargeBean.setREPAIR_C(Integer.parseInt(repairC));
-        chargeBean.setPRICE(Integer.parseInt(price)+fee);
+        chargeBean.setPRICE(Integer.parseInt(price) + fee);
 
+        // Process the payment for each order
         if (!chargeMgr.payMD(chargeBean)) {
             paymentSuccess = false;
             break;
         }
         i++;
+    }
+
+    if (paymentSuccess) {
+        // Redirect to the order detail page after successful payment
+        response.sendRedirect("shoppingPage_paymentDetail.jsp?orderNumber=" + orderNumber);
+    } else {
+        out.println("<script>alert('결제에 실패했습니다. 다시 시도해주세요.');</script>");
+        response.sendRedirect("shoppingPage_payment.jsp");
     }
 %>
