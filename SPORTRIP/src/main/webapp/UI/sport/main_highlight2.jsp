@@ -230,9 +230,9 @@ charset=UTF-8" pageEncoding="UTF-8"%>
         });
         
 	    // 슬라이드 기능
-	   	let slideWrap = $(".slide_wrap"),
-		    slideShow = slideWrap.find(".slide_show"),
-		    slideList = slideShow.find(".slide_list"),
+	   	let slideWrap = document.querySelector(".slide_wrap"),
+		    slideShow = document.querySelector(".slide_show"),
+		    slideList = document.querySelector(".slide_list"),
 		    slides = slideList.find(".slide-card"),
 		    slideBtn = slideWrap.find(".slide_btn");
 		
