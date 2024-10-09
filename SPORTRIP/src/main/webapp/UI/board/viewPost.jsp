@@ -36,14 +36,18 @@
     <div class="post-content-box">
         <div class="post-header">
             <div class="post-title">
-                <span style="font-weight: bold; font-size: 22px;"><%=board.getTITLE() %></span>
-				<% if (login != null && board.getID().equals(login.getId())) {%> <!-- 본인 게시글만 수정/삭제 -->
-				<div class="update-btn">
-					<button type="button" href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM() %>, 'board_update')">수정</button>
-					<button type="button" onclick="deleteboard(<%=board.getBOARD_NUM() %>)">삭제</button>
-				</div>
-				<% } %>
-            </div>
+			    <span style="font-weight: bold; font-size: 22px;"><%=board.getTITLE() %></span>
+			
+			    <!-- 본인 게시글이거나 root 계정일 때 삭제 버튼만 보이도록 -->
+			    <% if (login != null && (board.getID().equals(login.getId()) || login.getId().equals("root"))) { %>
+			        <div class="update-btn">
+			            <% if (!login.getId().equals("root")) { %> <!-- root가 아닌 경우에만 수정 버튼 표시 -->
+			                <button type="button" href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM() %>, 'board_update')">수정</button>
+			            <% } %>
+			            <button type="button" onclick="deleteboard(<%=board.getBOARD_NUM() %>)">삭제</button>
+			        </div>
+			    <% } %>
+			</div>
             <div class="user-box">
                 <div class="userInfo">
                     <span style="font-weight: bold;"><%=board.getID() %></span>
