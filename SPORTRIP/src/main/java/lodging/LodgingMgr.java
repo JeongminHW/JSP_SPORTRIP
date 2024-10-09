@@ -24,7 +24,7 @@ public class LodgingMgr {
 
         try {
             con = pool.getConnection();
-            String sql = "SELECT l.* FROM lodging l JOIN STADIUM s ON l.STARDIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
+            String sql = "SELECT l.* FROM lodging l JOIN stadium s ON l.STARDIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
             System.out.println("SQL Query: " + sql + " with parameter: " + stadiumName); // 디버깅용 출력
             
             pstmt = con.prepareStatement(sql);

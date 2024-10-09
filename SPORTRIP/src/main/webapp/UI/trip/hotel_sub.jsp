@@ -122,7 +122,7 @@
     let roomPrice; // 객실 가격
 
     function goMain(){
-        document.location.href="mainPage.jsp";
+        document.location.href=".././sport/mainPage.jsp";
     }
 
     function openModal(lodgingNum, roomNum, price, capacity){
@@ -149,7 +149,7 @@
 
     function closeModal(){
         document.querySelector('.modal').style.display = 'none';
-        document.getElementById("select-person").value = ""; 
+        document.getElementById("select-person").value = "1"; 
         document.getElementById("reserve_name").value = "";
         document.getElementById("contact").value = "";
         document.getElementById("check_in_date").value = "";
@@ -160,42 +160,13 @@
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('check_in_date').setAttribute('min', today);
 
-<<<<<<< Updated upstream
     function getSelectedStadium() {
         // 현재 선택된 경기장 정보를 가져오는 로직 구현
         return "someStadium"; // 선택된 경기장 이름을 반환
     }
-	</script>
 
-    <script>
-        let selectedLodgingNum; // 선택된 숙소 번호
-        let selectedRoomNum; // 선택된 객실 번호
-        let roomPrice; // 객실 가격
-
-        function goMain(){
-            document.location.href=".././sport/mainPage.jsp";
-        }
-
-        function openModal(lodgingNum, roomNum, price){
-            selectedLodgingNum = lodgingNum; // 선택된 숙소 번호 저장
-            selectedRoomNum = roomNum; // 선택된 객실 번호 저장
-            roomPrice = price; // 객실 가격 저장
-            document.querySelector('.modal').style.display = 'block';
-        }
-
-        function closeModal(){
-            document.querySelector('.modal').style.display = 'none';
-            document.getElementById("select-person").value = "1"; // 기본값
-            document.getElementById("reserve_name").value = "";
-            document.getElementById("contact").value = "";
-            document.getElementById("check_in_date").value = "";
-            document.getElementById("check_out_date").value = "";
-        }
-=======
     function updateCheckoutDate() {
         const checkInDate = document.getElementById('check_in_date').value;
->>>>>>> Stashed changes
-        
         // 체크인 날짜 이후부터 체크아웃 날짜 선택 가능하게 설정
         document.getElementById('check_out_date').setAttribute('min', checkInDate);
     }
