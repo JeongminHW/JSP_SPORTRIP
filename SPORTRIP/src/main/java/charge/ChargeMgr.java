@@ -28,7 +28,7 @@ public class ChargeMgr {
     	Vector<ChargeBean> chargeList = new Vector<ChargeBean>();
         try {
         	con = pool.getConnection();
-            query = "SELECT * FROM CHARGE WHERE ID = ?";
+            query = "SELECT * FROM charge WHERE ID = ?";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -60,8 +60,8 @@ public class ChargeMgr {
     	try {
     		con = pool.getConnection();
     		query = "SELECT c.*"
-    				+" FROM CHARGE c"
-    				+" JOIN MD m ON c.MD_NUM = m.MD_NUM"
+    				+" FROM charge c"
+    				+" JOIN md m ON c.MD_NUM = m.MD_NUM"
     				+" WHERE c.ID = ? and m.SPORT_NUM = ?";
     		
 
@@ -79,6 +79,37 @@ public class ChargeMgr {
     			charge.setREPAIR_C(rs.getInt(6));
     			charge.setPRICE(rs.getInt(7));
     			chargeList.addElement(charge);
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return chargeList;
+    }
+    
+    // 아이디와 스포츠로 결제 내역 조회
+    public Vector<ChargeBean> findGetCharge(String orderNum) {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	String query = null;
+    	ChargeBean chargeBean = null;
+    	Vector<ChargeBean> chargeList = new Vector<ChargeBean>();
+    	try {
+    		con = pool.getConnection();
+    		query = "SELECT * FROM charge where order_num = ?";
+    		pstmt = con.prepareStatement(query);
+    		pstmt.setString(1, orderNum);
+    		rs = pstmt.executeQuery();
+    		while (rs.next()) {
+    			chargeBean = new ChargeBean();
+    			chargeBean.setCHARGE_NUM(rs.getInt(1));
+    			chargeBean.setID(rs.getString(2));
+    			chargeBean.setORDER_NUM(rs.getString(3));
+    			chargeBean.setCHARGE_DATE(rs.getString(4));
+    			chargeBean.setMD_NUM(rs.getInt(5));
+    			chargeBean.setREPAIR_C(rs.getInt(6));
+    			chargeBean.setPRICE(rs.getInt(7));
+    			chargeList.addElement(chargeBean);
     		}
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -116,5 +147,29 @@ public class ChargeMgr {
 		}
 		return flag;
 	}
+    
+    // 굿즈 결제 삭제(주문일로 부터 2일 이내)
+    public boolean canclePayMD(String ordeNumber) {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+    	String sql = null;
+    	boolean flag = false;
+    	try {
+    		con = pool.getConnection();
+    		sql = "delete from charge where order_num = ?";
+    		pstmt = con.prepareStatement(sql);
+    		pstmt.setString(1, ordeNumber);
+    		
+    		if(pstmt.executeUpdate() == 1) {
+    			flag = true;
+    		}
+    		
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally {
+    		pool.freeConnection(con, pstmt);
+    	}
+    	return flag;
+    }
 
 }
