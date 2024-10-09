@@ -26,7 +26,7 @@ public class BasketMgr {
     	Vector<BasketBean> basketList = new Vector<BasketBean>();
         try {
         	con = pool.getConnection();
-            query = "SELECT * FROM BASKET WHERE ID = ?";
+            query = "SELECT * FROM basket WHERE ID = ?";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
@@ -50,14 +50,15 @@ public class BasketMgr {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query = null;
-		BasketBean basket = null;
 		boolean flag = false;
+
 		try {
 			con = pool.getConnection();
 			// md_num으로 그룹화하고 repair_b의 합계를 구함
-			query = "SELECT * FROM BASKET WHERE ID = ?, MD_NUM = ?";
+			query = "SELECT * FROM basket WHERE ID = ? and MD_NUM = ?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, md_num);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				flag = true;
@@ -83,10 +84,13 @@ public class BasketMgr {
 			con = pool.getConnection();
 			BasketMgr mgr = new BasketMgr();
 			if(mgr.vaildateBasket(bean.getID(), bean.getMD_NUM())) {
-				sql = "update basket set REPAIR_B = REPAIR_B + ? where basket_num = ?";
+				System.out.println(bean.getREPAIR_B());
+				sql = "update basket set REPAIR_B = REPAIR_B + ? where id = ? and md_num = ?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, bean.getBASKET_NUM());
-				pstmt.setInt(2, bean.getREPAIR_B());
+				pstmt.setInt(1, bean.getREPAIR_B());
+				pstmt.setString(2, bean.getID());
+				pstmt.setInt(3, bean.getMD_NUM());
+				
 			}else {
 				sql = "insert into basket values(null, ?, ?, ?)";
 				pstmt = con.prepareStatement(sql);

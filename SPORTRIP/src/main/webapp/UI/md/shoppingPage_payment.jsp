@@ -334,7 +334,6 @@ function closePopup() {
 		    }, function (response) {
 		        if (response.success) {
 		            alert("결제가 완료되었습니다.");
-		            // Submit the form after successful payment
 		            document.getElementById('paymentForm').submit();
 		        } else {
 		            alert("결제에 실패하였습니다. 에러 메시지: " + response.error_msg);

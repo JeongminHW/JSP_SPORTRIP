@@ -23,7 +23,7 @@ public class UserMgr {
     	
         try {
 			con = pool.getConnection();
-            query = "INSERT INTO USER (ID, PW, NAME, ADDRESS, POSTCODE, PHONE, EMAIL, ADMIN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            query = "INSERT INTO user (ID, PW, NAME, ADDRESS, POSTCODE, PHONE, EMAIL, ADMIN) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, user.getId());
             pstmt.setString(2, user.getPw());

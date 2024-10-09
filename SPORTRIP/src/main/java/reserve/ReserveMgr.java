@@ -57,7 +57,7 @@ public class ReserveMgr {
 		Vector<ReserveBean> vlist = new Vector<ReserveBean>();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT * FROM Reserve WHERE ID = ? and CHECK_IN > now()";
+			sql = "SELECT * FROM reserve WHERE ID = ? and CHECK_IN > now()";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -90,7 +90,7 @@ public class ReserveMgr {
 		Vector<ReserveBean> vlist = new Vector<ReserveBean>();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT * FROM Reserve WHERE ID = ? and CHECK_IN <= now()";
+			sql = "SELECT * FROM reserve WHERE ID = ? and CHECK_IN <= now()";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -122,7 +122,7 @@ public class ReserveMgr {
 	    String errorMsg = null; 
 	    try {
 	        con = pool.getConnection();
-	        sql = "INSERT INTO RESERVE (ID, LODGING_NUM, ROOM_NUM, HEADCOUNT, RESERVE_PRICE, CHECK_IN, CHECK_OUT) "
+	        sql = "INSERT INTO reserve (ID, LODGING_NUM, ROOM_NUM, HEADCOUNT, RESERVE_PRICE, CHECK_IN, CHECK_OUT) "
 	                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 	        pstmt = con.prepareStatement(sql);
 	        pstmt.setString(1, bean.getID());        

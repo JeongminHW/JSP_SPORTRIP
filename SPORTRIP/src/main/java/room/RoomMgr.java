@@ -24,7 +24,7 @@ public class RoomMgr {
 
         try {
             con = pool.getConnection();
-            sql = "SELECT * FROM Room WHERE LODGING_NUM = ?";
+            sql = "SELECT * FROM room WHERE LODGING_NUM = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, lodgingNum);
             rs = pstmt.executeQuery();
