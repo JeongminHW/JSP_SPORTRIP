@@ -1,5 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="headcoach.HeadcoachBean"%>
+<%@page import="DB.MUtil"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean id="login" scope="session" class="user.UserBean" />
+<jsp:useBean id="headcoachMgr" class="headcoach.HeadcoachMgr" />
+<%
+    // POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
+    int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
+    if (teamNum == 0) {
+        teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
+    } else {
+        session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
+    }
+     
+	int coachNum = MUtil.parseInt(request, "coachNum", 0);
+	HeadcoachBean headcoachBean = headcoachMgr.getHeadcoach(coachNum);
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -42,25 +58,29 @@
 	</div>
 
     <div class="updateplayer-box">
-        <h2>감독 수정</h2>
-        <form action="" method="post">
-            <div class="updateplayer-item">
-                <label class="label" for="player_name">감독 이름</label>
-                <input class="input" type="text" id="player_name" name="player_name">
+    <h2>감독 수정</h2>
+    <form action="update_coach.jsp" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="headcoachNum" value="<%= coachNum %>">
+        <div class="updateplayer-item">
+            <label class="label" for="headcoachName">감독 이름</label>
+            <input class="input" type="text" id="headcoachName" name="headcoachName" value="<%= headcoachBean.getHEADCOACH_NAME() %>">
+        </div>
+        <div class="updateplayer-item file-box">
+            <label class="label" for="headcoachImg">감독 이미지</label>
+            <div class="file-box">
+                <input class="upload-file" placeholder="첨부파일" readonly>
+                <label id="file-label" for="file"></label>
+                <input type="file" id="file" name="headcoachImg">
             </div>
-            <div class="updateplayer-item file-box">
-                <label class="label" for="player_img">감독 이미지</label>
-				<div class="file-box">
-	            	<input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
-	            	<label id="file-label" for="file"></label>
-	                <input type="file" id="file" name="player_img">
-				</div>
-            </div>
-            <div class="updateplayer-item">
-                <input type="button" onclick="playerManager()" value="목록">
-                <input type="submit" value="수정">
-            </div>
-    </div>
+        </div>
+        <div class="updateplayer-item">
+            <input type="button" onclick="playerManager()" value="목록">
+            <input type="hidden" id="headcoachNum" name="headcoachNum" value="<%= headcoachBean.getHEADCOACH_NUM() %>">
+            <input type="submit" value="수정">
+        </div>
+    </form>
+</div>
+    
     <script>
 	    function goMain(){
 	        document.location.href="mainPage.jsp";
@@ -69,11 +89,12 @@
 	    function playerManager(){
 	    	document.location.href="admin_player.jsp";
 	    }
-    
 	    document.getElementById("file").addEventListener('change', function() {
 	        var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
 	        document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
 	    });
+   
+
 	</script>
 </body>
 </html>

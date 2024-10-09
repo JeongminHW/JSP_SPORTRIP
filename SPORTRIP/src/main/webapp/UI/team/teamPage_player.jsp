@@ -28,7 +28,7 @@
 	Vector<PlayerBean> playerList = playerMgr.TeamPlayers(teamNum);
 	
 	HeadcoachMgr coachMgr = new HeadcoachMgr();
-	HeadcoachBean coachList = coachMgr.getHeadcoach(teamNum);
+	Vector<HeadcoachBean> coachList = coachMgr.TeamHeadCoach(teamNum); // 수정된 부분
 	
 	Set<String> positionList = new HashSet<>();
 	for (PlayerBean player : playerList) {
@@ -46,17 +46,16 @@
 			<a href="#" onclick="showPlayers()">선수</a>
 		</div>
 	</div>
-	<div id="coach-List">
-		<div class="coach-card">
-			<!-- 감독 사진 출력 -->
-			<img src="<%=coachList.getHEADCOACH_IMG()%>"
-				alt="<%=coachList.getHEADCOACH_NAME()%>" class="coach-photo">
-			<!-- 감독 이름 출력 -->
-			<div class="coach-name">
-				<span> <%=coachList.getHEADCOACH_NAME()%>
-				</span>
-			</div>
-		</div>
+	<div id="coach-List" style="display: none;">
+        <% for (HeadcoachBean coach : coachList) { %>
+            <div class="coach-card" data-coach-num="<%=coach.getHEADCOACH_NUM() %>">
+                <img src="<%= coach.getHEADCOACH_IMG() %>" alt="<%= coach.getHEADCOACH_NAME() %>" class="coach-photo">
+                <div class="coach-name">
+                    <span><%= coach.getHEADCOACH_NAME() %></span>
+                </div>
+            </div>
+        <% } %>
+    </div>
 	</div>
 	<div class="players-section">
 		<div id="player-List" style="display: none;">
