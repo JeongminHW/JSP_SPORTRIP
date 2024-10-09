@@ -19,8 +19,8 @@ charset=UTF-8" pageEncoding="UTF-8"%>
 	    </div>
 	  </div>
 	  <div class="slide_btn">
-	    <button class="prev">prev</button>
-	    <button class="next">next</button>
+	    <button class="prev"><</button>
+	    <button class="next">></button>
 	  </div>
 	</div>
 	<script type="text/javascript">
@@ -91,16 +91,60 @@ charset=UTF-8" pageEncoding="UTF-8"%>
 		                                    }
 		
 		                                    if (title.includes("K리그1")) {
-		          						$('.slide_list').append('<div class="slide-card highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');
+		          						$('.slide_list').append('<div class="slide-card highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="624" height="351" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');
 		                                        divCount++;
 		                                    }
 		                          	  }else{
-		                          		  $('.slide_list').append('<div class="slide-card highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');
+		                          		  $('.slide_list').append('<div class="slide-card highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="624" height="351" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');
 		                          	  }
-		
-		
-		
 		                            });
+		                         	// 슬라이드 기능
+		                            let slideWrap = $(".slide_wrap"),
+			                            slideShow = slideWrap.find(".slide_show"),
+			                            slideList = slideShow.find(".slide_list"),
+			                            slides = slideList.find(".slide-card"),
+			                            slideBtn = slideWrap.find(".slide_btn");
+	
+			                        let slideCount = slides.length,
+			                            slideWidth = slides.innerWidth()+20,
+			                            showNum = 3,
+			                            num = 0,
+			                            currentIndex = 0,
+			                            
+			                            slideCopy = $(".slide-card:lt("+ showNum +")").clone();
+			                            slideList.append(slideCopy);
+	
+			                        //이미지 움직이기
+			                        function backShow(){
+			                          if( num == 0 ){
+			                            //시작
+			                            num= slideCount;
+			                            slideList.css("left", -num * slideWidth + "px");
+			                          }
+			                          num--;
+			                          slideList.stop().animate({ left : -slideWidth * num +"px"}, 400);
+			                        }
+	
+			                        function nextShow(){
+			                          if( num == slideCount ){
+			                            //마지막
+			                            num= 0;
+			                            slideList.css("left", num);
+			                          }
+			                          num++;
+			                          slideList.stop().animate({ left : -slideWidth * num +"px"}, 400);
+			                        }
+	
+			                        //왼쪽, 오른쪽 버튼 설정
+			                        slideBtn.on("click","button",function(){
+			                          if( $(this).hasClass("prev")){
+			                            //왼쪽 버튼을 클릭
+			                            backShow();
+			                          } else {
+			                            //오른쪽 버튼을 클릭
+			                            nextShow();
+			                          }
+			                        });
 		                        },
 		                        complete : function(data) {
 		                        },
@@ -229,53 +273,7 @@ charset=UTF-8" pageEncoding="UTF-8"%>
             menu.classList.toggle('open');
         });
         
-	    // 슬라이드 기능
-	   	let slideWrap = document.querySelector(".slide_wrap"),
-		    slideShow = document.querySelector(".slide_show"),
-		    slideList = document.querySelector(".slide_list"),
-		    slides = slideList.find(".slide-card"),
-		    slideBtn = slideWrap.find(".slide_btn");
-		
-		let slideCount = slides.length,
-		    slideWidth = slides.innerWidth(),
-		    showNum = 3,
-		    num = 0,
-		    currentIndex = 0;
-		    
-		    slideCopy = $(".slide-card:lt("+ showNum +")").clone();
-		    slideList.append(slideCopy);
-		
-		//이미지 움직이기
-		function backShow(){
-		  if( num == 0 ){
-		    //시작
-		    num= slideCount;
-		    slideList.css("left", -num * slideWidth + "px");
-		  }
-		  num--;
-		  slideList.stop().animate({ left : -slideWidth * num +"px"}, 400);
-		}
-		
-		function nextShow(){
-		  if( num == slideCount ){
-		    //마지막
-		    num= 0;
-		    slideList.css("left", num);
-		  }
-		  num++;
-		  slideList.stop().animate({ left : -slideWidth * num +"px"}, 400);
-		}
-		
-		//왼쪽, 오른쪽 버튼 설정
-		slideBtn.on("click","button",function(){
-		  if( $(this).hasClass("prev")){
-		    //왼쪽 버튼을 클릭
-		    backShow();
-		  } else {
-		    //오른쪽 버튼을 클릭
-		    nextShow();
-		  }
-		});
+	    
         </script>
       <!-- </div> -->
     </body>
