@@ -1,0 +1,47 @@
+/* reset */
+* {margin: 0; padding: 0;}
+a {text-decoration: none;}
+li {list-style: none;}
+img {display: block;}
+body {
+  height: 100vh;
+}
+
+/*slide*/
+.slide_wrap{
+	margin: 50px 0;
+}
+.slide_show {
+  overflow: hidden;
+  left: 0; top: 0; right: 0; bottom: 0; margin: auto;
+}
+.slide_show .slide_list {
+  position: relative;
+  overflow:hidden; width: 3300px; height: 460px;
+}
+.slide_show .slide_list > div {
+  float: left; margin-left: 20px; margin-right: 20px;
+  box-sizing: content-box; position: relative;
+}
+.slide_show .slide_list > div:before {
+  position: absolute; left: 10px; top: 10px; color: #fff;
+  font-family: 'RIDIBatang';
+}
+.slide_list > div:nth-child(3n+1)::before {content:'01'}
+.slide_list > div:nth-child(3n+2)::before {content:'02'}
+.slide_list > div:nth-child(3n+3)::before {content:'03'}
+
+.slide_show .slide_list > div img {width: 100%;}
+
+.slide_btn {position: absolute; bottom: 5%; left: 50%; transform: translatex(-50%);}
+.slide_btn button {
+  background: rgba(0,0,0,.4);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  cursor: pointer;
+}
+.slide_btn button:hover {
+  background: rgba(0,0,0,.8);;
+}
