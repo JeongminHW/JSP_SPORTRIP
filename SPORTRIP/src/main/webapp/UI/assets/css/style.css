@@ -72,12 +72,11 @@ a {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 20px;
 	padding: 20px;
 	height: 80px; /* 헤더 높이 */
 	position: relative;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-	background-color: transparent;
+	background-color: #000;
 }
 
 .header-view{
@@ -86,15 +85,17 @@ a {
 	align-items: center;
 	height: 80px; /* 헤더 높이 */
 	position: relative;
+    right: 2%;
 	.item {
 		display: grid;
 		place-items: center; /*글씨 중간 정렬*/
-		font-size: 20px;
 		width: auto;
 		margin-left: 20px;
 		a{
-			color: #000000;
-			margin-left: 10px;
+			color: #fff;
+			margin: 0 20px;
+			font-size: 26px;
+			font-weight: bold;
 		}
 		img{
 			width: 30px;
@@ -232,20 +233,26 @@ input {
 }
 
 .highlight-box{
-  width: 560px;
+  width: 624px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
               0 2px 2px rgba(0,0,0,0.15), 
               0 4px 4px rgba(0,0,0,0.15), 
               0 8px 8px rgba(0,0,0,0.15);
   margin-bottom: 50px;
   font-size: 18px;
+  border-radius: 10px;
   .info-box{
     height: 82px;
+    padding: 10px;
   }
   span{
     padding: 10px;
     font-weight: 500;
   }
+}
+
+iframe{
+	border-radius: 10px 10px 0 0;
 }
 
 .rank-table {
@@ -291,28 +298,6 @@ tbody{
 	.team2{
 		margin: 0;
 	}
-}
-
-.highlight-container {
-	margin-top: 40px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	bottom: 0;
-}
-
-.highlight-box {
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15),
-		0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.15);
-	margin-bottom: 50px;
-	font-size: 18px;
-	span
-	{
-	font-weight
-	:
-	500;
-}
-
 }
 
 .login-signup-box{

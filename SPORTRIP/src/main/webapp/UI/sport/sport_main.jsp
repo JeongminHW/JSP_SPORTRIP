@@ -84,7 +84,7 @@ pageEncoding="UTF-8"%>
                     	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>경기 일정</span> </a></li>
                     </ul>
                 </li>
-                <li class="menu-item"><a href="#"><span>팀 선택<span></a>
+                <li class="menu-item"><a href="#"><span>팀<span></a>
                     <ul>
                     	<% for(int i = 0; i < teamVlist.size(); i++){
 							teamBean = teamVlist.get(i);
@@ -94,6 +94,12 @@ pageEncoding="UTF-8"%>
 						<%
 							}
 						%>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#">여행</a>
+                    <ul>
+						<li id="login"><a href=".././trip/tripPage_Hotel.jsp"><span>숙박</span></a></li>
+						<li id="signup"><a href=".././trip/tripPage_Food.jsp"><span>식당</span></a></li>
                     </ul>
                 </li>
                 <li class="menu-item"><a href="#">회원정보</a>
