@@ -9,8 +9,7 @@
 <jsp:setProperty property="*" name="teamSession" />
 <%
 int teamNum = 0;
-/* 	int sportNum = MUtil.parseInt(request, "sportNum", 0); // 폼에서 받은 값이 없으면 0 */
-int sportNum = 2;
+int sportNum = MUtil.parseInt(request, "sportNum", 0); // 폼에서 받은 값이 없으면 0
 if (sportNum == 0) {
 	sportNum = (Integer) session.getAttribute("sportNum"); // 세션에서 팀 번호 가져오기
 } else {
