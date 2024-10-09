@@ -1,0 +1,366 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #eeeeee;
+}
+
+#header {
+	display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: transparent;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    text-align: center;
+    transition: 0.5s ease;
+}
+
+.logo{
+	position: absolute;
+    top: 5%; /* 화면의 위쪽에서 8% */
+    left: 2%; /* 화면의 왼쪽에서 0% */
+    z-index: 2;
+	#logo_img {
+		width: 200px;
+	}
+}
+
+#header .h_wrap {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+#header .h_gnb {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 70px;
+}
+
+#header .h_gnb .hg_list {
+    display: inline-flex;
+    vertical-align: middle;
+    font-size: 0;
+    line-height: 0;
+}
+
+#header .h_gnb .hg_list li {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 30px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: white;
+    cursor: pointer;
+}
+
+#header .h_gnb .hg_list li a {
+    text-decoration: none;
+}
+
+#header .h_gnb .hg_list li span {
+    font-family: 'Pretendard-Regular';
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hamburger {
+    float: right;
+    right: 5%;
+}
+
+.banner-container {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.banner-slide {
+	width: 100%;
+	height: 100%;
+}
+
+.slide {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.visual-img {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.visual-img img {
+	width: 100%;
+	height: 100vh;
+	object-fit: cover;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
+	z-index: 5;
+}
+
+.visual-text {
+	position: absolute;
+	max-width: 1024px;
+	top: 50%;
+	left: 14%; /* progress-bar-container와 동일한 위치 */
+	transform: translateY(50%); /* 아래에서 올라오는 효과를 위해 변환 */
+	text-align: left;
+	color: #ffffff;
+	z-index: 10;
+	opacity: 0; /* 초기에는 안 보이도록 설정 */
+	transition: opacity 1.2s ease, transform 1s ease; /* 애니메이션 효과 */
+}
+
+.visual-text.show {
+	transform: translateY(-50%); /* 애니메이션 적용 시 초기 위치로 이동 */
+	opacity: 1; /* 텍스트가 보이도록 설정 */
+}
+
+
+.visual-text:not(.show) {
+	transition: opacity 0.2s ease, transform 0.2s ease; /* 사라질 때 0.2초 */
+}
+
+.visual-text p {
+	font-size: 50px;
+	line-height: 140%;
+	letter-spacing: 0;
+	color: #fff;
+	font-weight: 600;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.progress-bar-container {
+	position: absolute;
+	top: 65%; /* visual-text 아래로 배치 */
+	left: 20%; /* 중앙에 배치 */
+	transform: translate(-20%, -50%);
+	width: 400px; /* 고정된 길이 */
+	height: 5px;
+	background-color: rgba(255, 255, 255, 0.3);
+	z-index: 10; /* 텍스트와 동일한 레벨에 위치 */
+}
+
+.progress-bar {
+	width: 0;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 1);
+	transition: width 4s linear; /* 슬라이드의 시간에 맞춘 애니메이션 */
+}
+
+/* 화살표 스타일 */
+.arrow {
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    z-index: 10;
+    font-size: 1rem; /* 아이콘 크기 조정 */
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease; /* 호버 효과 추가 */
+}
+
+.arrow-left {
+    left: calc(20% + 400px + 10px); /* progress-bar의 오른쪽에 위치 */
+}
+
+.arrow-right {
+   	left: calc(20% + 400px + 60px); /* progress-bar의 오른쪽에 위치 */
+}
+
+/* 호버 시 색상 변경 */
+.arrow:hover {
+    color: rgba(255, 255, 255, 0.8); /* 약간 투명하게 변화 */
+}
+
+.third-page {
+    height: 100vh;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeeeee;
+    padding-bottom: 100px;
+    margin-bottom: 70px;
+}
+
+.third-page a {
+	cursor: pointer;
+	text-decoration: none; 
+	outline: none
+}
+
+.third-page > header {
+	width: 70%;
+	margin: auto;
+	position: absolute;
+	top: 50px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ffffff;
+	> span {
+		font-weight: bold;
+		font-size: 30px;
+		color: #236FB5;
+	}
+}
+
+.rank-table {
+    border-collapse: collapse;
+    width: 70%;
+    height: 80%;
+    position: absolute;
+    top: 150px;
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.rank-table th, .rank-table td {
+    padding: 15px;
+    text-align: center;
+    width: 100px;
+    border: none;
+}
+
+.rank-table th {
+    background-color: #d8d8d8;
+}
+
+.rank-table td img {
+    width: 25px;
+    vertical-align: middle;
+    margin-right: 5px;
+    display: inline;
+}
+
+/* 짝수 번째 행의 배경색 */
+.rank-table tbody tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+/* 홀수 번째 행의 배경색 */
+.rank-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+footer {
+	padding: 20px 0px;	
+	display: flex;
+	align-items: center;
+}
+
+.wrap {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+}
+
+.wrap .rolling-list ul {
+    padding: 0px;
+    display: flex;
+}
+
+.wrap .rolling-list ul li {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.image-wrap {
+    > img {
+        width: 70px;
+        margin: 0px 30px;
+    }
+}
+
+.rolling-list.original {
+	animation: rollingleft1 60s linear infinite;
+}
+
+.rolling-list.clone {
+	animation: rollingleft2 60s linear infinite;
+}
+
+.rolling-list.clone1 {
+	animation: rollingleft3 60s linear infinite;
+}
+
+@keyframes rollingleft1 { 
+	0% { transform: translateX(0); }
+    33.33% { transform: translateX(-100%); }
+    33.34% { transform: translateX(200%); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes rollingleft2 { 
+	0% { transition: translateX(0); }
+	33.33% { transform: translateX(-100%); }
+	66.66% { transform: translateX(-200%); }
+	66.67% { transform: translateX(100%); }	
+    100% { transform: translateX(0); }
+}
+
+@keyframes rollingleft3 { 
+	0% { transition: translateX(0); }
+	66.66% { transform: translateX(-200%); }
+	99.99% { transform: translateX(-300%); }	
+    100% { transform: translateX(200%); }
+}
+
+  #scrollTopBtn {
+    position: absolute; /* 위치를 절대값으로 설정 */
+    right: 20px;
+    display: none;
+    z-index: 99;
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.3s ease, top 0.8s ease; /* 위치와 불투명도에 애니메이션 적용 */
+  }
+
+  #scrollTopBtn.show {
+    display: block;
+    opacity: 1;
+  }
+
+  #scrollTopBtn.hide {
+    opacity: 0;
+  }
+
+  #scrollTopBtn:hover {
+    background-color: #333;
+  }
