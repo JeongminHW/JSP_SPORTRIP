@@ -1,0 +1,48 @@
+/* reset */
+* {margin: 0; padding: 0;}
+a {text-decoration: none;}
+li {list-style: none;}
+img {display: block;}
+body {
+  height: 100vh;
+}
+
+/*slide*/
+.slide_wrap{
+	margin: 80px 0;
+}
+.slide_show {
+  overflow: hidden; width: 1920px;
+  left: 0; top: 0%; right: 0; bottom: 0; margin: auto;
+}
+.slide_show .slide_list {
+  position: relative; overflow:hidden;
+  width: 10100px; height: 500px;
+}
+.slide_show .slide_list > div {
+  float: left; margin-right: 20px;
+  box-sizing: content-box; position: relative;
+}
+
+.slide_show .slide_list > div:last-child() {
+  float: left; margin-right: 0;
+  box-sizing: content-box; position: relative;
+}
+
+.slide_btn {position: absolute; bottom: 10%; left: 50%; transform: translatex(-50%);}
+.slide_btn button {
+  background: rgba(0,0,0,.4);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-radius: 50%;
+  width: 50px; height: 50px;
+  cursor: pointer;
+  font-size: 24px;
+}
+.slide_btn button:hover {
+  background: rgba(0,0,0,.8);;
+}
+
+.slide_list{
+	 scroll-snap-type: x mandatory;
+}

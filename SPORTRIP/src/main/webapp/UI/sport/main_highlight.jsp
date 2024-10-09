@@ -11,6 +11,8 @@ charset=UTF-8" pageEncoding="UTF-8"%>
 	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum); 
 %>
 <jsp:include page="sport_header.jsp"/>
+
+
        <div class="highlight-container">
         <script type="text/javascript">
           const sportNum = <%=sportNum%>;
@@ -116,6 +118,18 @@ charset=UTF-8" pageEncoding="UTF-8"%>
     	    document.body.appendChild(form);
     	    form.submit();
     	}
+    	
+    	// 페이지 로드 시 체크박스 해제
+    	window.addEventListener('load', function() {
+        const toggle = document.getElementById('toggle');
+        toggle.checked = false; // 체크박스 해제
+    	});
+        
+        // 햄버거 메뉴
+        document.getElementById('toggle').addEventListener('change', function() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('open');
+        });
         </script>
       </div>
     </body>

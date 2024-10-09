@@ -17,10 +17,6 @@
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8afbb0c0c5d852ce84e4f0f3b93696b6"></script> <!-- 카카오 지도 API 스크립트 -->
 
     <script>
-    function goMain() {
-        document.location.href="mainPage.jsp";
-    }
-    
     function openModal(lodgingName, lodgingLatitude, lodgingLongitude, stadiumName, stadiumLatitude, stadiumLongitude) {
         const modal = document.getElementById('mapModal');
         modal.style.display = 'block';
