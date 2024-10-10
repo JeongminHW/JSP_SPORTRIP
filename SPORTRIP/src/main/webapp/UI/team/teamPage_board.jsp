@@ -3,6 +3,7 @@
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
 <%@page import="java.util.Vector"%>
+<%@page import="java.util.List"%>
 <%@page import="DB.MUtil"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
@@ -22,6 +23,9 @@
 	}
 	// 팀 정보 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
+	String teamName = teamInfo.getTEAM_NAME();
+    int sportNum = (int) session.getAttribute("sportNum");
+    
 	// 게시글 정보 가져오기
 	Vector<BoardBean> boardInfo = boardMgr.listBoard(teamNum);
 	// NullPointerException 방지
@@ -29,8 +33,39 @@
 		boardInfo = new Vector<>();
 	}
 	
-	String teamName = teamInfo.getTEAM_NAME();
-	int sportNum = (int) session.getAttribute("sportNum");
+	// 관리자가 작성한 글을 따로 저장할 리스트
+    Vector<BoardBean> adminPosts = new Vector<>();
+    Vector<BoardBean> otherPosts = new Vector<>();
+
+    // 게시글을 관리자와 일반 사용자로 구분
+    for (BoardBean board : boardInfo) {
+        if ("root".equals(board.getID())) {
+        	adminPosts.add(board); // 관리자가 작성한 글
+        } else {
+            otherPosts.add(board); // 일반 사용자가 작성한 글
+        }
+    }
+	
+	// 검색어 처리 (제목, 작성자, 작성일에 대한 검색 조건 추가)
+    String searchType = request.getParameter("type");
+    String searchText = request.getParameter("searchText");
+    
+    Vector<BoardBean> searchResults = new Vector<>();
+    
+    if (searchText != null && !searchText.trim().isEmpty()) {
+        for (BoardBean board : otherPosts) { // otherPosts만 검색
+            if ("제목".equals(searchType) && board.getTITLE().contains(searchText)) {
+                searchResults.add(board);
+            } else if ("작성자".equals(searchType) && board.getID().contains(searchText)) {
+                searchResults.add(board);
+            } else if ("작성일".equals(searchType) && board.getPOSTDATE().contains(searchText)) {
+                searchResults.add(board);
+            }
+        }
+    } else {
+        // 검색어가 없을 경우 모든 게시글 출력
+        searchResults = otherPosts;
+    }
 %>
 
 <jsp:include page="team_header.jsp" />
@@ -60,40 +95,58 @@
 				</tr>
 			</thead>
 			<tbody>
-				<% int index = 1; %>
-				<% if (boardInfo != null && !boardInfo.isEmpty()) { %>
-				<% for (BoardBean board : boardInfo) { %>
-				<tr>
-					<td><%=index++%></td>
-					<td><a href="#"
-						onclick="sendBoardNum(<%=board.getBOARD_NUM()%>,'.././board/viewPost')"><%=board.getTITLE()%></a></td>
-					<td><%=board.getID()%></td>
-					<td><%=board.getPOSTDATE()%></td>
-					<td><%=board.getVIEWS()%></td>
-					<td><%=board.getRECOMMAND()%></td>
-				</tr>
-				<% }} else { %>
-				<tr>
-					<td colspan="6">게시글이 없습니다.</td>
-				</tr>
-				<% } %>
-			</tbody>
+				<!-- 관리자가 작성한 게시글을 최상단에 출력 -->
+                <% if (adminPosts != null && !adminPosts.isEmpty()) { %>
+                    <% for (BoardBean board : adminPosts) { %>
+                    <tr style="font-weight:bold;">
+                        <td><button class="notice">공지</button></td>
+                        <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>, '.././board/viewPost')">
+                            <%=board.getTITLE()%></a></td>
+                        <td>관리자</td> <!-- "관리자"로 표시 -->
+                        <td><%=board.getPOSTDATE()%></td>
+                        <td><%=board.getVIEWS()%></td>
+                        <td><%=board.getRECOMMAND()%></td>
+                    </tr>
+                    <% } %>
+                <% } %>
+                
+                <!-- 일반 사용자가 작성한 게시글 출력 -->
+                <% int index = 1; %>
+                <% if (otherPosts != null && !otherPosts.isEmpty()) { %>
+                    <% for (BoardBean board : otherPosts) { %>
+                    <tr>
+                        <td><%=index++%></td>
+                        <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>, '.././board/viewPost')">
+                            <%=board.getTITLE()%></a></td>
+                        <td><%=board.getID()%></td>
+                        <td><%=board.getPOSTDATE()%></td>
+                        <td><%=board.getVIEWS()%></td>
+                        <td><%=board.getRECOMMAND()%></td>
+                    </tr>
+                    <% } %>
+                <% } else { %>
+                <tr>
+                    <td colspan="6">게시글이 없습니다.</td>
+                </tr>
+                <% } %>
+            </tbody>
 		</table>
 	</div>
 </div>
+<!-- 검색 박스 -->
 <div class="board-search-box">
-	<select name="type" id="">
-		<option value="제목">제목</option>
-		<option value="작성자">작성자</option>
-		<option value="작성자">작성일</option>
-	</select> <input name="searchText" type="text" placeholder="검색어를 입력하세요.">
-	<button>검색</button>
+    <select name="type" id="searchType">
+        <option value="제목">제목</option>
+        <option value="작성자">작성자</option>
+        <option value="작성일">작성일</option>
+    </select>
+    <input id="searchText" type="text" placeholder="검색어를 입력하세요.">
+    <button type="button" onclick="searchPosts()">검색</button>
 </div>
 <script>
     function postMessage() {
         // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
         var userId = "<%=login.getId() != null ? login.getId() : ""%>"; // 로그인 여부를 세션에서 체크
-
 
         if (userId !== "") { // 로그인 되어 있으면
             document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
@@ -137,7 +190,6 @@
 	    form.submit();
 	}
 
-
 	// 페이지 로드 시 체크박스 해제
 	window.addEventListener('load', function() {
        const toggle = document.getElementById('toggle');
@@ -160,4 +212,28 @@
         menu.classList.remove('open'); // 메뉴 숨김
         overlay.classList.remove('open'); // 배경 숨김
     });
+    
+    function searchPosts() {
+        // 검색 타입과 검색어 가져오기
+        var searchType = document.getElementById('searchType').value;
+        var searchText = document.getElementById('searchText').value;
+        var teamNum = "<%=teamNum%>";  // teamNum은 서버에서 가져온 값
+
+        $.ajax({
+            type: "GET",
+            url: "board_search.jsp",
+            data: {
+                type: searchType,
+                searchText: searchText,
+                teamNum: teamNum
+            },
+            success: function(response) {
+                // 검색 결과를 받아서 페이지의 게시글 리스트를 업데이트
+                $('.table-list tbody').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error: " + error);
+            }
+        });
+    }
 </script>

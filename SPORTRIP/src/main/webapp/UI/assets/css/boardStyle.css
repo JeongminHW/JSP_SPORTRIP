@@ -9,7 +9,7 @@
     button{
         width: 100px;
         height: 30px;
-        font-size: 20px;
+        font-size: 18px;
         background-color: #ffffff;
         border: 1px solid #000000;
         border-radius: 4px;
@@ -34,13 +34,13 @@
                 width: 8%;
             }
             .size02{
-                width: 53%;
+                width: 48%;
             }
             .size03{
                 width: 15%;
             }
             .size04{
-                width: 10%;
+                width: 15%;
             }
             .size05{
                 width: 7%;
@@ -53,6 +53,10 @@
             text-decoration: none;
             color: #000000;
         }
+    }
+    
+    tr{
+    	height: 70px;
     }
     
     th{
@@ -96,13 +100,17 @@
     }
 }
 
+tbody{
+	font-weight: normal;
+}
+
 .board-search-box{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     input{
-        height: 10px;
+        height: 30px;
         font-size: 18px;
         padding: 10px;
         margin: 0 10px 0 10px;
@@ -115,8 +123,8 @@
         border-radius: 5px;
         cursor: pointer;
         width: 70px;
-        height: 40px;
-        font-size: 20px;
+        height: 30px;
+        font-size: 18px;
     }
     select{
         height: 30px;
@@ -124,6 +132,7 @@
         font-size: 16px;
         border: 1px solid #9e9e9e;
         border-radius: 4px;
+        margin-right: 4px;
     }
 }
 
@@ -425,4 +434,13 @@
 
 .recomment-content{
 	width: 100%;
+}
+
+.notice {
+	border: none;
+	border-radius: 10px;
+	width: 80%;
+	height: 30px;
+	font-size: 16px;
+	font-weight: bold;
 }

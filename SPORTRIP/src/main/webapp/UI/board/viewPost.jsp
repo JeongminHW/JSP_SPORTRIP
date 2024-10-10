@@ -50,7 +50,7 @@
 			</div>
             <div class="user-box">
                 <div class="userInfo">
-                    <span style="font-weight: bold;"><%=board.getID() %></span>
+                    <span style="font-weight: bold;"><td><%= "root".equals(board.getID()) ? "관리자" : board.getID() %></td> <!-- "관리자"로 표시 --></span>
                     <span><%=board.getPOSTDATE() %></span>
                     <span><%=board.getIP() %></span>
                 </div>
