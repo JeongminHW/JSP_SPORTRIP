@@ -29,6 +29,19 @@
 		boardInfo = new Vector<>();
 	}
 	
+	// 관리자가 작성한 글을 따로 저장할 리스트
+    Vector<BoardBean> adminPosts = new Vector<>();
+    Vector<BoardBean> otherPosts = new Vector<>();
+
+    // 게시글을 root와 일반 사용자로 구분
+    for (BoardBean board : boardInfo) {
+        if ("root".equals(board.getID())) {
+        	adminPosts.add(board); // 관리자가 작성한 글
+        } else {
+            otherPosts.add(board); // 일반 사용자가 작성한 글
+        }
+    }
+    
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int) session.getAttribute("sportNum");
 %>
@@ -36,10 +49,7 @@
 <!-- 게시글 -->
 <div class="table-list-box">
 	<div class="write-btn">
-		<button onclick="postMessage()">관리자 글쓰기</button>
-	</div>
-	<div class="del-btn">
-		<button onclick="postDelete()">삭제</button>
+		<button onclick="postMessage()">공지 작성</button>
 	</div>
 	<div class="table-list">
 		<table>
@@ -61,25 +71,42 @@
 					<th>추천</th>
 				</tr>
 			</thead>
-			<tbody>
-				<% int index = 1; %>
-				<% if (boardInfo != null && !boardInfo.isEmpty()) {	%>
-				<% for (BoardBean board : boardInfo) { %>
-				<tr>
-					<td><%=index++%></td>
-					<td><a href="#"
-						onclick="sendBoardNum(<%=board.getBOARD_NUM()%>,'.././board/viewPost')"><%=board.getTITLE()%></a></td>
-					<td><%=board.getID()%></td>
-					<td><%=board.getPOSTDATE()%></td>
-					<td><%=board.getVIEWS()%></td>
-					<td><%=board.getRECOMMAND()%></td>
-				</tr>
-				<% }} else { %>
-				<tr>
-					<td colspan="6">게시글이 없습니다.</td>
-				</tr>
-				<% } %>
-			</tbody>
+			<tbody>				
+				<!-- 관리자가 작성한 게시글을 최상단에 출력 -->
+                <% if (adminPosts != null && !adminPosts.isEmpty()) { %>
+                    <% for (BoardBean board : adminPosts) { %>
+                    <tr style="font-weight:bold;">
+                        <td><button class="notice">공지</button></td>
+                        <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>, '.././board/viewPost')">
+                            <%=board.getTITLE()%></a></td>
+                        <td>관리자</td> <!-- "관리자"로 표시 -->
+                        <td><%=board.getPOSTDATE()%></td>
+                        <td><%=board.getVIEWS()%></td>
+                        <td><%=board.getRECOMMAND()%></td>
+                    </tr>
+                    <% } %>
+                <% } %>
+                
+                <!-- 일반 사용자가 작성한 게시글 출력 -->
+                <% int index = 1; %>
+                <% if (otherPosts != null && !otherPosts.isEmpty()) { %>
+                    <% for (BoardBean board : otherPosts) { %>
+                    <tr>
+                        <td><%=index++%></td>
+                        <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>, '.././board/viewPost')">
+                            <%=board.getTITLE()%></a></td>
+                        <td><%=board.getID()%></td>
+                        <td><%=board.getPOSTDATE()%></td>
+                        <td><%=board.getVIEWS()%></td>
+                        <td><%=board.getRECOMMAND()%></td>
+                    </tr>
+                    <% } %>
+                <% } else { %>
+                <tr>
+                    <td colspan="6">게시글이 없습니다.</td>
+                </tr>
+                <% } %>
+            </tbody>
 		</table>
 	</div>
 </div>
