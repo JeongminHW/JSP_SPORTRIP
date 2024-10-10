@@ -47,7 +47,7 @@ charset=UTF-8" pageEncoding="UTF-8"%>
 		                		+ "q="+ searchData
 		                		+ "type=video&"
 		                		+ "videoDuration=medium&"
-		                		+ "key=AIzaSyADuItf8mzFqwyrWiWKYs89YaWA7TuwdWs";
+		                		+ "key=AIzaSyBaqFHd79_iYLlLIlJGZ8-xcOO9mX3bDks";
 		
 		                    function convertUTCToKST(utcStr) {
 		                        const date = new Date(utcStr);
