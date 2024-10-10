@@ -1,12 +1,15 @@
 <%@page import="team.TeamBean"%>
+<%@page import="team.TeamMgr"%>
+<%@page import="team.TeamBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
 <jsp:useBean id="teamSession" scope="session" class="team.TeamBean" />
 <jsp:setProperty property="*" name="teamSession" />
+<jsp:setProperty property="*" name = "teamBean"/>
+
 <%
 int teamNum = 0;
 int sportNum = MUtil.parseInt(request, "sportNum", 0); // 폼에서 받은 값이 없으면 0
@@ -39,7 +42,7 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 				src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고"
 				id="logo_img">
 			</a>
-			<div id="header" class="c_main" style="position: fixed;">
+			<div id="header" class="c_main">
 				<div class="h_wrap">
 					<nav class="h_gnb">
 						<div class="hg_list">
@@ -206,139 +209,31 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 					<th>실점</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/2_울산HD.png" alt="울산 로고">울산
-					</a></td>
-					<td>38</td>
-					<td>76</td>
-					<td>23</td>
-					<td>7</td>
-					<td>8</td>
-					<td>63</td>
-					<td>42</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/6_포항.png" alt="포항 로고">포항
-					</a></td>
-					<td>38</td>
-					<td>64</td>
-					<td>16</td>
-					<td>16</td>
-					<td>6</td>
-					<td>53</td>
-					<td>40</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/2_울산HD.png" alt="울산 로고">울산
-					</a></td>
-					<td>38</td>
-					<td>76</td>
-					<td>23</td>
-					<td>7</td>
-					<td>8</td>
-					<td>63</td>
-					<td>42</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/6_포항.png" alt="포항 로고">포항
-					</a></td>
-					<td>38</td>
-					<td>64</td>
-					<td>16</td>
-					<td>16</td>
-					<td>6</td>
-					<td>53</td>
-					<td>40</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/2_울산HD.png" alt="울산 로고">울산
-					</a></td>
-					<td>38</td>
-					<td>76</td>
-					<td>23</td>
-					<td>7</td>
-					<td>8</td>
-					<td>63</td>
-					<td>42</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/6_포항.png" alt="포항 로고">포항
-					</a></td>
-					<td>38</td>
-					<td>64</td>
-					<td>16</td>
-					<td>16</td>
-					<td>6</td>
-					<td>53</td>
-					<td>40</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/2_울산HD.png" alt="울산 로고">울산
-					</a></td>
-					<td>38</td>
-					<td>76</td>
-					<td>23</td>
-					<td>7</td>
-					<td>8</td>
-					<td>63</td>
-					<td>42</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/6_포항.png" alt="포항 로고">포항
-					</a></td>
-					<td>38</td>
-					<td>64</td>
-					<td>16</td>
-					<td>16</td>
-					<td>6</td>
-					<td>53</td>
-					<td>40</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/2_울산HD.png" alt="울산 로고">울산
-					</a></td>
-					<td>38</td>
-					<td>76</td>
-					<td>23</td>
-					<td>7</td>
-					<td>8</td>
-					<td>63</td>
-					<td>42</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="" target="_blank"> <img
-							src=".././assets/images/logo_img/6_포항.png" alt="포항 로고">포항
-					</a></td>
-					<td>38</td>
-					<td>64</td>
-					<td>16</td>
-					<td>16</td>
-					<td>6</td>
-					<td>53</td>
-					<td>40</td>
-				</tr>
-				<!-- 다른 팀 데이터 추가 -->
-			</tbody>
+            <tbody>
+                <%
+                    teamMgr = new TeamMgr();
+                    Vector<TeamBean> teamList = teamMgr.TeamRank(sportNum);
+                    if (teamList != null) {
+                        for (TeamBean team : teamList) {
+                %>
+			                <tr>
+			                    <td><%= team.getRANKING() %></td>
+			                    <td><img src="<%= team.getLOGO()%>" alt=""><%= team.getTEAM_NAME() %></td>
+			                    <td><%= team.getGAME() %></td>
+			                    <td><%= team.getPOINT() %></td>
+			                    <td><%= team.getWIN() %></td>
+			                    <td><%= team.getDRAW() %></td>
+			                    <td><%= team.getLOSS() %></td>
+			                    <td><%= team.getWIN_POINT() %></td>
+			                    <td><%= team.getLOSS_POINT() %></td>
+			                </tr>
+                <%
+                        }
+                    } else {
+                        out.println("<tr><td colspan='9'>데이터가 없습니다.</td></tr>");
+                    }
+                %>
+            </tbody>
 		</table>
 	</section>
 
@@ -700,7 +595,7 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 	        // 세션에 값을 설정
 	        var form = document.createElement("form");
 	        form.setAttribute("method", "POST");
-	        form.setAttribute("action", "sport_main.jsp"); // 데이터를 보낼 경로
+	        form.setAttribute("action", "sports_main.jsp"); // 데이터를 보낼 경로
 	
 	        var hiddenField = document.createElement("input");
 	        hiddenField.setAttribute("type", "hidden");
@@ -745,5 +640,29 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 	        menu.classList.toggle('open');
 	    });
     </script>
+    <script>
+	  function toggleMenuVisibility() {
+	    const rank = document.querySelector('.rank');
+	    const highlight = document.querySelector('.highlight');
+	    const matchdate = document.querySelector('.matchdate');
+	    const menuCheckbox = document.getElementById('toggle'); // 햄버거 메뉴 체크박스
+	
+	    // 햄버거 메뉴가 열렸을 때
+	    if (menuCheckbox.checked) {
+	      rank.style.display = 'none';
+	      highlight.style.display = 'none';
+	      matchdate.style.display = 'none';
+	      document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+	    } else { // 햄버거 메뉴가 닫혔을 때
+	      rank.style.display = 'inline-block';
+	      highlight.style.display = 'inline-block';
+	      matchdate.style.display = 'inline-block';
+	      document.body.style.overflow = ''; // 스크롤 활성화
+	    }
+	  }
+	
+	  // 햄버거 메뉴 클릭 이벤트에 함수 연결
+	  document.getElementById('toggle').addEventListener('change', toggleMenuVisibility);
+	</script>
 </body>
 </html>

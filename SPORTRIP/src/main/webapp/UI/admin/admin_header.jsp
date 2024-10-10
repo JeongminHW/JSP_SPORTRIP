@@ -44,7 +44,9 @@
     <title><%=teamInfo.getTEAM_NAME() %></title>
     <link rel="stylesheet" href=".././assets/css/style.css">
     <link rel="stylesheet" href=".././assets/css/boardStyle.css">
-    <link rel="stylesheet" href=".././assets/css/hamburger.css">
+    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
+	<link rel="stylesheet" href=".././assets/css/style.css">
+	<link rel="stylesheet" href=".././assets/css/adminStyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
     <link rel="stylesheet" href="https://code.jquery.com/jquery-3.5.1.min.js">
     <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -53,8 +55,20 @@
 </head>
 <body>
     <header class="header team_header">
-        <a href=".././sport/sport_main.jsp">
-            <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img">
+        <a href=".././sport/sports_main.jsp">
+        <%	
+        	String src = null;
+        	if(teamInfo.getSPORT_NUM() == 1) {
+        		src = ".././assets/images/sport_logo" + teamInfo.getSPORT_NUM() + ".svg";
+        	}
+        	else if(teamInfo.getSPORT_NUM() == 2){
+        		src = ".././assets/images/sport_logo" + teamInfo.getSPORT_NUM() + ".svg";
+        	}
+        	else if(teamInfo.getSPORT_NUM() == 3){
+        		src = ".././assets/images/sport_logo" + teamInfo.getSPORT_NUM() + ".svg";
+        	}
+        %>
+            <img src=<%=src %> alt="리그" id="league_logo_img">
         </a>
         <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
 	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
@@ -66,24 +80,92 @@
             <div class="bottom"></div>
         </label>
     </header>
-    <div class="overlay" id="overlay"></div>
-    <nav class="menu">
+    <nav class="menu" style="position:fixed; z-index:2;">
         <ul class="menu-list">
-			<li><a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a></li>
-            <li>
-				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
+			<li class="menu-item"><a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a></li>
+            <li class="menu-item">
+				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')"><span>야구</span></a>
+				<ul>
+                    	<% 
+                    	// 스포츠 별 팀 불러오기
+                        int sportNum = MUtil.parseInt(request, "sportNum", 1); // 폼에서 받은 값이 없으면 0
+                        session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
+                    	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
+                    	
+                    		for(int i = 0; i < teamVlist.size(); i++){
+							teamBean = teamVlist.get(i);
+							teamNum = teamBean.getTEAM_NUM();
+						%>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
+						<%
+							}
+						%>
+                </ul>
 			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">게시판</a>
+            <li class="menu-item">
+            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">축구</a>
+            	<ul>
+                    	<% 
+                    	// 스포츠 별 팀 불러오기
+                        sportNum = MUtil.parseInt(request, "sportNum", 2); // 폼에서 받은 값이 없으면 0
+                        session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
+                    	teamVlist = teamMgr.listTeam(sportNum);
+                    	
+                    		for(int i = 0; i < teamVlist.size(); i++){
+							teamBean = teamVlist.get(i);
+							teamNum = teamBean.getTEAM_NUM();
+						%>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
+						<%
+							}
+						%>
+                </ul>
 			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">굿즈샵</a>
+            <li class="menu-item">
+            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">배구</a>
+            	<ul>
+                    	<% 
+                    	// 스포츠 별 팀 불러오기
+                        sportNum = MUtil.parseInt(request, "sportNum", 3); // 폼에서 받은 값이 없으면 0
+                        session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
+                    	teamVlist = teamMgr.listTeam(sportNum);
+                    	
+                    		for(int i = 0; i < teamVlist.size(); i++){
+							teamBean = teamVlist.get(i);
+							teamNum = teamBean.getTEAM_NUM();
+						%>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
+						<%
+							}
+						%>
+                </ul>
 			</li>
         </ul>
     </nav>
+    
+    <div class="a_top">
+        <div class="item" style="background-color: #083660;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
+        </div>
+        <div class="item" style="background-color: #236FB5;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">굿즈샵 관리</a>
+        </div>
+        <div class="item" style="background-color: #236FB5;">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">게시판 관리</a>
+		</div>
+	</div>
 </body>
+
 <script>
-    function goMain(){
-        document.location.href=".././sport/mainPage.jsp";
-    }
+	//페이지 로드 시 체크박스 해제
+	window.addEventListener('load', function() {
+	const toggle = document.getElementById('toggle');
+	toggle.checked = false; // 체크박스 해제
+	});
+	
+	// 햄버거 메뉴
+	document.getElementById('toggle').addEventListener('change', function() {
+	    const menu = document.querySelector('.menu');
+	    menu.classList.toggle('open');
+	});
 </script>

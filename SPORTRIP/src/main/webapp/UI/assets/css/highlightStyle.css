@@ -39,12 +39,12 @@ body {
 	position: relative;
 	overflow: hidden;
 	width: 10100px;
-	height: 500px;
+	height: 600px;
 }
 
 .slide_show .slide_list>div {
 	width: 624px;
-	height: 430px;
+	height: 480px;
 	float: left;
 	margin-right: 20px;
 	box-sizing: content-box;
@@ -85,4 +85,23 @@ body {
 
 .slide_list {
 	scroll-snap-type: x mandatory;
+}
+
+.highlight-box{
+  width: 624px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+              0 2px 2px rgba(0,0,0,0.15), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.15);
+  margin-bottom: 50px;
+  font-size: 18px;
+  border-radius: 10px;
+  .info-box{
+    height: 82px;
+    padding: 10px;
+  }
+  span{
+    padding: 10px;
+    font-weight: 500;
+  }
 }
