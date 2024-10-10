@@ -700,7 +700,7 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 	        // 세션에 값을 설정
 	        var form = document.createElement("form");
 	        form.setAttribute("method", "POST");
-	        form.setAttribute("action", "sport_main.jsp"); // 데이터를 보낼 경로
+	        form.setAttribute("action", "sports_main.jsp"); // 데이터를 보낼 경로
 	
 	        var hiddenField = document.createElement("input");
 	        hiddenField.setAttribute("type", "hidden");

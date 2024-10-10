@@ -35,45 +35,16 @@
         positionList.add(player.getPOSITION());
     }
 %>
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><%=teamInfo.getTEAM_NAME() %></title>
-	<link rel="stylesheet" href=".././assets/css/style.css">
-	<link rel="stylesheet" href=".././assets/css/adminStyle.css">
-</head>
-<body>
-<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-	    <a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;">
-	    <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
-	    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
-    	</div>
-</header>
-    <div class="a_top">
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">게시판</a>
-		</div>
-	</div>
 	
+	<jsp:include page="admin_header.jsp" />
 	<!-- 감독 / 선수 -->
 	<div id="sub_wrap">
 		<div class="u_top">
-			<div class="item" style="background-color: #083660;" id="coach">
+			<div class="item" style="background-color: #236FB5;" id="coach">
 				<a href="#" onclick="showCoaches()">감독</a>
 			</div>
-			<div class="item" style="background-color: #236FB5;" id="player">
-				<a href="#" onclick="showPlayers()">선수</a>
+			<div class="item" style="background-color: #ffffff; border: 1px solid #236FB5;" id="player">
+				<a href="#" onclick="showPlayers()" style="color: #000;">선수</a>
 			</div>
 		</div>
 		<div class="update-player">
