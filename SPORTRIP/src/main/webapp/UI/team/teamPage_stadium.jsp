@@ -22,23 +22,44 @@
 %>
 <jsp:include page="team_header.jsp" />
 <div class="stadium-intro">
+	<div class="stadium-info">
+		<div class="climate-info">
+			<div class="climate-infoDetail">
+	          <img id="weather-img" />
+			</div>
+			  <span id="weather-temp"></span>
+		</div>
+		<div class="stadium-text">
+			<p id="stadium-name"><%=StadiumInfo.getSTADIUM_NAME()%></p>
+			<span>위치 : <%=StadiumInfo.getSTADIUM_ADDRESS()%></span><br> 
+			<span>수용 인원 : <%=StadiumInfo.getSEAT_CAPACITY_S()%>명
+			</span><br>
+		</div>
+	</div>
 	<div class="stadium-img">
 		<img alt=<%=StadiumInfo.getSTADIUM_NAME()%>
 			src="<%=StadiumInfo.getSEATS()%>">
 	</div>
-	<div class="stadium-info">
-		<div class="stadium-text">
-			<span>명칭 : <%=StadiumInfo.getSTADIUM_NAME()%></span><br> <span>위치
-				: <%=StadiumInfo.getSTADIUM_ADDRESS()%></span><br> <span>수용 인원
-				: <%=StadiumInfo.getSEAT_CAPACITY_S()%>명
-			</span><br>
-		</div>
-		<div class="climate-info">
-			<button class="climate-button">날씨 정보 보기</button>
-		</div>
-	</div>
+
 </div>
 <script>
+
+	const weatherIconImg = document.querySelector("#weather-img");
+	const weather_KEY = '55d0f0b2f63264b3079894777e5ff4b4';
+	const lat = <%=StadiumInfo.getLAT()%>
+	  const lon = <%=StadiumInfo.getLON()%>
+	  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${"${lat}"}&lon=${"${lon}"}&appid=${"${weather_KEY}"}&units=metric&lang=kr`;
+	  fetch(url) 
+	    .then((response) => response.json())
+	    .then((data) => {
+	      const weatherIcon = data.weather[0].icon;
+	      const iconURL = `http://openweathermap.org/img/wn/${"${weatherIcon}"}@2x.png`;
+	
+	      weatherIconImg.setAttribute('src', iconURL);
+	      const weather = document.querySelector("#weather-temp");
+	      weather.innerText = `${"${data.main.temp}"}°C`;
+	    });
+	
 	// 스포츠 넘버 전송
 	function sendSportNum(sportNum, page) {
 		// 폼을 생성
@@ -98,4 +119,6 @@
 		menu.classList.remove('open'); // 메뉴 숨김
 		overlay.classList.remove('open'); // 배경 숨김
 	});
+	
+	
 </script>
