@@ -35,7 +35,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K-league</title>
-<link rel="stylesheet" href=".././assets/css/style.css">
 <link rel="stylesheet" href=".././assets/css/adminStyle.css">
 <script src=".././assets/js/main.js"></script>
 <script>
@@ -45,57 +44,47 @@
 </script>
 </head>
 <body>
-<header class="header header_logo">
-		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-	    <a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;">
-	    <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
-	    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
-    	</div>
-</header>
-    <div class="a_top">
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
+	<div id="background" class="c_main">
+		<div class="b_wrap">
+			<img alt="" src=".././assets/images/main_page_img.png">
 		</div>
 	</div>
-
-    <div class="addplayer-box">
-        <h2>선수 등록</h2>
-        <form action="" method="post" enctype="multipart/form-data">
-
-            <div class="addplayer-item">
-                <label class="label" for="playerName" >선수 이름</label>
-                <input class="input" type="text" id="playerName" name="playerName">
-            </div>
-            <div class="addplayer-item">
-                <label class="label" for="playerPosition">선수 포지션</label>
-                <input class="input" type="text" id="playerPosition" name="playerPosition">
-            </div>
-            <div class="addplayer-item">
-                <label class="label" for="playerBacknum">선수 등번호</label>
-                <input class="input" type="text" id="playerBacknum" name="playerBacknum">
-            </div>
-            <div class="addplayer-item file-box">
-                <label class="label" for="player_img">선수 이미지</label>
+	<div class="popup-background">
+		<div class="popup">
+			<div class="addplayer-box">
 				<div class="file-box">
-	            	<input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
-	            	<label id="file-label" for="file"></label>
+				    <!-- 플레이어 이미지 업로드 섹션 -->
+					<img id="playerImg" src=".././assets/images/default_player.png" alt="Player Image">
+					<label id="file-label" for="file">이미지 업로드</label>
 	                <input type="file" id="file" name="playerImg">
-
 				</div>
-            </div>
-            <div class="addplayer-item">
-                <input type="button" onclick="playerManager()" value="목록">
-                <input type="button" onclick="insertPlayer()" value="등록">
-            </div>
-            </form>
-    </div>
+				<div class="player-info-box">
+					<form action="" method="post" enctype="multipart/form-data">
+					    <div class="addplayer-item">
+					        <label class="label" for="playerName">선수명</label>
+					        <input class="input" type="text" id="playerName" name="playerName">
+					    </div>
+			            <div class="addplayer-item">
+			                <label class="label" for="playerPosition">포지션</label>
+			                <input class="input" type="text" id="playerPosition" name="playerPosition">
+			            </div>
+					    <div class="addplayer-item">
+					        <label class="label" for="playerBirthday">생년월일</label>
+					        <input class="input" type="text" id="playerBirthday" name="playerBirthday">
+					    </div>
+			            <div class="addplayer-item"  style="margin-bottom: 60px;">
+			                <label class="label" for="playerBacknum">등번호</label>
+			                <input class="input" type="text" id="playerBacknum" name="playerBacknum">
+			            </div>
+						<div class="addplayer-item">
+							<input type="button" onclick="playerManager()" value="돌아가기">
+							<input type="button" onclick="insertPlayer()" value="선수 등록">
+						</div>
+					</form>
+			    </div>	
+			</div>
+		</div>
+	</div>
     <script>
 	    function goMain(){
 	        document.location.href="mainPage.jsp";
@@ -139,10 +128,6 @@
 	        })
 	        .catch(error => console.error('Error:', error));
 	    }
-
-
-		
-	    
 	</script>
 </body>
 </html>

@@ -2,29 +2,183 @@ body{
 	margin: 0;
 }
 
-.a_top {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	place-items: center; /*글씨 중간 정렬*/
-	width: 99%;
-	height: 50px;
-	gap: 10px;
-	margin-top: 20px;
-	.item{
-		display: grid;
-		place-items: center; /*글씨 중간 정렬*/
-		font-size: 20px;
-		width: 100%;
-		height: 100%;
-		margin-left: 20px;
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    transition: 0.5s ease;
+}
+
+#background .b_wrap {
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	> img {
+		width: 101vw;
+		height: auto;
 	}
+}
+
+/* 팝업 기본 스타일 */
+.popup-background {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup {
+    width: 800px; /* 팝업의 넓이를 이미지처럼 줄입니다 */
+    height: 500px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 중앙 정렬 */
+}
+
+.player-info-box {
+	width: 60%;	
+	height: auto;
+}
+
+.addplayer-box, .updateplayer-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    margin: 50px auto;
+}
+
+.addplayer-item	{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    align-items: center;
+    > label {
+    	font-size: 20px;
+    }
+}
+
+.updateplayer-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    align-items: center;
+    > label {
+    	font-size: 20px;
+    }
+    > input  {
+		padding: 10px;
+		width: 100%;
+		height: 20px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		font-size: 14px;
+		margin: 0px 0px 10px 0px;
+	}
+}
+
+
+
+label {
+	width: 120px;
+	margin-right: 40px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* 이미지 박스 스타일 */
+.file-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 80px;
+}
+
+.file-box img {
+	width: 180px;
+    height: 240px;
+    object-fit: cover; /* 이미지를 프레임에 맞추어 채움 */
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+}
+
+.file-box input[type="file"] {
+    display: none; /* 파일 입력 숨김 */
+}
+
+#file-label {
+    display: inline-block;
+	width: 160px;
+    margin-right: 0px;
+    padding: 8px 12px;
+    background-color: #D9D9D9;
+    color: #767676;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* 버튼 스타일 */
+.addplayer-item input[type="button"], .updateplayer-item input[type="button"] {
+    height: 50px;
+    padding: 10px 20px;
+    margin: 10px 10px;
+    border: 1px solid #000;
+    border-radius: 30px;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.addplayer-item input[type="button"]:first-child, .updateplayer-item input[type="button"]:first-child {
+    background-color: #fff;
+    color: #000;
+}
+
+.addplayer-item input[type="button"]:last-child, .updateplayer-item input[type="button"]:last-child {
+    background-color: #000;
+    color: #fff;
+}
+
+/* input_box의 입력 중 효과 */
+.player-info-box input:focus {
+  border-color: #807e7e; /* 포커스 시 파란색 테두리 */
+  outline: none;
+  box-shadow: 0 0 8px rgba(150, 149, 149, 0.2); /* 파란색 외곽선 그림자 */
+}
+
+.player-info-box input[type="button"]:hover {
+  outline: none;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .active{
 	border: 3px solid #f1290f;
 }
 
-.update-player, .update-goods{
+ .update-player, .update-goods{
     text-align: right;
     button{
         background-color: #ffffff;
@@ -37,7 +191,7 @@ body{
         margin-left: 10px;
     }
 }
-
+/*
 .addplayer-box, .addgoods-box, .updateplayer-box, .updategoods-box{
     text-align: center;
     margin-top: 20px;
@@ -170,4 +324,4 @@ body{
 
 .menu-item:nth-child(2){
 	border-left: none;
-}
+} */

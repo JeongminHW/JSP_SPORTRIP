@@ -22,8 +22,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K-league</title>
-<link rel="stylesheet" href=".././assets/css/style.css">
 <link rel="stylesheet" href=".././assets/css/adminStyle.css">
+<link href=".././assets/css/style.css" rel="stylesheet" type="text/css">
 <script src=".././assets/js/main.js"></script>
 <script>
     function goMain(){
@@ -32,63 +32,49 @@
 </script>
 </head>
 <body>
-<header class="header header_logo">
-    <a style="cursor: pointer" onclick="goMain()">
-    <img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-    <a href="soccer_main.html" style="margin-left: 50px;">
-    <img src=".././assets/images/k-league_logo.svg" alt="리그" id="league_logo_img"></a>
-    <img style="width:80px;" src=".././assets/images/logo_img/2_울산HD.png" alt="울산" class="team_logo_img ulsan">
-    <div class="login-signup-box">
-        <ul>
-            <li><a href="login.html" style="color: #000000;">로그인</a></li>
-            <li><a href="signup.html" style="color: #000000;">회원가입</a></li>
-        </ul>
-    </div>
-    </header>
-    <div class="a_top">
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
+	<div id="background" class="c_main">
+		<div class="b_wrap">
+			<img alt="" src=".././assets/images/main_page_img.png">
 		</div>
 	</div>
-
-    <div class="updateplayer-box">
-        <h2>선수 수정</h2>
-		<form action="updatePlayer.jsp" method="post" enctype="multipart/form-data">
-		    <input type="hidden" name="playerNum" value="<%= playerNum %>">
-		    <div class="updateplayer-item">
-		        <label class="label" for="playerName">선수 이름</label>
-		        <input class="input" type="text" id="playerName" name="playerName" value="<%= playerBean.getPLAYER_NAME() %>">
-		    </div>
-		    <div class="updateplayer-item">
-		        <label class="label" for="playerPosition">선수 포지션</label>
-		        <input class="input" type="text" id="playerPosition" name="playerPosition" value="<%= playerBean.getPOSITION() %>">
-		    </div>
-		    <div class="updateplayer-item">
-		        <label class="label" for="playerBacknum">선수 등번호</label>
-		        <input class="input" type="text" id="playerBacknum" name="playerBacknum" value="<%= playerBean.getUNIFORM_NUM() %>">
-		    </div>
-		    <div class="updateplayer-item file-box">
-		        <label class="label" for="playerImg">선수 이미지</label>
-		        <div class="file-box">
-		            <input class="upload-file" placeholder="첨부파일" readonly>
-		            <label id="file-label" for="file"></label>
-		            <input type="file" id="file" name="playerImg">
-		        </div>
-		    </div>
-		    <div class="updateplayer-item">
-		        <input type="button" onclick="playerManager()" value="목록">
-		        <input type="hidden" id="playerNum" name="playerNum" value="<%= playerBean.getPLAYER_NUM() %>">
-		        <input type="button" onclick="updatePlayer()" value="수정">
-		    </div>
-		</form>
-
-    </div>
+	<div class="popup-background">
+		<div class="popup">
+			<div class="updateplayer-box">
+				<div class="file-box">
+				    <!-- 플레이어 이미지 업로드 섹션 -->
+					<img id="playerImg" src="<%= playerBean.getPLAYER_IMG() " alt="Player Image">
+					<label id="file-label" for="file">이미지 업로드</label>
+	                <input type="file" id="file" name="playerImg">
+				</div>
+				<div class="player-info-box">
+					<form action="updatePlayer.jsp" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="playerNum" value="<%= playerNum %>">
+					    <div class="updateplayer-item">
+					        <label class="label" for="playerName">선수명</label>
+					        <input class="input" type="text" id="playerName" name="playerName" value="<%= playerBean.getPLAYER_NAME() %>">
+					    </div>
+			            <div class="updateplayer-item">
+			                <label class="label" for="playerPosition">포지션</label>
+			                <input class="input" type="text" id="playerPosition" name="playerPosition" value="<%= playerBean.getPOSITION() %>">
+			            </div>
+					    <div class="updateplayer-item">
+					        <label class="label" for="playerBirthday">생년월일</label>
+					        <input class="input" type="text" id="playerBirthday" name="playerBirthday" value="<%= playerBean.getBIRTH() %>">
+					    </div>
+			            <div class="updateplayer-item"  style="margin-bottom: 60px;">
+			                <label class="label" for="playerBacknum">등번호</label>
+		      				<input class="input" type="text" id="playerBacknum" name="playerBacknum" value="<%= playerBean.getUNIFORM_NUM() %>">
+			            </div>
+						<div class="updateplayer-item">
+							<input type="button" onclick="playerManager()" value="돌아가기">
+							<input type="hidden" id="playerNum" name="playerNum" value="<%= playerBean.getPLAYER_NUM() %>">
+							<input type="button" onclick="updatePlayer()" value="수정하기">
+						</div>
+					</form>
+			    </div>	
+			</div>
+		</div>
+	</div>
     <script>
 	    function goMain(){
 	        document.location.href="mainPage.jsp";
