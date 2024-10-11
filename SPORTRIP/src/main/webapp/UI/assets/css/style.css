@@ -65,7 +65,7 @@ body, input, button {
 }
 
 a {
-	color: #ffffff;
+	color: #000000;
 	text-decoration: none;
 }
 
@@ -733,7 +733,10 @@ tbody{
 }
 
 .selected-item {
-    background-color: #083660 !important;  /* 선택된 버튼의 색상 */
+    background-color: #000000 !important;  /* 선택된 버튼의 색상 */
+    a{
+    	color: #FBFBFB;
+    }
 }
 
 .selectBox2 * {

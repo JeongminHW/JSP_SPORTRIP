@@ -39,14 +39,14 @@
 <!-- 감독 / 선수 -->
 <div id="sub_wrap">
 	<div class="u_top">
-		<div class="item" style="background-color: #083660;" id="coach">
-			<a href="#" onclick="showCoaches()">감독</a>
+		<div class="item" style="background-color: #000000;" id="coach">
+			<a href="#" onclick="showCoaches()" style="color: #FBFBFB">감독</a>
 		</div>
-		<div class="item" style="background-color: #236FB5;" id="player">
+		<div class="item" style="background-color: #FBFBFB;" id="player">
 			<a href="#" onclick="showPlayers()">선수</a>
 		</div>
 	</div>
-	<div id="coach-List" style="display: none;">
+	<div id="coach-List">
         <% for (HeadcoachBean coach : coachList) { %>
             <div class="coach-card" data-coach-num="<%=coach.getHEADCOACH_NUM() %>">
                 <img src="<%= coach.getHEADCOACH_IMG() %>" alt="<%= coach.getHEADCOACH_NAME() %>" class="coach-photo">
@@ -62,7 +62,7 @@
 			<!-- 포지션 버튼 생성 -->
 			<div class="p_top">
 				<% for (String position : positionList) { %>
-				<div class="item" style="background-color: #236FB5;">
+				<div class="item" style="background-color: #FBFBFB;">
 					<a href="#" onclick="filterByPosition('<%=position%>')"><%=position%></a>
 				</div>
 				<% } %>
@@ -106,8 +106,10 @@
 	function showPlayers() {
 		document.getElementById('player-List').style.display = 'block';
 		document.getElementById('coach-List').style.display = 'none';
-		document.getElementById('player').style.backgroundColor = '#083660';
-		document.getElementById('coach').style.backgroundColor = '#236FB5';
+		document.getElementById('player').style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
+		document.getElementById('player').style.backgroundColor = '#000000';
+		document.getElementById('coach').style.color = '#000000'; // 폰트색 검정으로 변경
+		document.getElementById('coach').style.backgroundColor = '#FBFBFB';
 		var playerCards = document.querySelectorAll('.player-card');
 		playerCards.forEach(function(card) {
 			card.style.display = 'inline-block';
@@ -118,8 +120,10 @@
 	function showCoaches() {
 		document.getElementById('player-List').style.display = 'none';
 		document.getElementById('coach-List').style.display = 'block';
-		document.getElementById('player').style.backgroundColor = '#236FB5';
-		document.getElementById('coach').style.backgroundColor = '#083660';
+	    document.getElementById('player').style.backgroundColor = '#FBFBFB';
+	    document.getElementById('player').style.color = '#000000'; // 폰트색 검정으로 변경
+	    document.getElementById('coach').style.backgroundColor = '#000000';
+	    document.getElementById('coach').style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
 	}
 
 	// 포지션에 따라 선수 필터링
