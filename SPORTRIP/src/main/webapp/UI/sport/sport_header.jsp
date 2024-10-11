@@ -58,4 +58,4 @@ charset=UTF-8"
             <div class="bottom"></div>
         	</label>
 	</header>
-	<jsp:include page="../hamburger.jsp"></jsp:include>
+	<jsp:include page="../hamburger.jsp"/>

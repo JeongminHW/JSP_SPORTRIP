@@ -39,11 +39,11 @@
 <!-- 감독 / 선수 -->
 <div id="sub_wrap">
 	<div class="u_top">
-		<div class="item" style="background-color: #000000;" id="coach">
-			<a href="#" onclick="showCoaches()" style="color: #FBFBFB">감독</a>
+		<div class="item" id="coach">
+			<a href="#" onclick="showCoaches()" data-value="감독">감독</a>
 		</div>
-		<div class="item" style="background-color: #FBFBFB;" id="player">
-			<a href="#" onclick="showPlayers()">선수</a>
+		<div class="item" id="player">
+			<a href="#" onclick="showPlayers()" data-value="선수">선수</a>
 		</div>
 	</div>
 	<div id="coach-List">
@@ -106,9 +106,9 @@
 	function showPlayers() {
 		document.getElementById('player-List').style.display = 'block';
 		document.getElementById('coach-List').style.display = 'none';
-		document.getElementById('player').style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
+		document.getElementById('player').getElementsByTagName('a')[0].style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
 		document.getElementById('player').style.backgroundColor = '#000000';
-		document.getElementById('coach').style.color = '#000000'; // 폰트색 검정으로 변경
+		document.getElementById('coach').getElementsByTagName('a')[0].style.color = '#000000'; // 폰트색 검정으로 변경
 		document.getElementById('coach').style.backgroundColor = '#FBFBFB';
 		var playerCards = document.querySelectorAll('.player-card');
 		playerCards.forEach(function(card) {
@@ -121,9 +121,9 @@
 		document.getElementById('player-List').style.display = 'none';
 		document.getElementById('coach-List').style.display = 'block';
 	    document.getElementById('player').style.backgroundColor = '#FBFBFB';
-	    document.getElementById('player').style.color = '#000000'; // 폰트색 검정으로 변경
+	    document.getElementById('player').getElementsByTagName('a')[0].style.color = '#000000'; // 폰트색 검정으로 변경
 	    document.getElementById('coach').style.backgroundColor = '#000000';
-	    document.getElementById('coach').style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
+	    document.getElementById('coach').getElementsByTagName('a')[0].style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
 	}
 
 	// 포지션에 따라 선수 필터링

@@ -1,13 +1,4 @@
 @font-face {
-	font-family: 'BMJUA';
-	src:
-		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
     font-family: 'NanumSquareNeoLight';
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.eot);
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.ttf) format("truetype");
@@ -41,6 +32,10 @@
     font-family: 'NanumSquareNeoVariable';
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot);
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.ttf) format("truetype");
+}
+
+body{
+	margin: 0;
 }
 
 body, input, button {
@@ -210,6 +205,20 @@ input {
 	}
 	.item:hover {
   		box-shadow: 0 3px 8px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+	
+	.item:first-child{
+		background-color: #000000;
+		a{
+			color: #FBFBFB;
+		}
+	}
+	
+	.item:last-child{
+		background-color: #FBFBFB;
+		a{
+			color: #000000;
+		}
 	}
 }
 .p_top {
