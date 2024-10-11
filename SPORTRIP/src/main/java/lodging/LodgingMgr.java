@@ -118,4 +118,29 @@ public class LodgingMgr {
 	    return lodging;
 	}
 
+	// 숙소명 가져오기
+    public String getLodgingName(int lodgingNum) {
+        String lodgingName = null;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = pool.getConnection(); // DB 연결
+            String sql = "SELECT LODGING_NAME FROM lodging WHERE LODGING_NUM = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, lodgingNum);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                lodgingName = rs.getString("LODGING_NAME"); // 숙소명 가져오기
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            pool.freeConnection(con, pstmt, rs); // DB 연결 종료
+        }
+
+        return lodgingName;
+    }
 }
