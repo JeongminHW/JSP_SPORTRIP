@@ -128,8 +128,8 @@
 	<div class="hotel_main">
 	    <div class="h_top">
 	        <div class="item">
-	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_Hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
-	            <button type="button" class="food-btn" onclick="location.href='tripPage_Food.jsp'">식당</button>
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
+	            <button type="button" class="food-btn" onclick="location.href='tripPage_food.jsp'">식당</button>
 	        </div>
 	    </div>
 	
@@ -211,7 +211,7 @@
 						</button>
 					</div>
 					<div class="info-item-button">
-						<button class="show-detail" onclick="location.href='hotel_sub.jsp?lodgingNum=<%=lodging.getLODGING_NUM()%>'">객실 보기</button>
+						<button class="show-detail" onclick="location.href='tripPage_hotelsub.jsp?lodgingNum=<%=lodging.getLODGING_NUM()%>'">객실 보기</button>
 					</div>
 				</div>
 				<%

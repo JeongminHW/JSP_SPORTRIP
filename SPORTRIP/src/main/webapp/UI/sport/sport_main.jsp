@@ -78,14 +78,14 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 		                        <li class="volleyball"><a href="#" onclick="sendSportNum(3)"><span>배구</span></a></li>
 		                    </ul>
 		                </li>
-		                <li class="menu-item"><a href="#"><span>리그 정보<span></a>
+		                <li class="menu-item"><a href="#"><span>리그 정보</span></a>
 		                    <ul>
 		                    	<li class="trip"><a href=".././trip/tripPage_Hotel.jsp"><span>팀 순위</span> </a></li>
 		                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>하이라이트</span> </a></li>
 		                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>경기 일정</span> </a></li>
 		                    </ul>
 		                </li>
-		                <li class="menu-item"><a href="#"><span>팀<span></a>
+		                <li class="menu-item"><a href="#"><span>팀</span></a>
 		                    <ul>
 		                    	<% for(int i = 0; i < teamVlist.size(); i++){
 									teamBean = teamVlist.get(i);
@@ -215,10 +215,16 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
                     Vector<TeamBean> teamList = teamMgr.TeamRank(sportNum);
                     if (teamList != null) {
                         for (TeamBean team : teamList) {
+                        	String teamNames[] = team.getTEAM_NAME().split(" ");
+                        	String teamName = teamNames[0];
+                        	
+                        	if(teamName.equals("FC")){
+                        		teamName = teamNames[1];
+                        	}
                 %>
 			                <tr>
 			                    <td><%= team.getRANKING() %></td>
-			                    <td><img src="<%= team.getLOGO()%>" alt=""><%= team.getTEAM_NAME() %></td>
+			                    <td><img src="<%= team.getLOGO()%>" alt=""><%= teamName %></td>
 			                    <td><%= team.getGAME() %></td>
 			                    <td><%= team.getPOINT() %></td>
 			                    <td><%= team.getWIN() %></td>

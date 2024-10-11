@@ -54,7 +54,7 @@
 
     <section class="cart">
         <p class="title">
-            <span class="cart-title">장바구니</span> <span id="cartSize"> (2)</span>
+            <span class="cart-title">장바구니</span> <span id="cartSize"> (<%=basketVList.size() %>)</span>
         </p>
 		<table class="cart__list">
 		    <form id="paymnetForm" accept-charset="UTF-8" action="shoppingPage_payment.jsp" method="POST">

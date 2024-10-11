@@ -102,18 +102,6 @@
 <link rel="stylesheet" href=".././assets/css/orderStyle.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<script>
-// 팝업 열기
-function openPopup() {
-    document.querySelector('.popup-background').style.display = 'flex';
-    document.querySelector('.popup-content').scrollTop = 0;
-}
-
-// 팝업 닫기
-function closePopup() {
-    document.querySelector('.popup-background').style.display = 'none';
-}
-</script>
 </head>
 <body>
     <header class="order-header">
@@ -136,9 +124,6 @@ function closePopup() {
                             <div class="receiver-address">
                                 <span><%= login.getAddress() %> (<%= login.getPostcode() %>)</span>
                             </div>
-                        </div>
-                        <div class="address-chage">
-                            <button type="button" class="address-change-btn" onclick="openPopup()">변경</button>
                         </div>
                     </div>
                 </div>
@@ -199,23 +184,9 @@ function closePopup() {
             </div>
         </div>
     </section>
-
-    <!-- 팝업 창 -->
-    <div class="popup-background">
-        <div class="popup">
-            <div class="popup-header">회원 정보</div>
-            <div class="popup-content">
-                <p><%= login.getName() %></p>
-                <p><%= login.getPhone() %></p>
-                <p><%= login.getAddress() %></p>
-                <p><%= login.getPostcode() %></p>
-            </div>
-            <button class="popup-close" onclick="closePopup()">닫기</button>
-        </div>
-    </div>
     
-    <form id="paymentForm" action="saveCharge.jsp" method="post">
-        <!-- Form will be dynamically populated with hidden inputs for orders[] -->
+    <form id="paymentForm" action="save_charge.jsp" method="post">
+       
     </form>
 
     <footer class="payment-section">
@@ -252,12 +223,10 @@ function closePopup() {
 		    const form = document.getElementById('paymentForm');
 		    var repairSum = 0;
 
-		    // Clear previous form data if any
 		    while (form.lastElementChild) {
 		        form.removeChild(form.lastElementChild);
 		    }
 
-		    // Populate the form with orders data
 		    orders.forEach((order, index) => {
 		        const mdNumInput = document.createElement('input');
 		        mdNumInput.type = 'hidden';

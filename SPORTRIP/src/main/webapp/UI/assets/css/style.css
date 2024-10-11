@@ -604,7 +604,7 @@ tbody{
 	}
 }
 
-.room-img {
+.room-img, .goods-card {
     position: relative;
 }
 
@@ -620,6 +620,10 @@ tbody{
 }
 
 .room-img:hover .original-img {
+    display: block;
+}
+
+.goods-card:hover .original-img {
     display: block;
 }
 
@@ -758,7 +762,7 @@ tbody{
 	width: 200px;
 	height: 35px;
 	border-radius: 4px;
-	border: 2px solid #236FB5;
+	border: 2px solid #000000;
 	background:
 		url('https://img.icons8.com/?size=100&id=99977&format=png&color=000000')
 		calc(100% - 7px) center no-repeat;
@@ -774,7 +778,7 @@ tbody{
 	position: absolute;
 	top: 0;
 	right: 35px;
-	background: #236FB5;
+	background: #000000;
 }
 
 .selectBox2 .label {
@@ -795,7 +799,7 @@ tbody{
 	top: 28px;
 	left: 0;
 	width: 100%;
-	background: rgba(35, 111, 181);
+	background: #424242;
 	color: #fff;
 	list-style-type: none;
 	padding: 0;
@@ -819,14 +823,14 @@ tbody{
 }
 
 .selectBox2 .optionItem {
-	border-bottom: 1px dashed #083660;
+	border-bottom: 1px dashed #ffffff;
 	padding: 5px 15px 5px;
 	transition: .1s;
 	width: 100%;
 }
 
 .selectBox2 .optionItem:hover {
-	background: rgba(8, 54, 96);
+	background: #000000;
 }
 
 .selectBox2 .optionItem:last-child {
