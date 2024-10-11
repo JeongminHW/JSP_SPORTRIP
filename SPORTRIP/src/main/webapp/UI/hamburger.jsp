@@ -33,9 +33,9 @@ charset=UTF-8"
                 </li>
                 <li class="menu-item"><a href="#"><span>리그 정보<span></a>
                     <ul>
-                    	<li class="trip"><a href=".././trip/tripPage_Hotel.jsp"><span>팀 순위</span> </a></li>
-                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>하이라이트</span> </a></li>
-                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>경기 일정</span> </a></li>
+                    	<li class="league"><a href=".././sport/team_rank.jsp"><span>팀 순위</span> </a></li>
+                    	<li class="league"><a href=".././sport/main_highlight.jsp"><span>하이라이트</span> </a></li>
+                    	<li class="league"><a href=".././sport/sport_matchDate.jsp"><span>경기 일정</span> </a></li>
                     </ul>
                 </li>
                 <li class="menu-item"><a href="#"><span>팀<span></a>

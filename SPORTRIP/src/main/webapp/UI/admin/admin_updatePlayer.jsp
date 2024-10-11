@@ -42,7 +42,7 @@
 			<div class="updateplayer-box">
 				<div class="file-box">
 				    <!-- 플레이어 이미지 업로드 섹션 -->
-					<img id="playerImg" src="<%= playerBean.getPLAYER_IMG() " alt="Player Image">
+					<img id="playerImg" src="<%= playerBean.getPLAYER_IMG()%>" alt="Player Image">
 					<label id="file-label" for="file">이미지 업로드</label>
 	                <input type="file" id="file" name="playerImg">
 				</div>
