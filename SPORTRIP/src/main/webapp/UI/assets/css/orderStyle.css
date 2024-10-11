@@ -1,15 +1,14 @@
 @font-face {
-	font-family: 'BMJUA';
-	src:
-		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+	font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
 	margin: 0;
 	padding: 0;
+	background-color: #eeeeee
 }
 
 .order-header {
@@ -17,7 +16,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 50px;
-	background-color: #004190;
+	background-color: #000000;
 	font-size: 20px;
 }
 
@@ -91,7 +90,7 @@ body {
 .product-wrap, .address-wrap {
 	margin-top: 10px;
 	width: 100%;
-	background-color: rgba(189, 222, 255, 0.7);
+	background-color:#ffffff;
 	border-radius: 15px;
 	padding: 20px 16px 5px;
 }
@@ -108,7 +107,7 @@ ul li {
 }
 
 .product-info {
-	border-top: 1px solid rgba(35, 111, 181, 0.5);
+	border-top: 1px solid #eeeeee;
 }
 
 .img-box {
@@ -134,9 +133,9 @@ ul li {
 }
 
 .price-wrap {
-	margin-top: 12px;
+	margin-top: 20px;
 	width: 100%;
-	background-color: rgba(189, 222, 255, 0.7);
+	background-color:#ffffff;
 	border-radius: 15px;
 	padding: 20px 16px 5px;
 }
@@ -145,6 +144,7 @@ ul li {
 	padding-bottom: 15px;
 	margin: 0;
 	margin-bottom: 10px;
+	margin-top: 20px;
 }
 
 .total-product-price .delivery-fee {
@@ -188,10 +188,11 @@ ul li {
 .final-price {
 	display: flex; /* dt와 dd를 같은 줄에 배치 */
 	font-size: 17px;
+	color: white;
 	line-height: 23px;
 	margin: -10px -16px;
 	padding: 20px 16px;
-	background-color: rgba(120, 183, 255);
+	background-color: #000000;
 	border-radius: 0 0 15px 15px;
 }
 
@@ -232,8 +233,8 @@ ul li {
 	left: 0;
 	width: 100%;
 	height: 70px;
-	background-color: rgba(189, 222, 255);
-	box-shadow: 0 0 5px #004190;
+	background-color: #ffffff;
+	box-shadow: 0 0 5px #eeeeee;
 }
 
 .payment-content {
@@ -261,183 +262,10 @@ ul li {
 	line-height: 26px;
 	width: 100%;
 	padding: 5px 0 5px;
-	background-color: #004190;
+	background-color: #000000;
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, .1);
 	border: 0px; border-radius : 5px;
 	color: #fff;
 	border-radius: 5px;
 }
 
-/* 팝업 기본 스타일 */
-.popup-background {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 1000;
-	justify-content: center;
-	align-items: center;
-}
-
-.popup {
-	width: 400px; /* 가로 600px로 설정 */
-	height: 600px; /* 세로 800px로 설정 */
-	background: white;
-	border-radius: 10px;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-}
-
-.popup-header {
-	position: sticky;
-	top: 0;
-	background-color: #004190;
-	color: white;
-	padding: 10px;
-	font-size: 20px;
-	text-align: center;
-	border-radius: 10px 10px 0 0;
-	z-index: 10;
-}
-
-.popup-content {
-	flex: 1;
-	padding: 10px 20px;
-	overflow-y: auto;
-}
-
-.new-address-btn {
-	width: 100%;
-	height: 30px; background-color : #fff;
-	border: 1px solid lightgrey;
-	border-radius: 5px;
-	cursor: pointer;
-	background-color: #fff;
-}
-
-.address-list-area {
-	margin-top: 10px;
-	padding: 0;
-}
-
-.address-list-content {
-	max-height: 180px;
-}
-
-.address-content {
-	padding: 14px 0;
-}
-
-.address-area {
-	position: relative;
-}
-
-.button-area {
-	margin-top: 10px;
-}
-
-.popup .phone-number {
-	letter-spacing: -0.3px;
-}
-
-.popup .receiver-address {
-	letter-spacing: -0.5px;
-	font-size: 14px;
-}
-
-.popup .address-content {
-	display: flex;
-	flex-wrap: wrap;
-	border-bottom: 1px solid rgba(35, 111, 181, 0.5);
-}
-
-.address-selected-btn {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	width: 100%;
-	height: 100%;
-	letter-spacing: -0.5px;
-	border: 0 none;
-	background-color: transparent; > span { font-size : 16px;
-	line-height: 22px;
-	letter-spacing: -0.3px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	color: #aaaaac;
-}
-
-}
-.address-select-btn {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	width: 100%;
-	height: 100%;
-	letter-spacing: -0.5px;
-	border: 0 none;
-	background-color: transparent; 
-	> span { 
-		font-size : 14px;
-		line-height: 22px;
-		letter-spacing: -0.3px;
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 44px;
-		padding: 7px 0 5px;
-		border-radius: 4px;
-		background-color: rgba(189, 222, 255, 0.7);
-		color: #004190;
-	}
-}
-
-.modify-address {
-	margin-right: 8px;
-	font-size: 14px;
-	line-height: 20px;
-	letter-spacing: -0.3px;
-	width: 44px;
-	padding: 6px 0 4px;
-	border: 1px solid rgba(35, 111, 181, 0.5);
-	border-radius: 4px;
-	background-color: #fff;
-	vertical-align: top;
-	color: black;
-}
-
-.delete-address 
-{
-	margin-top: auto;
-	letter-spacing: -0.3px;
-	padding: 6px 0 4px;
-	border: 1px solid rgba(35, 111, 181, 0.5);
-	border-radius: 5px;
-	background-color: #fff;
-	vertical-align: top;
-	color: black;
-}
-
-.close-popup {
-	margin-top: auto; /* 남은 공간을 위쪽에 두어 버튼을 아래로 밀어냄 */
-	width: 44px;
-	padding: 6px 0 4px;
-	background-color: #004190;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	align-self: center; /* 버튼을 가로축에서 중앙 정렬 */
-}
-
-.close-popup:hover {
-	background-color: #003080;
-}

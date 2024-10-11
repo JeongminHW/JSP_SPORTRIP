@@ -318,15 +318,9 @@ a {
 }
 
 .goods-name, .hotel-name {
-	font-size: 14px;
+	font-size: 16px;
 }
 
-.myhotel-content img {
-	width: 184px;
-	height: 184px;
-	object-fit: cover;
-	margin-bottom: 10px;
-}
 
 .hotel-button button {
 	width: 150px;
@@ -491,3 +485,5 @@ tr {
 .rotate {
 	transform: rotate(180deg); /* 상하 반전 */
 }
+
+

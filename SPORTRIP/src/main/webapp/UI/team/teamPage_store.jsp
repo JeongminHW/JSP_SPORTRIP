@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="basket.BasketBean"%>
 <%@page import="team.TeamBean"%>
 <%@page import="md.MDBean"%>
@@ -26,6 +27,9 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int) session.getAttribute("sportNum");
 	Vector<MDBean> vlist = mdMgr.listMD(teamNum);
+	
+	// 금액 포맷 설정
+    DecimalFormat formatter = new DecimalFormat("###,###");
 %>
 <jsp:include page="team_header.jsp" />
 <div class="goods-section">
@@ -43,10 +47,13 @@
 		<div class="goods-card">
 			<img src="<%=MDList.getMD_IMG()%>" alt="굿즈 사진" class="goods-photo"
 				id="<%=MDList.getMD_KINDOF()%>">
+			<div class="original-img">
+				<img src="<%=MDList.getMD_IMG()%>" alt="원본 이미지">
+			</div>
 			<div class="goods-info">
 				<div class="goods-name"><%=MDList.getMD_NAME()%></div>
 				<div class="price-and-cart">
-					<span class="goods-price">₩<%=MDList.getMD_PRICE()%></span>
+					<span class="goods-price">₩<%=formatter.format(MDList.getMD_PRICE())%></span>
 					<button class="add-to-cart"
 						onclick="addToCart('<%=MDList.getMD_NUM()%>')">
 						<img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
@@ -57,7 +64,7 @@
 		<% } %>
 	</div>
 </div>
-<form id="basketForm" method="POST" action=".././md/addToBasket.jsp">
+<form id="basketForm" method="POST" action=".././md/add_basket.jsp">
 	<input type="hidden" name="mdNum" id="mdNumInput"> <input
 		type="hidden" name="repairB" value="1"> <input type="hidden"
 		name="url" value="<%=url%>">

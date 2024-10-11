@@ -24,8 +24,8 @@
     <div class="room_main">
 	    <div class="h_top">
 	        <div class="item">
-	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_Hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
-	            <button type="button" class="food-btn" onclick="location.href='tripPage_Food.jsp'">식당</button>
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
+	            <button type="button" class="food-btn" onclick="location.href='tripPage_food.jsp'">식당</button>
 	        </div>
 	    </div>
 	
@@ -113,7 +113,7 @@
 
 
     <div class="footer">
-        <button type="button"onclick="location.href='tripPage_Hotel.jsp'" class="list_btn">목록</button>
+        <button type="button"onclick="location.href='tripPage_hotel.jsp'" class="list_btn">목록</button>
     </div>
     
     <script>
@@ -234,7 +234,7 @@
         // AJAX 호출 등으로 서버에 예약 정보 저장
         // 예시:
         $.ajax({
-            url: 'saveReserve.jsp', // 서버로의 요청 URL
+            url: 'save_reserve.jsp', // 서버로의 요청 URL
             type: 'POST',
             data: data,
             success: function(response) {
