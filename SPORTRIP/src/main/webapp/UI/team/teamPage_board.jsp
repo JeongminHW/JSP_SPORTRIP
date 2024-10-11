@@ -219,17 +219,28 @@
         var searchText = document.getElementById('searchText').value;
         var teamNum = "<%=teamNum%>";  // teamNum은 서버에서 가져온 값
 
+        // 검색어가 비어 있으면 원래의 게시글 유지
+        if (searchText.trim() === "") {
+            alert("검색어를 입력하세요.");
+            return;
+        }
+
         $.ajax({
             type: "GET",
-            url: "board_search.jsp",
+            url: "../board/board_search.jsp",  // 파일 경로 수정
             data: {
                 type: searchType,
                 searchText: searchText,
                 teamNum: teamNum
             },
             success: function(response) {
-                // 검색 결과를 받아서 페이지의 게시글 리스트를 업데이트
-                $('.table-list tbody').html(response);
+                if (response.trim().length === 0) {
+                    // 검색 결과가 없을 때 메시지 출력
+                    $('.table-list tbody').html('<tr><td colspan="6">검색 결과가 없습니다.</td></tr>');
+                } else {
+                    // 검색 결과가 있을 때만 업데이트
+                    $('.table-list tbody').html(response);
+                }
             },
             error: function(xhr, status, error) {
                 console.error("AJAX error: " + error);

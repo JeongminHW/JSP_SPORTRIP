@@ -49,7 +49,7 @@
         <td><%=index++%></td>
         <td><a href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM()%>, '.././board/viewPost')">
             <%=board.getTITLE()%></a></td>
-        <td><%=board.getID()%></td>
+        <td><%= "root".equals(board.getID()) ? "관리자" : board.getID() %></td>
         <td><%=board.getPOSTDATE()%></td>
         <td><%=board.getVIEWS()%></td>
         <td><%=board.getRECOMMAND()%></td>

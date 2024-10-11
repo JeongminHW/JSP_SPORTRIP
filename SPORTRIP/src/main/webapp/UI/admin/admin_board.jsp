@@ -33,7 +33,7 @@
     Vector<BoardBean> adminPosts = new Vector<>();
     Vector<BoardBean> otherPosts = new Vector<>();
 
-    // 게시글을 root와 일반 사용자로 구분
+    // 게시글을 관리자와 일반 사용자로 구분
     for (BoardBean board : boardInfo) {
         if ("root".equals(board.getID())) {
         	adminPosts.add(board); // 관리자가 작성한 글
@@ -44,6 +44,27 @@
     
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int) session.getAttribute("sportNum");
+	
+	// 검색어 처리 (제목, 작성자, 작성일에 대한 검색 조건 추가)
+    String searchType = request.getParameter("type");
+    String searchText = request.getParameter("searchText");
+    
+    Vector<BoardBean> searchResults = new Vector<>();
+    
+    if (searchText != null && !searchText.trim().isEmpty()) {
+        for (BoardBean board : otherPosts) { // otherPosts만 검색
+            if ("제목".equals(searchType) && board.getTITLE().contains(searchText)) {
+                searchResults.add(board);
+            } else if ("작성자".equals(searchType) && board.getID().contains(searchText)) {
+                searchResults.add(board);
+            } else if ("작성일".equals(searchType) && board.getPOSTDATE().contains(searchText)) {
+                searchResults.add(board);
+            }
+        }
+    } else {
+        // 검색어가 없을 경우 모든 게시글 출력
+        searchResults = otherPosts;
+    }
 %>
 <jsp:include page="admin_header.jsp" />
 <!-- 게시글 -->
@@ -110,13 +131,15 @@
 		</table>
 	</div>
 </div>
+<!-- 검색 박스 -->
 <div class="board-search-box">
-	<select name="type" id="">
-		<option value="제목">제목</option>
-		<option value="작성자">작성자</option>
-		<option value="작성자">작성일</option>
-	</select> <input name="searchText" type="text" placeholder="검색어를 입력하세요.">
-	<button>검색</button>
+    <select name="type" id="searchType">
+        <option value="제목">제목</option>
+        <option value="작성자">작성자</option>
+        <option value="작성일">작성일</option>
+    </select>
+    <input id="searchText" type="text" placeholder="검색어를 입력하세요.">
+    <button type="button" onclick="searchPosts()">검색</button>
 </div>
 <script>
     function postMessage() {
@@ -179,4 +202,39 @@
         menu.classList.remove('open'); // 메뉴 숨김
         overlay.classList.remove('open'); // 배경 숨김
     });
+    
+    function searchPosts() {
+        // 검색 타입과 검색어 가져오기
+        var searchType = document.getElementById('searchType').value;
+        var searchText = document.getElementById('searchText').value;
+        var teamNum = "<%=teamNum%>";  // teamNum은 서버에서 가져온 값
+
+        // 검색어가 비어 있으면 원래의 게시글 유지
+        if (searchText.trim() === "") {
+            alert("검색어를 입력하세요.");
+            return;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "../board/board_search.jsp",  // 파일 경로 수정
+            data: {
+                type: searchType,
+                searchText: searchText,
+                teamNum: teamNum
+            },
+            success: function(response) {
+                if (response.trim().length === 0) {
+                    // 검색 결과가 없을 때 메시지 출력
+                    $('.table-list tbody').html('<tr><td colspan="6">검색 결과가 없습니다.</td></tr>');
+                } else {
+                    // 검색 결과가 있을 때만 업데이트
+                    $('.table-list tbody').html(response);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error: " + error);
+            }
+        });
+    }
 </script>
