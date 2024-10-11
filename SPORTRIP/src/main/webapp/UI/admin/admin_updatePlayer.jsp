@@ -42,9 +42,11 @@
 			<div class="updateplayer-box">
 				<div class="file-box">
 				    <!-- 플레이어 이미지 업로드 섹션 -->
-					<img id="playerImg" src="<%= playerBean.getPLAYER_IMG()%>" alt="Player Image">
-					<label id="file-label" for="file">이미지 업로드</label>
-	                <input type="file" id="file" name="playerImg">
+				    <div id="image_container"><img id="playerImg" src="<%= playerBean.getPLAYER_IMG() %>" alt="Player Image"></div>
+					<div class="form-group">
+						<label id="file-label" for="file">이미지 업로드</label>
+		                <input class="form-control form-control-user" type="file" id="file" name="player_image" onchange="setThumbnail(event);">
+					</div>
 				</div>
 				<div class="player-info-box">
 					<form action="updatePlayer.jsp" method="post" enctype="multipart/form-data">
@@ -75,7 +77,25 @@
 			</div>
 		</div>
 	</div>
-    <script>
+	<script>
+	function setThumbnail(event){
+		var reader = new FileReader();
+		
+		// 이미지가 새로 업로드될 때 기존 이미지를 제거
+		var imageContainer = document.querySelector("div#image_container");
+		imageContainer.innerHTML = ""; // 기존 이미지를 삭제
+		
+		reader.onload = function(event){
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("class", "col-lg-6");
+			document.querySelector("div#image_container").appendChild(img);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
+	</script>
+	<script>
 	    function goMain(){
 	        document.location.href="mainPage.jsp";
 	    }

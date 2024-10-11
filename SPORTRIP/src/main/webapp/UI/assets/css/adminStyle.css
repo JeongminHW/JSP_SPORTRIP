@@ -48,12 +48,12 @@ body{
     align-items: center; /* 중앙 정렬 */
 }
 
-.player-info-box {
+.player-info-box, .goods-info-box {
 	width: 60%;	
 	height: auto;
 }
 
-.addplayer-box, .updateplayer-box {
+.addplayer-box, .updateplayer-box, .addgoods-box {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -90,7 +90,32 @@ body{
 	}
 }
 
-
+.addgoods-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    align-items: center;
+    > label {
+    	font-size: 20px;
+    	width: 140px;
+    }
+    > input  {
+		padding: 10px;
+		width: 100%;
+		height: 20px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		font-size: 14px;
+		margin: 0px 0px 10px 0px;
+	}
+	> select{
+    	height: 40px;
+    	padding: 0 10px;
+    	flex: 0 1 450px;
+    	border-color: #ccc;
+    	border-radius: 5px; 
+    }
+}
 
 label {
 	width: 120px;
@@ -122,7 +147,22 @@ input {
     height: 240px;
     object-fit: cover; /* 이미지를 프레임에 맞추어 채움 */
     border: 1px solid #ccc;
+}
+
+#image_container {
+	width: 180px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    align-items: center;
     margin-bottom: 30px;
+}
+
+#image_container img {
+	width: 180px;
+    height: 240px;
+    object-fit: cover; /* 이미지를 프레임에 맞추어 채움 */
 }
 
 .file-box input[type="file"] {
@@ -141,7 +181,7 @@ input {
 }
 
 /* 버튼 스타일 */
-.addplayer-item input[type="button"], .updateplayer-item input[type="button"] {
+.addplayer-item input[type="button"], .updateplayer-item input[type="button"], .addgoods-item input[type="button"]  {
     height: 50px;
     padding: 10px 20px;
     margin: 10px 10px;
@@ -152,24 +192,24 @@ input {
     font-weight: bold;
 }
 
-.addplayer-item input[type="button"]:first-child, .updateplayer-item input[type="button"]:first-child {
+.addplayer-item input[type="button"]:first-child, .updateplayer-item input[type="button"]:first-child, .addgoods-item input[type="button"]:first-child {
     background-color: #fff;
     color: #000;
 }
 
-.addplayer-item input[type="button"]:last-child, .updateplayer-item input[type="button"]:last-child {
+.addplayer-item input[type="button"]:last-child, .updateplayer-item input[type="button"]:last-child, .addgoods-item input[type="button"]:last-child {
     background-color: #000;
     color: #fff;
 }
 
 /* input_box의 입력 중 효과 */
-.player-info-box input:focus {
+.player-info-box input:focus, .goods-info-box input:focus, .goods-info-box select:focus {
   border-color: #807e7e; /* 포커스 시 파란색 테두리 */
   outline: none;
-  box-shadow: 0 0 8px rgba(150, 149, 149, 0.2); /* 파란색 외곽선 그림자 */
+  box-shadow: 0 0 8px rgba(150, 149, 149, 0.5);
 }
 
-.player-info-box input[type="button"]:hover {
+.player-info-box input[type="button"]:hover, .goods-info-box input[type="button"]:hover{
   outline: none;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
 }

@@ -18,6 +18,7 @@
     
     // POST 데이터 받기
     String playerName = multi.getParameter("playerName");
+    String playerBirthday = multi.getParameter("playerBirthday");
     String playerPosition = multi.getParameter("playerPosition");
     String playerBacknum = multi.getParameter("playerBacknum");
     File playerImgFile = null;
@@ -45,7 +46,7 @@
     PlayerBean playerBean = new PlayerBean();
     playerBean.setTEAM_NUM(teamNum);
     playerBean.setPLAYER_NAME(playerName);
-    playerBean.setBIRTH("2000-08-29");
+    playerBean.setBIRTH(playerBirthday);
     playerBean.setPLAYER_IMG(playerImgPath); 
     playerBean.setPOSITION(playerPosition);
     playerBean.setUNIFORM_NUM(playerBacknum);
