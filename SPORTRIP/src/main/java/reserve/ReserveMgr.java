@@ -148,4 +148,12 @@ public class ReserveMgr {
 	    
 	    return errorMsg; // 실패 시 오류 메시지 반환
 	}
+	
+	// 사용자 예약 정보 전체 출력
+    public Vector<ReserveBean> getAllReserves(String id) {
+        Vector<ReserveBean> allReserves = new Vector<>();
+        allReserves.addAll(soonListReserve(id)); // 예정된 예약 추가
+        allReserves.addAll(endListReserve(id));   // 종료된 예약 추가
+        return allReserves;
+    }
 }

@@ -76,39 +76,41 @@
 	    </div>
 	</div>
     <div class="modal">
-        <div class="modal-popup">
-            <div class="modal-header">
-                <h2>예약하기</h2>
+    <div class="modal-popup">
+        <div class="modal-header">
+            <img src=".././assets/images/sportrip_logo.png" alt="스포트립 로고" id="modal_logo"> <!-- 로고 이미지 추가 -->
+            <h2>예약하기</h2>
+        </div>
+        <div class="modal-content">
+            <div class="modal-item">
+                <span>인원 수</span>
+                <select name="person" id="select-person">
+                </select>
             </div>
-            <div class="modal-content">
-                <div class="modal-item">
-                    <span>인원 수</span>
-                    <select name="person" id="select-person">
-                    </select>
-                </div>
-                <div class="modal-item">
-                    <span>이름</span>
-                    <input type="text" id="reserve_name" class="input-text" name="name">
-                </div>
-                <div class="modal-item">
-                    <span>연락처</span>
-                    <input type="text" id="contact" class="input-text" name="contact">
-                </div>
-                <div class="modal-item">
-                    <span>체크인 날짜</span>
-                    <input type="date" id="check_in_date" class="input-text start-date" name="checkIn" onchange="updateCheckoutDate()" min="">
-                </div>
-                <div class="modal-item">
-                    <span>체크아웃 날짜</span>
-                    <input type="date" id="check_out_date" class="input-text end-date" name="checkOut" min="">
-                </div>
+            <div class="modal-item">
+                <span>이름</span>
+                <input type="text" id="reserve_name" class="input-text" name="name">
             </div>
-            <div class="reserve-box">
-                <button class="close-btn" onclick="closeModal()">취소</button>
-                <button class="reserve-btn" onclick="submitReservation()">예약</button>
+            <div class="modal-item">
+                <span>연락처</span>
+                <input type="text" id="contact" class="input-text" name="contact">
+            </div>
+            <div class="modal-item">
+                <span>체크인 날짜</span>
+                <input type="date" id="check_in_date" class="input-text start-date" name="checkIn" onchange="updateCheckoutDate()" min="">
+            </div>
+            <div class="modal-item">
+                <span>체크아웃 날짜</span>
+                <input type="date" id="check_out_date" class="input-text end-date" name="checkOut" min="">
             </div>
         </div>
+        <div class="reserve-box">
+            <button class="close-btn" onclick="closeModal()">취소</button>
+            <button class="reserve-btn" onclick="submitReservation()">예약</button>
+        </div>
     </div>
+</div>
+
 
     <div class="footer">
         <button type="button"onclick="location.href='tripPage_Hotel.jsp'" class="list_btn">목록</button>
@@ -237,7 +239,7 @@
             data: data,
             success: function(response) {
                 alert("예약이 완료되었습니다.");
-                location.reload(); // 페이지 새로고침
+                location.href = 'reserve_detail.jsp'; 
             },
             error: function(xhr, status, error) {
                 alert("예약 저장에 실패했습니다. 에러: " + error);
