@@ -43,7 +43,7 @@
     <title><%=teamInfo.getTEAM_NAME() %></title>
     <link rel="stylesheet" href=".././assets/css/style.css">
     <link rel="stylesheet" href=".././assets/css/boardStyle.css">
-    <link rel="stylesheet" href=".././assets/css/hamburger.css">
+    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
     <link rel="stylesheet" href="https://code.jquery.com/jquery-3.5.1.min.js">
     <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -66,40 +66,4 @@
         </label>
     </header>
     
-    <div class="overlay" id="overlay"></div>
-    <nav class="menu">
-        <ul class="menu-list">
-			<li><a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a></li>
-			<ul class="user-box">
-				<li id="login"><a href=".././user/login.jsp">로그인</a></li>
-				<li id="signup"><a href=".././user/signup.jsp">회원가입</a></li>
-			</ul>
-            <li>
-				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_player')">선수 명단</a>
-			</li>
-            <li>
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_stadium')">경기장 소개</a>
-			</li>
-            <li>
-		    <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_teamintro')">구단 소개</a>
-			</li>
-            <li>
-           <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_highlight')">하이라이트 경기</a>
-			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
-			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-			</li>
-            <li>
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, '.././md/shoppingPage_basket')">장바구니</a>
-			</li>
-        </ul>
-    </nav>
-</body>
-<script>
-	function goMain(){
-	    document.location.href=".././sport/mainPage.jsp";
-	}
-</script>
+    <jsp:include page="../hamburger.jsp"></jsp:include>
