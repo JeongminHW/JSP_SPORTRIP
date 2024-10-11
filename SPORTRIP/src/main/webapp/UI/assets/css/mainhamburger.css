@@ -90,10 +90,9 @@
     }
 }
 
-.menu-item:first-child{
+.menu-item:nth-child(5n+1){
 	border-left: none;
 }
-
 
 /* .overlay {
   position: fixed;
