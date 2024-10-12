@@ -164,7 +164,7 @@ body {
 	width: 400px; /* 고정된 길이 */
 	height: 5px;
 	background-color: rgba(255, 255, 255, 0.3);
-	z-index: 10; /* 텍스트와 동일한 레벨에 위치 */
+	z-index: 1; /* 텍스트와 동일한 레벨에 위치 */
 }
 
 .progress-bar {
@@ -179,7 +179,7 @@ body {
     position: absolute;
     top: 65%;
     transform: translateY(-50%);
-    z-index: 10;
+    z-index: 1;
     font-size: 1rem; /* 아이콘 크기 조정 */
     color: white;
     cursor: pointer;

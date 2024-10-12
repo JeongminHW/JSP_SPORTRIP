@@ -80,68 +80,7 @@
             <div class="bottom"></div>
         </label>
     </header>
-    <nav class="menu" style="position:fixed; z-index:2;">
-        <ul class="menu-list">
-			<li class="menu-item"><a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a></li>
-            <li class="menu-item">
-				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')"><span>야구</span></a>
-				<ul>
-                    	<% 
-                    	// 스포츠 별 팀 불러오기
-                        int sportNum = MUtil.parseInt(request, "sportNum", 1); // 폼에서 받은 값이 없으면 0
-                        session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
-                    	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
-                    	
-                    		for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
-							teamNum = teamBean.getTEAM_NUM();
-						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
-						<%
-							}
-						%>
-                </ul>
-			</li>
-            <li class="menu-item">
-            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">축구</a>
-            	<ul>
-                    	<% 
-                    	// 스포츠 별 팀 불러오기
-                        sportNum = MUtil.parseInt(request, "sportNum", 2); // 폼에서 받은 값이 없으면 0
-                        session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
-                    	teamVlist = teamMgr.listTeam(sportNum);
-                    	
-                    		for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
-							teamNum = teamBean.getTEAM_NUM();
-						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
-						<%
-							}
-						%>
-                </ul>
-			</li>
-            <li class="menu-item">
-            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">배구</a>
-            	<ul>
-                    	<% 
-                    	// 스포츠 별 팀 불러오기
-                        sportNum = MUtil.parseInt(request, "sportNum", 3); // 폼에서 받은 값이 없으면 0
-                        session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
-                    	teamVlist = teamMgr.listTeam(sportNum);
-                    	
-                    		for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
-							teamNum = teamBean.getTEAM_NUM();
-						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
-						<%
-							}
-						%>
-                </ul>
-			</li>
-        </ul>
-    </nav>
+        <jsp:include page="../hamburger.jsp"/>
     
     <div class="a_top">
         <div class="item" style="background-color: #083660;">
