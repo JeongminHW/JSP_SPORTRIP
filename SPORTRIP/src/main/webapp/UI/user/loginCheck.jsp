@@ -24,12 +24,12 @@
 	
     if(userMgr.checkAdmin(id)){
         if (result) {
-            msg = "관리자 로그인에 성공하였습니다.";
+            msg = "관리자 로그인에 성공하였습니다." + id;
             login = userMgr.getJoin(login.getId());
             session.setAttribute("idKey", login.getId());
             session.setAttribute("login", login);
             redirectUrl = ".././admin/admin_player.jsp";
-            session.removeAttribute("previousPage"); 
+            session.removeAttribute("previousPage");
         }
     }else{
         if (result) {
