@@ -43,50 +43,60 @@
     <script src=".././assets/js/main.js"></script>
 </head>
 <body>
-<header class="header header_logo">
-    <a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-    <a href=".././sport/sport_main.jsp" style="margin-left: 20px; margin-right: 20px;">
-    <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img"></a>
-    <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
-    </div>
-</header>
-<div class="a_top">
-    <div class="item" style="background-color: #083660;">
-        <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')">선수 관리</a>
-    </div>
-    <div class="item" style="background-color: #236FB5;">
-        <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-    </div>
-    <div class="item" style="background-color: #236FB5;">
-        <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
-    </div>
-</div>
+	<div id="background" class="c_main">
+		<div class="b_wrap">
+			<img alt="" src=".././assets/images/main_page_img.png">
+		</div>
+	</div>
+	<div class="popup-background">
+		<div class="popup" style="width: 800px; height: 400px;">
+			<div class="addplayer-box">
+				<div class="coach-info-box">
+					<form action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="teamNum" value="<%= teamNum %>"> <!-- 팀 번호 숨은 필드 추가 -->
+						<div class="file-box">
+						    <!-- 플레이어 이미지 업로드 섹션 -->
+						    <div id="image_container"></div>
+							<div class="form-group">
+								<input type="hidden" class="upload-file" placeholder="첨부파일" readonly>
+								<label id="file-label" for="file">이미지 업로드</label>
+				                <input type="file" id="file" name="headcoachImg" onchange="setThumbnail(event);" />
+							</div>
+						</div>
+						<div class="addcoach-group">
+						    <div class="addcoach-item">
+						        <label class="label" for="headcoachName">감독 이름</label>
+						        <input class="input" type="text" id="headcoachName" name="headcoachName">
+						    </div>
+							<div class="addcoach-item" style="margin-top: 30px;">
+								<input type="button" onclick="playerManager()" value="돌아가기">
+								<input type="submit" value="감독 등록">
+							</div>
+						</div>	
+					</form>
+			    </div>	
+			</div>
+		</div>
+	</div>
+	<script>
+		function setThumbnail(event) {
+			var reader = new FileReader();
 
-<div class="addplayer-box">
-    <h2>감독 등록</h2>
-    <form action="insert_coach.jsp" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="teamNum" value="<%= teamNum %>"> <!-- 팀 번호 숨은 필드 추가 -->
-        <div class="addplayer-item">
-            <label class="label" for="headcoachName">감독 이름</label>
-            <input class="input" type="text" id="headcoachName" name="headcoachName" required>
-        </div>
-        <div class="addplayer-item file-box">
-            <label class="label" for="headcoachImg">감독 이미지</label>
-            <div class="file-box">
-                <input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
-                <label id="file-label" for="file"></label>
-                <input type="file" id="file" name="headcoachImg" required>
-            </div>
-        </div>
-        <div class="addplayer-item">
-            <input type="button" onclick="playerManager()" value="목록">
-            <input type="submit" value="등록">
-        </div>
-    </form>
-</div>
+			// 이미지가 새로 업로드될 때 기존 이미지를 제거
+			var imageContainer = document.querySelector("div#image_container");
+			imageContainer.innerHTML = ""; // 기존 이미지를 삭제
 
-<script>
+			reader.onload = function(event) {
+				var img = document.createElement("img");
+				img.setAttribute("src", event.target.result);
+				img.setAttribute("class", "col-lg-6");
+				document.querySelector("div#image_container").appendChild(img);
+			};
+
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+	<script>
     function goMain(){
         document.location.href="mainPage.jsp";
     }
