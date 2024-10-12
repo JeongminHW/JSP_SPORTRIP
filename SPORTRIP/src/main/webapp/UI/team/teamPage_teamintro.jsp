@@ -8,7 +8,12 @@
 <jsp:setProperty property="*" name="teamBean" />
 
 <%
-	int teamNum = MUtil.parseInt(request, "teamNum");
+	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
+	if (teamNum == 0) {
+		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
+	} else {
+		session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
+	}
 	
 	// 받은 값에 따라 팀 정보 가져오기
 	TeamMgr teamMgr = new TeamMgr();

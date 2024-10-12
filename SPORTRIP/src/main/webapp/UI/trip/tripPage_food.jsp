@@ -124,8 +124,8 @@
 	<div class="food_main">
 	    <div class="h_top">
 	        <div class="item">
-	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_Hotel.jsp'">숙소</button>
-	            <button type="button" class="food-btn" onclick="location.href='tripPage_Food.jsp'" style="background-color: #236FB5; color: white;">식당</button>
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_hotel.jsp'">숙소</button>
+	            <button type="button" class="food-btn" onclick="location.href='tripPage_food.jsp'" style="background-color: #236FB5; color: white;">식당</button>
 	        </div>
 	    </div>
 	

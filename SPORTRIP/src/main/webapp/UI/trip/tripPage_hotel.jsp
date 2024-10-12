@@ -135,7 +135,7 @@
 	
 		<div class="hotel-info-section">
 			<div style="float: left;" class="select-box">
-			  <form method="POST" action="tripPage_Hotel.jsp" accept-charset="UTF-8">
+			  <form method="POST" action="tripPage_hotel.jsp" accept-charset="UTF-8">
 			    <div class="custom-select-wrapper">
 			      <select name="sportNum" class="select year" onchange="this.form.submit()">
 			        <option value="0">스포츠</option>
@@ -211,7 +211,7 @@
 						</button>
 					</div>
 					<div class="info-item-button">
-						<button class="show-detail" onclick="location.href='tripPage_hotelsub.jsp?lodgingNum=<%=lodging.getLODGING_NUM()%>'">객실 보기</button>
+						<button class="show-detail" onclick="location.href='tripPage_hotelSub.jsp?lodgingNum=<%=lodging.getLODGING_NUM()%>'">객실 보기</button>
 					</div>
 				</div>
 				<%
