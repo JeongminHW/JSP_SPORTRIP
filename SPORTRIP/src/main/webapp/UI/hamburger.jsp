@@ -117,7 +117,7 @@
                     <ul>
 						<!-- 로그인 상태에 따라 텍스트 변경 -->
 	                    <li id="login">
-						    <a id="log" href="<%= isLogin ? "logout.jsp" : "login.jsp" %>">
+						    <a id="log" href="<%= isLogin ? "logout.jsp" : ".././user/login.jsp" %>">
 						        <span id="loginCheck"><%= isLogin ? "로그아웃" : "로그인" %></span>
 						    </a>
 						</li>
