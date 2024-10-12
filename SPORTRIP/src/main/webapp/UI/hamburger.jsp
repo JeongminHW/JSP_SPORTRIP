@@ -127,7 +127,7 @@
                     </ul>
                 </li>
             </ul>
-        </nav>
+			<%} %>
     </div>
     
     <script>
