@@ -23,13 +23,16 @@
     String playerPosition = multi.getParameter("playerPosition");
     String playerBacknum = multi.getParameter("playerBacknum");
     File playerImgFile = null;
+    
     if(multi.getFile("playerImg") != null){
     	playerImgFile = multi.getFile("playerImg");
     }
     
+    System.out.println(playerImgFile);
+    
     String playerImgPath = null;
     if (playerImgFile != null) {
-        String uniqueFileName = playerBacknum + playerName + ".png"; 
+        String uniqueFileName = "new" + playerBacknum + playerName + ".png"; 
         File newFile = new File(saveDirectory, uniqueFileName); 
 
         if (playerImgFile.renameTo(newFile)) {
@@ -54,7 +57,7 @@
     boolean updateStatus = playerMgr.updatePlayer(playerBean);
 
     if (updateStatus) {
-        out.println("sucess");
+        out.println("success");
     } else {
         out.println("fail");
     }

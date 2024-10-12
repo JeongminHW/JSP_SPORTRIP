@@ -80,9 +80,9 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 		                </li>
 		                <li class="menu-item"><a href="#"><span>리그 정보</span></a>
 		                    <ul>
-		                    	<li class="trip"><a href=".././trip/tripPage_Hotel.jsp"><span>팀 순위</span> </a></li>
-		                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>하이라이트</span> </a></li>
-		                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>경기 일정</span> </a></li>
+		                    	<li class="trip"><a href=".././trip/tripPage_hotel.jsp"><span>팀 순위</span> </a></li>
+		                    	<li class="trip"><a href=".././trip/tripPage_food.jsp"><span>하이라이트</span> </a></li>
+		                    	<li class="trip"><a href=".././sport/sport_matchDate.jsp"><span>경기 일정</span> </a></li>
 		                    </ul>
 		                </li>
 		                <li class="menu-item"><a href="#"><span>팀</span></a>
@@ -99,8 +99,8 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 		                </li>
 		                <li class="menu-item"><a href="#">여행</a>
 		                    <ul>
-								<li id="login"><a href=".././trip/tripPage_Hotel.jsp"><span>숙박</span></a></li>
-								<li id="signup"><a href=".././trip/tripPage_Food.jsp"><span>식당</span></a></li>
+								<li id="login"><a href=".././trip/tripPage_hotel.jsp"><span>숙박</span></a></li>
+								<li id="signup"><a href=".././trip/tripPage_food.jsp"><span>식당</span></a></li>
 		                    </ul>
 		                </li>
 		                <li class="menu-item"><a href="#">회원정보</a>
@@ -108,7 +108,7 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 								<li id="login"><a href=".././user/login.jsp"><span>로그인</span></a></li>
 								<li id="signup"><a href=".././user/signup.jsp"><span>회원가입</span></a></li>
 		                        <li><a href=".././md/shoppingPage_basket.jsp"><span>장바구니</span></a></li>
-		                        <li><a href=".././user/myPage.html"><span>마이페이지</span></a></li>
+		                        <li><a href=".././user/myPage.jsp"><span>마이페이지</span></a></li>
 		                    </ul>
 		                </li>
 		            </ul>

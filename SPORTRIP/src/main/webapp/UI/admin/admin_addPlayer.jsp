@@ -56,8 +56,9 @@
 				    <!-- 플레이어 이미지 업로드 섹션 -->
 				    <div id="image_container"></div>
 					<div class="form-group">
+						<input type="hidden" class="upload-file" placeholder="첨부파일" readonly>
 						<label id="file-label" for="file">이미지 업로드</label>
-		                <input class="form-control form-control-user" type="file" id="file" name="player_image" onchange="setThumbnail(event);">
+		                <input type="file" id="file" name="playerImg" onchange="setThumbnail(event);" />
 					</div>
 				</div>
 				<div class="player-info-box">
@@ -123,16 +124,25 @@
 	        let playerName = document.getElementById('playerName').value;
 	        let playerPosition = document.getElementById('playerPosition').value;
 	        let playerBacknum = document.getElementById('playerBacknum').value;
-	        let playerImg = document.getElementById('file').files[0]; // Get the file from the input
-	        let teamNum = <%=teamNum%>;
+	        
+	        // 파일 input의 파일을 가져옵니다.
+	        let playerImgInput = document.getElementById('file'); // 파일 input을 가져옴
+	        let playerImg = playerImgInput ? playerImgInput.files[0] : null; // 파일이 있을 때만 참조
+
+	        let playerBirthday = document.getElementById('playerBirthday').value;
 
 	        const formData = new FormData();
-	        formData.append('teamNum', teamNum);
 	        formData.append('playerName', playerName);
 	        formData.append('playerPosition', playerPosition);
 	        formData.append('playerBacknum', playerBacknum);
-	        formData.append('playerImg', playerImg); // Add the file to FormData
-
+	        formData.append('teamNum', <%=teamNum%>);
+	        
+	        // 파일이 선택된 경우에만 FormData에 추가
+	        if (playerImg) {
+	            formData.append('playerImg', playerImg);
+	        }
+	        
+	        formData.append('playerBirthday', playerBirthday);
 	        fetch('insert_player.jsp', {
 	            method: 'POST',
 	            body: formData // Use FormData as body

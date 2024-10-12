@@ -21,15 +21,19 @@
     String playerBirthday = multi.getParameter("playerBirthday");
     String playerPosition = multi.getParameter("playerPosition");
     String playerBacknum = multi.getParameter("playerBacknum");
+
+    
     File playerImgFile = null;
     if(multi.getFile("playerImg") != null){
     	playerImgFile = multi.getFile("playerImg");
     }
     int teamNum = Integer.parseInt(multi.getParameter("teamNum")); // 팀 번호 받기
-
+    
+    System.out.println(teamNum);
+    
     String playerImgPath = null;
     if (playerImgFile != null) {
-        String uniqueFileName = playerBacknum + playerName + ".png"; 
+        String uniqueFileName = "new" + playerBacknum + playerName + ".png"; 
         File newFile = new File(saveDirectory, uniqueFileName); 
 
         if (playerImgFile.renameTo(newFile)) {
