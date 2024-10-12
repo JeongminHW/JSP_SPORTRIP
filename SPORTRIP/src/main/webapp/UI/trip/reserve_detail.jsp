@@ -2,6 +2,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="reserve.ReserveBean"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
 <%@page import="lodging.LodgingMgr"%> <!-- LodgingMgr 추가 -->
@@ -15,14 +16,19 @@
 <%
     request.setCharacterEncoding("UTF-8");
     
+	// 금액 포맷 설정
+	DecimalFormat formatter = new DecimalFormat("###,###");
+
     // 로그인 정보 확인
     if (login == null) {
         out.println("로그인 정보가 없습니다.");
         return;
     }
 
+    // 현재 로그인한 사용자 ID
+    String userId = login.getId(); 
+    
     // 예약 내역 가져오기
-    String userId = login.getId(); // 현재 로그인한 사용자 ID
     Vector<ReserveBean> reserveList = reserveMgr.getAllReserves(userId);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
@@ -39,41 +45,101 @@
     <div class="reserve-detail">
         <div class="reserve-info-section">
             <header class="reserve-info-header">
+                <span>주문/결제내역</span>
+            </header>
+            <div class="reserve-info-content">
+                <%
+                    for (ReserveBean reserve : reserveList) {
+                        String lodgingName = lodgingMgr.getLodgingName(reserve.getLODGING_NUM()); // 숙소명 가져오기
+                        String roomImage = roomMgr.getRoomImage(reserve.getROOM_NUM()); // 객실 이미지 가져오기
+                %>
+                <div class="reserve-info">
+			        <!-- 왼쪽: 주문번호와 호텔 이름 -->
+			        <div class="order-details">
+			            <span class="reserve-number">주문번호: <%= reserve.getRESERVE_NUM() %></span>
+			            <span class="reserve-name"><%= lodgingName %></span>
+			        </div>
+			
+			        <!-- 중간: 가격과 결제 방식 -->
+			        <div class="price-method">
+			            <span class="reserve-price"><%= formatter.format(reserve.getRESERVE_PRICE()) %>원</span>
+			            <span class="reserve-method">카카오페이</span>
+			        </div>
+			
+			        <!-- 오른쪽: 결제 완료, 결제 취소 -->
+			        <div class="status-info">
+			            <div class="complete-cancel">
+			                <span class="reserve-complete">결제완료</span>
+			                <button type="button" class="reserve-cancel" onclick="cancelReserve('<%= reserve.getRESERVE_NUM() %>')">결제취소</button>
+			            </div>
+			            <span class="cancel-info">언제든 취소 가능</span>
+			        </div>
+    			</div>
+                <%
+                    } // for 문 닫기
+                %>
+            </div>
+        </div>
+
+        <div class="reserve-detail-section">
+            <header class="reserve-info-header">
                 <span>숙소 예약 내역</span>
             </header>
             <div class="reserve-info-content">
+                <%
+                    for (ReserveBean reserve : reserveList) {
+                        String lodgingName = lodgingMgr.getLodgingName(reserve.getLODGING_NUM()); // 숙소명 가져오기
+                        String roomImage = roomMgr.getRoomImage(reserve.getROOM_NUM()); // 객실 이미지 가져오기
+                %>
                 <table>
                     <tr>
                         <th>예약번호</th>
+                        <td colspan="3"><%= reserve.getRESERVE_NUM() %></td>
+                    </tr>
+                    <tr>
+                        <th>현재구매상태</th>
+                        <td colspan="3">결제완료</td>
+                    </tr>
+                    <tr>
+                        <th>결제방식</th>
+                        <td colspan="3">카카오페이</td>
+                    </tr>
+                    <tr>    
                         <th>숙소명</th>
-                        <th>객실 이미지</th> <!-- 객실 이미지 추가 -->
+                        <td colspan="3"><%= lodgingName %></td>
+                    </tr>                                              
+                    <tr>
+                        <th>객실 이미지</th>
+                        <td colspan="3"><img src="<%= roomImage %>" alt="객실 이미지" style="width:150px;height:auto;"/></td>
+                    </tr>
+                    <tr>    
                         <th>객실번호</th>
+                        <td colspan="3"><%= reserve.getROOM_NUM() %></td>
+                    </tr>
+                    <tr>                            
                         <th>인원수</th>
+                        <td colspan="3"><%= reserve.getHEADCOUNT() %></td>
+                    </tr>
+                    <tr>    
                         <th>예약금액</th>
+                        <td colspan="3"><%= formatter.format(reserve.getRESERVE_PRICE()) %>원</td>                        
+                    </tr>
+                    <tr>      
                         <th>체크인</th>
+                        <td colspan="3"><%= sdf.format(reserve.getCHECK_IN()) %></td>
+                    </tr>   
+                    <tr> 
                         <th>체크아웃</th>
+                        <td colspan="3"><%= sdf.format(reserve.getCHECK_OUT()) %></td>
+                    </tr> 
+                    <tr>
                         <th>취소</th>
+                        <td colspan="3"><button type="button" class="cancel-reserve" onclick="cancelReserve('<%= reserve.getRESERVE_NUM() %>')">예약 취소</button></td>                        
                     </tr>
-                    <%
-                        for (ReserveBean reserve : reserveList) {
-                            String lodgingName = lodgingMgr.getLodgingName(reserve.getLODGING_NUM()); // 숙소명 가져오기
-                            String roomImage = roomMgr.getRoomImage(reserve.getROOM_NUM()); // 객실 이미지 가져오기
-                    %>
-                    <tr class="item-row">
-                        <td><%= reserve.getRESERVE_NUM() %></td>
-                        <td><%= lodgingName %></td> <!-- 숙소명 출력 -->
-                        <td><img src="<%= roomImage %>" alt="객실 이미지" style="width:100px;height:auto;"/></td> <!-- 객실 이미지 출력 -->
-                        <td><%= reserve.getROOM_NUM() %></td>
-                        <td><%= reserve.getHEADCOUNT() %></td>
-                        <td><%= reserve.getRESERVE_PRICE() %>원</td>
-                        <td><%= sdf.format(reserve.getCHECK_IN()) %></td>
-                        <td><%= sdf.format(reserve.getCHECK_OUT()) %></td>
-                        <td>
-                            <button type="button" class="cancel-reserve" onclick="cancelReserve('<%= reserve.getRESERVE_NUM() %>')">취소</button>
-                        </td>
-                    </tr>
-                    <% } %>
                 </table>
+                <%
+                    } // for 문 닫기
+                %>
             </div>
         </div>
     </div>
@@ -91,7 +157,7 @@
                 .then(data => {
                     if (data.includes("success")) {
                         alert('예약이 취소되었습니다.');
-                        location.reload(); // 페이지 새로고침
+                        location.href = ".././trip/tripPage_Hotel.jsp";
                     } else {
                         alert('예약 취소에 실패했습니다.');
                     }

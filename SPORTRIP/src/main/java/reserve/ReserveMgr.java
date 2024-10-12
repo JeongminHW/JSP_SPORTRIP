@@ -156,4 +156,61 @@ public class ReserveMgr {
         allReserves.addAll(endListReserve(id));   // 종료된 예약 추가
         return allReserves;
     }
+    
+    public ReserveBean getReserveByNum(int reserveNum) {
+        ReserveBean reserve = null;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+        	con = pool.getConnection(); // DB 연결
+            String sql = "SELECT * FROM reserve WHERE RESERVE_NUM = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, reserveNum);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                reserve = new ReserveBean();
+                reserve.setRESERVE_NUM(rs.getInt("RESERVE_NUM"));
+                reserve.setLODGING_NUM(rs.getInt("LODGING_NUM"));
+                reserve.setROOM_NUM(rs.getInt("ROOM_NUM"));
+                reserve.setHEADCOUNT(rs.getInt("HEADCOUNT"));
+                reserve.setRESERVE_PRICE(rs.getInt("RESERVE_PRICE"));
+                reserve.setCHECK_IN(rs.getDate("CHECK_IN"));
+                reserve.setCHECK_OUT(rs.getDate("CHECK_OUT"));
+                // 필요한 다른 필드 설정
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // 예외 처리
+        } finally {
+        	pool.freeConnection(con, pstmt, rs); // 자원 반납
+        }
+
+        return reserve;
+    }
+    
+    public boolean cancelReserve(int reserveNum) {
+        boolean success = false;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+        	con = pool.getConnection(); // DB 연결
+            String sql = "DELETE FROM reserve WHERE RESERVE_NUM = ?"; // 예약 삭제 쿼리
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, reserveNum);
+            int rowsAffected = pstmt.executeUpdate(); // 쿼리 실행
+
+            if (rowsAffected > 0) {
+                success = true; // 삭제 성공
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // 예외 처리
+        } finally {
+            pool.freeConnection(con, pstmt); 
+        }
+        return success; // 성공 여부 반환
+    }
+    
 }
