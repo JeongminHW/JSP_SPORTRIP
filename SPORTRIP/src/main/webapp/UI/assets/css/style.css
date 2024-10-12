@@ -163,6 +163,7 @@ input {
 
 .team_logo_img {
 	width: 50px;
+  	margin-right: 30px;
 }
 
 .league_info {
@@ -457,14 +458,11 @@ tbody{
 }
 
 .img-box {
-	display: flex;
+	display: inline-block;
 	position: absolute;
 	left: 50%;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 26px;
 	img	{
-		width:100px;
+	width:100px;
 	}
 }
 

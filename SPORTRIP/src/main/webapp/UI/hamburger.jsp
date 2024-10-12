@@ -1,14 +1,14 @@
 <%@page import="team.TeamBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html;
+charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
 <jsp:useBean id="teamSession" scope="session" class="team.TeamBean" />
 <jsp:setProperty property="*" name="teamSession" />
-<jsp:useBean id="userMgr" class="user.UserMgr" />
-<jsp:useBean id="login" scope="session" class="user.UserBean" />
-
 <%
 	int teamNum = 0;
 	int sportNum = MUtil.parseInt(request, "sportNum", 0); // 폼에서 받은 값이 없으면 0
@@ -18,68 +18,10 @@
 	    session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
 	}
 	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
-	
-	boolean isAdmin = userMgr.checkAdmin(login.getId()); // 관리자인지 확인
 %>
 
 <div class="menu" style="position:fixed; z-index: 2;">
-        <!-- 관리자 햄버거 메뉴 -->
-    		<%if(isAdmin){%>
-	    		<ul class="menu-list">
-			<li class="menu-item"><a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a></li>
-            <li class="menu-item">
-				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')"><span>야구</span></a>
-				<ul>
-                    	<% 
-                    	// 스포츠 별 팀 불러오기
-                    	teamVlist = teamMgr.listTeam(1);
-                    	
-                    		for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
-							teamNum = teamBean.getTEAM_NUM();
-						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
-						<%
-							}
-						%>
-                </ul>
-			</li>
-            <li class="menu-item">
-            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">축구</a>
-            	<ul>
-                    	<% 
-                    	// 스포츠 별 팀 불러오기
-                    	teamVlist = teamMgr.listTeam(2);
-                    	
-                    		for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
-							teamNum = teamBean.getTEAM_NUM();
-						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
-						<%
-							}
-						%>
-                </ul>
-			</li>
-            <li class="menu-item">
-            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">배구</a>
-            	<ul>
-                    	<% 
-                    	// 스포츠 별 팀 불러오기
-                    	teamVlist = teamMgr.listTeam(3);
-                    	
-                    		for(int i = 0; i < teamVlist.size(); i++){
-							teamBean = teamVlist.get(i);
-							teamNum = teamBean.getTEAM_NUM();
-						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
-						<%
-							}
-						%>
-                </ul>
-			</li>
-        </ul>
-    		<%} else {%>
+        <nav>
             <ul class="menu-list">
                 <li class="menu-item">
                 	<a href="#"><span>스포츠</span></a>
@@ -87,6 +29,13 @@
                         <li class="baseball"><a href="#" onclick="sendSportNum(1)"><span>야구</span></a></li>
                         <li class="soccer"><a href="#" onclick="sendSportNum(2)"><span>축구</span></a></li>
                         <li class="volleyball"><a href="#" onclick="sendSportNum(3)"><span>배구</span></a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#"><span>리그 정보<span></a>
+                    <ul>
+                    	<li class="league"><a href=".././sport/team_rank.jsp"><span>팀 순위</span> </a></li>
+                    	<li class="league"><a href=".././sport/main_highlight.jsp"><span>하이라이트</span> </a></li>
+                    	<li class="league"><a href=".././sport/sport_matchDate.jsp"><span>경기 일정</span> </a></li>
                     </ul>
                 </li>
                 <li class="menu-item"><a href="#"><span>팀<span></a>
@@ -116,5 +65,5 @@
                     </ul>
                 </li>
             </ul>
-            <%} %>
+        </nav>
     </div>
