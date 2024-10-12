@@ -44,8 +44,9 @@
 				    <!-- 플레이어 이미지 업로드 섹션 -->
 				    <div id="image_container"><img id="playerImg" src="<%= playerBean.getPLAYER_IMG() %>" alt="Player Image"></div>
 					<div class="form-group">
+					    <input type="hidden" class="upload-file" placeholder="첨부파일" readonly>
 						<label id="file-label" for="file">이미지 업로드</label>
-		                <input class="form-control form-control-user" type="file" id="file" name="player_image" onchange="setThumbnail(event);">
+		                <input type="file" id="file" name="playerImg" onchange="setThumbnail(event);" />
 					</div>
 				</div>
 				<div class="player-info-box">
@@ -113,37 +114,44 @@
 	        let playerName = document.getElementById('playerName').value;
 	        let playerPosition = document.getElementById('playerPosition').value;
 	        let playerBacknum = document.getElementById('playerBacknum').value;
-	        let playerImg = document.getElementById('file').files[0]; 
-	        let playerNum = document.getElementById('playerNum').value;
-
-	        console.log(playerName);
-	        console.log(playerPosition);
-	        console.log(playerBacknum);
-	        console.log(playerImg);
-	        console.log(playerNum);
 	        
+	        // 파일 input의 파일을 가져옵니다.
+	        let playerImgInput = document.getElementById('file'); // 파일 input을 가져옴
+	        let playerImg = playerImgInput ? playerImgInput.files[0] : null; // 파일이 있을 때만 참조
+
+	        let playerNum = document.getElementById('playerNum').value;
+	        let playerBirthday = document.getElementById('playerBirthday').value;
+
 	        const formData = new FormData();
 	        formData.append('playerNum', playerNum);
 	        formData.append('playerName', playerName);
 	        formData.append('playerPosition', playerPosition);
 	        formData.append('playerBacknum', playerBacknum);
-	        formData.append('playerImg', playerImg); 
+	        
+	        // 파일이 선택된 경우에만 FormData에 추가
+	        if (playerImg) {
+	            formData.append('playerImg', playerImg);
+	        }
+	        
+	        formData.append('playerBirthday', playerBirthday);
 
+	        // fetch 요청으로 폼 데이터를 서버로 전송
 	        fetch('update_player.jsp', {
 	            method: 'POST',
-	            body: formData 
+	            body: formData
 	        })
 	        .then(response => response.text())
 	        .then(data => {
-	            if (data.includes("success")) { 
+	            if (data.includes("success")) {
 	                alert('선수 수정이 완료되었습니다.');
-	                location.href = "admin_player.jsp"; 
+	                location.href = "admin_player.jsp";
 	            } else {
-	                alert('선수 등록이 되지 않았습니다.');
+	                alert('선수 수정이 실패했습니다.');
 	            }
 	        })
 	        .catch(error => console.error('Error:', error));
 	    }
+
 	</script>
 </body>
 </html>

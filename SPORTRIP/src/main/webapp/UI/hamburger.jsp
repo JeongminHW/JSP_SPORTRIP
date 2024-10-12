@@ -18,8 +18,14 @@
 	    session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
 	}
 	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
-	
+
+	boolean isLogin = false;
+
+	if (login != null && login.getId() != null && !login.getId().isEmpty()) {
+	    isLogin = true;
+	}
 	boolean isAdmin = userMgr.checkAdmin(login.getId()); // 관리자인지 확인
+
 %>
 
 <div class="menu" style="position:fixed; z-index: 2;">
@@ -103,18 +109,42 @@
                 </li>
                 <li class="menu-item"><a href="#">여행</a>
                     <ul>
-						<li id="login"><a href=".././trip/tripPage_Hotel.jsp"><span>숙박</span></a></li>
-						<li id="signup"><a href=".././trip/tripPage_Food.jsp"><span>식당</span></a></li>
+						<li id="login"><a href=".././trip/tripPage_hotel.jsp"><span>숙박</span></a></li>
+						<li id="signup"><a href=".././trip/tripPage_food.jsp"><span>식당</span></a></li>
                     </ul>
                 </li>
                 <li class="menu-item"><a href="#">회원정보</a>
                     <ul>
-						<li id="login"><a href=".././user/login.jsp"><span>로그인</span></a></li>
+						<!-- 로그인 상태에 따라 텍스트 변경 -->
+	                    <li id="login">
+						    <a id="log" href="<%= isLogin ? "logout.jsp" : "login.jsp" %>">
+						        <span id="loginCheck"><%= isLogin ? "로그아웃" : "로그인" %></span>
+						    </a>
+						</li>
 						<li id="signup"><a href=".././user/signup.jsp"><span>회원가입</span></a></li>
                         <li><a href=".././md/shoppingPage_basket.jsp"><span>장바구니</span></a></li>
-                        <li><a href=".././user/myPage.html"><span>마이페이지</span></a></li>
+                        <li><a href=".././user/myPage.jsp"><span>마이페이지</span></a></li>
                     </ul>
                 </li>
             </ul>
-            <%} %>
+        </nav>
     </div>
+    
+    <script>
+    // 로그아웃 시 세션 해제
+    document.getElementById('log').addEventListener('click', function(e) {
+        if (document.getElementById('loginCheck').innerHTML === '로그아웃') {
+            e.preventDefault(); // 기본 동작 방지
+            // 로그아웃 처리: 세션 해제
+            fetch('logout.jsp')
+                .then(response => {
+                    if (response.ok) {
+                        alert("로그아웃 되었습니다.");
+                        location.reload();
+                    }
+                })
+                .catch(error => console.error('Logout failed:', error));
+        }
+    });
+    </script>
+
