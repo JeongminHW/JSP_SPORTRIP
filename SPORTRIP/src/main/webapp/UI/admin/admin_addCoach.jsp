@@ -70,7 +70,7 @@
 						    </div>
 							<div class="addcoach-item" style="margin-top: 30px;">
 								<input type="button" onclick="playerManager()" value="돌아가기">
-								<input type="submit" value="감독 등록">
+								<input type="button" onclick="insertCoach()" value="감독 등록">
 							</div>
 						</div>	
 					</form>
@@ -109,6 +109,38 @@
         var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
         document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
     });
+    
+    function insertCoach() {
+        let headcoachName = document.getElementById('headcoachName').value;
+        
+        // 파일 input의 파일을 가져옵니다.
+        let headcoachImgInput = document.getElementById('file'); // 파일 input을 가져옴
+        let headcoachImg = headcoachImgInput ? headcoachImgInput.files[0] : null; // 파일이 있을 때만 참조
+
+        const formData = new FormData();
+        formData.append('headcoachName', headcoachName);
+        formData.append('teamNum', <%=teamNum%>);
+        
+        // 파일이 선택된 경우에만 FormData에 추가
+        if (headcoachImg) {
+            formData.append('headcoachImg', headcoachImg);
+        }
+        
+        fetch('insert_coach.jsp', {
+            method: 'POST',
+            body: formData // Use FormData as body
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) { 
+                alert('감독 등록이 완료되었습니다.');
+                location.href = "admin_player.jsp"; 
+            } else {
+                alert('감독 등록이 되지 않았습니다.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
 </script>
 </body>
 </html>
