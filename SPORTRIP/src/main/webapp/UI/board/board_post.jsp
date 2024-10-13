@@ -10,8 +10,19 @@
 <jsp:useBean id="teamBean" class="team.TeamBean" />
 <jsp:useBean id="boardMgr" class="board.BoardMgr" />
 <jsp:useBean id="boardBean" class="board.BoardBean" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<link rel="stylesheet" href="https://code.jquery.com/jquery-3.6.0.min.js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".././assets/css/style.css">
+    <link rel="stylesheet" href=".././assets/css/boardStyle.css">
+    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
+    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.5.1.min.js">
+    <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
+</head>
 <%
 	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
@@ -27,7 +38,10 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
-<jsp:include page="../header.jsp" />
+<body>
+	<header class="header team_header">
+        <jsp:include page="../header.jsp"/>
+    </header>
     <div class="post-box">
         <form action="" name="postForm">
             <!-- 글 작성 테이블 -->
