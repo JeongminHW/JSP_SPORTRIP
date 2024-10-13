@@ -132,4 +132,56 @@ public class MDMgr {
 		}
 		return flag;
     }
+    
+    // 굿즈 수정(관리자)
+    public boolean updateMD(MDBean bean) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+        boolean flag = false;
+
+        try {
+            con = pool.getConnection();
+            sql = "UPDATE md SET md_name = ?, md_price = ?, md_kindof = ?, md_img = ? WHERE md_num = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, bean.getMD_NAME());
+            pstmt.setInt(2, bean.getMD_PRICE());
+            pstmt.setString(3, bean.getMD_KINDOF());
+            pstmt.setString(4, bean.getMD_IMG());
+            pstmt.setInt(5, bean.getMD_NUM());
+
+            if (pstmt.executeUpdate() == 1) {
+                flag = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            pool.freeConnection(con, pstmt);
+        }
+        return flag;
+    }
+    
+    // 굿즈 삭제(관리자)
+    public boolean deleteMD(int mdNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "delete from md where md_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mdNum);
+			if(pstmt.executeUpdate() == 1) {
+				flag = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
 }

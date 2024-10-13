@@ -29,6 +29,11 @@
 	Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
 <jsp:include page="admin_header.jsp" />
+<div class="insert-goods">
+	<button class="update-btn" id="delete" onclick="deleteGoods()">삭제</button>
+	<button class="update-btn" id="edit" onclick="editGoods()">수정</button>
+	<button class="update-btn" id="add" onclick="addGoods()"> 등록</button>
+</div>
 <div class="goods-section">
 	<div class="selectBox2">
 		<button class="label">카테고리를 선택하세요</button>
@@ -38,13 +43,10 @@
 			<li class="optionItem">기타</li>
 		</ul>
 	</div>
-	<div class="insert-goods">
-		<button class="insert-btn" id="add" onclick="addGoods()">등록</button>
-	</div>
 	<!-- goods-list를 selectBox2 아래로 이동 -->
 	<div class="goods-list">
 		<% for (MDBean MDList : vlist) { %>
-		<div class="goods-card">
+		<div class="goods-card" data-goods-num="<%=MDList.getMD_NUM()%>">
 			<img src="<%=MDList.getMD_IMG()%>" alt="굿즈 사진" class="goods-photo"
 				id="<%=MDList.getMD_KINDOF()%>">
 			<div class="goods-info">
@@ -120,26 +122,89 @@
             label.parentNode.classList.add('active');
         }
     });
-    
 
  	// 등록하기
     function addGoods(){
     	const goodsFrame = document.getElementById('goods-List');
 		document.location.href="admin_addGoods.jsp";
     }
-
  	
- 	// md 클릭 시 이벤트
+ 	// 굿즈 선택 시 번호 저장
+    let selectedGoodsNum = null;
+ 	
+ 	// 굿즈 클릭 이벤트
     document.querySelectorAll('.goods-card').forEach((item) => {
         item.addEventListener('click', () => {
-        item.classList.toggle('active');
-        
-        if (item.classList.contains('active')) {
-        	cart.style.border = 'none'
-        }
-      });
+            // 토글을 통해 카드가 활성화됨을 표시
+            item.classList.toggle('active');
+
+            // 선택한 굿즈 번호 가져오기
+            selectedGoodsNum = item.getAttribute('data-goods-num');
+            
+            // 이름 요소를 찾아 스타일 적용
+            const goodsName = item.querySelector('.goods-name');
+            
+            if (item.classList.contains('active')) {
+            	goodsName.style.marginLeft = '3px'; // 활성화 시 3px 추가
+            	goodsName.style.bottom = '-3px';  // 활성화 시 3px 추가 (아래)
+            } else {
+            	goodsName.style.marginLeft = ''; // 비활성화 시 원래 상태로 복원
+            	goodsName.style.bottom = '';  // 비활성화 시 원래 상태로 복원
+            }
+        });
     });
  	
+ 	// 수정하기 함수 업데이트
+    function editGoods() {
+        const goodsFrame = document.getElementById('goods-List');
+
+        // 굿즈가 선택된 경우
+        if (selectedGoodsNum) {
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", "admin_updateGoods.jsp");
+
+            var goodsField = document.createElement("input");
+            goodsField.setAttribute("type", "hidden");
+            goodsField.setAttribute("name", "goodsNum");
+            goodsField.setAttribute("value", selectedGoodsNum);
+            form.appendChild(goodsField);
+
+            document.body.appendChild(form);
+            form.submit();
+        } 
+        // 굿즈가 선택되지 않은 경우
+        else {
+            alert("수정할 굿즈를 선택하세요.");
+        }
+    }
+ 	
+ 	// 삭제
+	function deleteGoods() {
+		const goodsFrame = document.getElementById('goods-List');
+
+	    if (selectedGoodsNum) {
+	        const params = new URLSearchParams();
+	        params.append('selectedGoodsNum', selectedGoodsNum);
+
+	        fetch('delete_goods.jsp?' + params.toString(), {
+	            method: 'GET',
+	        })
+	        .then(response => response.text())
+	        .then(data => {
+	            console.log("Response:", data);
+	            if (data.includes("success")) {
+	                alert('굿즈 삭제가 완료되었습니다.');
+	                location.href = "admin_goods.jsp"; // 삭제 후 페이지 이동
+	            } else {
+	                alert('굿즈 삭제가 되지 않았습니다.');
+	            }
+	        })
+	        .catch(error => console.error('Error:', error));
+	    } else {
+	        alert('삭제할 굿즈를 선택하세요.');
+	    }
+	}
 
 	// 페이지 로드 시 체크박스 해제
 	window.addEventListener('load', function() {
@@ -151,16 +216,6 @@
     document.getElementById('toggle').addEventListener('change', function() {
         const menu = document.querySelector('.menu');
         const overlay = document.getElementById('overlay');
-        
         menu.classList.toggle('open');
-        overlay.classList.toggle('open');
-    });
-
-    // 클릭 시 메뉴 닫기
-    overlay.addEventListener('click', function() {
-        document.getElementById('toggle').checked = false; // 체크박스 해제
-        const menu = document.querySelector('.menu');
-        menu.classList.remove('open'); // 메뉴 숨김
-        overlay.classList.remove('open'); // 배경 숨김
     });
 </script>
