@@ -21,7 +21,3 @@
         out.println("fail");
     }
 %>
-
-
-
-

@@ -189,16 +189,14 @@ input {
 	grid-template-columns: 1fr 1fr;
 	place-items: center; /* 글씨 중간 정렬 */
 	width: 99%;
-	height: 40px;
-	gap: 10px;
-	margin: 40px auto 40px 0; /* 상단 마진 40px, 좌우 중앙 정렬 */
+	height: 50px;
+	margin: 60px auto 40px auto; /* 상단 마진 60px, 좌우 중앙 정렬 */
 	.item{
 		display: grid;
 		place-items: center; /*글씨 중간 정렬*/
 		font-size: 20px;
 		width: 100%;
 		height: 100%;
-		margin-left: 20px;
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 	}
@@ -224,10 +222,10 @@ input {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(10%, auto));
 	place-items: center; /* 글씨 중간 정렬 */
-	width: 100%;
-	height: 40px;
-	gap: 10px;
-	margin-bottom: 40px;
+	width: 99%;
+	height: 50px;
+	margin: 0px auto 60px auto; /* 상단 마진 60px, 좌우 중앙 정렬 */
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	.item{
 		display: grid;
 		place-items: center; /*글씨 중간 정렬*/
@@ -238,10 +236,6 @@ input {
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 	}
-}
-
-.item{
-	border-radius: 50px;
 }
 
 .highlight-container{
@@ -334,8 +328,8 @@ tbody{
 
 #sub_wrap {
 	width: 100%;
+	height: 60px;
 	margin: 0 auto;
-	padding: 0 0 80px 0;
 }
 
 .players-section {
@@ -361,7 +355,7 @@ tbody{
 	flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈되도록 설정 */
 	width: 180px;
 	height: 240px;
-	margin: 10px;
+	margin: 10px 25px 30px 25px;
 }
 
 .player-photo, .coach-photo {
@@ -379,7 +373,6 @@ tbody{
 	text-align: center;
 	padding: 12px 0;
 	background: rgba(0, 0, 0, 0.5); /* 배경 반투명 검정 */
-	color: #ffffff;
 }
 
 .player-name, .coach-name span {

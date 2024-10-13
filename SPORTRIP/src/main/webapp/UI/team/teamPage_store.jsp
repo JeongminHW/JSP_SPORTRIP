@@ -25,11 +25,17 @@
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	
 	String teamName = teamInfo.getTEAM_NAME();
-	int sportNum = (int) session.getAttribute("sportNum");
 	Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 	
 	// 금액 포맷 설정
     DecimalFormat formatter = new DecimalFormat("###,###");
+	
+	int sportNum = MUtil.parseInt(request, "sportNum", 0); // 폼에서 받은 값이 없으면 0
+	if (sportNum == 0) {
+		sportNum = (Integer) session.getAttribute("sportNum"); // 세션에서 팀 번호 가져오기
+	} else {
+	    session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
+	}
 %>
 <jsp:include page="../header.jsp" />
 <div class="goods-section">
@@ -153,14 +159,6 @@
         const overlay = document.getElementById('overlay');
         
         menu.classList.toggle('open');
-        overlay.classList.toggle('open');
     });
 
-    // 클릭 시 메뉴 닫기
-    overlay.addEventListener('click', function() {
-        document.getElementById('toggle').checked = false; // 체크박스 해제
-        const menu = document.querySelector('.menu');
-        menu.classList.remove('open'); // 메뉴 숨김
-        overlay.classList.remove('open'); // 배경 숨김
-    });
 </script>

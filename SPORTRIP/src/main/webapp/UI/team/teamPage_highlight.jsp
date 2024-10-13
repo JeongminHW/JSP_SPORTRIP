@@ -20,7 +20,13 @@
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	
 	String teamName = teamInfo.getTEAM_NAME();
-	int sportNum = (int)session.getAttribute("sportNum");
+	
+	int sportNum = MUtil.parseInt(request, "sportNum", 0); // 폼에서 받은 값이 없으면 0
+	if (sportNum == 0) {
+		sportNum = (Integer) session.getAttribute("sportNum"); // 세션에서 팀 번호 가져오기
+	} else {
+	    session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
+	}
 %>
 <jsp:include page="../header.jsp" />
 <div class="highlight-container">
@@ -137,15 +143,8 @@
             // 햄버거 메뉴
             $('#toggle').change(function() {
                 $('.menu').toggleClass('open');
-                $('#overlay').toggleClass('open');
             });
 
-            // 클릭 시 메뉴 닫기
-            $('#overlay').click(function() {
-                $('#toggle').prop('checked', false); // 체크박스 해제
-                $('.menu').removeClass('open'); // 메뉴 숨김
-                $('#overlay').removeClass('open'); // 배경 숨김
-            });
         });
     </script>
 </div>

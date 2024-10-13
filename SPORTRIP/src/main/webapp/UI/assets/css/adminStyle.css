@@ -247,8 +247,9 @@ input {
 	border: 3px solid #f1290f;
 }
 
- .update-player, .update-goods{
+ .update-player, .insert-goods{
     text-align: right;
+    margin: 30px auto 0px auto;
     button{
         background-color: #ffffff;
         border: 1px solid #000000;

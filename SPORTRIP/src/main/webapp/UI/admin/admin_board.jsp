@@ -180,7 +180,7 @@
 	    document.body.appendChild(form);
 	    form.submit();
 	}
-	
+
     function searchPosts() {
         // 검색 타입과 검색어 가져오기
         var searchType = document.getElementById('searchType').value;

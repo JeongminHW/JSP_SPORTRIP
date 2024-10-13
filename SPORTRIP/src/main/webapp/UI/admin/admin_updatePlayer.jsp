@@ -13,6 +13,7 @@
     }
      
 	int playerNum = MUtil.parseInt(request, "playerNum", 0);
+	System.out.println(playerNum);
 	PlayerBean playerBean = playerMgr.getPlayer(playerNum);
 	
 %>
@@ -21,15 +22,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-league</title>
+<title>선수 등록</title>
 <link rel="stylesheet" href=".././assets/css/adminStyle.css">
 <link href=".././assets/css/style.css" rel="stylesheet" type="text/css">
 <script src=".././assets/js/main.js"></script>
-<script>
-    function goMain(){
-        document.location.href="mainPage.jsp";
-    }
-</script>
 </head>
 <body>
 	<div id="background" class="c_main">
@@ -95,63 +91,57 @@
 		
 		reader.readAsDataURL(event.target.files[0]);
 	}
-	</script>
-	<script>
-	    function goMain(){
-	        document.location.href="mainPage.jsp";
-	    }
-	    
-	    function playerManager(){
-	    	document.location.href="admin_player.jsp";
-	    }
+	
+    function playerManager(){
+    	document.location.href="admin_player.jsp";
+    }
+   
+    document.getElementById("file").addEventListener('change', function() {
+        var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
+        document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
+    });
     
-	    document.getElementById("file").addEventListener('change', function() {
-	        var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
-	        document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
-	    });
-	    
-	    function updatePlayer() {
-	        let playerName = document.getElementById('playerName').value;
-	        let playerPosition = document.getElementById('playerPosition').value;
-	        let playerBacknum = document.getElementById('playerBacknum').value;
-	        
-	        // 파일 input의 파일을 가져옵니다.
-	        let playerImgInput = document.getElementById('file'); // 파일 input을 가져옴
-	        let playerImg = playerImgInput ? playerImgInput.files[0] : null; // 파일이 있을 때만 참조
+    function updatePlayer() {
+        let playerName = document.getElementById('playerName').value;
+        let playerPosition = document.getElementById('playerPosition').value;
+        let playerBacknum = document.getElementById('playerBacknum').value;
+        
+        // 파일 input의 파일을 가져옵니다.
+        let playerImgInput = document.getElementById('file'); // 파일 input을 가져옴
+        let playerImg = playerImgInput ? playerImgInput.files[0] : null; // 파일이 있을 때만 참조
 
-	        let playerNum = document.getElementById('playerNum').value;
-	        let playerBirthday = document.getElementById('playerBirthday').value;
+        let playerNum = <%=playerNum%>;
+        let playerBirthday = document.getElementById('playerBirthday').value;
 
-	        const formData = new FormData();
-	        formData.append('playerNum', playerNum);
-	        formData.append('playerName', playerName);
-	        formData.append('playerPosition', playerPosition);
-	        formData.append('playerBacknum', playerBacknum);
-	        
-	        // 파일이 선택된 경우에만 FormData에 추가
-	        if (playerImg) {
-	            formData.append('playerImg', playerImg);
-	        }
-	        
-	        formData.append('playerBirthday', playerBirthday);
+        const formData = new FormData();
+        formData.append('playerNum', playerNum);
+        formData.append('playerName', playerName);
+        formData.append('playerPosition', playerPosition);
+        formData.append('playerBacknum', playerBacknum);
+        
+        // 파일이 선택된 경우에만 FormData에 추가
+        if (playerImg) {
+            formData.append('playerImg', playerImg);
+        }
+        
+        formData.append('playerBirthday', playerBirthday);
 
-	        // fetch 요청으로 폼 데이터를 서버로 전송
-	        fetch('update_player.jsp', {
-	            method: 'POST',
-	            body: formData
-	        })
-	        .then(response => response.text())
-	        .then(data => {
-	            if (data.includes("success")) {
-	                alert('선수 수정이 완료되었습니다.');
-	                location.href = "admin_player.jsp";
-	            } else {
-	                alert('선수 수정이 실패했습니다.');
-	            }
-	        })
-	        .catch(error => console.error('Error:', error));
-	    }
-
+        // fetch 요청으로 폼 데이터를 서버로 전송
+        fetch('update_player.jsp', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) {
+                alert('선수 수정이 완료되었습니다.');
+                location.href = "admin_player.jsp";
+            } else {
+                alert('선수 수정이 실패했습니다.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
 	</script>
 </body>
 </html>

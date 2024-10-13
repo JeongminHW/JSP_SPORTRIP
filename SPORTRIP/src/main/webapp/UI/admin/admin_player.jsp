@@ -35,24 +35,23 @@
         positionList.add(player.getPOSITION());
     }
 %>
-	
 	<jsp:include page="../header.jsp" />
-	<!-- 감독 / 선수 -->
-	<div id="sub_wrap">
-		<div class="u_top">
-			<div class="item" id="coach">
-				<a href="#" onclick="showCoaches()">감독</a>
-			</div>
-			<div class="item" id="player">
-				<a href="#" onclick="showPlayers()" style="color: #000;">선수</a>
-			</div>
+<div class="update-player">
+	<button class="update-btn" id="delete" onclick="deletePlayer()">삭제</button>
+	<button class="update-btn" id="edit" onclick="editPlayer()">수정</button>
+	<button class="update-btn" id="add" onclick="addPlayer()"> 등록</button>
+</div>
+<!-- 감독 / 선수 -->
+<div id="sub_wrap">
+	<div class="u_top">
+		<div class="item" id="coach">
+			<a href="#" onclick="showCoaches()" data-value="감독">감독</a>
 		</div>
-		<div class="update-player">
-		<button class="update-btn" id="delete" onclick="deletePlayer()">삭제</button>
-		<button class="update-btn" id="edit" onclick="editPlayer()">수정</button>
-		<button class="update-btn" id="add" onclick="addPlayer()"> 등록</button>
+		<div class="item" id="player">
+			<a href="#" onclick="showPlayers()" data-value="선수">선수</a>
+		</div>
 	</div>
-		<div id="coach-List" style="display: none;">
+	<div id="coach-List">
         <% for (HeadcoachBean coach : coachList) { %>
             <div class="coach-card" data-coach-num="<%=coach.getHEADCOACH_NUM() %>">
                 <img src="<%= coach.getHEADCOACH_IMG() %>" alt="<%= coach.getHEADCOACH_NAME() %>" class="coach-photo">
@@ -63,8 +62,63 @@
         <% } %>
     </div>
 </div>
-
-	    
+<div class="players-section">
+	<div id="player-List" style="display: none;">
+		<!-- 포지션 버튼 생성 -->
+		<div class="p_top">
+			<% for (String position : positionList) { %>
+			<div class="item" style="background-color: #FBFBFB;">
+				<a href="#" onclick="filterByPosition('<%=position%>')"><%=position%></a>
+			</div>
+			<% } %>
+		</div>
+		<!-- 선수 리스트 -->
+		<% for (PlayerBean player : playerList) { %>
+		<div class="player-card" data-player-num="<%=player.getPLAYER_NUM()%>" data-position="<%=player.getPOSITION()%>">
+			<!-- 선수 사진 출력 -->
+			<img src="<%=player.getPLAYER_IMG()%>"
+				alt="<%=player.getPLAYER_NAME()%>" class="player-photo">
+			<!-- 선수 이름, 나이 출력 -->
+			<div class="player-name">
+				<span> <%=player.getUNIFORM_NUM()%>
+				</span>
+				<%=player.getPLAYER_NAME()%>
+			</div>
+		</div>
+		<% } %>
+	</div>
+</div>
+<script>
+ 	// 팀 번호 전달
+	function sendTeamNum(teamNum, page) {
+	    // 세션에 값을 설정
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action", page + ".jsp");
+	
+	    var teamField = document.createElement("input");
+	    teamField.setAttribute("type", "hidden");
+	    teamField.setAttribute("name", "teamNum");
+	    teamField.setAttribute("value", teamNum);
+	    form.appendChild(teamField);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+ 	
+	// 선수 출력
+	function showPlayers() {
+		document.getElementById('player-List').style.display = 'block';
+		document.getElementById('coach-List').style.display = 'none';
+		document.getElementById('player').getElementsByTagName('a')[0].style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
+		document.getElementById('player').style.backgroundColor = '#000000';
+		document.getElementById('coach').getElementsByTagName('a')[0].style.color = '#000000'; // 폰트색 검정으로 변경
+		document.getElementById('coach').style.backgroundColor = '#FBFBFB';
+		var playerCards = document.querySelectorAll('.player-card');
+		playerCards.forEach(function(card) {
+			card.style.display = 'inline-block';
+		});
+	}
 	    <div class="players-section">
 	    	<div id="player-List" style="display: none;">
 	    	<!-- 포지션 버튼 생성 -->
@@ -274,58 +328,118 @@
             else {
                 alert("수정할 선수를 또는 감독을 선택하세요.");
             }
+        });
+
+    // 감독 클릭 시 번호 저장
+    let selectedCoachNum = null;
+
+    document.querySelectorAll('.coach-card').forEach((item) => {
+        item.addEventListener('click', () => {
+            // 토글을 통해 카드가 활성화됨을 표시
+            item.classList.toggle('active');
+
+            // 선택한 감독의 번호 가져오기
+            selectedCoachNum = item.getAttribute('data-coach-num');
+
+            // 이름 요소를 찾아 스타일 적용
+            const coachName = item.querySelector('.coach-name');
+
+            if (item.classList.contains('active')) {
+                coachName.style.marginLeft = '3px'; // 활성화 시 3px 추가
+                coachName.style.bottom = '-3px';  // 활성화 시 3px 추가 (아래)
+            } else {
+                coachName.style.marginLeft = ''; // 비활성화 시 원래 상태로 복원
+                coachName.style.bottom = '';  // 비활성화 시 원래 상태로 복원
+            }
+        });
+    });
+
+    // 수정하기 함수 업데이트
+    function editPlayer() {
+        const playerFrame = document.getElementById('player-List');
+        const coachFrame = document.getElementById('coach-List');
+		console.log(selectedPlayerNum);
+        // 선수가 선택된 경우
+        if (selectedPlayerNum) {
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", "admin_updatePlayer.jsp");
+
+            var playerField = document.createElement("input");
+            playerField.setAttribute("type", "hidden");
+            playerField.setAttribute("name", "playerNum");
+            playerField.setAttribute("value", selectedPlayerNum);
+            form.appendChild(playerField);
+
+            document.body.appendChild(form);
+            form.submit();
+        } 
+        // 감독이 선택된 경우
+        else if (selectedCoachNum) {
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", "admin_updateCoach.jsp");
+
+            var coachField = document.createElement("input");
+            coachField.setAttribute("type", "hidden");
+            coachField.setAttribute("name", "coachNum");
+            coachField.setAttribute("value", selectedCoachNum);
+            form.appendChild(coachField);
+
+            document.body.appendChild(form);
+            form.submit();
+        } 
+        // 선수나 감독이 선택되지 않은 경우
+        else {
+            alert("수정할 선수 또는 감독을 선택하세요.");
         }
+    }
 
-        
+    // 삭제
+	function deletePlayer() {
+	    const playerFrame = document.getElementById('player-List');
+	    const coachFrame = document.getElementById('coach-List');
 
-		function deletePlayer() {
-		    const playerFrame = document.getElementById('player-List');
-		    const coachFrame = document.getElementById('coach-List');
+	    if (coachFrame.style.display == 'block' && selectedCoachNum) {
+	        // 감독 삭제일 경우
+	        const params = new URLSearchParams();
+	        params.append('selectedCoachNum', selectedCoachNum);
 
-		    if (coachFrame.style.display == 'block' && selectedCoachNum) {
-		        // 감독 삭제일 경우
-		        const params = new URLSearchParams();
-		        params.append('selectedCoachNum', selectedCoachNum);
+	        fetch('delete_coach.jsp?' + params.toString(), {
+	            method: 'GET',
+	        })
+	        .then(response => response.text())
+	        .then(data => {
+	            console.log("Response:", data);
+	            if (data.includes("success")) {
+	                alert('감독 삭제가 완료되었습니다.');
+	                location.href = "admin_player.jsp"; // 감독 삭제 후 페이지 이동
+	            } else {
+	                alert('감독 삭제가 되지 않았습니다.');
+	            }
+	        })
+	        .catch(error => console.error('Error:', error));
+	    } else if (playerFrame.style.display == 'block' && selectedPlayerNum) {
+	        // 선수 삭제일 경우
+	        const params = new URLSearchParams();
+	        params.append('selectedPlayerNum', selectedPlayerNum);
 
-		        fetch('delete_coach.jsp?' + params.toString(), {
-		            method: 'GET',
-		        })
-		        .then(response => response.text())
-		        .then(data => {
-		            console.log("Response:", data);
-		            if (data.includes("success")) {
-		                alert('감독 삭제가 완료되었습니다.');
-		                location.href = "admin_player.jsp"; // 감독 삭제 후 페이지 이동
-		            } else {
-		                alert('감독 삭제가 되지 않았습니다.');
-		            }
-		        })
-		        .catch(error => console.error('Error:', error));
-		    } else if (playerFrame.style.display == 'block' && selectedPlayerNum) {
-		        // 선수 삭제일 경우
-		        const params = new URLSearchParams();
-		        params.append('selectedPlayerNum', selectedPlayerNum);
-
-		        fetch('delete_player.jsp?' + params.toString(), {
-		            method: 'GET',
-		        })
-		        .then(response => response.text())
-		        .then(data => {
-		            console.log("Response:", data);
-		            if (data.includes("success")) {
-		                alert('선수 삭제가 완료되었습니다.');
-		                location.href = "admin_player.jsp"; // 선수 삭제 후 페이지 이동
-		            } else {
-		                alert('선수 삭제가 되지 않았습니다.');
-		            }
-		        })
-		        .catch(error => console.error('Error:', error));
-		    } else {
-		        alert('삭제할 감독이나 선수를 선택하세요.');
-		    }
-		}
-
-
-	  </script>
-</body>
-</html>
+	        fetch('delete_player.jsp?' + params.toString(), {
+	            method: 'GET',
+	        })
+	        .then(response => response.text())
+	        .then(data => {
+	            console.log("Response:", data);
+	            if (data.includes("success")) {
+	                alert('선수 삭제가 완료되었습니다.');
+	                location.href = "admin_player.jsp"; // 선수 삭제 후 페이지 이동
+	            } else {
+	                alert('선수 삭제가 되지 않았습니다.');
+	            }
+	        })
+	        .catch(error => console.error('Error:', error));
+	    } else {
+	        alert('삭제할 감독이나 선수를 선택하세요.');
+	    }
+	}
+</script>
