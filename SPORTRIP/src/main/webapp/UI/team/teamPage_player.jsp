@@ -154,17 +154,4 @@
 			card.style.display = 'block';
 		});
 	}
-
-	// 페이지 로드 시 체크박스 해제
-	window.addEventListener('load', function() {
-		const toggle = document.getElementById('toggle');
-		toggle.checked = false; // 체크박스 해제
-	});
-
-	// 햄버거 메뉴
-	document.getElementById('toggle').addEventListener('change', function() {
-		const menu = document.querySelector('.menu');
-		const overlay = document.getElementById('overlay');
-		menu.classList.toggle('open');
-	});
 </script>

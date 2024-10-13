@@ -51,7 +51,7 @@
 <%} else if (currentPath.contains("/trip/")) { %>
 <!-- trip 헤더 -->
 <a style="cursor: pointer" href=".././sport/mainPage.jsp">
-	<img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img">
+	<img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img">
 </a>
 <div id="header" class="c_main">
 	<div class="h_wrap">
@@ -184,11 +184,13 @@
             <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img">
         </a>
         <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-        	<a class="t_header" href="teamPage_player.jsp"><span>Player</span></a>
         	<a class="t_header" href="teamPage_teamintro.jsp"><span>Info</span></a>
+        	<a class="t_header" href="teamPage_player.jsp"><span>Player</span></a>
+        	<a class="t_header" href="teamPage_highlight.jsp"><span>Highlight</span></a>
 	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
 	        <a class="t_header" href="teamPage_stadium.jsp"><span>Stadium</span></a>
 	        <a class="t_header" href="teamPage_store.jsp"><span>Shop</span></a>
+	        <a class="t_header" href="teamPage_board.jsp"><span>Board</span></a>
     	</div>
         <input id="toggle" type="checkbox"/>
         <label class="hamburger" for="toggle">
