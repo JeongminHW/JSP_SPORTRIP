@@ -56,32 +56,31 @@
             </div>
         <% } %>
     </div>
-	</div>
-	<div class="players-section">
-		<div id="player-List" style="display: none;">
-			<!-- 포지션 버튼 생성 -->
-			<div class="p_top">
-				<% for (String position : positionList) { %>
-				<div class="item" style="background-color: #FBFBFB;">
-					<a href="#" onclick="filterByPosition('<%=position%>')"><%=position%></a>
-				</div>
-				<% } %>
-			</div>
-			<!-- 선수 리스트 -->
-			<% for (PlayerBean player : playerList) { %>
-			<div class="player-card" data-position="<%=player.getPOSITION()%>">
-				<!-- 선수 사진 출력 -->
-				<img src="<%=player.getPLAYER_IMG()%>"
-					alt="<%=player.getPLAYER_NAME()%>" class="player-photo">
-				<!-- 선수 이름, 나이 출력 -->
-				<div class="player-name">
-					<span> <%=player.getUNIFORM_NUM()%>
-					</span>
-					<%=player.getPLAYER_NAME()%>
-				</div>
+</div>
+<div class="players-section">
+	<div id="player-List" style="display: none;">
+		<!-- 포지션 버튼 생성 -->
+		<div class="p_top">
+			<% for (String position : positionList) { %>
+			<div class="item" style="background-color: #FBFBFB;">
+				<a href="#" onclick="filterByPosition('<%=position%>')"><%=position%></a>
 			</div>
 			<% } %>
 		</div>
+		<!-- 선수 리스트 -->
+		<% for (PlayerBean player : playerList) { %>
+		<div class="player-card" data-position="<%=player.getPOSITION()%>">
+			<!-- 선수 사진 출력 -->
+			<img src="<%=player.getPLAYER_IMG()%>"
+				alt="<%=player.getPLAYER_NAME()%>" class="player-photo">
+			<!-- 선수 이름, 나이 출력 -->
+			<div class="player-name">
+				<span> <%=player.getUNIFORM_NUM()%>
+				</span>
+				<%=player.getPLAYER_NAME()%>
+			</div>
+		</div>
+		<% } %>
 	</div>
 </div>
 <script>
@@ -166,16 +165,6 @@
 	document.getElementById('toggle').addEventListener('change', function() {
 		const menu = document.querySelector('.menu');
 		const overlay = document.getElementById('overlay');
-
 		menu.classList.toggle('open');
-		overlay.classList.toggle('open');
-	});
-
-	// 클릭 시 메뉴 닫기
-	overlay.addEventListener('click', function() {
-		document.getElementById('toggle').checked = false; // 체크박스 해제
-		const menu = document.querySelector('.menu');
-		menu.classList.remove('open'); // 메뉴 숨김
-		overlay.classList.remove('open'); // 배경 숨김
 	});
 </script>

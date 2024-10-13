@@ -55,7 +55,7 @@
 </head>
 <body>
     <header class="header team_header">
-        <a href=".././sport/sports_main.jsp">
+        <a href=".././sport/sport_main.jsp">
         <%	
         	String src = null;
         	if(teamInfo.getSPORT_NUM() == 1) {
@@ -94,7 +94,6 @@
 		</div>
 	</div>
 </body>
-
 <script>
 	//페이지 로드 시 체크박스 해제
 	window.addEventListener('load', function() {

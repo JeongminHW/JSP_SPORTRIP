@@ -26,9 +26,7 @@
     TeamBean teamInfo = teamMgr.getTeam(teamNum);
     PlayerMgr playerMgr = new PlayerMgr();
     Vector<PlayerBean> playerList = playerMgr.TeamPlayers(teamNum);
-
 %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
