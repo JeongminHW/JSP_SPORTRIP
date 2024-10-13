@@ -9,6 +9,7 @@
 <jsp:useBean id="teamSession" scope="session" class="team.TeamBean" />
 <jsp:setProperty property="*" name="teamSession" />
 <jsp:setProperty property="*" name = "teamBean"/>
+<jsp:useBean id="login" scope="session" class="user.UserBean" />
 
 <%
 	int teamNum = 0;

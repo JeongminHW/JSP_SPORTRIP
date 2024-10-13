@@ -1,6 +1,6 @@
 <%@ page import="DB.MUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<jsp:useBean id="login" scope="session" class="user.UserBean" />
 <%
     String url = request.getParameter("url"); 
     if (url == null || url.isEmpty()) {
@@ -9,7 +9,6 @@
             url = ".././sport/sport_main.jsp"; 
         }
     }
-
     session.setAttribute("previousPage", url); 
 	
 	int sportNum = (int)session.getAttribute("sportNum");
