@@ -11,23 +11,24 @@
     String saveDirectory = application.getRealPath("/UI/assets/images/headcoach_img/");
     int maxPostSize = 10 * 1024 * 1024; // 최대 파일 크기 10MB
     String encoding = "UTF-8";
-
-    File saveDir = new File(saveDirectory);
-    if (!saveDir.exists()) {
-        saveDir.mkdirs(); // 디렉토리 생성
-    }
-
+    
     MultipartRequest multi = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, new DefaultFileRenamePolicy());
 
     // POST 데이터 받기
-    String headcoachNum = multi.getParameter("headcoachNum");
-    System.out.println("Received headcoachNum: " + headcoachNum); // 디버깅 로그
+    String coachNum = multi.getParameter("headcoachNum");
+    System.out.println("Received coachNum: " + coachNum); // 디버깅 로그
     String headcoachName = multi.getParameter("headcoachName");
-    File headcoachImgFile = multi.getFile("headcoachImg");
-
+    File headcoachImgFile = null;
+    
+    if(multi.getFile("headcoachImg") != null){
+    	headcoachImgFile = multi.getFile("headcoachImg");
+    }
+    
+    System.out.println(headcoachImgFile);
+    
     String headcoachImgPath = null;
     if (headcoachImgFile != null) {
-        String uniqueFileName = headcoachNum + headcoachName + ".png"; 
+        String uniqueFileName = "new" + coachNum + headcoachName + ".png"; 
         File newFile = new File(saveDirectory, uniqueFileName); 
 
         if (headcoachImgFile.renameTo(newFile)) {
@@ -46,9 +47,9 @@
     HeadcoachBean headcoachBean = new HeadcoachBean();
 
     // headcoachNum 유효성 검사
-    if (headcoachNum != null && !headcoachNum.trim().isEmpty()) {
+    if (coachNum != null && !coachNum.trim().isEmpty()) {
         try {
-            headcoachBean.setHEADCOACH_NUM(Integer.parseInt(headcoachNum));
+            headcoachBean.setHEADCOACH_NUM(Integer.parseInt(coachNum));
         } catch (NumberFormatException e) {
             e.printStackTrace(); // 숫자로 변환할 수 없는 경우 로그에 출력
             out.println("headcoachNum은 유효한 숫자가 아닙니다.");
@@ -58,7 +59,8 @@
         out.println("headcoachNum 값이 없습니다.");
         return; // 프로세스 중단
     }
-
+    
+    headcoachBean.setHEADCOACH_NUM(Integer.parseInt(coachNum));
     headcoachBean.setHEADCOACH_NAME(headcoachName);
     headcoachBean.setHEADCOACH_IMG(headcoachImgPath);
     

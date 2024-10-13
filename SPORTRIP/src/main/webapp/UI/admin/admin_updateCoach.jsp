@@ -12,8 +12,8 @@
         session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
     }
      
-	int coachNum = MUtil.parseInt(request, "coachNum", 0);
-	HeadcoachBean headcoachBean = headcoachMgr.getHeadcoach(coachNum);
+	int coachNum  = MUtil.parseInt(request, "coachNum", 0);
+	HeadcoachBean headcoachBean = headcoachMgr.getHeadcoach(coachNum );
 	
 %>
 <!DOCTYPE html>
@@ -41,11 +41,11 @@
 		<div class="popup" style="width: 800px; height: 400px;">
 			<div class="addplayer-box">
 				<div class="coach-info-box">
-					<form action="" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="headcoachNum" value="<%= coachNum %>"> <!-- 팀 번호 숨은 필드 추가 -->
+					<form action="update_coach.jsp" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="coachNum" value="<%= coachNum %>"> <!-- 팀 번호 숨은 필드 추가 -->
 						<div class="file-box">
 						    <!-- 플레이어 이미지 업로드 섹션 -->
-						    <div id="image_container"></div>
+						    <div id="image_container"><img id="headcoachImg" src="<%= headcoachBean.getHEADCOACH_IMG() %>" alt="Headcoach Image"></div>
 							<div class="form-group">
 								<input type="hidden" class="upload-file" placeholder="첨부파일" readonly>
 								<label id="file-label" for="file">이미지 업로드</label>
@@ -59,8 +59,8 @@
 						    </div>
 							<div class="addcoach-item" style="margin-top: 30px;">
 								<input type="button" onclick="playerManager()" value="돌아가기">
-								<input type="hidden" id="headcoachNum" name="headcoachNum" value="<%= headcoachBean.getHEADCOACH_NUM() %>">
-								<input type="submit" value="수정">
+								<input type="hidden" id="coachNum" name="coachNum" value="<%= headcoachBean.getHEADCOACH_NUM() %>">
+								<input type="button" onclick="updateCoach()" value="수정하기">
 							</div>
 						</div>	
 					</form>
@@ -98,8 +98,43 @@
 	        var fileName = this.files.length > 0 ? this.files[0].name : ''; // 선택된 파일의 이름
 	        document.querySelector(".upload-file").value = fileName; // .upload-file에 파일 이름 설정
 	    });
-   
+	    
+	       function updateCoach() {
+	           let headcoachName = document.getElementById('headcoachName').value;
+	           
+	           // 파일 input의 파일을 가져옵니다.
+	           let headcoachImgInput = document.getElementById('file'); // 파일 input을 가져옴
+	           let headcoachImg = headcoachImgInput ? headcoachImgInput.files[0] : null; // 파일이 있을 때만 참조
+	           let coachNum = document.getElementById('coachNum').value;
+	           
+	           console.log("coachNum: ", coachNum); // coachNum 값 확인
+	           
+	           const formData = new FormData();
+	           formData.append('headcoachName', headcoachName);
+	           formData.append('headcoachNum', coachNum);
+	           
+	           // 파일이 선택된 경우에만 FormData에 추가
+	           if (headcoachImg) {
+	               formData.append('headcoachImg', headcoachImg);
+	           }
 
+	           // fetch 요청으로 폼 데이터를 서버로 전송
+	           fetch('update_coach.jsp', {
+	               method: 'POST',
+	               body: formData
+	           })
+	           .then(response => response.text())
+	           .then(data => {
+	        	   console.log("Response: ", data); // 서버로부터 받은 응답 출력
+	               if (data.includes("success")) {
+	                   alert('감독 수정이 완료되었습니다.');
+	                   location.href = "admin_player.jsp";
+	               } else {
+	                   alert('감독 수정이 실패했습니다.');
+	               }
+	           })
+	           .catch(error => console.error('Error:', error));
+	       }
 	</script>
 </body>
 </html>
