@@ -160,21 +160,6 @@
 				alert("모든 필수 항목을 입력하세요.");
 			}
 
-
-            xhr.open("POST", "validateId.jsp", true); 
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var response = xhr.responseText;
-                    if (response.includes("duplicate")) {
-                        alert("중복된 아이디가 존재합니다. 다시 입력해주세요.");
-                    } else if (response.includes("valid")) {
-                        document.getElementById("signupForm").submit();
-                    }
-                }
-            };
-            xhr.send("id=" + id);
-
 			if (password !== password_check) {
 				alert("비밀번호가 일치하지 않습니다.");
 			}
