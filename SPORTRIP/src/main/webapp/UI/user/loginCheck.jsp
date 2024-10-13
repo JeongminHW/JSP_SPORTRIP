@@ -12,8 +12,7 @@
 	
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
-	System.out.println(id);
-	System.out.println(pw);
+
 	if(id == null || pw == null){
 		out.println("fail");
 	}else{
@@ -21,6 +20,7 @@
 		
 	    if (result) {
 	    	login = userMgr.getJoin(id);
+		    session.setAttribute("login", login);
 	    	if(userMgr.checkAdmin(id)){
 	    		out.println("admin");
 	    	}else{

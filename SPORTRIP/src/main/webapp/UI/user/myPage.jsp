@@ -35,35 +35,36 @@
     Vector<ReserveBean> reserveVlist = null;
     Vector<BoardBean> boardVlist = null;
 
-	if(login.getId() != null){
-		UserBean userBean = new UserBean();
+    if (login.getId() != null) {
+        UserBean userBean = new UserBean();
 
-		userBean.setId(id);
-		userBean.setName(name);
-		userBean.setAddress(address);
-		userBean.setPostcode(zipcode);
-		userBean.setPhone(phone);
-		userBean.setEmail(email);
-		
-		Pattern pattern = Pattern.compile("^(.*?)(\\((.*)\\))$");
-		Matcher matcher = pattern.matcher(address);
+        userBean.setId(id);
+        userBean.setName(name);
+        userBean.setAddress(address);
+        userBean.setPostcode(zipcode);
+        userBean.setPhone(phone);
+        userBean.setEmail(email);
 
+        if (address != null && !address.isEmpty()) {
+            Pattern pattern = Pattern.compile("^(.*?)(\\((.*)\\))$");
+            Matcher matcher = pattern.matcher(address);
 
-	    
-	    if (matcher.find()) {
-	        part1 = matcher.group(1).trim();
-	        part2 = matcher.group(3);   
-	    }
-	    
-	    
-	}else{
-	%> 
-		<script>
-	    alert("로그인을 진행하세요.");
-	    location.href = "login.jsp";
-		</script>
-	<% } %>
-
+            if (matcher.find()) {
+                part1 = matcher.group(1).trim();
+                part2 = matcher.group(3);
+            }
+        } else {
+            part1 = address;  
+        }
+    } else {
+%>
+        <script>
+            alert("로그인을 진행하세요.");
+            location.href = "login.jsp";
+        </script>
+<% 
+    } 
+%>
    
 <!DOCTYPE html>
 <html>
