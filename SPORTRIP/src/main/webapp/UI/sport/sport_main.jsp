@@ -504,21 +504,7 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
         clone.classList.add('clone');
         clone1.classList.add('clone1');
     </script>
-	<script>
-	    window.onload = function(){
-	    	const backImg = document.getElementById("mainImage");
-	    	const sportNum = <%=sportNum%>;
-	    	if(sportNum == 1){
-	        	backImg.src = ".././assets/images/baseball_img.png";
-	    	}
-	    	else if(sportNum == 2){
-	        	backImg.src = ".././assets/images/sportmain_img.png";
-	    	}
-	    	else if(sportNum == 3){
-	        	backImg.src = ".././assets/images/valleyball_img.png";
-	    	}
-	    }
-	    
+	<script>  
 	    function sendSportNum(sportNum) {
 	        // 세션에 값을 설정
 	        var form = document.createElement("form");
