@@ -141,7 +141,8 @@
         </label>
     </header>
     <script src=".././assets/js/main.js"></script>
-<%} else if(currentPath.contains("/team/")) { 
+<%} else if(currentPath.contains("/team/") || currentPath.contains("/board/")) { 
+
 
     // POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
     int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
