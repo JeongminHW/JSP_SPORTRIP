@@ -76,7 +76,13 @@
 	<link rel="stylesheet" href=".././assets/css/mainhamburger.css">
 </head>
 <body>
-	<jsp:include page=".././hamburger.jsp"/>
+	<input id="toggle" type="checkbox"/>
+        <label class="hamburger" for="toggle">
+            <div class="top"></div>
+            <div class="middle"></div>
+            <div class="bottom"></div>
+        </label>
+	<jsp:include page="../hamburger.jsp"/>
 	<div class="mypage">
 		<div class="member-info">
 			<div class="info">

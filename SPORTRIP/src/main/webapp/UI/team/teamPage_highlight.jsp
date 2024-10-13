@@ -78,7 +78,7 @@
    		+ "q="+ searchData
    		+ "&type=video&"
    		+ "videoDuration=medium&"
-   		+ "key=AIzaSyADuItf8mzFqwyrWiWKYs89YaWA7TuwdWs";
+   		+ "key=AIzaSyBaqFHd79_iYLlLIlJGZ8-xcOO9mX3bDks";
 
      function convertUTCToKST(utcStr) {
          const date = new Date(utcStr);
@@ -118,12 +118,12 @@
                       }
                 	  if(sportNum == 2){
                           if (title.includes("K리그1") && title.includes(searchteamName)) {
-                          	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
+                          	$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="624" height="351" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
         						divCount++;
                           } 	
 			}
                   	else{
-                  		$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
+                  		$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="624" height="351" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');   
 				divCount++; 
                   	}
                   });

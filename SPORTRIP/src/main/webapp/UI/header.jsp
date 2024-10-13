@@ -140,7 +140,9 @@
             <div class="bottom"></div>
         </label>
     </header>
+    <script src=".././assets/js/main.js"></script>
 <%} else if(currentPath.contains("/team/") || currentPath.contains("/board/")) { 
+
 
     // POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
     int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
@@ -170,6 +172,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=teamInfo.getTEAM_NAME() %></title>
     <link rel="stylesheet" href=".././assets/css/style.css">
+    <link rel="stylesheet" href=".././assets/css/highlightstyle.css">
     <link rel="stylesheet" href=".././assets/css/boardStyle.css">
     <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
@@ -201,19 +204,5 @@
     </header>
     
 <%} %>
-
-<script>
-// 페이지 로드 시 체크박스 해제
-window.addEventListener('load', function() {
-const toggle = document.getElementById('toggle');
-toggle.checked = false; // 체크박스 해제
-});
-
-// 햄버거 메뉴
-document.getElementById('toggle').addEventListener('change', function() {
-    const menu = document.querySelector('.menu');
-    menu.classList.toggle('open');
-});
-</script>
 
 <jsp:include page="hamburger.jsp"/>
