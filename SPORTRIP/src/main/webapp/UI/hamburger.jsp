@@ -117,7 +117,7 @@
                     <ul>
 						<!-- 로그인 상태에 따라 텍스트 변경 -->
 	                    <li id="login">
-						    <a id="log" href="<%= isLogin ? "logout.jsp" : ".././user/login.jsp" %>">
+						    <a id="log" href="<%= isLogin ? ".././user/logout.jsp" : ".././user/login.jsp" %>">
 						        <span id="loginCheck"><%= isLogin ? "로그아웃" : "로그인" %></span>
 						    </a>
 						</li>
@@ -136,7 +136,7 @@
         if (document.getElementById('loginCheck').innerHTML === '로그아웃') {
             e.preventDefault(); // 기본 동작 방지
             // 로그아웃 처리: 세션 해제
-            fetch('logout.jsp')
+            fetch('.././user/logout.jsp')
                 .then(response => {
                     if (response.ok) {
                         alert("로그아웃 되었습니다.");

@@ -128,7 +128,7 @@
 	<div class="hotel_main">
 	    <div class="h_top">
 	        <div class="item">
-	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_hotel.jsp'" style="background-color: #000000; color: white;">숙소</button>
 	            <button type="button" class="food-btn" onclick="location.href='tripPage_food.jsp'">식당</button>
 	        </div>
 	    </div>
@@ -147,85 +147,98 @@
 			    </div>
 			
 			    <div class="custom-select-wrapper">
-			      <select name="stadium" id="stadiumSelect" class="select month" onchange="this.form.submit()">
-			        <option value="0">경기장</option>
-			        <% 
-			            String sportNumStr = request.getParameter("sportNum");
-			            if (sportNumStr != null && !sportNumStr.equals("0")) {
-			                int sportNum = Integer.parseInt(sportNumStr);
-			                StadiumMgr stadiumMgr = new StadiumMgr();
-			                List<StadiumBean> stadiumList = stadiumMgr.getStadiumsBySport(sportNum);
-			
-			                for (StadiumBean stadium : stadiumList) {
-			        %>
-			          <option value="<%= stadium.getSTADIUM_NAME() %>" <%= (request.getParameter("stadium") != null && request.getParameter("stadium").equals(stadium.getSTADIUM_NAME())) ? "selected" : "" %>>
-			            <%= stadium.getSTADIUM_NAME() %>
-			          </option>
-			        <%
-			                }
-			            }
-			        %>
-			      </select>
-			      <span class="custom-arrow">▼</span>
-			    </div>
+				    <select name="stadium" id="stadiumSelect" class="select month" onchange="this.form.submit()">
+				        <option value="0">경기장</option>
+				        <% 
+				            String sportNumStr = request.getParameter("sportNum");
+				            if (sportNumStr != null && !sportNumStr.equals("0")) {
+				                int sportNum = Integer.parseInt(sportNumStr);
+				                StadiumMgr stadiumMgr = new StadiumMgr();
+				                
+				                // 중복 제거를 위해 Set 사용
+				                Set<String> stadiumSet = new HashSet<>();
+				                List<StadiumBean> stadiumList = stadiumMgr.getStadiumsBySport(sportNum);
+				
+				                for (StadiumBean stadium : stadiumList) {
+				                    if (!stadiumSet.contains(stadium.getSTADIUM_NAME())) {
+				                        stadiumSet.add(stadium.getSTADIUM_NAME());
+				        %>          
+				                    <option value="<%= stadium.getSTADIUM_NAME() %>" <%= (request.getParameter("stadium") != null && request.getParameter("stadium").equals(stadium.getSTADIUM_NAME())) ? "selected" : "" %>>
+				                        <%= stadium.getSTADIUM_NAME() %>
+				                    </option>
+				        <%
+				                    }
+				                }
+				            }
+				        %>
+				    </select>
+				    <span class="custom-arrow">▼</span>
+				</div>
 			  </form>
 			</div>
 		
 		    <div class="search-menu-box">
-		<% 
-		      
-			String selectedStadium = request.getParameter("stadium");
-		    StadiumBean selectedStadiumBean = null;
-		    
-		    if (selectedStadium != null && !selectedStadium.equals("0")) {
-		        // 선택된 경기장 정보를 가져옴
-		        StadiumMgr stadiumMgr = new StadiumMgr();
-		
-		        selectedStadiumBean = stadiumMgr.getStadiumByName(selectedStadium);
-		   
-		        
-		        // 숙소 정보를 가져옴
-		        LodgingMgr lodgingMgr = new LodgingMgr();
-		        List<LodgingBean> lodgingList = lodgingMgr.getLodgingsByStadiumName(selectedStadium);
-		
-		        if (!lodgingList.isEmpty()) {
-		            for (LodgingBean lodging : lodgingList) {
-		%>
-				<div class="hotel-box">
-					<div class="hotel-img">
-						<img src="<%=lodging.getLODGING_IMG()%>" alt="호텔 이미지">
-					</div>
-					<div class="info-item">
-						<span class="title" style="font-size: 24px;"><%=lodging.getLODGING_NAME()%></span>
-						<div class="info-item-text">
-							<p class="address"><%=lodging.getADDRESS()%></p>
-							<span>★ <%=(lodging.getGRADE() != null) ? lodging.getGRADE() : "별점 없음"%></span>
-						</div>
-						<button class="show-location" onclick="openModal(
-		                                '<%=lodging.getLODGING_NAME()%>',
-		                                <%=lodging.getLAT()%>, <%=lodging.getLON()%>, 
-		                                '<%=selectedStadiumBean.getSTADIUM_NAME()%>',
-		                                <%=selectedStadiumBean.getLAT()%>, 
-		                                <%=selectedStadiumBean.getLON()%>)">
-							<img src=".././assets/images/location_img.png"> 위치보기
-						</button>
-					</div>
-					<div class="info-item-button">
-						<button class="show-detail" onclick="location.href='tripPage_hotelSub.jsp?lodgingNum=<%=lodging.getLODGING_NUM()%>'">객실 보기</button>
-					</div>
-				</div>
-				<%
-				}
-				} else {
-				%>
-		            <p>근처 숙소 정보가 없습니다.</p>
-		<%
-		}
-		}
-		%>
-		
-		        
-		    </div>
+		    <% 
+		        String selectedStadium = request.getParameter("stadium");
+		        StadiumBean selectedStadiumBean = null;
+		        if (selectedStadium != null && !selectedStadium.equals("0")) {
+		            
+		            // 선택된 경기장 정보를 가져옴
+		            StadiumMgr stadiumMgr = new StadiumMgr();
+		            selectedStadiumBean = stadiumMgr.getStadiumByName(selectedStadium);
+		            
+		            // 숙소 정보를 가져옴
+		            LodgingMgr lodgingMgr = new LodgingMgr();
+		            List<LodgingBean> lodgingList = lodgingMgr.getLodgingsByStadiumName(selectedStadium);
+		            
+		            // 중복된 숙소 이름을 저장하는 Set
+		            Set<String> lodgingSet = new HashSet<>();
+		            
+		            if (!lodgingList.isEmpty()) {
+		                for (LodgingBean lodging : lodgingList) {
+		                    // 중복된 숙소 이름 제거
+		                    if (!lodgingSet.contains(lodging.getLODGING_NAME())) {
+		                        lodgingSet.add(lodging.getLODGING_NAME());
+		                        
+		                        String img = lodging.getLODGING_IMG();
+		                        if (img == null || img.equals("")) {
+		                            img = ".././assets/images/goods_img/noimg.png";
+		                        }
+		    %>
+		                        <div class="hotel-box">
+		                            <div class="hotel-img">
+		                                <img src="<%= img %>" alt="호텔 이미지">
+		                            </div>
+		                            <div class="info-item">
+		                                <span class="title" style="font-size: 24px;"><%= lodging.getLODGING_NAME() %></span>
+		                                <div class="info-item-text">
+		                                    <p class="address"><%= lodging.getADDRESS() %></p>
+		                                    <span>★ <%=(lodging.getGRADE() != null) ? lodging.getGRADE() : "별점 없음" %></span>
+		                                </div>
+		                                <button class="show-location" onclick="openModal(
+		                                    '<%= lodging.getLODGING_NAME() %>',
+		                                    <%= lodging.getLAT() %>, <%= lodging.getLON() %>, 
+		                                    '<%= selectedStadiumBean.getSTADIUM_NAME() %>',
+		                                    <%= selectedStadiumBean.getLAT() %>, 
+		                                    <%= selectedStadiumBean.getLON() %>)">
+		                                    <img src=".././assets/images/location_img.png"> 위치보기
+		                                </button>
+		                            </div>
+		                            <div class="info-item-button">
+		                                <button class="show-detail" onclick="location.href='tripPage_hotelSub.jsp?lodgingNum=<%= lodging.getLODGING_NUM() %>'">객실 보기</button>
+		                            </div>
+		                        </div>
+		    <%
+		                    }
+		                }
+		            } else {
+		    %>
+		                <p>근처 숙소 정보가 없습니다.</p>
+		    <%
+		            }
+		        }
+		    %>
+		</div>
 	    </div>
 	</div>
 

@@ -133,7 +133,6 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 			</thead>
             <tbody>
                 <%
-                    teamMgr = new TeamMgr();
                     Vector<TeamBean> teamList = teamMgr.TeamRank(sportNum);
                     if (teamList != null) {
                         for (TeamBean team : teamList) {
@@ -171,66 +170,20 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 			<div class="rolling-list">
 				<!-- 원본배너 -->
 				<ul>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/1_강원.png" alt="강원 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/2_울산HD.png" alt="울산 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/3_수원FC.png" alt="수원 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/4_김천상무.png" alt="김천 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/5_서울.png" alt="서울 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/6_포항.png" alt="포항 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/7_광주.png" alt="광주 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/8_제주.png" alt="제주 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/9_대전.png" alt="대전 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/10_인천.png" alt="인천 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/11_전북.png" alt="전북 로고">
-						</div>
-					</li>
-					<li>
-						<div class="image-wrap">
-							<img src=".././assets/images/logo_img/12_대구.png" alt="대구 로고">
-						</div>
-					</li>
+					<%
+	                    if (teamVlist != null) {
+	                        for (TeamBean team : teamVlist) { 
+	                %>
+	                			<li>
+									<div class="image-wrap">
+										<a href=".././team/teamPage_player.jsp" <% session.setAttribute("teamNum", team.getTEAM_NUM()); %>>
+								            <img src="<%= team.getLOGO() %>" alt="<%= team.getTEAM_NAME() %>" style="width: 60px; height: 60px; margin:20px;">
+								        </a>
+									</div>
+								</li>
+	                
+	                        <%}%>
+	                <%}%>
 				</ul>
 			</div>
 		</div>
@@ -504,6 +457,7 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
         clone.classList.add('clone');
         clone1.classList.add('clone1');
     </script>
+
 	<script>  
 	    function sendSportNum(sportNum) {
 	        // 세션에 값을 설정

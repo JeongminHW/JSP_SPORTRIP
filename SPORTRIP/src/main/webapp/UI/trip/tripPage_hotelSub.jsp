@@ -24,8 +24,8 @@
     <div class="room_main">
 	    <div class="h_top">
 	        <div class="item">
-	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_hotel.jsp'" style="background-color: #236FB5; color: white;">숙소</button>
-	            <button type="button" class="food-btn" onclick="location.href='tripPage_food.jsp'">식당</button>
+	            <button type="button" class="hotel-btn" onclick="location.href='tripPage_hotel.jsp'" style="background-color: #000000; color: white;">숙소</button>
+	            <button type="button" class="food-btn" onclick="location.href='tripPage_food.jsp'" style="background-color: #ffffff; color: black;">식당</button>
 	        </div>
 	    </div>
 	
@@ -40,10 +40,14 @@
 		
 		                if (!roomList.isEmpty()) {
 		                    for (RoomBean room : roomList) {
+				            	String img = room.getROOM_IMG();
+				            	if (img == null || img.equals("")) {
+				            	    img = ".././assets/images/goods_img/noimg.png";
+				            	}
 		        %>
 		            <div class="room-box">
 					<div class="room-img">
-						<img src="<%=room.getROOM_IMG()%>" alt="객실 이미지">
+						<img src="<%=img%>" alt="객실 이미지">
 						<div class="original-img">
 							<img src="<%=room.getROOM_IMG()%>" alt="원본 이미지">
 						</div>
