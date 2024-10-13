@@ -68,7 +68,7 @@
     }
 %>
 
-<jsp:include page="team_header.jsp" />
+<jsp:include page="../header.jsp" />
 
 <div class="table-list-box">
 	<div class="write-btn">

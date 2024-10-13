@@ -31,7 +31,7 @@
 	// 금액 포맷 설정
     DecimalFormat formatter = new DecimalFormat("###,###");
 %>
-<jsp:include page="team_header.jsp" />
+<jsp:include page="../header.jsp" />
 <div class="goods-section">
 	<div class="selectBox2">
 		<button class="label">카테고리를 선택하세요</button>

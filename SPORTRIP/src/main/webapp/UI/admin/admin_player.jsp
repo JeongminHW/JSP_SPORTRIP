@@ -36,14 +36,14 @@
     }
 %>
 	
-	<jsp:include page="admin_header.jsp" />
+	<jsp:include page="../header.jsp" />
 	<!-- 감독 / 선수 -->
 	<div id="sub_wrap">
 		<div class="u_top">
-			<div class="item" style="background-color: #236FB5;" id="coach">
+			<div class="item" id="coach">
 				<a href="#" onclick="showCoaches()">감독</a>
 			</div>
-			<div class="item" style="background-color: #ffffff; border: 1px solid #236FB5;" id="player">
+			<div class="item" id="player">
 				<a href="#" onclick="showPlayers()" style="color: #000;">선수</a>
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 	    	<!-- 포지션 버튼 생성 -->
 		    <div class="p_top">
 		        <% for (String position : positionList) { %>
-		            <div class="item" style="background-color: #236FB5;">
+		            <div class="item position">
 		                <a href="#" onclick="filterByPosition('<%=position%>')"><%= position %></a>
 		            </div>
 		        <% } %>
@@ -110,25 +110,38 @@
 		    document.body.appendChild(form);
 		    form.submit();
 		}
-	  	// 선수 출력
-	  	function showPlayers() {
-        	document.getElementById('player-List').style.display = 'block';
-        	document.getElementById('coach-List').style.display = 'none';
-        	document.getElementById('player').style.backgroundColor = '#083660'; 
-        	document.getElementById('coach').style.backgroundColor = '#236FB5'; 
-        	var playerCards = document.querySelectorAll('.player-card');
-            playerCards.forEach(function(card) {
-            	card.style.display = 'inline-block';
-            });
-    	}
-		
-	  	// 감독 출력
-    	function showCoaches() {
-        	document.getElementById('player-List').style.display = 'none';
-        	document.getElementById('coach-List').style.display = 'block';
-        	document.getElementById('player').style.backgroundColor = '#236FB5'; 
-        	document.getElementById('coach').style.backgroundColor = '#083660';
-	    }
+	 	
+		// 선수 출력
+		function showPlayers() {
+			document.getElementById('player-List').style.display = 'block';
+			document.getElementById('coach-List').style.display = 'none';
+			document.getElementById('player').getElementsByTagName('a')[0].style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
+			document.getElementById('player').style.backgroundColor = '#000000';
+			document.getElementById('coach').getElementsByTagName('a')[0].style.color = '#000000'; // 폰트색 검정으로 변경
+			document.getElementById('coach').style.backgroundColor = '#FBFBFB';
+			var playerCards = document.querySelectorAll('.player-card');
+			playerCards.forEach(function(card) {
+				card.style.display = 'inline-block';
+			});
+			// 모든 포지션 버튼의 스타일 초기화
+		    var positionItems = document.querySelectorAll('.p_top .item');
+		    positionItems.forEach(function(item) {
+		        item.classList.remove('selected-item');  // 선택된 클래스 제거
+		        item.getElementsByTagName('a')[0].style.color = '#000000';  // 폰트색 검정으로 변경
+		        item.style.backgroundColor = '#FBFBFB';  // 배경색 흰색으로 변경
+		    });
+		}
+
+		// 감독 출력
+		function showCoaches() {
+			document.getElementById('player-List').style.display = 'none';
+			document.getElementById('coach-List').style.display = 'block';
+		    document.getElementById('player').style.backgroundColor = '#FBFBFB';
+		    document.getElementById('player').getElementsByTagName('a')[0].style.color = '#000000'; // 폰트색 검정으로 변경
+		    document.getElementById('coach').style.backgroundColor = '#000000';
+		    document.getElementById('coach').getElementsByTagName('a')[0].style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
+		}
+
 	  	
     	// 포지션에 따라 선수 필터링
         function filterByPosition(position) {
@@ -146,10 +159,12 @@
          	// 이전 선택된 버튼에서 'selected-item' 클래스 제거
             positionItems.forEach(function(item) {
             	item.classList.remove('selected-item');
+            	item.getElementsByTagName('a')[0].style.color = '#000000';  // 폰트 색을 검정으로
             });
             // 현재 클릭한 버튼에 'selected-item' 클래스 추가
             var currentItem = event.target.parentElement;   // 현재 클릭한 버튼
             currentItem.classList.add('selected-item');
+            currentItem.getElementsByTagName('a')[0].style.color = '#FBFBFB';  // 폰트 색을 흰색으로
         }
 
         // 모든 선수 보여주기 (초기 상태)

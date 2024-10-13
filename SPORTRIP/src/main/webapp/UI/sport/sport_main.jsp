@@ -36,7 +36,7 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
 </head>
 <body>
-	<jsp:include page="sport_header.jsp"/>
+	<jsp:include page="../header.jsp"/>
 		<div class="banner-container">
 			<div class="banner-slide">
 				<div class="slide">
@@ -495,18 +495,6 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 		function goMain(){
 			document.location.href="mainPage.jsp";
 		}
-	  	
-		// 페이지 로드 시 체크박스 해제
-		window.addEventListener('load', function() {
-	    const toggle = document.getElementById('toggle');
-	    toggle.checked = false; // 체크박스 해제
-		});
-	    
-	    // 햄버거 메뉴
-	    document.getElementById('toggle').addEventListener('change', function() {
-	        const menu = document.querySelector('.menu');
-	        menu.classList.toggle('open');
-	    });
     </script>
     <script>
 	  function toggleMenuVisibility() {

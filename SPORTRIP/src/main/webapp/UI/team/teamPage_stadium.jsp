@@ -25,7 +25,7 @@
 	TeamBean teamInfo = teamMgr.getTeam(teamNum); // teamNum을 사용하여 팀 정보 조회    
 	StadiumBean StadiumInfo = stadium.getStadium(teamNum);
 %>
-<jsp:include page="team_header.jsp" />
+<jsp:include page="../header.jsp" />>
 <div class="stadium-intro">
 	<div class="stadium-info">
 		<div class="climate-info">

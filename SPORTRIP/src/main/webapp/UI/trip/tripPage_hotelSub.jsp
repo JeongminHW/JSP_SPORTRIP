@@ -13,13 +13,7 @@
 </head>
 <body style="margin: 0; background-color: #EEEEEE;">
     <header class="header header_logo">
-        <a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-        <div class="login-signup-box">
-            <ul>
-                <li><a href="login.jsp" style="font-family: BMJUA; color: black;">로그인</a></li>
-                <li><a href="signup.jsp" style="font-family: BMJUA; color: black;">회원가입</a></li>
-            </ul>
-        </div>
+        <jsp:include page="../header.jsp"/>
     </header>
     <div class="room_main">
 	    <div class="h_top">

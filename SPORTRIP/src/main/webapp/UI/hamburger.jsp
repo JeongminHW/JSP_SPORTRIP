@@ -84,8 +84,22 @@
 						%>
                 </ul>
 			</li>
+			<li class="menu-item"><a href="#">회원정보</a>
+                    <ul>
+						<!-- 로그인 상태에 따라 텍스트 변경 -->
+	                    <li id="login">
+						    <a id="log" href="<%= isLogin ? ".././user/logout.jsp" : ".././user/login.jsp" %>">
+						        <span id="loginCheck"><%= isLogin ? "로그아웃" : "로그인" %></span>
+						    </a>
+						</li>
+						<li id="signup"><a href=".././user/signup.jsp"><span>회원가입</span></a></li>
+                        <li><a href=".././md/shoppingPage_basket.jsp"><span>장바구니</span></a></li>
+                        <li><a href=".././user/myPage.jsp"><span>마이페이지</span></a></li>
+                    </ul>
+                </li>
         </ul>
     		<%} else {%>
+    		<!-- 일반 햄버거 메뉴 -->
             <ul class="menu-list">
                 <li class="menu-item">
                 	<a href="#"><span>스포츠</span></a>

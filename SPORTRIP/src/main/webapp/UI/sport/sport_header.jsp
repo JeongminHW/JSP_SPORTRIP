@@ -1,6 +1,3 @@
-<%@page import="team.TeamBean"%>
-<%@page import="java.util.Vector"%>
-<%@page import="DB.MUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <section class="first-page" id="first-page">
 		<header>
@@ -22,8 +19,8 @@
 							</ul>
 						</div>
 					</nav>
-					<input id="toggle" type="checkbox" /> <label class="hamburger"
-						for="toggle">
+					<input id="toggle" type="checkbox" />
+					<label class="hamburger"for="toggle">
 						<div class="top"></div>
 						<div class="middle"></div>
 						<div class="bottom"></div>

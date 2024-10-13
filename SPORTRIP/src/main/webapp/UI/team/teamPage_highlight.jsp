@@ -22,7 +22,7 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
-<jsp:include page="team_header.jsp"/>
+<jsp:include page="../header.jsp" />
 <div class="highlight-container">
 	<script>
   	// 팀 번호 전달

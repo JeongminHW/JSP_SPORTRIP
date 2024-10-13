@@ -29,7 +29,7 @@
 	int sportNum = (int)session.getAttribute("sportNum");
 %>
 
-<jsp:include page=".././team/team_header.jsp"/>
+<jsp:include page="../header.jsp" />
 	<div class="list-btn-top">
         <button type="button" onclick="goList()">목록</button>
     </div>

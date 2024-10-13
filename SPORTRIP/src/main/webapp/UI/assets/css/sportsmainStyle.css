@@ -33,6 +33,11 @@ body {
 	}
 }
 
+#logo_img{
+	width: 200px;
+	margin: auto;
+}
+
 #header .h_wrap {
     display: inline-block;
     vertical-align: middle;
