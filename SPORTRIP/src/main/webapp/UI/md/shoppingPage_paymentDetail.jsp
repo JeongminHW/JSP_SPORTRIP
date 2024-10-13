@@ -17,8 +17,7 @@
     // 금액 포맷 설정
     DecimalFormat formatter = new DecimalFormat("###,###");
 
-    //String orderNumber = request.getParameter("orderNumber");
-    String orderNumber = "680c52170857";
+    String orderNumber = request.getParameter("orderNumber");
 
     Vector<ChargeBean> chargeVlist = chargeMgr.findGetCharge(orderNumber);
     int total = 0;
