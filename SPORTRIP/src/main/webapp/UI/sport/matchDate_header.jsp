@@ -42,10 +42,10 @@ charset=UTF-8"
 		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
 		<div class="header-view">
 			<div class="item">
-				<a href="sport_main.jsp#third-page">Rank</a>
+				<a href="sport_main.jsp#second-page">Highlight</a>
 			</div>
 			<div class="item">
-				<a href="sport_main.jsp#second-page">Highlight</a>
+				<a href="sport_main.jsp#third-page">Rank</a>
 			</div>
 			<div class="item">
 				<a href=".././sport/sport_matchDate.jsp">MatchDate</a>

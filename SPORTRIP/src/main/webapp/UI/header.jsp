@@ -28,11 +28,11 @@
 					<nav class="h_gnb">
 						<div class="hg_list">
 							<ul>
-								<li class="rank">
-									<a href="#" onclick="document.getElementById('third-page').scrollIntoView({behavior: 'smooth'})"><span>Rank</span></a>
-								</li>
 								<li class="highlight">
 									<a href="#" onclick="document.getElementById('second-page').scrollIntoView({behavior: 'smooth'})"><span>Highlight</span></a>
+								</li>
+								<li class="rank">
+									<a href="#" onclick="document.getElementById('third-page').scrollIntoView({behavior: 'smooth'})"><span>Rank</span></a>
 								</li>
 								<li class="matchdate">
 									<a href=".././sport/sport_matchDate.jsp"><span>MatchDate</span></a>
