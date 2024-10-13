@@ -457,8 +457,8 @@ Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
         clone.classList.add('clone');
         clone1.classList.add('clone1');
     </script>
-	<script>
-	    
+
+	<script>  
 	    function sendSportNum(sportNum) {
 	        // 세션에 값을 설정
 	        var form = document.createElement("form");

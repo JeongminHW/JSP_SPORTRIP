@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,63 +15,67 @@
 </script>
 </head>
 <body>
-<header class="header header_logo">
-    <a style="cursor: pointer" onclick="goMain()">
-    <img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
-    <a href="soccer_main.html" style="margin-left: 50px;">
-    <img src=".././assets/images/k-league_logo.svg" alt="리그" id="league_logo_img"></a>
-    <img style="width:80px;" src=".././assets/images/logo_img/2_울산HD.png" alt="울산" class="team_logo_img ulsan">
-    <div class="login-signup-box">
-        <ul>
-            <li><a href="login.html" style="color: #000000;">로그인</a></li>
-            <li><a href="signup.html" style="color: #000000;">회원가입</a></li>
-        </ul>
-    </div>
-    </header>
-    <div class="a_top">
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">선수 관리</a>
-        </div>
-        <div class="item" style="background-color: #083660;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_store')">굿즈샵</a>
-        </div>
-        <div class="item" style="background-color: #236FB5;">
-            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'teamPage_board')">게시판</a>
+	<div id="background" class="c_main">
+		<div class="b_wrap">
+			<img alt="" src=".././assets/images/main_page_img.png">
 		</div>
 	</div>
-
-    <div class="updategoods-box">
-        <h2>굿즈 수정</h2>
-        <form action="" method="post">
-            <div class="updategoods-item">
-                <label class="label" for="goods_name">굿즈 종류</label>
-                <select class="goods-select">
-                	<option value="유니푬">유니폼</option>
-                	<option value="머플러">머플러</option>
-                	<option value="기타">기타</option>
-                </select>
-            </div>
-            <div class="updategoods-item file-box">
-                <label class="label" for="goods_img">굿즈 이미지</label>
+	<div class="popup-background">
+		<div class="popup" style="height: 450px;">
+			<div class="addgoods-box">
 				<div class="file-box">
-	            	<input class="upload-file" value="img_file" placeholder="첨부파일" readonly>
-	            	<label id="file-label" for="file"></label>
-	                <input type="file" id="file" name="goods_img">
+				    <!-- 이미지 업로드 섹션 -->
+				    <div id="image_container"></div>
+					<div class="form-group">
+						<label id="file-label" for="file">이미지 업로드</label>
+		                <input class="form-control form-control-user" type="file" id="file" name="goods_image" onchange="setThumbnail(event);">
+					</div>
 				</div>
-            </div>
-            <div class="updategoods-item">
-                <label class="label" for="player_name">굿즈 이름</label>
-                <input class="input" type="text" id="player_name" name="player_name">
-            </div>
-            <div class="updategoods-item">
-                <label class="label" for="player_name">굿즈 가격</label>
-                <input class="input" type="text" id="player_name" name="player_name">
-            </div>
-            <div class="updategoods-item">
-                <input type="button" onclick="goodsManager()" value="목록">
-                <input type="submit" value="수정">
-            </div>
-    </div>
+				<div class="goods-info-box">
+					<form action="" method="post" enctype="multipart/form-data">
+						<div class="addgoods-item">
+							<label class="label" for="category">굿즈 종류</label> 
+								<select	class="goods-select" id="goods-select">
+									<option value="유니푬">유니폼</option>
+									<option value="머플러">머플러</option>
+									<option value="기타">기타</option>
+								</select>
+						</div>
+					    <div class="addgoods-item">
+					        <label class="label" for="goodsName">굿즈명</label>
+					        <input class="input" type="text" id="goodsName" name="goodsName" value="">
+					    </div>
+			            <div class="addgoods-item"  style="margin-bottom: 60px;">
+			                <label class="label" for="goodsPrice">가격</label>
+			                <input class="input" type="text" id="goodsPrice" name="goodsPrice" value="">
+			            </div>
+						<div class="addgoods-item">
+							<input type="button" onclick="goodsManager()" value="돌아가기">
+							<input type="button" onclick="updateGoods()" value="굿즈 수정">
+						</div>
+					</form>
+			    </div>	
+			</div>
+		</div>
+	</div>
+	<script>
+		function setThumbnail(event) {
+			var reader = new FileReader();
+
+			// 이미지가 새로 업로드될 때 기존 이미지를 제거
+			var imageContainer = document.querySelector("div#image_container");
+			imageContainer.innerHTML = ""; // 기존 이미지를 삭제
+
+			reader.onload = function(event) {
+				var img = document.createElement("img");
+				img.setAttribute("src", event.target.result);
+				img.setAttribute("class", "col-lg-6");
+				document.querySelector("div#image_container").appendChild(img);
+			};
+
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
     <script>
 	    function goMain(){
 	        document.location.href="mainPage.jsp";
