@@ -21,10 +21,10 @@
 	} else {
 		session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
 	}
+	
 	// 팀 정보 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	String teamName = teamInfo.getTEAM_NAME();
-    int sportNum = (int) session.getAttribute("sportNum");
     
 	// 게시글 정보 가져오기
 	Vector<BoardBean> boardInfo = boardMgr.listBoard(teamNum);
@@ -202,16 +202,8 @@
         const overlay = document.getElementById('overlay');
         
         menu.classList.toggle('open');
-        overlay.classList.toggle('open');
     });
 
-    // 클릭 시 메뉴 닫기
-    overlay.addEventListener('click', function() {
-        document.getElementById('toggle').checked = false; // 체크박스 해제
-        const menu = document.querySelector('.menu');
-        menu.classList.remove('open'); // 메뉴 숨김
-        overlay.classList.remove('open'); // 배경 숨김
-    });
     
     function searchPosts() {
         // 검색 타입과 검색어 가져오기

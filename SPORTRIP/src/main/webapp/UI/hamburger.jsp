@@ -146,5 +146,22 @@
                 .catch(error => console.error('Logout failed:', error));
         }
     });
+    
+  	function sendSportNum(sportNum) {
+	    // 세션에 값을 설정
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action", ".././sport/sport_main.jsp"); // 데이터를 보낼 경로
+		
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "sportNum");
+        hiddenField.setAttribute("value", sportNum);
+	    form.appendChild(hiddenField);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+
+	}
     </script>
 
