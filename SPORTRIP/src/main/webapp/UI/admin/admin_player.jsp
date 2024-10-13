@@ -88,67 +88,8 @@
 		<% } %>
 	</div>
 </div>
-<script>
- 	// 팀 번호 전달
-	function sendTeamNum(teamNum, page) {
-	    // 세션에 값을 설정
-	    var form = document.createElement("form");
-	    form.setAttribute("method", "POST");
-	    form.setAttribute("action", page + ".jsp");
-	
-	    var teamField = document.createElement("input");
-	    teamField.setAttribute("type", "hidden");
-	    teamField.setAttribute("name", "teamNum");
-	    teamField.setAttribute("value", teamNum);
-	    form.appendChild(teamField);
-	
-	    document.body.appendChild(form);
-	    form.submit();
-	}
- 	
-	// 선수 출력
-	function showPlayers() {
-		document.getElementById('player-List').style.display = 'block';
-		document.getElementById('coach-List').style.display = 'none';
-		document.getElementById('player').getElementsByTagName('a')[0].style.color = '#FFFFFF'; // 폰트색 흰색으로 변경
-		document.getElementById('player').style.backgroundColor = '#000000';
-		document.getElementById('coach').getElementsByTagName('a')[0].style.color = '#000000'; // 폰트색 검정으로 변경
-		document.getElementById('coach').style.backgroundColor = '#FBFBFB';
-		var playerCards = document.querySelectorAll('.player-card');
-		playerCards.forEach(function(card) {
-			card.style.display = 'inline-block';
-		});
-	}
-	    <div class="players-section">
-	    	<div id="player-List" style="display: none;">
-	    	<!-- 포지션 버튼 생성 -->
-		    <div class="p_top">
-		        <% for (String position : positionList) { %>
-		            <div class="item position">
-		                <a href="#" onclick="filterByPosition('<%=position%>')"><%= position %></a>
-		            </div>
-		        <% } %>
-		    </div>
-	    	<!-- 선수 리스트 -->
-				<% for (PlayerBean player : playerList) { %>
-				    <div class="player-card" data-position="<%= player.getPOSITION() %>" data-player-num="<%=player.getPLAYER_NUM() %>">
-				        <!-- 선수 사진 출력 -->
-				        <img src="<%=player.getPLAYER_IMG() %>" alt="<%=player.getPLAYER_NAME() %>" class="player-photo">
-				        <!-- 선수 이름, 나이 출력 -->
-				        <div class="player-name">
-				            <span> <%=player.getUNIFORM_NUM() %> </span> <%=player.getPLAYER_NAME() %>
-				        </div>
-				    </div>
-				<% } %>
-        	</div>
-	    </div>
-    </div>
-	<script>
-	 	function goMain(){
-	        document.location.href=".././sport/mainPage.jsp";
-	    }
-	 	
-	 	// 팀 번호 전달
+<script src=".././assets/js/main.js">
+/* 	 	// 팀 번호 전달
 		function sendTeamNum(teamNum, page) {
 		    // 세션에 값을 설정
 		    var form = document.createElement("form");
@@ -218,7 +159,7 @@
             // 현재 클릭한 버튼에 'selected-item' 클래스 추가
             var currentItem = event.target.parentElement;   // 현재 클릭한 버튼
             currentItem.classList.add('selected-item');
-            currentItem.getElementsByTagName('a')[0].style.color = '#FBFBFB';  // 폰트 색을 흰색으로
+            currentItem.getElementsByTagName('a')[0].style.color = '#FFFFFF';  // 폰트 색을 흰색으로
         }
 
         // 모든 선수 보여주기 (초기 상태)
@@ -441,5 +382,5 @@
 	    } else {
 	        alert('삭제할 감독이나 선수를 선택하세요.');
 	    }
-	}
+	} */
 </script>

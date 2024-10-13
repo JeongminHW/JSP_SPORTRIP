@@ -140,6 +140,7 @@
             <div class="bottom"></div>
         </label>
     </header>
+    <script src=".././assets/js/main.js"></script>
 <%} else if(currentPath.contains("/team/")) { 
 
     // POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
@@ -170,6 +171,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=teamInfo.getTEAM_NAME() %></title>
     <link rel="stylesheet" href=".././assets/css/style.css">
+    <link rel="stylesheet" href=".././assets/css/highlightstyle.css">
     <link rel="stylesheet" href=".././assets/css/boardStyle.css">
     <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
