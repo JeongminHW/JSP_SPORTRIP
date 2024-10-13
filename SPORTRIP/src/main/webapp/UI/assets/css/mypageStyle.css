@@ -301,7 +301,7 @@ a {
 	width: 200px;
 }
 
-.myorder-content img {
+.myorder-content img, .mypage-hotel-img {
 	width: 184px;
 	height: 184px;
 	object-fit: cover;

@@ -19,11 +19,12 @@
 	}
 	Vector<TeamBean> teamVlist = teamMgr.listTeam(sportNum);
 
-	boolean isLogin = false;
+    boolean isLogin = false;
+    if (login != null && login.getId() != null && !login.getId().isEmpty()) {
+        isLogin = true;
+    }
 
-	if (login != null && login.getId() != null && !login.getId().isEmpty()) {
-	    isLogin = true;
-	}
+
 	boolean isAdmin = userMgr.checkAdmin(login.getId()); // 관리자인지 확인
 
 %>
@@ -148,21 +149,22 @@
     document.addEventListener('DOMContentLoaded', function() {
         const logElement = document.getElementById('log');
         if (logElement !== null) {
-            if (logElement.innerHTML !== null) {
-                logElement.addEventListener('click', function(e) {
-                    if (document.getElementById('loginCheck').innerHTML === '로그아웃') {
-                        e.preventDefault(); // 기본 동작 방지
-                        fetch('.././user/logout.jsp')
-                            .then(response => {
-                                if (response.ok) {
-                                    alert("로그아웃 되었습니다.");
-                                    location.reload();
-                                }
-                            })
-                            .catch(error => console.error('Logout failed:', error));
-                    }
-                });
-            }
+            logElement.addEventListener('click', function(e) {
+                if (document.getElementById('loginCheck').innerHTML === '로그아웃') {
+                    e.preventDefault(); // 기본 동작 방지
+                    fetch('.././user/logout.jsp')
+                        .then(response => response.text())
+                        .then(result => {
+                            if (result.includes('success')) {
+                                alert("로그아웃 되었습니다.");
+                                location.href=".././sport/sport_main.jsp"
+                            } else if (result.includes('fail')) {
+                                alert("로그아웃에 실패했습니다.");
+                            }
+                        })
+                        .catch(error => console.error('Logout failed:', error));
+                }
+            });
         }
     });
       

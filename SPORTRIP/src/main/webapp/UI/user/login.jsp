@@ -1,8 +1,6 @@
 <%@ page import="DB.MUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:useBean id="login" class="user.UserBean" scope="session"/>
-
 <%
     String url = request.getParameter("url"); 
     if (url == null || url.isEmpty()) {
@@ -67,19 +65,19 @@
 			<div class="popup" id="popup">
 				<div class="popup-content">
 					<div class="login_img">
-						<img src=".././assets/images/logo_img/2_울산HD.png" alt="울산HD" id="team_img">
+						<img src=".././assets/images/sportrip_logo.png" alt="울산HD" id="team_img">
 					</div>
 					<div class="login_form">
-						<form action="loginCheck.jsp" method="POST">
+						<form action="#" method="POST">
 							<div class="input_box">
-								<input type="text" name="id" placeholder="아이디">
+								<input type="text" name="id" id="id" placeholder="아이디">
 							</div>
 							<div class="input_box">
-								<input type="password" name="pw" placeholder="비밀번호">
+								<input type="password" name="pw" id="pw"  placeholder="비밀번호">
 							</div>
 							<div class="login_button">
 								<input type="hidden" name="url" value="<%=url%>"> 
-								<button type="submit">로그인</button>
+								<button type="button" onclick="loginUser()">로그인</button>
 							</div>
 						</form>
 					</div>
@@ -115,6 +113,32 @@
 	
 	    document.body.appendChild(form);
 	    form.submit();
+	}
+  	
+  	function loginUser() {
+  		const id = document.getElementById('id').value;
+	    const pw = document.getElementById('pw').value;
+  		
+        const params = new URLSearchParams();
+        params.append('id', id);
+        params.append('pw', pw);
+
+        fetch('loginCheck.jsp?' + params.toString(), {
+            method: 'POST',
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("admin")) {
+                alert('관리자 로그인이 완료되었습니다.');
+                location.href = ".././admin/admin_player.jsp"; 
+            } else if(data.includes("user")){
+                alert('로그인이 완료되었습니다.');
+                location.href = ".././sport/sport_main.jsp"; 
+            } else if(data.includes("fail")){
+                alert('로그인이 되지 않았습니다.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
 	}
     </script>
   </body>
