@@ -34,6 +34,14 @@
 	//금액 포맷 설정
 	DecimalFormat formatter = new DecimalFormat("###,###");
 	
+    if (login.getId() == null) {
+%>
+	<script>
+	    alert("로그인을 진행하세요.");
+	    location.href = ".././user/login.jsp";
+	</script>
+<% 
+    } 
 %>
 <!DOCTYPE html>
 <html lang="ko">
