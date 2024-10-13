@@ -89,39 +89,41 @@ function addPlayer() {
 // 선수 클릭 시 번호 저장
 let selectedPlayerNum = null;
 
-document.querySelectorAll('.player-card').forEach((item) => {
-    item.addEventListener('click', (event) => {
-        item.classList.toggle('active');
-        selectedPlayerNum = item.getAttribute('data-player-num');
-        const playerName = item.querySelector('.player-name');
-        if (item.classList.contains('active')) {
-            playerName.style.marginLeft = '3px';
-            playerName.style.bottom = '-3px';
-        } else {
-            playerName.style.marginLeft = '';
-            playerName.style.bottom = '';
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.player-card').forEach((item) => {
+        item.addEventListener('click', (event) => {
+            item.classList.toggle('active');
+            selectedPlayerNum = item.getAttribute('data-player-num');
+            const playerName = item.querySelector('.player-name');
+            if (item.classList.contains('active')) {
+                playerName.style.marginLeft = '3px';
+                playerName.style.bottom = '-3px';
+            } else {
+                playerName.style.marginLeft = '';
+                playerName.style.bottom = '';
+            }
+        });
     });
 });
 
 // 감독 클릭 시 번호 저장
 let selectedCoachNum = null;
-
-document.querySelectorAll('.coach-card').forEach((item) => {
-    item.addEventListener('click', () => {
-        item.classList.toggle('active');
-        selectedCoachNum = item.getAttribute('data-coach-num');
-        const coachName = item.querySelector('.coach-name');
-        if (item.classList.contains('active')) {
-            coachName.style.marginLeft = '3px';
-            coachName.style.bottom = '-3px';
-        } else {
-            coachName.style.marginLeft = '';
-            coachName.style.bottom = '';
-        }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+	document.querySelectorAll('.coach-card').forEach((item) => {
+	    item.addEventListener('click', () => {
+	        item.classList.toggle('active');
+	        selectedCoachNum = item.getAttribute('data-coach-num');
+	        const coachName = item.querySelector('.coach-name');
+	        if (item.classList.contains('active')) {
+	            coachName.style.marginLeft = '3px';
+	            coachName.style.bottom = '-3px';
+	        } else {
+	            coachName.style.marginLeft = '';
+	            coachName.style.bottom = '';
+	        }
+	    });
+	});
 });
-
 // 수정하기
 function editPlayer() {
     const playerFrame = document.getElementById('player-List');
