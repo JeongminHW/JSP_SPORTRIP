@@ -53,9 +53,9 @@ charset=UTF-8"
 		</div>
 		<input id="toggle" type="checkbox"/>
         	<label class="hamburger" for="toggle">
-            <div class="top"></div>
-            <div class="middle"></div>
-            <div class="bottom"></div>
+	            <div class="top"></div>
+	            <div class="middle"></div>
+	            <div class="bottom"></div>
         	</label>
 	</header>
 	<div class="menu" style="position:fixed; z-index: 2;">

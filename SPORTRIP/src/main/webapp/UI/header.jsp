@@ -51,7 +51,7 @@
 <%} else if (currentPath.contains("/trip/")) { %>
 <!-- trip 헤더 -->
 <a style="cursor: pointer" href=".././sport/mainPage.jsp">
-	<img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img">
+	<img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img">
 </a>
 <div id="header" class="c_main">
 	<div class="h_wrap">
