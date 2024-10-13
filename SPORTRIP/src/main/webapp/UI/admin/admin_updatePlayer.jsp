@@ -13,6 +13,7 @@
     }
      
 	int playerNum = MUtil.parseInt(request, "playerNum", 0);
+	System.out.println(playerNum);
 	PlayerBean playerBean = playerMgr.getPlayer(playerNum);
 	
 %>
@@ -109,7 +110,7 @@
         let playerImgInput = document.getElementById('file'); // 파일 input을 가져옴
         let playerImg = playerImgInput ? playerImgInput.files[0] : null; // 파일이 있을 때만 참조
 
-        let playerNum = document.getElementById('playerNum').value;
+        let playerNum = <%=playerNum%>;
         let playerBirthday = document.getElementById('playerBirthday').value;
 
         const formData = new FormData();

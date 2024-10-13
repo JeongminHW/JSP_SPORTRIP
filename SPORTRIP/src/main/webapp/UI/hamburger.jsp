@@ -131,22 +131,27 @@
     </div>
     
     <script>
-    // 로그아웃 시 세션 해제
-    document.getElementById('log').addEventListener('click', function(e) {
-        if (document.getElementById('loginCheck').innerHTML === '로그아웃') {
-            e.preventDefault(); // 기본 동작 방지
-            // 로그아웃 처리: 세션 해제
-            fetch('.././user/logout.jsp')
-                .then(response => {
-                    if (response.ok) {
-                        alert("로그아웃 되었습니다.");
-                        location.reload();
+    document.addEventListener('DOMContentLoaded', function() {
+        const logElement = document.getElementById('log');
+        if (logElement !== null) {
+            if (logElement.innerHTML !== null) {
+                logElement.addEventListener('click', function(e) {
+                    if (document.getElementById('loginCheck').innerHTML === '로그아웃') {
+                        e.preventDefault(); // 기본 동작 방지
+                        fetch('.././user/logout.jsp')
+                            .then(response => {
+                                if (response.ok) {
+                                    alert("로그아웃 되었습니다.");
+                                    location.reload();
+                                }
+                            })
+                            .catch(error => console.error('Logout failed:', error));
                     }
-                })
-                .catch(error => console.error('Logout failed:', error));
+                });
+            }
         }
     });
-    
+      
   	function sendSportNum(sportNum) {
 	    // 세션에 값을 설정
 	    var form = document.createElement("form");
