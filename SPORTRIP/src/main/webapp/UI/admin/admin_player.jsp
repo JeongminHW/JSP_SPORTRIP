@@ -74,7 +74,7 @@
 		</div>
 		<!-- 선수 리스트 -->
 		<% for (PlayerBean player : playerList) { %>
-		<div class="player-card" data-position="<%=player.getPOSITION()%>">
+		<div class="player-card" data-player-num="<%=player.getPLAYER_NUM()%>" data-position="<%=player.getPOSITION()%>">
 			<!-- 선수 사진 출력 -->
 			<img src="<%=player.getPLAYER_IMG()%>"
 				alt="<%=player.getPLAYER_NAME()%>" class="player-photo">
@@ -186,7 +186,7 @@
             
             // 이름 요소를 찾아 스타일 적용
             const playerName = item.querySelector('.player-name');
-            
+    		console.log(selectedPlayerNum);
             if (item.classList.contains('active')) {
                 playerName.style.marginLeft = '3px'; // 활성화 시 3px 추가
                 playerName.style.bottom = '-3px';  // 활성화 시 3px 추가 (아래)
@@ -225,7 +225,7 @@
     function editPlayer() {
         const playerFrame = document.getElementById('player-List');
         const coachFrame = document.getElementById('coach-List');
-
+		console.log(selectedPlayerNum);
         // 선수가 선택된 경우
         if (selectedPlayerNum) {
             var form = document.createElement("form");
