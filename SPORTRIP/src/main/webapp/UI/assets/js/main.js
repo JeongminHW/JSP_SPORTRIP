@@ -60,6 +60,7 @@ function filterByPosition(position) {
     positionItems.forEach(function(item) {
         item.classList.remove('selected-item');
         item.getElementsByTagName('a')[0].style.color = '#000000';
+		item.style.backgroundColor = '#FBFBFB';  // 배경색 흰색으로 변경
     });
     
     var currentItem = event.target.parentElement;
