@@ -136,15 +136,5 @@
           });
       	});
         
-        $(document).ready(function() {
-            // 페이지 로드 시 체크박스 해제
-            $('#toggle').prop('checked', false); // 체크박스 해제
-
-            // 햄버거 메뉴
-            $('#toggle').change(function() {
-                $('.menu').toggleClass('open');
-            });
-
-        });
     </script>
 </div>
