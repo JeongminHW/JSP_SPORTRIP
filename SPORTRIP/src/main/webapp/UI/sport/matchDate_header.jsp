@@ -42,10 +42,10 @@ charset=UTF-8"
 		<a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a>
 		<div class="header-view">
 			<div class="item">
-				<a href=".././sport/team_rank.jsp">Rank</a>
+				<a href="sport_main.jsp#third-page">Rank</a>
 			</div>
 			<div class="item">
-				<a href=".././sport/main_highlight.jsp">Highlight</a>
+				<a href="sport_main.jsp#second-page">Highlight</a>
 			</div>
 			<div class="item">
 				<a href=".././sport/sport_matchDate.jsp">MatchDate</a>
@@ -67,13 +67,6 @@ charset=UTF-8"
                         <li class="baseball"><a href="#" onclick="sendSportNum(1)"><span>야구</span></a></li>
                         <li class="soccer"><a href="#" onclick="sendSportNum(2)"><span>축구</span></a></li>
                         <li class="volleyball"><a href="#" onclick="sendSportNum(3)"><span>배구</span></a></li>
-                    </ul>
-                </li>
-                <li class="menu-item"><a href="#"><span>리그 정보<span></a>
-                    <ul>
-                    	<li class="trip"><a href=".././trip/tripPage_Hotel.jsp"><span>팀 순위</span> </a></li>
-                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>하이라이트</span> </a></li>
-                    	<li class="trip"><a href=".././trip/tripPage_Food.jsp"><span>경기 일정</span> </a></li>
                     </ul>
                 </li>
                 <li class="menu-item"><a href="#"><span>팀<span></a>

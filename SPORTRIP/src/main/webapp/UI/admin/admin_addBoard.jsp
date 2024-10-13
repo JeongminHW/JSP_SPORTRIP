@@ -27,7 +27,7 @@
 	String teamName = teamInfo.getTEAM_NAME();
 	int sportNum = (int) session.getAttribute("sportNum");
 %>
-<jsp:include page=".././team/team_header.jsp" />
+<jsp:include page="../header.jsp" />
 <div class="post-box">
 	<form action="" name="postForm">
 		<!-- 글 작성 테이블 -->

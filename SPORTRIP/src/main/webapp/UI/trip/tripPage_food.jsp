@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTRIP 맛집</title>
     <link rel="stylesheet" href=".././assets/css/style.css">
+	<link rel="stylesheet" href=".././assets/css/mainhamburger.css">
     
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8afbb0c0c5d852ce84e4f0f3b93696b6"></script> 
     	
@@ -65,6 +66,21 @@
             document.getElementById('mapModal').style.display = 'none';
         }
         
+        function sendSportNum(sportNum) {
+    	    // 세션에 값을 설정
+    	    var form = document.createElement("form");
+    	    form.setAttribute("method", "POST");
+    	    form.setAttribute("action", ".././sport/sport_main.jsp"); // 데이터를 보낼 경로
+    		
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "sportNum");
+            hiddenField.setAttribute("value", sportNum);
+    	    form.appendChild(hiddenField);
+    	
+    	    document.body.appendChild(form);
+    	    form.submit();
+    	}
     </script>
     
     <style>
@@ -111,15 +127,7 @@
 </head>
 <body style="margin: 0; background-color: #EEEEEE;">
     <header class="header header_logo">
-        <a style="cursor: pointer" href=".././sport/mainPage.jsp">
-            <img src=".././assets/images/sportrip_logo.png" alt="sportrip 로고" id="logo_img">
-        </a>
-        <div class="login-signup-box">
-            <ul>
-                <li><a href="../user/login.jsp" style="font-family: BMJUA; color: black;">로그인</a></li>
-                <li><a href="../user/signup.jsp" style="font-family: BMJUA; color: black;">회원가입</a></li>
-            </ul>
-        </div>
+        <jsp:include page="../header.jsp"/>
     </header>
 	<div class="food_main">
 	    <div class="h_top">

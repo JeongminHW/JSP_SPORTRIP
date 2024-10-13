@@ -21,7 +21,7 @@
 	// teamNum을 사용하여 팀 정보 조회  
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 %>
-<jsp:include page="team_header.jsp" />
+<jsp:include page="../header.jsp" />
 <div class="team-info-box">
 	<img src="<%=teamInfo.getCLUBINFO()%>" alt="구단 소개">
 </div>

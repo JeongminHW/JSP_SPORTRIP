@@ -28,7 +28,7 @@
 	    session.setAttribute("sportNum", sportNum); // 세션에 팀 번호 저장
 	}
 %>
-<jsp:include page="team_header.jsp"/>
+<jsp:include page="../header.jsp" />
 <div class="highlight-container">
 	<script>
   	// 팀 번호 전달

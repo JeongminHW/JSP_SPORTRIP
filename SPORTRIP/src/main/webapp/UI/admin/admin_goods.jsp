@@ -28,7 +28,8 @@
 	int sportNum = (int) session.getAttribute("sportNum");
 	Vector<MDBean> vlist = mdMgr.listMD(teamNum);
 %>
-<jsp:include page="admin_header.jsp" />
+
+<jsp:include page="../header.jsp"/>
 <div class="insert-goods">
 	<button class="update-btn" id="delete" onclick="deleteGoods()">삭제</button>
 	<button class="update-btn" id="edit" onclick="editGoods()">수정</button>

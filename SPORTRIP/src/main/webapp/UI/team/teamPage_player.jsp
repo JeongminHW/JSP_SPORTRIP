@@ -35,7 +35,7 @@
 		positionList.add(player.getPOSITION());
 	}
 %>
-<jsp:include page="team_header.jsp" />
+<jsp:include page="../header.jsp" />
 <!-- 감독 / 선수 -->
 <div id="sub_wrap">
 	<div class="u_top">

@@ -17,7 +17,7 @@
     int boardNum = MUtil.parseInt(request, "boardNum", 0);
     BoardBean board = boardMgr.getBoard(boardNum); // 게시글 정보 가져오기
 %>
-<jsp:include page=".././team/team_header.jsp"/>
+<jsp:include page="../header.jsp" />
    <div class="post-box">
        <form action="" name="postForm">
            <!-- 글 작성 테이블 -->
