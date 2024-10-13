@@ -70,6 +70,28 @@ public class UserMgr {
     	return flag;
     }
     
+    // 사용자 수정
+    public boolean deleteUser(String id) {
+    	Connection con = null;
+    	PreparedStatement pstmt = null;
+    	String query = null;
+    	boolean flag = false;
+    	
+    	try {
+    		con = pool.getConnection();
+    		query = "delete from user where ID = ?";
+    		pstmt = con.prepareStatement(query);
+    		pstmt.setString(1, id);
+    		if(pstmt.executeUpdate() == 1) {
+    			flag = true;
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return flag;
+    }
+    
     // 로그인
 	public boolean checkLogin(String id, String pw) {
 		Connection con = null;

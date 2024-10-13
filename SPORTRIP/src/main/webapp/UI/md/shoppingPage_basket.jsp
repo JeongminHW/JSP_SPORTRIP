@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="basket.BasketMgr"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="basket.BasketBean"%>
@@ -30,6 +31,9 @@
 	Vector<BasketBean> basketVList = basketMgr.listBasket(login.getId());
 	int basketNum = 0;
 	
+	//금액 포맷 설정
+	DecimalFormat formatter = new DecimalFormat("###,###");
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -46,7 +50,7 @@
     <!-- 아이콘과 장바구니 이미지를 같은 div에 넣기 -->
     <div class="header-right">
         <!-- 아이콘 이미지 -->
-        <img src=".././assets/images/myPage_icon.png" alt="내 아이콘" class="myPage_icon" onClick="location.href='.././user/myPage.html'"> 
+        <img src=".././assets/images/myPage_icon.png" alt="내 아이콘" class="myPage_icon" onClick="location.href='.././user/myPage.jsp'"> 
         <!-- 장바구니 이미지 -->
         <img src=".././assets/images/cart_icon.png" alt="장바구니" class="cart_img" onClick="location.href='shoppingPage_basket.jsp'">
     </div>
@@ -98,18 +102,18 @@
 		                <td class="img_td"><img src="<%= MDBean.getMD_IMG() %>" alt="<%= MDBean.getMD_NAME() %>"></td>
 		                <td style="position: relative;">
 		                    <p><%= MDBean.getMD_NAME() %></p>
-		                    <span class="price-info"><%= MDBean.getMD_PRICE() %>원</span>
+		                    <span class="price-info"><%= formatter.format(MDBean.getMD_PRICE())  %>원</span>
 		                    <button class="cart__list__countbtn" onclick="deleteBasket(<%= basketbean.getBASKET_NUM() %>)">삭제하기</button>
 		                </td>
 		                <td class="cart__list__count">
 		                    <!-- 수량 조절 버튼 -->
 		                    <div class="quantity-control">
 		                        <button type="button" class="decrease" onclick="decrease(<%= basketbean.getBASKET_NUM() %>)">-</button>
-		                        <input type="number" class="quantity-input" onchange="quantity_input(this)" value="<%= basketbean.getREPAIR_B() %>" min="1" data-price="<%= MDBean.getMD_PRICE() %>">
+		                        <input type="number" class="quantity-input" onchange="quantity_input(this)" value="<%= basketbean.getREPAIR_B() %>" min="1" data-price="<%= formatter.format(MDBean.getMD_PRICE()) %>">
 		                        <button type="button" class="increase" onclick="increase(<%= basketbean.getBASKET_NUM() %>)">+</button>
 		                    </div>
 		                </td>
-		                <td style="width: 200px;"><span class="product-price"><%= sum %>원</span></td>
+		                <td style="width: 200px;"><span class="product-price"><%= formatter.format(sum) %>원</span></td>
 		
 		                <!-- 배송비는 첫 번째 행에만 rowspan을 적용하여 병합 -->
 		                <% if (i == 0) { %>
@@ -120,7 +124,7 @@
 		            </tr>
 		            <form action="/shoppingPage_payment.jsp?<%= login.getId() %>" method="get" class="order_form">
 		                <input type="hidden" name="orders[0].MD_NUM" value="<%= MDBean.getMD_NUM() %>">
-		                <input type="hidden" name="orders[0].REPAIR_C" value="<%= sum %>">
+		                <input type="hidden" name="orders[0].REPAIR_C" value="<%= formatter.format(sum) %>">
 		                <input type="hidden" name="teamNum" value="<%= teamNum %>">
 		            </form>
 		            <% } %>

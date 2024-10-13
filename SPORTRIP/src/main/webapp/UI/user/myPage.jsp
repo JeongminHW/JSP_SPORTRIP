@@ -72,8 +72,10 @@
     <title>마이페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet"/>
     <link href=".././assets/css/mypageStyle.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href=".././assets/css/mainhamburger.css">
 </head>
 <body>
+	<jsp:include page=".././hamburger.jsp"/>
 	<div class="mypage">
 		<div class="member-info">
 			<div class="info">
@@ -132,7 +134,7 @@
 							</form>
 						</div>
 						<div class="secession">
-							<a>탈퇴하기</a>
+							<a onclick="deleteUser()">탈퇴하기</a>
 							<button type="button" class="save-button" onclick="updateUser()">저장하기</button>
 						</div>
 					</div>
@@ -685,6 +687,35 @@
 	    	})
 	    	.catch(error => console.error('Error:', error));
 		}
+		
+	    function deleteUser() {
+	    	// 데이터를 수집
+	    	let id = document.getElementById('id').value;
+	    	
+		    const params = new URLSearchParams();
+
+		    params.append('id', id);
+
+		    fetch('delete_user.jsp', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/x-www-form-urlencoded'
+		        },
+		        body: params.toString() // 쿼리 스트링으로 변환하여 보냄
+		    })
+	    	.then(response => response.text())
+	    	.then(data => {
+	    	    if (data.includes("success")) { 
+	    	        alert("탈퇴가 완료되었습니다.");
+	    	        closeWindow();
+	    	        <% session.removeAttribute("login"); // 로그인 정보만 제거 %>
+	    	        location.href = ".././sport/sport_main.jsp";
+	    	    }else{
+	    	        alert("탈퇴가 실패하였습니다.");
+	    	    }
+	    	})
+	    	.catch(error => console.error("Error:", error));
+		}
 	</script>
 
 
@@ -758,6 +789,7 @@
 		    document.body.appendChild(form);
 		    form.submit();
 		}
+
 	</script>
 </body>
 </html>
