@@ -26,7 +26,6 @@
     userBean.setPhone(phone);
     userBean.setEmail(email);
 
-
     if(userMgr.addUser(userBean)){
         response.sendRedirect("login.jsp");
     }
