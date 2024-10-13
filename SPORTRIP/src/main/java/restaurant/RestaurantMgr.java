@@ -23,7 +23,7 @@ public class RestaurantMgr {
 
         try {
             con = pool.getConnection();
-            String sql = "SELECT r.* FROM restaurant r JOIN STADIUM s ON r.STARDIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
+            String sql = "SELECT r.* FROM restaurant r JOIN stadium s ON r.STADIUM = s.STADIUM_NAME WHERE s.STADIUM_NAME = ?";
             System.out.println("SQL Query: " + sql + " with parameter: " + stadiumName); // 디버깅용 출력
 
             pstmt = con.prepareStatement(sql);
@@ -40,7 +40,7 @@ public class RestaurantMgr {
                 restaurant.setRESTAURANT_IMG(rs.getString("RESTAURANT_IMG"));
                 restaurant.setLON(rs.getString("LON"));
                 restaurant.setLAT(rs.getString("LAT"));
-                restaurant.setSTARDIUM(rs.getString("STARDIUM")); // STARDIUM 필드
+                restaurant.setSTARDIUM(rs.getString("STADIUM")); // STARDIUM 필드
                 restaurantList.add(restaurant);
             }
         } catch (Exception e) {

@@ -59,7 +59,7 @@ pageEncoding="UTF-8"%>
                   </a>
                 </li>
                 <li class="trip">
-                  <a href=".././trip/tripPage_Hotel.jsp"> <span>Trip</span> </a>
+                  <a href=".././trip/tripPage_hotel.jsp"> <span>Trip</span> </a>
                 </li>
               </ul>
             </div>
