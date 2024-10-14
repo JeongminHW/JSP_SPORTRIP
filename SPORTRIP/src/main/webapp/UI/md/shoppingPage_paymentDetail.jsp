@@ -140,8 +140,11 @@
 				</tr>
 			</table>
 			<div class="payment-total-price">
-				<span class="text">총 금액 </span>
-				<span><%=formatter.format(total) %></span>
+				<button type="button" onclick="location.href='.././user/myPage.jsp'">확인</button>
+				<div>
+					<span class="text">총 금액 </span>
+					<span><%=formatter.format(total) %></span>
+				</div>
 			</div>
 
 		</div>
