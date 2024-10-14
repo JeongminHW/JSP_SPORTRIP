@@ -77,7 +77,7 @@
 </head>
 <body>
 	<input id="toggle" type="checkbox"/>
-        <label class="hamburger" for="toggle">
+        <label class="hamburger" for="toggle" style="float: right; margin: 2% 10%;">
             <div class="top"></div>
             <div class="middle"></div>
             <div class="bottom"></div>
