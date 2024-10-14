@@ -52,7 +52,7 @@
 				<div class="popup-content">
 					<div class="logo-section">
 						<div class="singup_img">
-							<img src=".././assets/images/sportrip_logo.png" alt="울산HD" id="sportrip_logo">
+							<a style="cursor: pointer" href=".././sport/sport_main.jsp"><img src=".././assets/images/sportrip_logo.png" alt="울산HD" id="sportrip_logo"></a>
 							<div class="signup_button">
 								<button type="button" onclick="return validateForm()">회원가입</button>
 							</div>

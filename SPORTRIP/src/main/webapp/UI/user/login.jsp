@@ -64,7 +64,7 @@
 			<div class="popup" id="popup">
 				<div class="popup-content">
 					<div class="login_img">
-						<img src=".././assets/images/sportrip_logo.png" alt="울산HD" id="team_img">
+						<a style="cursor: pointer" href=".././sport/sport_main.jsp"><img src=".././assets/images/sportrip_logo.png" alt="울산HD" id="team_img"></a>
 					</div>
 					<div class="login_form">
 						<form action="#" method="POST">
