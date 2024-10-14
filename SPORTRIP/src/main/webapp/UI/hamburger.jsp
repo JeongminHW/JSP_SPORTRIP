@@ -122,7 +122,7 @@
                 </li>
                 <li class="menu-item"><a href="#">여행</a>
                     <ul>
-						<li id="login"><a href=".././trip/tripPage_hotel.jsp"><span>숙박</span></a></li>
+						<li id="login"><a href=".././trip/tripPage_hotel.jsp"><span>숙소</span></a></li>
 						<li id="signup"><a href=".././trip/tripPage_food.jsp"><span>식당</span></a></li>
                     </ul>
                 </li>
