@@ -269,7 +269,7 @@
 											<img class="mypage-hotel-img" alt="호텔 사진" src="<%=lodgingbean.getLODGING_IMG()%>">
 											<div class="hotel-info">
 												<span class="hotel-price"><%=formatter.format(reserveBean.getRESERVE_PRICE()) %>원</span> 
-												<span class="hotel-name"><%=lodgingbean.getLODGING_NAME()%></span>
+												<span class="hotel-name"><a href=".././trip/reserve_detail.jsp?reserveNum=<%=reserveBean.getRESERVE_NUM()%>"><%=lodgingbean.getLODGING_NAME()%></a></span>
 												<p style="font-size: 14px;"><%=reserveBean.getCHECK_IN()%> ~ <%=reserveBean.getCHECK_OUT()%></p>
 											</div>
 										</div>
@@ -290,10 +290,10 @@
 								
 							%>
 									<div class="myhotel-content">
-										<img alt="호텔 사진" src="<%=lodgingbean.getLODGING_IMG()%>">
+										<img class="mypage-hotel-img" alt="호텔 사진" src="<%=lodgingbean.getLODGING_IMG()%>">
 										<div class="hotel-info">
 											<span class="hotel-price"><%=formatter.format(reserveBean.getRESERVE_PRICE()) %>원</span> 
-											<span class="hotel-name"><%=lodgingbean.getLODGING_NAME()%></span>
+											<span class="hotel-name"><a href=".././trip/reserve_detail.jsp?reserveNum=<%=reserveBean.getRESERVE_NUM()%>"><%=lodgingbean.getLODGING_NAME()%></a></span>
 											<p style="font-size: 13px;"><%=reserveBean.getCHECK_IN()%> ~ <%=reserveBean.getCHECK_OUT()%></p>
 										</div>
 									</div>
