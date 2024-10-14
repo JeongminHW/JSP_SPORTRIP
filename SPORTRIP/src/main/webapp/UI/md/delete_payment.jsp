@@ -9,7 +9,6 @@
     if (orderNumber != null) {
         ChargeMgr chargeMgr = new ChargeMgr();
         boolean deleteFlag = chargeMgr.canclePayMD(orderNumber);
-
         if (deleteFlag) {
             out.println("success");
         } else {

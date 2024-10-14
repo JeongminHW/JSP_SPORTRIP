@@ -181,8 +181,8 @@
 	    fetch('delete_payment.jsp?' + params.toString(), {
 	        method: 'GET', 
 	    })
-	    .then(response => response.text())
-	    .then(data => {
+        .then(response => response.text())
+        .then(data => {
 	        console.log("Response:", data); 
 	        if (data.includes("success")) { 
 	            alert('결제 취소가 완료되었습니다.');
