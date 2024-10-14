@@ -117,6 +117,8 @@
 					<th>결제일</th>
 					<td colspan="3"><%=chargeBean.getCHARGE_DATE() %></td>
 				</tr>
+				<tr class="item-row">
+					<th rowspan="3">상품</th>
 				<%
 					for(ChargeBean charge : chargeVlist){
 						
@@ -127,12 +129,10 @@
 				    	mdbean = mdMgr.getMD(charge.getMD_NUM());
 				    
 				%>
-					<tr class="item-row">
-						<th rowspan="3">상품</th>
-						<td><%=mdbean.getMD_NAME() %> <%=charge.getREPAIR_C() %>개</td>
-						<th rowspan="3">금액</th>
-						<td><%=formatter.format((mdbean.getMD_PRICE()*charge.getREPAIR_C()))%> </td>
-					</tr>
+						<tr>
+						    <td><%= mdbean.getMD_NAME() %> <%=charge.getREPAIR_C() %>개</td> <!-- 상품명 (Product Name) -->
+						    <td class="product-info"><%= formatter.format(mdbean.getMD_PRICE() * charge.getREPAIR_C()) %>원</td> <!-- 가격 (Price) -->
+						</tr>
 				<%} %>
 				<tr>
 					<th>배송비</th>
