@@ -31,7 +31,7 @@
 
 <jsp:include page="../header.jsp" />
 	<div class="list-btn-top">
-        <button type="button" onclick="goList()">목록</button>
+        <button type="button" onclick="goList()" style="cursor:pointer">목록</button>
     </div>
     <div class="post-content-box">
         <div class="post-header">
@@ -39,14 +39,16 @@
 			    <span style="font-weight: bold; font-size: 22px;"><%=board.getTITLE() %></span>
 			
 			    <!-- 본인 게시글이거나 root 계정일 때 삭제 버튼만 보이도록 -->
-			    <% if (login != null && (board.getID().equals(login.getId()) || login.getId().equals("root"))) { %>
-			        <div class="update-btn">
-			            <% if (!login.getId().equals("root")) { %> <!-- root가 아닌 경우에만 수정 버튼 표시 -->
-			                <button type="button" href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM() %>, 'board_update')">수정</button>
-			            <% } %>
-			            <button type="button" onclick="deleteboard(<%=board.getBOARD_NUM() %>)">삭제</button>
-			        </div>
-			    <% } %>
+			<%  String loginId = (login != null && login.getId() != null) ? login.getId() : ""; // 로그인 안 됐을 때 대비
+			
+			    if (!loginId.isEmpty() && (board.getID().equals(loginId) || "root".equals(loginId))) { %>
+			    <div class="update-btn">
+			        <% if (!"root".equals(loginId)) { %> <!-- 관리자 아닌 경우에만 수정 버튼 표시 -->
+			            <button type="button" href="#" onclick="sendBoardNum(<%=board.getBOARD_NUM() %>, 'board_update')">수정</button>
+			        <% } %>
+			        <button type="button" onclick="deleteboard(<%=board.getBOARD_NUM() %>)">삭제</button>
+			    </div>
+			<%  } %>
 			</div>
             <div class="user-box">
                 <div class="userInfo">
@@ -81,15 +83,12 @@
 	<jsp:include page="comments.jsp"/>
 	<!-- 목록 -->
     <div class="list-btn"><button type="button" onclick="goList(<%= teamNum %>)">목록</button></div>
+
     <div class="btns">
-		<div class="moveTopBtn">↑</div>
-		<div class="moveBottomBtn">↓</div>
+		<div class="moveTopBtn" style="cursor:pointer">↑</div>
+		<div class="moveBottomBtn" style="cursor:pointer">↓</div>
 	</div>
     <script>
-		function goMain() {
-			document.location.href = "mainPage.jsp";
-		}
-	
 	    function postMessage(){
 	        document.location.href = "Board_post.jsp";
 	    }
@@ -133,17 +132,17 @@
 		    form.submit();
 		}
 		
-        const $topBtn = document.querySelector(".moveTopBtn");
+        const topBtn = document.querySelector(".moveTopBtn");
 
 	    // 버튼 클릭 시 맨 위로 이동
-	    $topBtn.onclick = () => {
+	    topBtn.onclick = () => {
 	      window.scrollTo({ top: 0, behavior: "smooth" });  
 	    }
 	
-	    const $bottomBtn = document.querySelector(".moveBottomBtn");
+	    const bottomBtn = document.querySelector(".moveBottomBtn");
 	
 	    // 버튼 클릭 시 페이지 하단으로 이동
-	    $bottomBtn.onclick = () => {
+	    bottomBtn.onclick = () => {
 	      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 	    };
 	    
