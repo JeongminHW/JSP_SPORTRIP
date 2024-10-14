@@ -132,29 +132,6 @@
 		    document.body.appendChild(form);
 		    form.submit();
 		}
-
-		// 페이지 로드 시 체크박스 해제
-		window.addEventListener('load', function() {
-        const toggle = document.getElementById('toggle');
-        toggle.checked = false; // 체크박스 해제
-    	});
-        
-        // 햄버거 메뉴
-        document.getElementById('toggle').addEventListener('change', function() {
-            const menu = document.querySelector('.menu');
-            const overlay = document.getElementById('overlay');
-            
-            menu.classList.toggle('open');
-            overlay.classList.toggle('open');
-        });
-
-        // 클릭 시 메뉴 닫기
-        overlay.addEventListener('click', function() {
-            document.getElementById('toggle').checked = false; // 체크박스 해제
-            const menu = document.querySelector('.menu');
-            menu.classList.remove('open'); // 메뉴 숨김
-            overlay.classList.remove('open'); // 배경 숨김
-        });
 		
         const $topBtn = document.querySelector(".moveTopBtn");
 
