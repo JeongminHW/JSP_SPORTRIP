@@ -17,59 +17,6 @@
 
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8afbb0c0c5d852ce84e4f0f3b93696b6"></script> <!-- 카카오 지도 API 스크립트 -->
 
-    <script>
-    function openModal(lodgingName, lodgingLatitude, lodgingLongitude, stadiumName, stadiumLatitude, stadiumLongitude) {
-        const modal = document.getElementById('mapModal');
-        modal.style.display = 'block';
-
-        // 모달 제목 설정
-        document.getElementById('modalTitle').innerText = `숙소 위치`;
-
-        // 지도 초기화
-        const mapContainer = document.getElementById('map');
-        const mapOption = {
-            center: new kakao.maps.LatLng(lodgingLatitude, lodgingLongitude), // 숙소의 위도와 경도를 중심으로 설정
-            level: 5 // 지도의 확대 레벨
-        };
-
-        const map = new kakao.maps.Map(mapContainer, mapOption);
-
-        // 마커 이미지 설정 (숙소 마커 이미지)
-        const lodgingImageSrc = '.././assets/images/lodging_marker.png', // 숙소 마커 이미지 경로
-        stadiumImageSrc = '.././assets/images/stadium_marker.png',
-            imageSize = new kakao.maps.Size(57, 57), // 마커 이미지의 크기
-            imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커 이미지의 옵션 (중심 좌표 조정)
-
-        // 숙소 마커 이미지 생성
-        const lodgingMarkerImage = new kakao.maps.MarkerImage(lodgingImageSrc, imageSize, imageOption);
-
-        // 숙소 마커 생성
-        const lodgingMarker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(lodgingLatitude, lodgingLongitude),
-            title: lodgingName,
-            image: lodgingMarkerImage // 커스텀 이미지 적용
-        });
-        lodgingMarker.setMap(map);
-
-     	// 경기장 마커 이미지 생성
-        const stadiumMarkerImage = new kakao.maps.MarkerImage(stadiumImageSrc, imageSize, imageOption);
-
-        // 경기장 마커 기본 설정 (기존 파란색 마커 유지)
-        const stadiumMarker = new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(stadiumLatitude, stadiumLongitude),
-            title: stadiumName,
-            image: stadiumMarkerImage
-        });
-        stadiumMarker.setMap(map);
-
-    }
-
-    function closeModal() {
-        document.getElementById('mapModal').style.display = 'none';
-    }
-</script>
-
-
     <style>
         /* 모달 스타일 */
         #mapModal {
@@ -242,6 +189,57 @@
             <div id="map"></div>
         </div>
     </div>
-
 </body>
+    	
+    <script>
+        function openModal(restaurantName, restaurantLatitude, restaurantLongitude, stadiumName, stadiumLatitude, stadiumLongitude) {
+            const modal = document.getElementById('mapModal');
+            modal.style.display = 'block';
+
+            // 모달 제목 설정
+            document.getElementById('modalTitle').innerText = `맛집 위치`;
+
+            // 지도 초기화
+            const mapContainer = document.getElementById('map');
+            const mapOption = {
+                center: new kakao.maps.LatLng(restaurantLatitude, restaurantLongitude), // 맛집의 위도와 경도를 중심으로 설정
+                level: 5 // 지도의 확대 레벨
+            };
+
+            const map = new kakao.maps.Map(mapContainer, mapOption);
+
+            // 마커 이미지 설정 (숙소 마커 이미지)
+            const restaurantImageSrc = '.././assets/images/restaurant_marker.png', // 숙소 마커 이미지 경로
+            stadiumImageSrc = '.././assets/images/stadium_marker.png',
+                imageSize = new kakao.maps.Size(57, 57), // 마커 이미지의 크기
+                imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커 이미지의 옵션 (중심 좌표 조정)
+
+         	// 맛집 마커 이미지 생성
+            const restaurantMarkerImage = new kakao.maps.MarkerImage(restaurantImageSrc, imageSize, imageOption);
+
+            // 맛집 마커 기본 설정 
+            const restaurantMarker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(restaurantLatitude, restaurantLongitude),
+                title: restaurantName,
+                image: restaurantMarkerImage
+            });
+            restaurantMarker.setMap(map);
+            
+         	// 경기장 마커 이미지 생성
+            const stadiumMarkerImage = new kakao.maps.MarkerImage(stadiumImageSrc, imageSize, imageOption);
+
+            // 경기장 마커 기본 설정 
+            const stadiumMarker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(stadiumLatitude, stadiumLongitude),
+                title: stadiumName,
+                image: stadiumMarkerImage
+            });
+            stadiumMarker.setMap(map);
+
+        }
+
+        function closeModal() {
+            document.getElementById('mapModal').style.display = 'none';
+        }
+    </script>
 </html>
