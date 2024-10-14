@@ -157,7 +157,7 @@
                 .then(data => {
                     if (data.includes("success")) {
                         alert('예약이 취소되었습니다.');
-                        location.href = ".././trip/tripPage_Hotel.jsp";
+                        location.href = ".././trip/tripPage_hotel.jsp";
                     } else {
                         alert('예약 취소에 실패했습니다.');
                     }
