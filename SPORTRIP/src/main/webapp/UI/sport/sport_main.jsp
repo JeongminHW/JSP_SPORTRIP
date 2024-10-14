@@ -177,7 +177,7 @@
 	                %>
 	                			<li>
 									<div class="image-wrap">
-										<a href=".././team/teamPage_player.jsp" <% session.setAttribute("teamNum", team.getTEAM_NUM()); %>>
+										<a href="#" onclick="sendTeamNum(<%=team.getTEAM_NUM() %>, '.././team/teamPage_player')">
 								            <img src="<%= team.getLOGO() %>" alt="<%= team.getTEAM_NAME() %>" style="width: 60px; height: 60px; margin:20px;">
 								        </a>
 									</div>
