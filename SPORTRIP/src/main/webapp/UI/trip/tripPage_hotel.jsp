@@ -197,7 +197,7 @@
             modal.style.display = 'block';
 
             // 모달 제목 설정
-            document.getElementById('modalTitle').innerText = `맛집 위치`;
+            document.getElementById('modalTitle').innerText = `숙소 위치`;
 
             // 지도 초기화
             const mapContainer = document.getElementById('map');
