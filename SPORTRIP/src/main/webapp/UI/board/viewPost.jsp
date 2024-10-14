@@ -94,8 +94,7 @@
 	    }
 	    
 	    function goList() {
-	    	history.back(); // 이전 페이지로 이동
-	    	location.href = document.referrer;	// 새로고침
+	    	location.href = ".././team/teamPage_board.jsp";
 	    }
 	    
 	 	// 팀 번호 전달
