@@ -69,7 +69,7 @@
 %>
 
 <jsp:include page="../header.jsp" />
-
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <div class="table-list-box">
 
 <div class="write-btn">
