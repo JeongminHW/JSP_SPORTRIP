@@ -715,7 +715,6 @@
 	    	    if (data.includes("success")) { 
 	    	        alert("탈퇴가 완료되었습니다.");
 	    	        closeWindow();
-	    	        <% session.removeAttribute("login"); // 로그인 정보만 제거 %>
 	    	        location.href = ".././sport/sport_main.jsp";
 	    	    }else{
 	    	        alert("탈퇴가 실패하였습니다.");
