@@ -205,7 +205,7 @@ body {
 }
 
 .third-page {
-    height: 100vh;
+    height: 140vh;
     display: flex;
     position: relative;
     flex-direction: column;

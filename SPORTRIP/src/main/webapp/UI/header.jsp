@@ -214,7 +214,7 @@
 	        </div>
 	        <div class="t_header">
 	            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')"><span>게시판 관리</span></a>
-			</div>
+          </div>
     	</div>
         <input id="toggle" type="checkbox"/>
         <label class="hamburger" for="toggle">
