@@ -120,3 +120,8 @@ body {
     cursor: pointer; 
 }
 
+#logo_img{
+	width: 200px;
+	height: auto;
+	margin: auto;
+}

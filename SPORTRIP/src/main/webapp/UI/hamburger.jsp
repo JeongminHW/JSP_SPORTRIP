@@ -33,7 +33,7 @@
 	    		<ul class="menu-list">
 			<li class="menu-item"><a style="cursor: pointer" onclick="goMain()"><img src=".././assets/images/white_sportrip_logo.png" alt="sportrip 로고" id="logo_img"></a></li>
             <li class="menu-item">
-				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')"><span>야구</span></a>
+				<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, '.././admin/admin_player')"><span>야구</span></a>
 				<ul>
                     	<% 
                     	// 스포츠 별 팀 불러오기
@@ -43,14 +43,14 @@
 							teamBean = teamVlist.get(i);
 							teamNum = teamBean.getTEAM_NUM();
 						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, '.././admin/admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
 						<%
 							}
 						%>
                 </ul>
 			</li>
             <li class="menu-item">
-            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')">축구</a>
+            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, '.././admin/admin_goods')">축구</a>
             	<ul>
                     	<% 
                     	// 스포츠 별 팀 불러오기
@@ -60,14 +60,14 @@
 							teamBean = teamVlist.get(i);
 							teamNum = teamBean.getTEAM_NUM();
 						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, '.././admin/admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
 						<%
 							}
 						%>
                 </ul>
 			</li>
             <li class="menu-item">
-            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')">배구</a>
+            	<a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, '.././admin/admin_board')">배구</a>
             	<ul>
                     	<% 
                     	// 스포츠 별 팀 불러오기
@@ -77,7 +77,7 @@
 							teamBean = teamVlist.get(i);
 							teamNum = teamBean.getTEAM_NUM();
 						%>
-							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, 'admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
+							<li><a href="#" onclick="sendTeamNum(<%=teamNum%>, '.././admin/admin_player')"><span><%=teamBean.getTEAM_NAME()%></span></a></li>
 						<%
 							}
 						%>

@@ -44,6 +44,8 @@ body, input, button {
 
 #logo_img {
 	width: 200px;
+	height: auto;
+	margin: auto;
 }
 
 #league_logo_img {

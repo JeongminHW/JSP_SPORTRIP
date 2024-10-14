@@ -1,5 +1,6 @@
 /* reset */
 /* * {
+	margin: 0;
 	padding: 0;
 }
 
@@ -17,12 +18,12 @@ img {
 
 body {
 	height: 100vh;
-} */
+}*/
 
-/*slide*/
+slide
 .slide_wrap {
 	padding: 100px 0;
-}
+} 
 
 .slide_show {
 	overflow: hidden;
