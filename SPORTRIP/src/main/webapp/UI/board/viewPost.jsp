@@ -80,7 +80,7 @@
 	<!-- 댓글 출력 -->
 	<jsp:include page="comments.jsp"/>
 	<!-- 목록 -->
-    <div class="list-btn"><button type="button" onclick="goList()">목록</button></div>
+    <div class="list-btn"><button type="button" onclick="goList(<%= teamNum %>)">목록</button></div>
     <div class="btns">
 		<div class="moveTopBtn">↑</div>
 		<div class="moveBottomBtn">↓</div>
