@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*, java.util.*, reserve.ReserveBean, reserve.ReserveMgr, room.RoomMgr, room.RoomBean, java.sql.Date" %>
+<jsp:useBean id="login" scope="session" class="user.UserBean" />
 
 <%
     // 입력받은 데이터 파라미터 받기
@@ -14,15 +15,12 @@
     System.out.println("checkIn: " + checkInStr);
     System.out.println("checkOut: " + checkOutStr);
     
-    // 현재 로그인한 사용자 ID 가져오기 (세션에서)
-    String userID = (String) session.getAttribute("userID");
-
-    // 사용자 ID가 null일 경우 임시로 "a"로 설정
-    if (userID == null) {
-        userID = "a"; // 임시 사용자 ID 설정
-        System.out.println("임시 사용자 ID: " + userID); // 로그에 출력
-    } else {
-        System.out.println("사용자 ID: " + userID); // ID 출력
+	String id = login.getId();
+    
+    if (id == null) {
+        out.println("<script>alert('로그인이 필요합니다. 로그인 페이지로 이동합니다.');</script>");
+        response.sendRedirect(".././user/login.jsp");
+        return;
     }
 
     int lodgingNum = 0;
@@ -30,7 +28,7 @@
     int roomPrice = 0;
 
     StringBuilder errorMsg = new StringBuilder();
-    if (session == null || userID.isEmpty()) {
+    if (session == null || id == null || id.isEmpty()) {
         errorMsg.append("세션이 만료되었습니다. 다시 로그인 해주세요. ");
     }
 
@@ -101,7 +99,7 @@
 
         // ReserveBean에 데이터 설정
         ReserveBean reserveBean = new ReserveBean();
-        reserveBean.setID(userID);
+        reserveBean.setID(id);
         reserveBean.setLODGING_NUM(lodgingNum);
         reserveBean.setROOM_NUM(roomNum);
         reserveBean.setHEADCOUNT(Integer.parseInt(headcountStr));
