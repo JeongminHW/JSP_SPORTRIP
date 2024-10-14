@@ -134,7 +134,7 @@
                     </tr> 
                     <tr>
                         <th>취소</th>
-                        <td colspan="3"><button type="button" class="cancel-reserve" onclick="cancelReserve('<%= reserve.getRESERVE_NUM() %>')">예약 취소</button></td>                        
+                        <td colspan="3"><button type="button" class="reserve-cancel" onclick="cancelReserve('<%= reserve.getRESERVE_NUM() %>')">예약취소</button></td>                        
                     </tr>
                 </table>
                 <%
