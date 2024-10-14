@@ -65,7 +65,7 @@
 		      				<input class="input" type="text" id="playerBacknum" name="playerBacknum" value="<%= playerBean.getUNIFORM_NUM() %>">
 			            </div>
 						<div class="updateplayer-item">
-							<input type="button" onclick="playerManager()" value="돌아가기">
+							<input type="button" onclick="playerManager(<%= teamNum %>)" value="돌아가기">
 							<input type="hidden" id="playerNum" name="playerNum" value="<%= playerBean.getPLAYER_NUM() %>">
 							<input type="button" onclick="updatePlayer()" value="수정하기">
 						</div>
