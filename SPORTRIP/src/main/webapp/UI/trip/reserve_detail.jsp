@@ -140,7 +140,10 @@
                 <%
                     } // for 문 닫기
                 %>
-            </div>
+				<div class="payment-total-price">
+					<button type="button" onclick="location.href='.././user/myPage.jsp'">확인</button>
+				</div>
+			</div>
         </div>
     </div>
 
