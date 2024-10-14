@@ -146,7 +146,7 @@
                 %>
 			                <tr>
 			                    <td><%= team.getRANKING() %></td>
-			                    <td><img src="<%= team.getLOGO()%>" alt=""><%= teamName %></td>
+			                    <td><a href="#" onclick="sendTeamNum(<%=team.getTEAM_NUM() %>, '.././team/teamPage_player')"><img src="<%= team.getLOGO()%>" alt=""><%= teamName %></a></td>
 			                    <td><%= team.getGAME() %></td>
 			                    <td><%= team.getPOINT() %></td>
 			                    <td><%= team.getWIN() %></td>
