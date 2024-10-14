@@ -900,16 +900,24 @@ tbody{
     color: black;
 }
 
+.add-to-cart-btn {
+	display: flex;
+	justify-content: center;	
+	margin-top: 5px;
+}
+
 .add-to-cart {
     background: none;
     border: none;
     cursor: pointer;
-    width: 30px;
     outline: none; /* 기본 outline 제거 */
-   	img {
-    	width: 16px;
-    	border: none;
-    }
+   	> span {
+   		color: grey;
+   	}
+}
+
+.add-to-cart span:hover {
+	font-weight: bold;
 }
 
 .cart {
