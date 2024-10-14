@@ -180,8 +180,25 @@
 	
 	    document.body.appendChild(form);
 	    form.submit();
-
 	}
+  	
+	 // 팀 번호 전달
+	function sendTeamNum(teamNum, page) {
+	    // 세션에 값을 설정
+	    var form = document.createElement("form");
+	    form.setAttribute("method", "POST");
+	    form.setAttribute("action", page + ".jsp");
+	
+	    var teamField = document.createElement("input");
+	    teamField.setAttribute("type", "hidden");
+	    teamField.setAttribute("name", "teamNum");
+	    teamField.setAttribute("value", teamNum);
+	    form.appendChild(teamField);
+	
+	    document.body.appendChild(form);
+	    form.submit();
+	}
+  	
  	// 페이지 로드 시 체크박스 해제
   	window.addEventListener('load', function() {
   	const toggle = document.getElementById('toggle');

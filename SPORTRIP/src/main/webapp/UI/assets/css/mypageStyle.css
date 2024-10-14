@@ -21,7 +21,6 @@ button {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	letter-spacing: 0.05em;
 	line-height: 1.5em;
-	clear: right;
 }
 
 span {
@@ -33,6 +32,19 @@ a {
 	cursor: pointer;
 	color: grey;
 	font-size: 14px;
+}
+
+.header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	position: relative;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+	background-color: #000;
+	img{
+		width: 200px;
+	}
 }
 
 .mypage {

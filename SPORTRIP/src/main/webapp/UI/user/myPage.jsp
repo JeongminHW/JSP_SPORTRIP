@@ -76,12 +76,15 @@
 	<link rel="stylesheet" href=".././assets/css/mainhamburger.css">
 </head>
 <body>
+<header class="header">
+	<a href=".././sport/sport_main.jsp"><img style="cursor: pointer; " src=".././assets/images/white_sportrip_logo.png" alt="sportrip"></a>
 	<input id="toggle" type="checkbox"/>
-        <label class="hamburger" for="toggle" style="float: right; margin: 2% 10%;">
+        <label class="hamburger" for="toggle">
             <div class="top"></div>
             <div class="middle"></div>
             <div class="bottom"></div>
         </label>
+</header>
 	<jsp:include page="../hamburger.jsp"/>
 	<div class="mypage">
 		<div class="member-info">
