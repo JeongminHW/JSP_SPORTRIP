@@ -9,6 +9,7 @@
 <%@page import="java.util.Vector"%>
 <%@page import="DB.MUtil"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean id="userMgr" class="user.UserMgr" />
 <jsp:useBean id="login" scope="session" class="user.UserBean" />
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <jsp:useBean id="teamBean" class="team.TeamBean" />
@@ -163,37 +164,57 @@
     Set<String> positionList = new HashSet<>();
     for (PlayerBean player : playerList) {
         positionList.add(player.getPOSITION());
-    }%>
-<!-- team 헤더 -->
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=teamInfo.getTEAM_NAME() %></title>
-    <link rel="stylesheet" href=".././assets/css/style.css">
-    <link rel="stylesheet" href=".././assets/css/highlightstyle.css">
-    <link rel="stylesheet" href=".././assets/css/boardStyle.css">
-    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
-    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.5.1.min.js">
-    <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
-    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
-</head>
-<body>
+    }
+
+	boolean isAdmin = userMgr.checkAdmin(login.getId()); // 관리자인지 확인
+    %>
+    <%if(isAdmin){ %>
+	<!-- admin 헤더 -->
+	<!DOCTYPE html>
+	<html lang="ko">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title><%=teamInfo.getTEAM_NAME() %></title>
+	    <link rel="stylesheet" href=".././assets/css/style.css">
+	    <link rel="stylesheet" href=".././assets/css/boardStyle.css">
+	    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
+		<link rel="stylesheet" href=".././assets/css/style.css">
+		<link rel="stylesheet" href=".././assets/css/adminStyle.css">
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
+	    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.5.1.min.js">
+	    <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+	    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
+	</head>
+	<body>
     <header class="header team_header">
         <a href=".././sport/sport_main.jsp">
-            <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img">
+        <%	
+        	String src = null;
+        	if(teamInfo.getSPORT_NUM() == 1) {
+        		src = ".././assets/images/sport_logo" + teamInfo.getSPORT_NUM() + ".svg";
+        	}
+        	else if(teamInfo.getSPORT_NUM() == 2){
+        		src = ".././assets/images/sport_logo" + teamInfo.getSPORT_NUM() + ".svg";
+        	}
+        	else if(teamInfo.getSPORT_NUM() == 3){
+        		src = ".././assets/images/sport_logo" + teamInfo.getSPORT_NUM() + ".svg";
+        	}
+        %>
+            <img src=<%=src %> alt="리그" id="league_logo_img">
         </a>
         <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-        	<a class="t_header" href="teamPage_teamintro.jsp"><span>Info</span></a>
-        	<a class="t_header" href="teamPage_player.jsp"><span>Player</span></a>
-        	<a class="t_header" href="teamPage_highlight.jsp"><span>Highlight</span></a>
 	        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
-	        <a class="t_header" href="teamPage_stadium.jsp"><span>Stadium</span></a>
-	        <a class="t_header" href="teamPage_store.jsp"><span>Shop</span></a>
-	        <a class="t_header" href="teamPage_board.jsp"><span>Board</span></a>
+	        <div class="t_header">
+            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_player')"><span>선수 관리</span></a>
+	        </div>
+	        <div class="t_header">
+	            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_goods')"><span>굿즈샵 관리</span></a>
+	        </div>
+	        <div class="t_header">
+	            <a href="#" onclick="sendTeamNum(<%=session.getAttribute("teamNum")%>, 'admin_board')"><span>게시판 관리</span></a>
+			</div>
     	</div>
         <input id="toggle" type="checkbox"/>
         <label class="hamburger" for="toggle">
@@ -202,7 +223,46 @@
             <div class="bottom"></div>
         </label>
     </header>
-    
+	<%} else{%>
+	<!-- team 헤더 -->
+	<!DOCTYPE html>
+	<html lang="ko">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title><%=teamInfo.getTEAM_NAME() %></title>
+	    <link rel="stylesheet" href=".././assets/css/style.css">
+	    <link rel="stylesheet" href=".././assets/css/highlightstyle.css">
+	    <link rel="stylesheet" href=".././assets/css/boardStyle.css">
+	    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
+	    <link rel="stylesheet" href="https://code.jquery.com/jquery-3.5.1.min.js">
+	    <script type="text/JavaScript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+	    <script type="text/JavaScript" src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
+	</head>
+	<body>
+	    <header class="header team_header">
+	        <a href=".././sport/sport_main.jsp">
+	            <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img">
+	        </a>
+	        <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
+	        	<a class="t_header" href="teamPage_teamintro.jsp"><span>Info</span></a>
+	        	<a class="t_header" href="teamPage_player.jsp"><span>Player</span></a>
+	        	<a class="t_header" href="teamPage_highlight.jsp"><span>Highlight</span></a>
+		        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
+		        <a class="t_header" href="teamPage_stadium.jsp"><span>Stadium</span></a>
+		        <a class="t_header" href="teamPage_store.jsp"><span>Shop</span></a>
+		        <a class="t_header" href="teamPage_board.jsp"><span>Board</span></a>
+	    	</div>
+	        <input id="toggle" type="checkbox"/>
+	        <label class="hamburger" for="toggle">
+	            <div class="top"></div>
+	            <div class="middle"></div>
+	            <div class="bottom"></div>
+	        </label>
+    </header>
+	<%} %>
 <%} %>
 
 <jsp:include page="hamburger.jsp"/>
