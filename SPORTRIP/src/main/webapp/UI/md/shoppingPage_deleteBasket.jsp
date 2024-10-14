@@ -6,9 +6,13 @@
     int basketNum = MUtil.parseInt(request, "basketNum", 0);
 
     if (basketNum > 0) {
-        basketMgr.deleteBasket(basketNum);
-        response.getWriter().print("success");
+        if(basketMgr.deleteBasket(basketNum)){
+        	 out.println("success");
+        }else{
+        	out.println("error");
+        }
+       
     } else {
-        response.getWriter().print("error");
+    	out.println("error");
     }
 %>
