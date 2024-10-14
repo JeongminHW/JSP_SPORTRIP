@@ -167,18 +167,16 @@
     }
 
     function updateCheckoutDate() {
-        const checkInDateValue = document.getElementById('check_in_date').value;
+        const checkInDate = document.getElementById('check_in_date').value;
         
-        if (checkInDateValue) {
-            const checkInDate = new Date(checkInDateValue);
-            checkInDate.setDate(checkInDate.getDate() + 1); // 체크인 날짜에 하루 더하기
-
+        // 체크인 날짜가 선택되었을 때
+        if (checkInDate) {
+            const nextDay = new Date(checkInDate);
+            nextDay.setDate(nextDay.getDate() + 1); // 체크인 날짜의 다음 날
+            
             // 'YYYY-MM-DD' 형식으로 변환
-            const year = checkInDate.getFullYear();
-            const month = String(checkInDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
-            const day = String(checkInDate.getDate()).padStart(2, '0');
-
-            const minCheckoutDate = `${year}-${month}-${day}`;
+            const minCheckoutDate = nextDay.toISOString().split('T')[0];
+            
             document.getElementById('check_out_date').setAttribute('min', minCheckoutDate);
         }
     }
