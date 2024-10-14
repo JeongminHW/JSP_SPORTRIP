@@ -75,12 +75,11 @@ charset=UTF-8" pageEncoding="UTF-8"%>
                                 const title = element.snippet.title;
                                 const publishedDate = convertUTCToKST(element.snippet.publishedAt);
                                 const truncatedTitle = truncateTitle(title);
+                                if (divCount >= 12) {
+                                    return;
+                                }
 
                           	  if(sportNum == 2){
-                                    if (divCount >= 12) {
-                                        return;
-                                    }
-
                                     if (title.includes("K리그1")) {
           						$('.highlight-container').append('<div class="highlight-box highlight'+index+'"> <div class="highlight-video"> <iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div> <div class="info-box"> <span style="color: red; font-weight: bold;">[하이라이트]</span><br> <span>'+ truncatedTitle + '</span><br> <span> (' + publishedDate + ')</span> </div> </div>');
                                         divCount++;

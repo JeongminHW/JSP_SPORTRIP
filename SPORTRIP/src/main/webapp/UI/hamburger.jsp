@@ -24,9 +24,7 @@
         isLogin = true;
     }
 
-
 	boolean isAdmin = userMgr.checkAdmin(login.getId()); // 관리자인지 확인
-
 %>
 
 <div class="menu" style="position:fixed; z-index: 2;">

@@ -13,12 +13,12 @@
 	String url = request.getParameter("url");
 	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
 	
-	int teamNum = MUtil.parseInt(request, "teamNum", 1); // 폼에서 받은 값이 없으면 0
-	if (teamNum == 0) {
-		teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 팀 번호 가져오기
-	} else {
-		session.setAttribute("teamNum", teamNum); // 세션에 팀 번호 저장
-	}
+	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
+    if (teamNum != 0) {
+        session.setAttribute("teamNum", teamNum); // 세션에 teamNum 저장
+    } else {
+        teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 teamNum 가져오기
+    }
 	
 	// 팀 정보와 선수 명단 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
@@ -206,17 +206,4 @@
 	        alert('삭제할 굿즈를 선택하세요.');
 	    }
 	}
-
-	// 페이지 로드 시 체크박스 해제
-	window.addEventListener('load', function() {
-       const toggle = document.getElementById('toggle');
-       toggle.checked = false; // 체크박스 해제
-   	});
-       
-    // 햄버거 메뉴
-    document.getElementById('toggle').addEventListener('change', function() {
-        const menu = document.querySelector('.menu');
-        const overlay = document.getElementById('overlay');
-        menu.classList.toggle('open');
-    });
 </script>

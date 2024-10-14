@@ -73,7 +73,7 @@
 			                <input class="input" type="text" id="goodsPrice" name="goodsPrice" value="<%=goods.getMD_PRICE()%>">
 			            </div>
 						<div class="addgoods-item">
-							<input type="button" onclick="goodsManager()" value="돌아가기">
+							<input type="button" onclick="goodsManager(<%= teamNum %>)" value="돌아가기">
 							<input type="button" onclick="updateGoods()" value="굿즈 수정">
 						</div>
 					</form>
@@ -101,8 +101,8 @@
 		}	    
 		
 		// 굿즈 화면 돌아가기
-	    function goodsManager(){
-	    	document.location.href="admin_goods.jsp";
+	    function goodsManager(teamNum){
+	    	document.location.href="admin_goods.jsp?teamNum="+teamNum;
 	    }
     
 	    document.getElementById("file").addEventListener('change', function() {
