@@ -21,6 +21,7 @@ button {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	letter-spacing: 0.05em;
 	line-height: 1.5em;
+	clear: right;
 }
 
 span {
@@ -485,5 +486,3 @@ tr {
 .rotate {
 	transform: rotate(180deg); /* 상하 반전 */
 }
-
-
