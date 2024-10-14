@@ -276,20 +276,20 @@
 	// floatPosition을 정의
 	var floatPosition = 200;
 
-	// 스크롤 이벤트 리스너 추가
-	window.addEventListener('scroll', function() {
-	    // 현재 스크롤 위치
-	    var currentTop = window.scrollY; // 스크롤 위치
-	    var bannerTop = currentTop + floatPosition + "px"; // 배너 위치 계산
+	window.addEventListener('DOMContentLoaded', function() {
+	    // 스크롤 이벤트 리스너 추가
+	    window.addEventListener('scroll', function() {
+	        var currentTop = window.scrollY; // 스크롤 위치
+	        var bannerTop = currentTop + floatPosition + "px"; // 배너 위치 계산
+	        var sideBanner = document.querySelector('.btns'); // sideBanner 요소 선택
 
-	    // sideBanner 요소 선택
-	    var sideBanner = document.querySelector('.btns');
+	        if (sideBanner) {
+	            sideBanner.style.transition = 'top 0.2s'; // 애니메이션 시간 설정
+	            sideBanner.style.top = bannerTop; // 배너 위치 업데이트
+	        }
+	    });
 
-	    // 이동 애니메이션
-	    sideBanner.style.transition = 'top 0.2s'; // 애니메이션 시간 설정
-	    sideBanner.style.top = bannerTop; // 배너 위치 업데이트
+	    // 페이지 로드 시 스크롤 이벤트 발생
+	    window.dispatchEvent(new Event('scroll'));
 	});
-
-	// 페이지 로드 시 스크롤 이벤트 발생
-	window.dispatchEvent(new Event('scroll'));
 </script>
