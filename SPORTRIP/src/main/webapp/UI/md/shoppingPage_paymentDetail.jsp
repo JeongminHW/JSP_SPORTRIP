@@ -118,7 +118,7 @@
 					<td colspan="3"><%=chargeBean.getCHARGE_DATE() %></td>
 				</tr>
 				<tr class="item-row">
-					<th rowspan="3">상품</th>
+					<th rowspan="<%=chargeVlist.size()+1%>">상품</th>
 				<%
 					for(ChargeBean charge : chargeVlist){
 						

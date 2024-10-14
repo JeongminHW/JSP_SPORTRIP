@@ -178,8 +178,8 @@
 								<div class="myorder-content">
 									<img alt="상품사진" src="<%=mdBean.getMD_IMG() %>">
 									<div class="goods-info">
-										<span class="goods-price"><%=formatter.format(chargeBean.getPRICE()) %>원</span> <span
-											class="goods-name"><%=mdBean.getMD_NAME() %></span>
+										<span class="goods-price"><%=formatter.format(chargeBean.getPRICE()) %>원</span> 
+										<span class="goods-name"><a href=".././md/shoppingPage_paymentDetail.jsp?orderNumber=<%=chargeBean.getORDER_NUM()%>"><%=mdBean.getMD_NAME() %></a></span>
 									</div>
 								</div>
 								<%
@@ -198,8 +198,8 @@
 								<div class="myorder-content">
 									<img alt="상품사진" src="<%=mdBean.getMD_IMG() %>">
 									<div class="goods-info">
-										<span class="goods-price"><%=formatter.format(chargeBean.getPRICE()) %>원</span> <span
-											class="goods-name"><%=mdBean.getMD_NAME() %></span>
+										<span class="goods-price"><%=formatter.format(chargeBean.getPRICE()) %>원</span>
+										<span class="goods-name"><a href=".././md/shoppingPage_paymentDetail.jsp?orderNumber=<%=chargeBean.getORDER_NUM()%>"><%=mdBean.getMD_NAME() %></a></span>
 									</div>
 								</div>
 								<%
@@ -218,8 +218,8 @@
 								<div class="myorder-content">
 									<img alt="상품사진" src="<%=mdBean.getMD_IMG() %>">
 									<div class="goods-info">
-										<span class="goods-price"><%=formatter.format(chargeBean.getPRICE()) %>원</span> <span
-											class="goods-name"><%=mdBean.getMD_NAME() %></span>
+										<span class="goods-price"><%=formatter.format(chargeBean.getPRICE()) %>원</span> 
+										<span class="goods-name"><a href=".././md/shoppingPage_paymentDetail.jsp?orderNumber=<%=chargeBean.getORDER_NUM()%>"><%=mdBean.getMD_NAME() %></a></span>
 									</div>
 								</div>
 								<%
