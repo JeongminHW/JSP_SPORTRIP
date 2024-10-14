@@ -46,8 +46,9 @@
 				    <!-- 이미지 업로드 섹션 -->
 				    <div id="image_container"></div>
 					<div class="form-group">
+						<input type="hidden" class="upload-file" placeholder="첨부파일" readonly>
 						<label id="file-label" for="file">이미지 업로드</label>
-		                <input class="form-control form-control-user" type="file" id="file" name="goods_image" onchange="setThumbnail(event);">
+		                <input type="file" id="file" name="goodsImg" onchange="setThumbnail(event);" />
 					</div>
 				</div>
 				<div class="goods-info-box">
@@ -112,7 +113,11 @@
 	    function insertGoods() {
 	        let goodsName = document.getElementById('goodsName').value;
 	        let goodsPrice = document.getElementById('goodsPrice').value;
-	        let goodsImg = document.getElementById('file').files[0]; // Get the file from the input
+	        
+	        let goodsImgInput = document.getElementById('file'); // 파일 input을 가져옴
+	        let goodsImg = goodsImgInput ? goodsImgInput.files[0] : null; // 파일이 있을 때만 참조
+			console.log(goodsImg);
+			console.log(goodsImgInput);
 	        let category = document.getElementById('goods-select').value;
 	        let teamNum = <%=teamNum%>;
 	        let sportNum = <%=sportNum%>;

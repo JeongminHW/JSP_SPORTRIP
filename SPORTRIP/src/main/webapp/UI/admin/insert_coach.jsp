@@ -39,7 +39,7 @@
             System.out.println("Failed to rename/move the uploaded file.");
         }
     } else {
-        headcoachImgPath = ".././assets/images/headcoach_img/기본.png"; // 기본 이미지 경로 설정
+    	headcoachImgPath = ".././assets/images/player_img/기본.png";
     }
 
 

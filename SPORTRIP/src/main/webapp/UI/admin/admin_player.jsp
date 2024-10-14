@@ -54,7 +54,7 @@
 			<a href="#" onclick="showPlayers()" data-value="선수">선수</a>
 		</div>
 	</div>
-	<div id="coach-List">
+	<div id="coach-List" style="display: block;">
         <% for (HeadcoachBean coach : coachList) { %>
             <div class="coach-card" data-coach-num="<%=coach.getHEADCOACH_NUM() %>">
                 <img src="<%= coach.getHEADCOACH_IMG() %>" alt="<%= coach.getHEADCOACH_NAME() %>" class="coach-photo">

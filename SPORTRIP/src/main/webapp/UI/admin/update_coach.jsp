@@ -39,7 +39,7 @@
             headcoachImgPath = "../assets/images/headcoach_img/기본.png"; // 기본 이미지 경로
         }
     } else {
-        headcoachImgPath = "../assets/images/headcoach_img/기본.png"; // 기본 이미지 경로 설정
+    	headcoachImgPath = ".././assets/images/player_img/기본.png";
         System.out.println("No file uploaded, using default image.");
     }
 
