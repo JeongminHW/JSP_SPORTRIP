@@ -71,9 +71,12 @@
 <jsp:include page="../header.jsp" />
 
 <div class="table-list-box">
-	<div class="write-btn">
-		<button onclick="postMessage()">글쓰기</button>
-	</div>
+
+<div class="write-btn">
+    <% if (login.getId() != null) { %>
+    	<button onclick="postMessage()">글쓰기</button>
+    <% } %>
+</div>
 	<div class="table-list">
 		<table>
 			<colgroup>
@@ -144,17 +147,9 @@
     <button type="button" onclick="searchPosts()">검색</button>
 </div>
 <script>
-    function postMessage() {
-        // 로그인 여부 확인 (세션에서 아이디를 가져와 null인지 아닌지 확인)
-        var userId = "<%=login.getId() != null ? login.getId() : ""%>"; // 로그인 여부를 세션에서 체크
-
-        if (userId !== "") { // 로그인 되어 있으면
-            document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
-        } else {
-            alert("로그인이 필요합니다."); // 로그인 필요 메시지 출력
-            document.location.href = ".././user/login.jsp"; // 로그인 페이지로 이동
-        }
-    }
+	function postMessage() {
+		document.location.href = ".././board/board_post.jsp"; // 게시글 작성 페이지로 이동
+	}
     
  	// 팀 번호 전달
 	function sendTeamNum(teamNum, page) {
@@ -204,7 +199,7 @@
 
         $.ajax({
             type: "GET",
-            url: "../board/board_search.jsp",  // 파일 경로 수정
+            url: "../board/board_search.jsp",
             data: {
                 type: searchType,
                 searchText: searchText,

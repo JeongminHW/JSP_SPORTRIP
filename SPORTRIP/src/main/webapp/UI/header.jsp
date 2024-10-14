@@ -172,7 +172,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=teamInfo.getTEAM_NAME() %></title>
     <link rel="stylesheet" href=".././assets/css/style.css">
-    <link rel="stylesheet" href=".././assets/css/highlightstyle.css">
+    <link rel="stylesheet" href=".././assets/css/highlightStyle.css">
     <link rel="stylesheet" href=".././assets/css/boardStyle.css">
     <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
