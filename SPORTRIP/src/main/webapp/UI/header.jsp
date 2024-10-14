@@ -232,7 +232,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <title><%=teamInfo.getTEAM_NAME() %></title>
 	    <link rel="stylesheet" href=".././assets/css/style.css">
-	    <link rel="stylesheet" href=".././assets/css/highlightstyle.css">
+	    <link rel="stylesheet" href=".././assets/css/highlightStyle.css">
 	    <link rel="stylesheet" href=".././assets/css/boardStyle.css">
 	    <link rel="stylesheet" href=".././assets/css/mainhamburger.css">
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
@@ -247,13 +247,13 @@
 	            <img src=".././assets/images/sport_logo<%=teamInfo.getSPORT_NUM()%>.svg" alt="리그" id="league_logo_img">
 	        </a>
 	        <div style="position: absolute; left: 50%; transform: translateX(-50%);" class="img-box">
-	        	<a class="t_header" href="teamPage_teamintro.jsp"><span>Info</span></a>
-	        	<a class="t_header" href="teamPage_player.jsp"><span>Player</span></a>
-	        	<a class="t_header" href="teamPage_highlight.jsp"><span>Highlight</span></a>
+	        	<a class="t_header" href=".././team/teamPage_teamintro.jsp"><span>Info</span></a>
+	        	<a class="t_header" href=".././team/teamPage_player.jsp"><span>Player</span></a>
+	        	<a class="t_header" href=".././team/teamPage_highlight.jsp"><span>Highlight</span></a>
 		        <img src="<%=teamInfo.getLOGO() %>" alt="로고" class="team_logo_img">
-		        <a class="t_header" href="teamPage_stadium.jsp"><span>Stadium</span></a>
-		        <a class="t_header" href="teamPage_store.jsp"><span>Shop</span></a>
-		        <a class="t_header" href="teamPage_board.jsp"><span>Board</span></a>
+		        <a class="t_header" href=".././team/teamPage_stadium.jsp"><span>Stadium</span></a>
+		        <a class="t_header" href=".././team/teamPage_store.jsp"><span>Shop</span></a>
+		        <a class="t_header" href=".././team/teamPage_board.jsp"><span>Board</span></a>
 	    	</div>
 	        <input id="toggle" type="checkbox"/>
 	        <label class="hamburger" for="toggle">
