@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="md.MDBean"%>
 <%@page import="team.TeamBean"%>
 <%@page import="team.TeamMgr"%>
@@ -11,15 +12,16 @@
 
 <%
 	String url = request.getParameter("url");
-	//POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
-	
+	// POST로 전달된 teamNum을 세션에 저장 (세션에 없을 경우에만 저장)
 	int teamNum = MUtil.parseInt(request, "teamNum", 0); // 폼에서 받은 값이 없으면 0
-    if (teamNum != 0) {
-        session.setAttribute("teamNum", teamNum); // 세션에 teamNum 저장
-    } else {
-        teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 teamNum 가져오기
-    }
 	
+	if(teamNum == 0 && (session.getAttribute("teamNum") == null || session.getAttribute("teamNum").equals(""))){
+		teamNum = 1;
+	}else if (teamNum != 0) {
+	    session.setAttribute("teamNum", teamNum); // 세션에 teamNum 저장
+	} else {
+	    teamNum = (Integer) session.getAttribute("teamNum"); // 세션에서 teamNum 가져오기
+	}
 	// 팀 정보와 선수 명단 가져오기
 	TeamBean teamInfo = teamMgr.getTeam(teamNum);
 	
@@ -27,6 +29,9 @@
 	
 	int sportNum = (int) session.getAttribute("sportNum");
 	Vector<MDBean> vlist = mdMgr.listMD(teamNum);
+	
+	//금액 포맷 설정
+	DecimalFormat formatter = new DecimalFormat("###,###");
 %>
 
 <jsp:include page="../header.jsp"/>
@@ -53,7 +58,7 @@
 			<div class="goods-info">
 				<div class="goods-name"><%=MDList.getMD_NAME()%></div>
 				<div class="price-and-cart">
-					<span class="goods-price">₩<%=MDList.getMD_PRICE()%></span>
+					<span class="goods-price">₩<%=formatter.format(MDList.getMD_PRICE()) %></span>
 				</div>
 			</div>
 		</div>
