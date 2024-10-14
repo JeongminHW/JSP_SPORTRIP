@@ -22,7 +22,7 @@
 	
     if (coachNum  >= 0) {
     	HeadcoachMgr headcoachMgr = new HeadcoachMgr();
-        boolean deleteFlag = headcoachMgr.deleteHeadcoach(coachNum );
+        boolean deleteFlag = headcoachMgr.deleteHeadcoach(coachNum);
 
         if (deleteFlag) {
             out.println("success");

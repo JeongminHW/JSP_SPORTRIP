@@ -20,8 +20,8 @@
     String category = multi.getParameter("category");
     
     File goodsImgFile = null;
-    if(multi.getFile("playerImg") != null){
-    	goodsImgFile = multi.getFile("playerImg");
+    if(multi.getFile("goodsImg") != null){
+    	goodsImgFile = multi.getFile("goodsImg");
     }
     
     int teamNum = Integer.parseInt(multi.getParameter("teamNum")); // 팀 번호 받기

@@ -160,6 +160,7 @@ function editPlayer() {
 function deletePlayer() {
     const playerFrame = document.getElementById('player-List');
     const coachFrame = document.getElementById('coach-List');
+	
     if (coachFrame.style.display == 'block' && selectedCoachNum) {
         const params = new URLSearchParams();
         params.append('selectedCoachNum', selectedCoachNum);
@@ -176,7 +177,7 @@ function deletePlayer() {
             }
         })
         .catch(error => console.error('Error:', error));
-    } else if (playerFrame.style.display == 'block' && selectedPlayerNum) {
+    }else if (playerFrame.style.display == 'block' && selectedPlayerNum) {
         const params = new URLSearchParams();
         params.append('selectedPlayerNum', selectedPlayerNum);
         fetch('delete_player.jsp?' + params.toString(), {

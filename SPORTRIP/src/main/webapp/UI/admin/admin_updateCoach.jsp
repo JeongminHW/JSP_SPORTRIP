@@ -13,7 +13,7 @@
     }
      
 	int coachNum  = MUtil.parseInt(request, "coachNum", 0);
-	HeadcoachBean headcoachBean = headcoachMgr.getHeadcoach(coachNum );
+	HeadcoachBean headcoachBean = headcoachMgr.getHeadcoach(coachNum);
 	
 %>
 <!DOCTYPE html>
