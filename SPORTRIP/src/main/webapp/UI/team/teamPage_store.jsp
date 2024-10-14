@@ -60,9 +60,10 @@
 				<div class="goods-name"><%=MDList.getMD_NAME()%></div>
 				<div class="price-and-cart">
 					<span class="goods-price">₩<%=formatter.format(MDList.getMD_PRICE())%></span>
-					<button class="add-to-cart"
-						onclick="addToCart('<%=MDList.getMD_NUM()%>')">
-						<img src=".././assets/images/cart_icon.png" alt="카트 아이콘">
+				</div>
+				<div class="add-to-cart-btn">
+					<button class="add-to-cart" onclick="addToCart('<%=MDList.getMD_NUM()%>')">
+						<span>담기</span>
 					</button>
 				</div>
 			</div>

@@ -77,11 +77,13 @@ img {
 }	
 
 .cart_img {
-	width: 30px;
+	width: 27px;
 	height: auto;
 	margin-top: 50px;
+	margin-left: 3px;
 	cursor: pointer;
-	filter: invert(74%) sepia(56%) saturate(2016%) hue-rotate(360deg) brightness(103%) contrast(103%);
+	margin-bottom: 3px;
+	filter: invert(46%) sepia(71%) saturate(481%) hue-rotate(8deg) brightness(98%) contrast(90%);
 }
 	
 .cart_img:hover {
