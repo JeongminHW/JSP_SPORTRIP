@@ -20,6 +20,9 @@
 <jsp:useBean id="teamMgr" class="team.TeamMgr" />
 <%
 
+	request.setCharacterEncoding("UTF-8");
+	System.out.println(login.getName());
+
 	//금액 포맷 설정
 	DecimalFormat formatter = new DecimalFormat("###,###");
 
@@ -104,7 +107,7 @@
 					    <img src=".././assets/images/close.png" alt="닫기" style="width: 24px; height: 24px; margin-right: 8px;">
 					</button>
 					<span>회원 정보 수정</span>
-					<a>로그아웃</a>
+					<a href="#" onclick="logoutFun()">로그아웃</a>
 					
 				</div>
 				<div class="popup-content">
@@ -690,7 +693,7 @@
 	    	    if (data.includes("success")) { 
 	    	        alert("수정사항이 저장되었습니다.");
 	    	        closeWindow();
-	    	        location.reload();
+	    	        location.href="myPage.jsp";
 	    	    } else {
 	    	        alert('수정사항이 저장되지 않았습니다.');
 	    	    }
@@ -799,6 +802,33 @@
 		    form.submit();
 		}
 
+		
+		function logoutFun() {
+	    	let id = document.getElementById('id').value;
+	    	
+		    const params = new URLSearchParams();
+
+		    params.append('id', id);
+
+		    fetch('logout.jsp', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/x-www-form-urlencoded'
+		        },
+		        body: params.toString() // 쿼리 스트링으로 변환하여 보냄
+		    })
+	    	.then(response => response.text())
+	    	.then(data => {
+	    	    if (data.includes("success")) { 
+	    	        alert("로그아웃이 완료되었습니다.");
+	    	        closeWindow();
+	    	        location.href = ".././sport/sport_main.jsp";
+	    	    }else{
+	    	        alert("로그아웃이 실패하였습니다.");
+	    	    }
+	    	})
+	    	.catch(error => console.error("Error:", error));
+		}
 	</script>
 </body>
 </html>

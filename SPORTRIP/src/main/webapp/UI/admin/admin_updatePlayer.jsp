@@ -13,7 +13,7 @@
     }
      
 	int playerNum = MUtil.parseInt(request, "playerNum", 0);
-	System.out.println(playerNum);
+	System.out.println("playerNum" + playerNum);
 	PlayerBean playerBean = playerMgr.getPlayer(playerNum);
 	
 %>

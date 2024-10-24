@@ -32,7 +32,7 @@
     
     String playerImgPath = null;
     if (playerImgFile != null) {
-        String uniqueFileName = "new" + playerBacknum + playerName + ".png"; 
+        String uniqueFileName = "newPlayer" + playerBacknum + playerName + ".png"; 
         File newFile = new File(saveDirectory, uniqueFileName); 
 
         if (playerImgFile.renameTo(newFile)) {

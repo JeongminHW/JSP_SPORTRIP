@@ -327,7 +327,7 @@
 		                		+ "q="+ searchData
 		                		+ "type=video&"
 		                		+ "videoDuration=medium&"
-		                		+ "key=AIzaSyBaqFHd79_iYLlLIlJGZ8-xcOO9mX3bDks";
+		                		+ "key=AIzaSyB_a-GhBc7Jp1Sjy63tETxaYDxxrtQ0YoU";
 		
 		                    function convertUTCToKST(utcStr) {
 		                        const date = new Date(utcStr);
